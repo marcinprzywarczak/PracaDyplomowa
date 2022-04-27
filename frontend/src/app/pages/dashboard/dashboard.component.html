@@ -1,0 +1,9 @@
+<div>
+  <h1 class="text-center">DASHBOARD</h1>
+  <h1 *ngIf="name">Witaj {{name}}, {{email}}</h1>
+  <button *ngIf="!isLogged" class="bg-green-400 p-2 mx-2" type="button" routerLink="/login">Zaloguj</button>
+  <button *ngIf="isLogged" type="button" class="bg-red-400 p-2 mx-2" (click)="logout()">Wyloguj</button>
+  <button type="button" class="bg-red-400 p-2 mx-2" (click)="sprawdz()">Czy zalogowany</button>
+  <button type="button" class="bg-red-400 p-2 mx-2" (click)="test()">Test</button>
+</div>
+

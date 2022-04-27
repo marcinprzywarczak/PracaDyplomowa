@@ -1,0 +1,77 @@
+<div class="h-full flex flex-col items-center justify-center">
+<!--  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-1/2 flex flex-col ">-->
+<!--    <span class="text-red-600" *ngIf="error">{{error}}</span>-->
+<!--    <input class="bg-amber-200 mb-2 p-2" type="text" id="login" name="login" formControlName="login">-->
+<!--    <span class="text-red-600" *ngIf="errors.email">{{errors.email[0]}}</span>-->
+<!--    <input class="bg-amber-200 mb-2 p-2" type="password" id="haslo" name="haslo" formControlName="haslo">-->
+<!--    <span class="text-red-600" *ngIf="errors.password">{{errors.password[0]}}</span>-->
+<!--    <button class="bg-green-400 self-end p-2"  type="submit">Zaloguj</button>-->
+
+
+<!--  </form>-->
+
+  <div class="block p-6 rounded-lg shadow-lg bg-white max-w-sm">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <span class="text-red-600" *ngIf="error">{{error}}</span>
+      <div class="form-group mb-6">
+        <label for="email" class="form-label inline-block mb-2 text-gray-700">Email address</label>
+        <input type="email" id="email" name="email" formControlName="email" class="form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+               aria-describedby="emailHelp" placeholder="Enter email">
+        <span class="text-red-600" *ngIf="errors.email">{{errors.email[0]}}</span>
+      </div>
+      <div class="form-group mb-6">
+        <label for="password" class="form-label inline-block mb-2 text-gray-700">Password</label>
+        <input type="password" id="password" name="password" formControlName="password" class="form-control block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+               placeholder="Password">
+        <span class="text-red-600" *ngIf="errors.password">{{errors.password[0]}}</span>
+      </div>
+      <button type="submit" class="
+      w-full
+      px-6
+      py-2.5
+      bg-blue-600
+      text-white
+      font-medium
+      text-xs
+      leading-tight
+      uppercase
+      rounded
+      shadow-md
+      hover:bg-blue-700 hover:shadow-lg
+      focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0
+      active:bg-blue-800 active:shadow-lg
+      transition
+      duration-150
+      ease-in-out">Sign in</button>
+    </form>
+  </div>
+</div>
+
+
