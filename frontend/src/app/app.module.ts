@@ -10,6 +10,7 @@ import {HttpXsrfInterceptor} from "./shared/HttpXsrfInterceptor";
 import {DashboardModule} from "./pages/dashboard/dashboard.module";
 import {LoginModule} from "./pages/login/login.module";
 import {AuthInterceptor} from "./shared/auth.interceptor";
+import {RegisterModule} from "./pages/register/register.module";
 
 @NgModule({
   declarations: [
@@ -21,9 +22,10 @@ import {AuthInterceptor} from "./shared/auth.interceptor";
         BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
-      HttpClientModule,
-      DashboardModule,
-      LoginModule
+        HttpClientModule,
+        DashboardModule,
+        LoginModule,
+        RegisterModule
     ],
   providers: [
     {provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true},

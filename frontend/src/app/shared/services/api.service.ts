@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {finalize} from "rxjs";
+import {emitDistinctChangesOnlyDefaultValue} from "@angular/compiler";
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,11 @@ import {finalize} from "rxjs";
 export class ApiService {
 
   constructor(private http: HttpClient) { }
-
+  register(email: string, name: string, password: string, password_conf: string){
+    return this.http.post<any>('http://localhost:8000/register',
+        {email: email, name: name, password: password, password_confirmation: password_conf, test: true},
+        {withCredentials: true});
+  }
   test(){
     // this.http.get('http://localhost:8000/sanctum/csrf-cookie').pipe(finalize(() => {
     //   this.http.post('http://localhost:8000/log',

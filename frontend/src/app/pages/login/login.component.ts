@@ -27,23 +27,26 @@ export class LoginComponent implements OnInit {
     return this.form.controls;
   }
   onSubmit(){
-    this.loginService.login(this.form.controls['email'].value, this.form.controls['password'].value).subscribe({
-      next: value => {
-        if(value.success){
-          this.router.navigate(['/dashboard']);
-          localStorage.setItem('isLogged', 'true');
+    this.loginService.csrf().subscribe(()=>{
+      this.loginService.login(this.form.controls['email'].value, this.form.controls['password'].value).subscribe({
+        next: value => {
+          if(value.error){
+            this.error = value.error;
+            this.errors = [];
+          }
+          else{
+            this.router.navigate(['/dashboard']);
+            localStorage.setItem('isLogged', 'true');
+          }
+        },
+        error: err => {
+          this.errors = err.error.errors;
+          this.error = '';
+          //console.log('err', err.error.errors)
         }
-        if(value.error){
-          this.error = value.error;
-          this.errors = [];
-        }
-      },
-      error: err => {
-        this.errors = err.error.errors;
-        this.error = '';
-        //console.log('err', err.error.errors)
-    }
-    });
+      });
+    })
+
   }
 
 

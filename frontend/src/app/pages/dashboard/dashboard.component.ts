@@ -15,6 +15,7 @@ export class DashboardComponent implements OnInit {
   constructor(private loginService: LoginService, private router: Router) { }
 
   ngOnInit(): void {
+    //this.loginService.csrf();
     this.isLogged = !!localStorage.getItem('isLogged');
     if(this.isLogged)
     {
@@ -26,8 +27,8 @@ export class DashboardComponent implements OnInit {
     }
   }
   logout(){
-    this.loginService.logout().subscribe(value => {
-      if(value.success){
+    this.loginService.logout().subscribe(response => {
+      if(response.status === 204){
         localStorage.removeItem('isLogged');
         window.location.reload();
       }
