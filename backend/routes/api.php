@@ -23,7 +23,7 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 Route::post('/isLogged', function () {
     return response()->json(['isLogged' => \Illuminate\Support\Facades\Auth::check()], 200);
-});
+})->middleware('permission:users.store');
 
 Route::post('/photo', [\App\Http\Controllers\PhotoController::class, 'add']);
 

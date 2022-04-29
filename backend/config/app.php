@@ -82,7 +82,7 @@ return [
     |
     */
 
-    'locale' => 'en',
+    'locale' => 'pl',
 
     /*
     |--------------------------------------------------------------------------
@@ -177,6 +177,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
         App\Providers\FortifyServiceProvider::class,
+        Spatie\Permission\PermissionServiceProvider::class,
 
     ],
 
@@ -195,4 +196,7 @@ return [
         // 'ExampleClass' => App\Example\ExampleClass::class,
     ])->toArray(),
 
+    'firm_owner_role' => env('FIRM_OWNER_ROLE', 'firm_owner'),
+    'employee_role' => env('EMPLOYEE_ROLE','employee'),
+    'user_role' => env('USER_ROLE', 'user'),
 ];
