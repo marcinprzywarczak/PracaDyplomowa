@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,11 +16,15 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return User::with('firm')->find(\Illuminate\Support\Facades\Auth::id());
 });
 
 
 
-Route::get('/isLogged', function () {
+Route::post('/isLogged', function () {
     return response()->json(['isLogged' => \Illuminate\Support\Facades\Auth::check()], 200);
 });
+
+Route::post('/photo', [\App\Http\Controllers\PhotoController::class, 'add']);
+
+Route::get('/photoGet', [\App\Http\Controllers\PhotoController::class, 'get']);

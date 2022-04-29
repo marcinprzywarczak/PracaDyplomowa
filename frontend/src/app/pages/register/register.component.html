@@ -1,19 +1,12 @@
-<div class="h-full flex flex-col items-center justify-center">
-  <!--  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-1/2 flex flex-col ">-->
-  <!--    <span class="text-red-600" *ngIf="error">{{error}}</span>-->
-  <!--    <input class="bg-amber-200 mb-2 p-2" type="text" id="login" name="login" formControlName="login">-->
-  <!--    <span class="text-red-600" *ngIf="errors.email">{{errors.email[0]}}</span>-->
-  <!--    <input class="bg-amber-200 mb-2 p-2" type="password" id="haslo" name="haslo" formControlName="haslo">-->
-  <!--    <span class="text-red-600" *ngIf="errors.password">{{errors.password[0]}}</span>-->
-  <!--    <button class="bg-green-400 self-end p-2"  type="submit">Zaloguj</button>-->
-
-
-  <!--  </form>-->
-
-  <div class="block p-6 rounded-lg shadow-lg bg-white w-1/2">
+<div class="flex flex-col items-center justify-center mt-12" >
+  <div class=" p-6 rounded-lg shadow-lg bg-green-300 w-1/2">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
+      <div class="form-group flex flex-row items-center justify-items-center mb-6">
+        <label for="isFirmAccount">Konto firmowe</label>
+        <input class="ml-2" [(ngModel)]="isFirmAccount" (change)="checkValue(isFirmAccount)" type="checkbox" id="isFirmAccount" name="isFirmAccount" formControlName="isFirmAccount">
+      </div>
       <div class="form-group mb-6 w-full">
-        <label for="email" class="form-label inline-block mb-2 text-gray-700">Email address</label>
+        <label for="email" class="form-label inline-block mb-2 text-gray-700">Adres email</label>
         <input type="email" id="email" name="email" formControlName="email" class="form-control
         block
         w-full
@@ -29,11 +22,11 @@
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-               aria-describedby="emailHelp" placeholder="Enter email">
+               placeholder="Wprowadź email">
       </div>
       <div class="form-group mb-6 w-full">
-        <label for="name" class="form-label inline-block mb-2 text-gray-700">Name</label>
-        <input type="text" id="name" name="email" formControlName="name" class="form-control
+        <label for="first_name" class="form-label inline-block mb-2 text-gray-700">Imię</label>
+        <input type="text" id="first_name" name="first_name" formControlName="first_name" class="form-control
         block
         w-full
         px-3
@@ -48,10 +41,51 @@
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-               aria-describedby="emailHelp" placeholder="Enter email">
+              placeholder="Wprowadź imię">
       </div>
+
+      <div class="form-group mb-6 w-full">
+        <label for="sure_name" class="form-label inline-block mb-2 text-gray-700">Nazwisko</label>
+        <input type="text" id="sure_name" name="sure_name" formControlName="sure_name" class="form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+               placeholder="Wprowadź nazwisko">
+      </div>
+
+      <div class="form-group mb-6 w-full">
+        <label for="phone_number" class="form-label inline-block mb-2 text-gray-700">Numer telefonu</label>
+        <input type="text" id="phone_number" name="phone_number" formControlName="phone_number" class="form-control
+        block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+        placeholder="Wprowadź numer telefonu">
+      </div>
+
       <div class="form-group mb-6">
-        <label for="password" class="form-label inline-block mb-2 text-gray-700">Password</label>
+        <label for="password" class="form-label inline-block mb-2 text-gray-700">Hasło</label>
         <input type="password" id="password" name="password" formControlName="password" class="form-control block
         w-full
         px-3
@@ -66,11 +100,11 @@
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-               placeholder="Password">
+               placeholder="Hasło">
       </div>
       <div class="form-group mb-6">
-        <label for="password_conf" class="form-label inline-block mb-2 text-gray-700">Password</label>
-        <input type="password_conf" id="password_conf" name="password" formControlName="password_conf" class="form-control block
+        <label for="password_conf" class="form-label inline-block mb-2 text-gray-700">Potwierdź hasło</label>
+        <input type="password" id="password_conf" name="password_conf" formControlName="password_conf" class="form-control block
         w-full
         px-3
         py-1.5
@@ -84,7 +118,181 @@
         ease-in-out
         m-0
         focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-               placeholder="Password confirm">
+               placeholder="Powtórz hasło">
+      </div>
+      <div class="form-group mb-6">
+        <label for="user_avatar" class="form-label inline-block mb-2 text-gray-700">Awatar</label>
+        <input type="file" id="user_avatar" name="user_avatar" formControlName="user_avatar" (change)="onChangeUserAvatar($event)" class="form-control block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+               placeholder="Wybierz zdjęcie">
+      </div>
+      <div *ngIf="isFirmAccount">
+<!--      <div [ngClass]="isFirmAccount ? 'block' : 'hidden'">-->
+        <div class="form-group mb-6">
+          <label for="firm_name" class="form-label inline-block mb-2 text-gray-700">Nazwa firmy</label>
+          <input type="text" id="firm_name" name="firm_name" formControlName="firm_name" class="form-control block
+          w-full
+          px-3
+          py-1.5
+          text-base
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                 placeholder="Wprowadź nazwę firmy">
+        </div>
+        <div class="flex flex-row space-x-4">
+          <div class="form-group mb-6 w-1/2">
+            <label for="nip" class="form-label inline-block mb-2 text-gray-700">NIP</label>
+            <input type="text" id="nip" name="nip" formControlName="nip" class="form-control block
+          w-full
+          px-3
+          py-1.5
+          text-base
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                   placeholder="Wprowadź numer NIP">
+          </div>
+          <div class="form-group mb-6 w-1/2">
+            <label for="regon" class="form-label inline-block mb-2 text-gray-700">REGON</label>
+            <input type="text" id="regon" name="regon" formControlName="regon" class="form-control block
+          w-full
+          px-3
+          py-1.5
+          text-base
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                   placeholder="Wprowadź numer REGON">
+          </div>
+        </div>
+
+        <div class="flex flex-row space-x-4">
+          <div class="form-group mb-6 w-1/2">
+            <label for="street" class="form-label inline-block mb-2 text-gray-700">Ulica</label>
+            <input type="text" id="street" name="street" formControlName="street" class="form-control block
+          w-full
+          px-3
+          py-1.5
+          text-base
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                   placeholder="Wprowadź nazwę ulicy">
+          </div>
+          <div class="form-group mb-6 w-1/2">
+            <label for="number" class="form-label inline-block mb-2 text-gray-700">Nr domu</label>
+            <input type="text" id="number" name="number" formControlName="number" class="form-control block
+          w-full
+          px-3
+          py-1.5
+          text-base
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                   placeholder="Wprowadź numer budynku">
+          </div>
+        </div>
+
+        <div class="flex flex-row space-x-4">
+          <div class="form-group mb-6 w-1/2">
+            <label for="locality" class="form-label inline-block mb-2 text-gray-700">Miejscowość</label>
+            <input type="text" id="locality" name="locality" formControlName="locality" class="form-control block
+          w-full
+          px-3
+          py-1.5
+          text-base
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                   placeholder="Wprowadź miejscowość">
+          </div>
+          <div class="form-group mb-6 w-1/2">
+            <label for="zip_code" class="form-label inline-block mb-2 text-gray-700">Kod pocztowy</label>
+            <input type="text" id="zip_code" name="zip_code" formControlName="zip_code" class="form-control block
+          w-full
+          px-3
+          py-1.5
+          text-base
+          font-normal
+          text-gray-700
+          bg-white bg-clip-padding
+          border border-solid border-gray-300
+          rounded
+          transition
+          ease-in-out
+          m-0
+          focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                   placeholder="Wprowadź kod pocztowy">
+          </div>
+        </div>
+        <div class="form-group mb-6">
+          <label for="firm_logo" class="form-label inline-block mb-2 text-gray-700">Logo firmy</label>
+          <input type="file" id="firm_logo" name="firm_logo" formControlName="firm_logo" (change)="onChangeFirmLogo($event)" class="form-control block
+        w-full
+        px-3
+        py-1.5
+        text-base
+        font-normal
+        text-gray-700
+        bg-white bg-clip-padding
+        border border-solid border-gray-300
+        rounded
+        transition
+        ease-in-out
+        m-0
+        focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                 placeholder="Wybierz logo firmy">
+        </div>
+
       </div>
       <button type="submit" class="
       w-full
@@ -103,7 +311,7 @@
       active:bg-blue-800 active:shadow-lg
       transition
       duration-150
-      ease-in-out">Sign in</button>
+      ease-in-out">Zarejestruj się!</button>
     </form>
   </div>
 </div>

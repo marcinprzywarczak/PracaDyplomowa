@@ -10,8 +10,9 @@ import {SharedModule} from "../../shared/shared.module";
   declarations: [
     RegisterComponent
   ],
-    imports: [
-        ReactiveFormsModule
-    ]
+  imports: [
+    ReactiveFormsModule,
+    CommonModule
+  ]
 })
 export class RegisterModule { }

@@ -6,6 +6,7 @@ use App\Actions\Fortify\CreateNewUser;
 use App\Actions\Fortify\ResetUserPassword;
 use App\Actions\Fortify\UpdateUserPassword;
 use App\Actions\Fortify\UpdateUserProfileInformation;
+use App\Models\User;
 use Illuminate\Cache\RateLimiting\Limit;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -32,7 +33,7 @@ class FortifyServiceProvider extends ServiceProvider
 //        });
         $this->app->instance(LoginResponse::class, new class implements LoginResponse{
             public function toResponse($request){
-                return response()->json(['success' => 'success', 'user' => Auth::user()], 200);
+                return response()->json(['success' => 'success', 'user' => User::with('firm')->find(Auth::id())], 200);
             }
         });
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse{

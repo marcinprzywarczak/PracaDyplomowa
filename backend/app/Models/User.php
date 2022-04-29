@@ -18,9 +18,13 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
-        'name',
+        'first_name',
+        'sure_name',
+        'firm_id',
+        'phone_number',
         'email',
         'password',
+        'avatar',
     ];
 
     /**
@@ -41,4 +45,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+    public function firm()
+    {
+        return $this->belongsTo(Firm::class);
+    }
+
 }

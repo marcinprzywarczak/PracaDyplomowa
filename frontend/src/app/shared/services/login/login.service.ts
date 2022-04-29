@@ -3,6 +3,7 @@ import {HttpClient} from "@angular/common/http";
 import {finalize} from "rxjs";
 import {error} from "@angular/compiler/src/util";
 import {ApiService} from "../api.service";
+import {UserRegistration} from "../../models/user-registration";
 
 @Injectable({
   providedIn: 'root'
@@ -27,14 +28,14 @@ export class LoginService {
   }
 
   isLogged(){
-    return this.http.get<{isLogged: boolean}>('http://localhost:8000/api/isLogged', {withCredentials: true});
+    return this.http.post<{isLogged: boolean}>('http://localhost:8000/api/isLogged',{}, {withCredentials: true});
   }
 
   logout(){
     return this.http.post<any>('http://localhost:8000/logout',{}, {withCredentials: true, observe: 'response'});
   }
 
-  register(email: string, name: string, password: string, password_conf: string){
-    return this.apiService.register(email, name, password, password_conf);
+  register(registerData: FormData){
+    return this.apiService.register(registerData);
   }
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../../shared/services/login/login.service";
 import {Router} from "@angular/router";
+import {ApiService} from "../../shared/services/api.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -12,7 +13,10 @@ export class DashboardComponent implements OnInit {
   isLogged: boolean;
   name: string;
   email: string;
-  constructor(private loginService: LoginService, private router: Router) { }
+  avatar_url: string;
+  isFirmAccount: boolean;
+  firmName: string;
+  constructor(private loginService: LoginService,private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
     //this.loginService.csrf();
@@ -21,8 +25,12 @@ export class DashboardComponent implements OnInit {
     {
       this.loginService.test().subscribe(value => {
         console.log(value);
-        this.name = value.name;
+        this.name = value.first_name + ' ' + value.sure_name;
+        this.avatar_url = value.avatar;
         this.email = value.email;
+        this.isFirmAccount = value.firm !== null;
+        this.firmName = this.isFirmAccount ? value.firm.name : '';
+        console.log(this.isFirmAccount);
       })
     }
   }
@@ -37,9 +45,12 @@ export class DashboardComponent implements OnInit {
   }
 
   sprawdz(){
-    this.loginService.isLogged().subscribe(value => {
-      console.log(value);
+    this.loginService.csrf().subscribe(() => {
+      this.loginService.isLogged().subscribe(value => {
+        console.log(value);
+      });
     });
+
   }
 
   test(){
