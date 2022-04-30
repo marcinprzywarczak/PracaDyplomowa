@@ -125,10 +125,10 @@ return [
     | specify a specific custom language line for a given attribute rule.
     |
     */
-
-    'custom' => [
-
+    'messages' => [
+        'phone_number.regex' => 'TEST TEST',
     ],
+
 
     /*
     |--------------------------------------------------------------------------
@@ -137,6 +137,21 @@ return [
     |
     |
     */
-
+    'attributes' => [
+        'first_name' =>'imię',
+        'sure_name' => 'nazwisko',
+        'phone_number' => 'numer telefonu',
+        'email' => 'adres e-mail',
+        'password' => 'hasło',
+        'user_avatar' => 'awatar',
+        'firm_name' => 'nazwa firmy',
+        'nip' => 'NIP',
+        'regon' => 'REGON',
+        'street' => 'ulica',
+        'number' => 'numer budynku',
+        'zip_code' => 'kod pocztowy',
+        'locality' => 'lokalizacja',
+        'firm_logo' => 'logo firmy',
+    ]
 
 ];

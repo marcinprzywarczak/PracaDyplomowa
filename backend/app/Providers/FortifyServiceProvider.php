@@ -33,7 +33,14 @@ class FortifyServiceProvider extends ServiceProvider
 //        });
         $this->app->instance(LoginResponse::class, new class implements LoginResponse{
             public function toResponse($request){
-                return response()->json(['success' => 'success', 'user' => User::with('firm')->find(Auth::id())], 200);
+                return response()->json(
+                    [
+                        'success' => 'success',
+                        'user' => $user = User::with('firm')->find(Auth::id()),
+                        'roles' => $user->getRoleNames(),
+                        'permissions' => $user->permissions,
+                    ],
+                    200);
             }
         });
         $this->app->instance(RegisterResponse::class, new class implements RegisterResponse{

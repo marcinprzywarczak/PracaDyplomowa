@@ -25,11 +25,11 @@ export class DashboardComponent implements OnInit {
     {
       this.loginService.test().subscribe(value => {
         console.log(value);
-        this.name = value.first_name + ' ' + value.sure_name;
-        this.avatar_url = value.avatar;
-        this.email = value.email;
-        this.isFirmAccount = value.firm !== null;
-        this.firmName = this.isFirmAccount ? value.firm.name : '';
+        this.name = value.user.first_name + ' ' + value.user.sure_name;
+        this.avatar_url = value.user.avatar;
+        this.email = value.user.email;
+        this.isFirmAccount = value.user.firm !== null;
+        this.firmName = this.isFirmAccount ? value.user.firm.name : '';
         console.log(this.isFirmAccount);
       })
     }

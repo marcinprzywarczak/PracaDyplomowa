@@ -36,7 +36,8 @@ class DatabaseSeeder extends Seeder
             'firm_id' => 1,
             'phone_number' => '+48 655 888 555',
             'email' => 'test@test.com',
-            'password' => Hash::make('12345678')
+            'password' => Hash::make('12345678'),
+            'avatar' => 'http://localhost:8000/avatars/default_avatar.jpg'
         ]);
         $firmOwnerRole = Role::findByName(config('app.firm_owner_role'));
         if(isset($firmOwnerRole))
@@ -46,7 +47,8 @@ class DatabaseSeeder extends Seeder
             'sure_name' => 'Testowy',
             'phone_number' => '+48 255 888 555',
             'email' => 'user@testowy.com',
-            'password' => Hash::make('12345678')
+            'password' => Hash::make('12345678'),
+            'avatar' => 'http://localhost:8000/avatars/default_avatar.jpg'
         ]);
         $userRole = Role::findByName(config('app.user_role'));
         if(isset($userRole))

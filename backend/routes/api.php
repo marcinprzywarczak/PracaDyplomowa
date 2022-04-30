@@ -2,6 +2,7 @@
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return User::with('firm')->find(\Illuminate\Support\Facades\Auth::id());
+    return response()->json(
+        [
+            'success' => 'success',
+            'user' => $user = User::with('firm')->find(Auth::id()),
+            'roles' => $user->getRoleNames(),
+            'permissions' => $user->getAllPermissions(),
+        ],
+        200);
 });
 
 
