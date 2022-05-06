@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient} from "@angular/common/http";
 import {finalize} from "rxjs";
 import {error} from "@angular/compiler/src/util";
-import {ApiService} from "../api.service";
+import {ApiService} from "../api/api.service";
 import {UserRegistration} from "../../models/user-registration";
 
 @Injectable({
@@ -15,13 +15,10 @@ export class LoginService {
     return this.http.get('http://localhost:8000/sanctum/csrf-cookie', {withCredentials: true});
   }
   login(email: string, password: string){
-    //this.http.get('http://localhost:8000/sanctum/csrf-cookie', {withCredentials: true}).subscribe();
-    // return this.http.get('http://localhost:8000/sanctum/csrf-cookie', {withCredentials: true}).pipe(()=>{
       return this.http.post<any>('http://localhost:8000/login', {
         email: email,
         password: password
       }, {withCredentials: true});
-    // });
   }
   test(){
     return this.http.get<any>('http://localhost:8000/api/user', {withCredentials: true});

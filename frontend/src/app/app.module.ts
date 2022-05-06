@@ -11,11 +11,13 @@ import {DashboardModule} from "./pages/dashboard/dashboard.module";
 import {LoginModule} from "./pages/login/login.module";
 import {AuthInterceptor} from "./shared/auth.interceptor";
 import {RegisterModule} from "./pages/register/register.module";
+import { NavbarComponent } from './components/navbar/navbar.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
+    NavbarComponent,
 
   ],
     imports: [

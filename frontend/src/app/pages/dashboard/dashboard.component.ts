@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {LoginService} from "../../shared/services/login/login.service";
 import {Router} from "@angular/router";
-import {ApiService} from "../../shared/services/api.service";
+import {ApiService} from "../../shared/services/api/api.service";
 
 @Component({
   selector: 'app-dashboard',
@@ -38,6 +38,7 @@ export class DashboardComponent implements OnInit {
     this.loginService.logout().subscribe(response => {
       if(response.status === 204){
         localStorage.removeItem('isLogged');
+        localStorage.removeItem('user');
         window.location.reload();
       }
     });

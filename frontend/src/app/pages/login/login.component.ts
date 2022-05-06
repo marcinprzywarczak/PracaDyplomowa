@@ -1,6 +1,6 @@
 import {AfterContentInit, Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup} from "@angular/forms";
-import {ApiService} from "../../shared/services/api.service";
+import {ApiService} from "../../shared/services/api/api.service";
 import {LoginService} from "../../shared/services/login/login.service";
 import {Router} from "@angular/router";
 
@@ -35,8 +35,10 @@ export class LoginComponent implements OnInit {
             this.errors = [];
           }
           else{
-            this.router.navigate(['/dashboard']);
+            console.log(value);
             localStorage.setItem('isLogged', 'true');
+            localStorage.setItem('user', JSON.stringify(value.user));
+           window.location.href="/dashboard";
           }
         },
         error: err => {

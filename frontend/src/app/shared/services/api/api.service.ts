@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {finalize} from "rxjs";
 import {emitDistinctChangesOnlyDefaultValue} from "@angular/compiler";
-import {UserRegistration} from "../models/user-registration";
+import {UserRegistration} from "../../models/user-registration";
 
 @Injectable({
   providedIn: 'root'

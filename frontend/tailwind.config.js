@@ -4,4 +4,11 @@ module.exports = {
     extend: {},
   },
   plugins: [],
+  variants: {
+    extend: {
+      outline: ["focus"],
+      ring: ["focus"],
+    },
+
+  }
 }
