@@ -12,27 +12,32 @@ import {LoginModule} from "./pages/login/login.module";
 import {AuthInterceptor} from "./shared/auth.interceptor";
 import {RegisterModule} from "./pages/register/register.module";
 import { NavbarComponent } from './components/navbar/navbar.component';
+import { OfferComponent } from './components/offer/offer.component';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    NavbarComponent,
+    declarations: [
+        AppComponent,
+        LoginComponent,
+        NavbarComponent,
+        OfferComponent,
 
-  ],
+    ],
     imports: [
         BrowserModule,
         AppRoutingModule,
         ReactiveFormsModule,
         HttpClientModule,
-        DashboardModule,
+        // DashboardModule,
         LoginModule,
         RegisterModule
     ],
-  providers: [
-    {provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true},
-    {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
-  ],
-  bootstrap: [AppComponent]
+    providers: [
+        {provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true},
+        {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
+    ],
+    exports: [
+        OfferComponent
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }

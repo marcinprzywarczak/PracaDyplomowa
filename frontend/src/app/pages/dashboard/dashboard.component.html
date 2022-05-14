@@ -1,11 +1,8 @@
-<div>
+<div class="flex justify-center">
   <h1 class="text-center">DASHBOARD</h1>
-  <h1 *ngIf="name">Witaj {{name}}, {{email}}. Zatrudniony w firmie {{firmName}}</h1>
-  <img src="{{avatar_url}}" width="30" height="30"/>
-  <button *ngIf="!isLogged" class="bg-green-400 p-2 mx-2" type="button" routerLink="/login">Zaloguj</button>
-  <button *ngIf="isLogged" type="button" class="bg-red-400 p-2 mx-2" (click)="logout()">Wyloguj</button>
-  <button type="button" class="bg-red-400 p-2 mx-2" (click)="sprawdz()">Czy zalogowany</button>
-  <button type="button" class="bg-red-400 p-2 mx-2" (click)="test()">Test</button>
-  <button *ngIf="!isLogged" class="bg-green-400 p-2 mx-2" type="button" routerLink="/register">Zrejestruj</button>
+</div>
+<div class="w-full flex flex-col justify-center items-center pt-4 space-y-4">
+  <app-offer *ngFor="let offer of offers"  class="w-full md:px-56" [offer]="offer"></app-offer>
+  <p-paginator [rows]="10" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
 </div>
 

@@ -4,6 +4,7 @@ import {LoginService} from "../../shared/services/login/login.service";
 import {Router} from "@angular/router";
 import {UserRegistration} from "../../shared/models/user-registration";
 import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {ApiService} from "../../shared/services/api/api.service";
 
 @Component({
   selector: 'app-register',
@@ -33,7 +34,8 @@ export class RegisterComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
-    private http: HttpClient) { }
+    private http: HttpClient,
+    private apiService: ApiService) { }
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -85,14 +87,15 @@ export class RegisterComponent implements OnInit {
       formData.append('zip_code',this.form.controls['zip_code'].value != null ? this.form.controls['zip_code'].value : '');
 
 
-      this.loginService.csrf().subscribe(()=>{
-        this.loginService.register(
+      this.apiService.csrf().subscribe(()=>{
+        this.apiService.register(
           formData
         ).subscribe({
           next: value => {
             if(value.success){
-              this.router.navigate(['/dashboard']);
               localStorage.setItem('isLogged', 'true');
+              localStorage.setItem('user', JSON.stringify(value.user));
+              window.location.href="/dashboard";
             }
           },
           error: err => {

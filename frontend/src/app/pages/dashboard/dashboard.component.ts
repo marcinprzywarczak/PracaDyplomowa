@@ -16,10 +16,13 @@ export class DashboardComponent implements OnInit {
   avatar_url: string;
   isFirmAccount: boolean;
   firmName: string;
+  offers: any;
+  totalRecords: number;
+  currentPage: number;
+  dataLoad: boolean = false;
   constructor(private loginService: LoginService,private apiService: ApiService, private router: Router) { }
 
   ngOnInit(): void {
-    //this.loginService.csrf();
     this.isLogged = !!localStorage.getItem('isLogged');
     if(this.isLogged)
     {
@@ -33,30 +36,23 @@ export class DashboardComponent implements OnInit {
         console.log(this.isFirmAccount);
       })
     }
-  }
-  logout(){
-    this.loginService.logout().subscribe(response => {
-      if(response.status === 204){
-        localStorage.removeItem('isLogged');
-        localStorage.removeItem('user');
-        window.location.reload();
-      }
-    });
-
+    this.apiService.getOffers(1).subscribe((value:any) => {
+      console.log(value.offers);
+      this.totalRecords = value.offers.total;
+      this.offers = value.offers.data;
+      this.currentPage = value.offers.curent_page;
+      this.dataLoad = true;
+    })
   }
 
-  sprawdz(){
-    this.loginService.csrf().subscribe(() => {
-      this.loginService.isLogged().subscribe(value => {
-        console.log(value);
+
+
+  paginate(event: any){
+    if(this.currentPage !== (event.page+1)){
+      this.apiService.getOffers(event.page + 1).subscribe((value:any) => {
+        this.offers = value.offers.data;
       });
-    });
-
-  }
-
-  test(){
-    this.loginService.test().subscribe(value => {
-      console.log(value);
-    });
+      this.currentPage = (event.page+1);
+    }
   }
 }

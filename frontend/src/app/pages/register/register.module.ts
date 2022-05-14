@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { RegisterComponent } from './register.component';
 import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 import {SharedModule} from "../../shared/shared.module";
+import {InputSwitchModule} from "primeng/inputswitch";
+import {PaginatorModule} from "primeng/paginator";
 
 
 
@@ -12,7 +14,9 @@ import {SharedModule} from "../../shared/shared.module";
   ],
   imports: [
     ReactiveFormsModule,
-    CommonModule
+    CommonModule,
+    InputSwitchModule,
+    PaginatorModule
   ]
 })
 export class RegisterModule { }

@@ -21,16 +21,5 @@ export class LoginComponent implements OnInit {
   get f() {
     return this.form.controls;
   }
-  onSubmit(){
-    this.apiService.test();
-    console.log('test');
-  }
 
-  test2(){
-    this.apiService.test2();
-  }
-
-  wyloguj(){
-    this.apiService.wyloguj();
-  }
 }

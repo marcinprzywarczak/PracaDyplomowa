@@ -11,9 +11,11 @@
 <!--        </div>-->
         <!-- Primary Navbar items -->
         <div class="hidden md:flex items-center space-x-1">
-          <a href="" class="py-4 px-2 text-green-500 border-b-4 border-green-500 font-semibold ">Strona główna</a>
+          <a routerLink="dashboard" class="py-4 px-2 text-green-500 border-b-4 border-green-500 font-semibold ">Strona główna</a>
           <div (click)="dropdownHouse()" class="cursor-pointer  text-gray-500 font-semibold">
-            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-house">Domy</div>
+            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-house">
+              Domy <i id="dropdown-house-icon" class="pi pi-angle-down text-center align-middle"></i>
+            </div>
             <div id="dropdown-content-house" class="bg-gray-200 w-auto fixed hidden">
               <a href="#">
                 <div class="p-3 hover:text-green-500 transition duration-300">
@@ -28,7 +30,9 @@
             </div>
           </div>
           <div (click)="dropdownFlat()" class="cursor-pointer  text-gray-500 font-semibold">
-            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-flat">Mieszkania</div>
+            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-flat">
+              Mieszkania <i id="dropdown-flat-icon" class="pi pi-angle-down text-center align-middle"></i>
+            </div>
             <div id="dropdown-content-flat" class="bg-gray-200 w-auto fixed hidden">
               <a href="#">
                 <div class="p-3 hover:text-green-500 transition duration-300">
@@ -43,7 +47,9 @@
             </div>
           </div>
           <div (click)="dropdownPlot()" class="cursor-pointer  text-gray-500 font-semibold">
-            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-plot">Działki</div>
+            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-plot">
+              Działki <i id="dropdown-plot-icon" class="pi pi-angle-down text-center align-middle"></i>
+            </div>
             <div id="dropdown-content-plot" class="bg-gray-200 w-auto fixed hidden">
               <a href="#">
                 <div class="p-3 hover:text-green-500 transition duration-300">
@@ -59,7 +65,9 @@
           </div>
 
           <div (click)="dropdownWarehouse()" class="cursor-pointer  text-gray-500 font-semibold">
-            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-warehouse">Magazyny</div>
+            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-warehouse">
+              Magazyny <i id="dropdown-warehouse-icon" class="pi pi-angle-down text-center align-middle"></i>
+            </div>
             <div id="dropdown-content-warehouse" class="bg-gray-200 w-auto fixed hidden">
               <a href="#">
                 <div class="p-3 hover:text-green-500 transition duration-300">
@@ -75,7 +83,9 @@
           </div>
 
           <div (click)="dropdownRoom()" class="cursor-pointer text-gray-500 font-semibold">
-            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-room">Pokoje</div>
+            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-room">
+              Pokoje <i id="dropdown-room-icon" class="pi pi-angle-down text-center align-middle"></i>
+            </div>
             <div id="dropdown-content-room" class="bg-gray-200 w-auto fixed hidden">
               <a href="#">
                 <div class="p-3 hover:text-green-500 transition duration-300">
@@ -86,7 +96,9 @@
           </div>
 
           <div (click)="dropdownOffice()" class="cursor-pointer  text-gray-500 font-semibold">
-            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-office">Biura</div>
+            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-office">
+              Biura <i id="dropdown-office-icon" class="pi pi-angle-down text-center align-middle"></i>
+            </div>
             <div id="dropdown-content-office" class="bg-gray-200 w-auto fixed hidden">
               <a href="#">
                 <div class="p-3 hover:text-green-500 transition duration-300">
@@ -127,9 +139,10 @@
 <!--          </div>-->
 <!--        </div>-->
         <div (click)="dropdownUser()" class="hidden md:block cursor-pointer  text-gray-500 font-semibold">
-          <div id="dropdown-user" class="py-4 px-2 flex flex-row items-center cursor-pointer  text-gray-500 font-semibold hover:text-green-500 transition duration-300">
+          <div id="dropdown-user" class="py-4 px-2 flex flex-row items-center cursor-pointer space-x-1  text-gray-500 font-semibold hover:text-green-500 transition duration-300">
             <img id="dropdown-user-img" src="{{user.avatar}}" width="30" height="30" alt="zdj"/>
             <div id="dropdown-user-name" class="">{{user.first_name}} {{user.sure_name}}</div>
+            <i id="dropdown-user-icon" class="pi pi-angle-down"></i>
           </div>
           <div id="dropdown-content-user" class="bg-gray-200 w-auto fixed hidden">
             <a href="#">
@@ -173,7 +186,9 @@
       </li>
       <li>
         <div (click)="dropdownHouseMobile()" class="cursor-pointer  text-gray-500 font-semibold">
-          <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-house-mobile">Domy</div>
+          <div class="py-4 px-2 hover:text-green-500 transition duration-300 flex justify-between" id="dropdown-house-mobile">
+            Domy <i id="dropdown-house-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
+          </div>
           <div class="bg-gray-200 w-full hidden" id="dropdown-content-house-mobile">
             <a href="#">
               <div class="p-3 hover:text-green-500 transition duration-300">
@@ -190,7 +205,9 @@
       </li>
       <li>
         <div (click)="dropdownFlatMobile()" class="cursor-pointer  text-gray-500 font-semibold">
-          <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-flat-mobile">Mieszkania</div>
+          <div class="py-4 px-2 hover:text-green-500 flex justify-between transition duration-300" id="dropdown-flat-mobile">
+            Mieszkania <i id="dropdown-flat-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
+          </div>
           <div id="dropdown-content-flat-mobile" class="bg-gray-200 w-full hidden">
             <a href="#">
               <div class="p-3 hover:text-green-500 transition duration-300">
@@ -207,7 +224,9 @@
       </li>
       <li>
         <div (click)="dropdownPlotMobile()" class="cursor-pointer  text-gray-500 font-semibold">
-          <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-plot-mobile">Działki</div>
+          <div class="py-4 px-2 hover:text-green-500 transition duration-300 flex justify-between" id="dropdown-plot-mobile">
+            Działki <i id="dropdown-plot-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
+          </div>
           <div id="dropdown-content-plot-mobile" class="bg-gray-200 w-full hidden">
             <a href="#">
               <div class="p-3 hover:text-green-500 transition duration-300">
@@ -224,7 +243,9 @@
       </li>
       <li>
         <div (click)="dropdownWarehouseMobile()" class="cursor-pointer  text-gray-500 font-semibold">
-          <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-warehouse-mobile">Magazyny</div>
+          <div class="py-4 px-2 hover:text-green-500 transition duration-300 flex justify-between" id="dropdown-warehouse-mobile">
+            Magazyny <i id="dropdown-warehouse-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
+          </div>
           <div id="dropdown-content-warehouse-mobile" class="bg-gray-200 w-full hidden">
             <a href="#">
               <div class="p-3 hover:text-green-500 transition duration-300">
@@ -241,7 +262,10 @@
       </li>
       <li>
         <div (click)="dropdownRoomMobile()" class="cursor-pointer  text-gray-500 font-semibold">
-          <div class="py-4 px-2 hover:text-green-500 transition duration-300 focus:bg-amber-700" id="dropdown-room-mobile">Pokoje</div>
+          <div class="py-4 px-2 hover:text-green-500 flex justify-between transition duration-300 focus:bg-amber-700"
+               id="dropdown-room-mobile">
+            Pokoje <i id="dropdown-room-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
+          </div>
           <div id="dropdown-content-room-mobile" class="bg-gray-200 w-full hidden">
             <a href="#">
               <div class="p-3 hover:text-green-500 transition duration-300">
@@ -253,7 +277,9 @@
       </li>
       <li>
         <div (click)="dropdownOfficeMobile()" class="cursor-pointer  text-gray-500 font-semibold">
-          <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-office-mobile">Biura</div>
+          <div class="py-4 px-2 hover:text-green-500 transition duration-300 flex justify-between" id="dropdown-office-mobile">
+            Biura <i id="dropdown-office-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
+          </div>
           <div id="dropdown-content-office-mobile" class="bg-gray-200 w-full hidden">
             <a href="#">
               <div class="p-3 hover:text-green-500 transition duration-300">
@@ -275,9 +301,10 @@
         </div>
         <ng-template #loggedMobile>
           <div (click)="dropdownUserMobile()" class="cursor-pointer text-gray-500 font-semibold w-full">
-            <div id="dropdown-user-mobile" class="py-2 px-2 justify-start flex flex-row items-center cursor-pointer  text-gray-500 font-semibold hover:text-green-500 transition duration-300">
+            <div id="dropdown-user-mobile" class="py-2 px-2 justify-start space-x-1 flex flex-row items-center cursor-pointer  text-gray-500 font-semibold hover:text-green-500 transition duration-300">
               <img id="dropdown-user-img-mobile" src="{{user.avatar}}" width="30" height="30" alt="zdj"/>
               <div id="dropdown-user-name-mobile" class="">{{user.first_name}} {{user.sure_name}}</div>
+              <i id="dropdown-user-icon-mobile" class="pi pi-angle-down"></i>
             </div>
             <div id="dropdown-content-user-mobile" class="bg-gray-200 w-full hidden">
               <a href="#">

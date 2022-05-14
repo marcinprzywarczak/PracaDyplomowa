@@ -101,89 +101,104 @@ export class NavbarComponent implements OnInit {
 
   @HostListener('document:click', ['$event'])
   onDocumentClick(event: MouseEvent){
-    if(!(event.target == document.getElementById("dropdown-plot"))){
+    if(!(event.target == document.getElementById("dropdown-plot"))
+      && !(event.target == document.querySelector("#dropdown-plot-icon"))){
       const menu = document.querySelector("#dropdown-content-plot")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-plot-mobile"))){
+    if(!(event.target == document.getElementById("dropdown-plot-mobile"))
+      && !(event.target == document.querySelector("#dropdown-plot-icon-mobile"))){
       const menu = document.querySelector("#dropdown-content-plot-mobile")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");
     }
 
 
-    if(!(event.target == document.getElementById("dropdown-house"))){
+    if(!(event.target == document.getElementById("dropdown-house"))
+      && !(event.target == document.querySelector("#dropdown-house-icon"))){
       const menu = document.querySelector("#dropdown-content-house")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");
     }
-    if(!(event.target == document.getElementById("dropdown-house-mobile"))){
+    if(!(event.target == document.getElementById("dropdown-house-mobile"))
+      && !(event.target == document.querySelector("#dropdown-house-icon-mobile"))){
       const menu = document.querySelector("#dropdown-content-house-mobile")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-flat"))){
+    if(!(event.target == document.getElementById("dropdown-flat"))
+      && !(event.target == document.querySelector("#dropdown-flat-icon"))){
       const menu = document.querySelector("#dropdown-content-flat")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-warehouse"))){
+    if(!(event.target == document.getElementById("dropdown-warehouse"))
+      && !(event.target == document.querySelector("#dropdown-warehouse-icon"))){
       const menu = document.querySelector("#dropdown-content-warehouse")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-room"))){
+    if(!(event.target == document.getElementById("dropdown-room"))
+      && !(event.target == document.querySelector("#dropdown-room-icon"))){
       const menu = document.querySelector("#dropdown-content-room")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-office"))){
+    if(!(event.target == document.getElementById("dropdown-office"))
+      && !(event.target == document.querySelector("#dropdown-office-icon"))){
       const menu = document.querySelector("#dropdown-content-office")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-flat-mobile"))){
+    if(!(event.target == document.getElementById("dropdown-flat-mobile"))
+      && !(event.target == document.querySelector("#dropdown-flat-icon-mobile"))){
       const menu = document.querySelector("#dropdown-content-flat-mobile")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-warehouse-mobile"))){
+    if(!(event.target == document.getElementById("dropdown-warehouse-mobile"))
+      && !(event.target == document.querySelector("#dropdown-warehouse-icon-mobile"))){
       const menu = document.querySelector("#dropdown-content-warehouse-mobile")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-room-mobile"))){
+    if(!(event.target == document.getElementById("dropdown-room-mobile"))
+      && !(event.target == document.querySelector("#dropdown-room-icon-mobile"))){
       const menu = document.querySelector("#dropdown-content-room-mobile")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-office-mobile"))){
+    if(!(event.target == document.getElementById("dropdown-office-mobile"))
+      && !(event.target == document.querySelector("#dropdown-office-icon-mobile"))){
       const menu = document.querySelector("#dropdown-content-office-mobile")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");
     }
 
     if(!(event.target == document.querySelector("#dropdown-user"))
-    && !(event.target == document.querySelector("#dropdown-user-img"))
-    && !(event.target == document.querySelector("#dropdown-user-name")) && this.isLogged){
+        && !(event.target == document.querySelector("#dropdown-user-img"))
+        && !(event.target == document.querySelector("#dropdown-user-name"))
+        && !(event.target == document.querySelector("#dropdown-user-icon")) && this.isLogged){
       const menu = document.querySelector("#dropdown-content-user")!;
       if(!menu.classList.contains("hidden"))
          menu.classList.toggle("hidden");
     }
 
     if(!(event.target == document.querySelector("#dropdown-user-mobile"))
-      && !(event.target == document.querySelector("#dropdown-user-img-mobile"))
-      && !(event.target == document.querySelector("#dropdown-user-name-mobile")) && this.isLogged){
+        && !(event.target == document.querySelector("#dropdown-user-img-mobile"))
+        && !(event.target == document.querySelector("#dropdown-user-name-mobile"))
+        && !(event.target == document.querySelector("#dropdown-user-icon-mobile"))
+        && this.isLogged){
       const menu = document.querySelector("#dropdown-content-user-mobile")!;
       if(!menu.classList.contains("hidden"))
         menu.classList.toggle("hidden");

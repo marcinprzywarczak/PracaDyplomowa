@@ -20,7 +20,8 @@ export class AuthInterceptor implements HttpInterceptor {
         if(err.status === 401){
           this.loginService.logout();
           localStorage.removeItem('isLogged');
-          this.router.navigate(['/login']);
+          window.location.href = '/login';
+          // this.router.navigate(['/login']);
         }
         return throwError(err);
       })

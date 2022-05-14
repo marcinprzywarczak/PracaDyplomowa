@@ -1,9 +1,6 @@
-<form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-1/2 flex flex-col bg-amber-300">
+<form [formGroup]="form" class="w-1/2 flex flex-col bg-amber-300">
   <input class="bg-amber-200" type="text" id="login" name="login" formControlName="login">
   <input class="bg-amber-200" type="text" id="haslo" name="haslo" formControlName="haslo">
   <button type="submit">Wyslij</button>
 </form>
 
-<button class="bg-amber-200" (click)="test2()">TEST</button>
-
-<button class="bg-amber-700" (click)="wyloguj()">TEST</button>

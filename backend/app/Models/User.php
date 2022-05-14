@@ -51,4 +51,8 @@ class User extends Authenticatable
         return $this->belongsTo(Firm::class);
     }
 
+    public function offers(){
+        return $this->hasMany(Offer::class);
+    }
+
 }

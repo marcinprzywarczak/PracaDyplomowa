@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Firm;
+use App\Models\OfferStatus;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -54,6 +55,10 @@ class DatabaseSeeder extends Seeder
         if(isset($userRole))
             $user->assignRole($userRole);
 
+        $this->call(PropertyTypesSeeder::class);
+        $this->call(OfferStatusesSeeder::class);
+        $this->call(OfferTypesSeeder::class);
+        $this->call(OffersSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }
