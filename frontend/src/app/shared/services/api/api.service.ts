@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {finalize} from "rxjs";
 import {emitDistinctChangesOnlyDefaultValue} from "@angular/compiler";
 import {UserRegistration} from "../../models/user-registration";
+import {Filter} from "../../models/filter";
 
 @Injectable({
   providedIn: 'root'
@@ -36,7 +37,15 @@ export class ApiService {
     return this.http.post<any>('http://localhost:8000/logout',{}, {withCredentials: true, observe: 'response'});
   }
 
-  getOffers(page: number){
-    return this.http.get(`http://localhost:8000/api/offers?page=${page}`, {withCredentials: true});
+  getOffers(page: number, filters:Filter[]){
+    return this.http.post(`http://localhost:8000/api/offers?page=${page}`,{filters: filters}, {withCredentials: true});
+  }
+
+  getPropertyTypes(){
+    return this.http.get('http://localhost:8000/api/getPropertyType');
+  }
+
+  getOfferTypes(){
+    return this.http.get('http://localhost:8000/api/getOfferType');
   }
 }

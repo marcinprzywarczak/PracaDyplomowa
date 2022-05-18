@@ -13,6 +13,7 @@ import {AuthInterceptor} from "./shared/auth.interceptor";
 import {RegisterModule} from "./pages/register/register.module";
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { OfferComponent } from './components/offer/offer.component';
+import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { OfferComponent } from './components/offer/offer.component';
         HttpClientModule,
         // DashboardModule,
         LoginModule,
-        RegisterModule
+        RegisterModule,
+        BrowserAnimationsModule,
     ],
     providers: [
         {provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true},

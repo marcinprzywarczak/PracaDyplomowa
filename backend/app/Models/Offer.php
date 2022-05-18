@@ -38,7 +38,10 @@ class Offer extends Model
         return $this->belongsTo(User::class);
     }
 
-
+    public function parameters(){
+        return $this->belongsToMany(Parameter::class)
+            ->withPivot('value')->using(OfferParameter::class);
+    }
 
 
 }

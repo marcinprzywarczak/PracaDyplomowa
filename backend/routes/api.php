@@ -37,4 +37,8 @@ Route::post('/photo', [\App\Http\Controllers\PhotoController::class, 'add']);
 
 Route::get('/photoGet', [\App\Http\Controllers\PhotoController::class, 'get']);
 
-Route::get('/offers', [\App\Http\Controllers\OfferController::class, 'index']);
+Route::post('/offers', [\App\Http\Controllers\OfferController::class, 'index']);
+
+Route::get('/getPropertyType', [\App\Http\Controllers\PropertyTypeController::class, 'getPropertyType']);
+
+Route::get('/getOfferType', [\App\Http\Controllers\OfferTypeController::class, 'getOfferType']);

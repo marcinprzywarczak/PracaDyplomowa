@@ -4,6 +4,7 @@ namespace Database\Seeders;
 
 use App\Models\Firm;
 use App\Models\OfferStatus;
+use App\Models\Parameter;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -59,6 +60,8 @@ class DatabaseSeeder extends Seeder
         $this->call(OfferStatusesSeeder::class);
         $this->call(OfferTypesSeeder::class);
         $this->call(OffersSeeder::class);
+        $this->call(ParametersSeeder::class);
+        $this->call(OfferParametersSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }
