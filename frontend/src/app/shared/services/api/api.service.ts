@@ -48,4 +48,8 @@ export class ApiService {
   getOfferTypes(){
     return this.http.get('http://localhost:8000/api/getOfferType');
   }
+
+  getPropertyAndOfferTypes(){
+    return this.http.get('http://localhost:8000/api/getPropertyAndOfferTypes');
+  }
 }

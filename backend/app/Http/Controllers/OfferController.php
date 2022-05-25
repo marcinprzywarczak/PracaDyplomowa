@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Offer;
+use App\Models\OfferType;
+use App\Models\PropertyType;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -28,5 +30,11 @@ class OfferController extends Controller
         }
         $offers = $offers->paginate(10);
         return response()->json(['offers' => $offers]);
+    }
+
+    public function getOfferAndPropertyTypes(){
+        $propertyTypes = PropertyType::all();
+        $offerTypes = OfferType::all();
+        return response()->json(['propertyTypes' => $propertyTypes, 'offerTypes' => $offerTypes]);
     }
 }

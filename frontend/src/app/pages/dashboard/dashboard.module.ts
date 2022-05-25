@@ -7,6 +7,7 @@ import {PaginatorModule} from "primeng/paginator";
 import {ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
+import {SharedModule} from "../../shared/shared.module";
 
 
 
@@ -17,7 +18,7 @@ import {ProgressSpinnerModule} from "primeng/progressspinner";
   imports: [
     CommonModule,
     AppRoutingModule,
-    AppModule,
+    SharedModule,
     PaginatorModule,
     ReactiveFormsModule,
     InputTextModule,

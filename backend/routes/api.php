@@ -42,3 +42,5 @@ Route::post('/offers', [\App\Http\Controllers\OfferController::class, 'index']);
 Route::get('/getPropertyType', [\App\Http\Controllers\PropertyTypeController::class, 'getPropertyType']);
 
 Route::get('/getOfferType', [\App\Http\Controllers\OfferTypeController::class, 'getOfferType']);
+
+Route::get('/getPropertyAndOfferTypes', [\App\Http\Controllers\OfferController::class, 'getOfferAndPropertyTypes']);

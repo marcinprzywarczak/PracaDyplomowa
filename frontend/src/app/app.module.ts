@@ -12,7 +12,7 @@ import {LoginModule} from "./pages/login/login.module";
 import {AuthInterceptor} from "./shared/auth.interceptor";
 import {RegisterModule} from "./pages/register/register.module";
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { OfferComponent } from './components/offer/offer.component';
+import { OfferComponent } from './shared/components/offer/offer.component';
 import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
 
 @NgModule({
@@ -20,8 +20,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         AppComponent,
         LoginComponent,
         NavbarComponent,
-        OfferComponent,
-
     ],
     imports: [
         BrowserModule,
@@ -38,7 +36,6 @@ import {BrowserAnimationsModule} from "@angular/platform-browser/animations";
         {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     ],
     exports: [
-        OfferComponent
     ],
     bootstrap: [AppComponent]
 })

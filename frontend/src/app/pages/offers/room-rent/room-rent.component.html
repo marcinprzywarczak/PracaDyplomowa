@@ -1,0 +1,10 @@
+<div class="w-full flex flex-col justify-center items-center pt-4 space-y-4" *ngIf="dataLoad; else elseBlock">
+  <app-offer *ngFor="let offer of offers"  class="w-full md:px-20" [offer]="offer"></app-offer>
+  <h1 *ngIf="offers.length === 0">BRAK OFERT</h1>
+  <p-paginator [rows]="10" [totalRecords]="totalRecords" (onPageChange)="paginate($event)"></p-paginator>
+</div>
+<ng-template #elseBlock>
+  <div class="w-full h-full flex items-center justify-center">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</ng-template>
