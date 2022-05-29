@@ -8,6 +8,8 @@ import {ReactiveFormsModule} from "@angular/forms";
 import {InputTextModule} from "primeng/inputtext";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {SharedModule} from "../../shared/shared.module";
+import {SidebarModule} from "primeng/sidebar";
+import {CheckboxModule} from "primeng/checkbox";
 
 
 
@@ -22,7 +24,9 @@ import {SharedModule} from "../../shared/shared.module";
     PaginatorModule,
     ReactiveFormsModule,
     InputTextModule,
-    ProgressSpinnerModule
+    ProgressSpinnerModule,
+    SidebarModule,
+    CheckboxModule
   ]
 })
 export class DashboardModule { }

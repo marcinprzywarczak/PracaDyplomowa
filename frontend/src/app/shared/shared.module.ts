@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {OfferComponent} from "./components/offer/offer.component";
+import {AppRoutingModule} from "../app-routing.module";
+import {RouterModule} from "@angular/router";
 
 
 
@@ -9,7 +11,8 @@ import {OfferComponent} from "./components/offer/offer.component";
     OfferComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    RouterModule
   ],
   exports: [
     OfferComponent

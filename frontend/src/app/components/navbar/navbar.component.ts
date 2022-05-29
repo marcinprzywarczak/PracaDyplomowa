@@ -2,6 +2,7 @@ import {Component, HostListener, OnChanges, OnInit, SimpleChanges} from '@angula
 import {LoginService} from "../../shared/services/login/login.service";
 import {finalize} from "rxjs";
 import {UserService} from "../../shared/services/user/user.service";
+import {ApiService} from "../../shared/services/api/api.service";
 
 @Component({
   selector: 'app-navbar',
@@ -16,7 +17,7 @@ export class NavbarComponent implements OnInit {
   sureName = "Kowalski";
   avatarUrl = "../../assets/default_avatar.jpg";
   userDropdown: boolean = false;
-  constructor(private loginService: LoginService, private userService: UserService) { }
+  constructor(private apiService: ApiService, private userService: UserService) { }
 
   ngOnInit(): void {
     this.isLogged = this.userService.getState();
@@ -136,12 +137,12 @@ export class NavbarComponent implements OnInit {
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-warehouse"))
-      && !(event.target == document.querySelector("#dropdown-warehouse-icon"))){
-      const menu = document.querySelector("#dropdown-content-warehouse")!;
-      if(!menu.classList.contains("hidden"))
-        menu.classList.toggle("hidden");
-    }
+    // if(!(event.target == document.getElementById("dropdown-warehouse"))
+    //   && !(event.target == document.querySelector("#dropdown-warehouse-icon"))){
+    //   const menu = document.querySelector("#dropdown-content-warehouse")!;
+    //   if(!menu.classList.contains("hidden"))
+    //     menu.classList.toggle("hidden");
+    // }
 
     if(!(event.target == document.getElementById("dropdown-room"))
       && !(event.target == document.querySelector("#dropdown-room-icon"))){
@@ -150,12 +151,12 @@ export class NavbarComponent implements OnInit {
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-office"))
-      && !(event.target == document.querySelector("#dropdown-office-icon"))){
-      const menu = document.querySelector("#dropdown-content-office")!;
-      if(!menu.classList.contains("hidden"))
-        menu.classList.toggle("hidden");
-    }
+    // if(!(event.target == document.getElementById("dropdown-office"))
+    //   && !(event.target == document.querySelector("#dropdown-office-icon"))){
+    //   const menu = document.querySelector("#dropdown-content-office")!;
+    //   if(!menu.classList.contains("hidden"))
+    //     menu.classList.toggle("hidden");
+    // }
 
     if(!(event.target == document.getElementById("dropdown-flat-mobile"))
       && !(event.target == document.querySelector("#dropdown-flat-icon-mobile"))){
@@ -164,12 +165,12 @@ export class NavbarComponent implements OnInit {
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-warehouse-mobile"))
-      && !(event.target == document.querySelector("#dropdown-warehouse-icon-mobile"))){
-      const menu = document.querySelector("#dropdown-content-warehouse-mobile")!;
-      if(!menu.classList.contains("hidden"))
-        menu.classList.toggle("hidden");
-    }
+    // if(!(event.target == document.getElementById("dropdown-warehouse-mobile"))
+    //   && !(event.target == document.querySelector("#dropdown-warehouse-icon-mobile"))){
+    //   const menu = document.querySelector("#dropdown-content-warehouse-mobile")!;
+    //   if(!menu.classList.contains("hidden"))
+    //     menu.classList.toggle("hidden");
+    // }
 
     if(!(event.target == document.getElementById("dropdown-room-mobile"))
       && !(event.target == document.querySelector("#dropdown-room-icon-mobile"))){
@@ -178,12 +179,12 @@ export class NavbarComponent implements OnInit {
         menu.classList.toggle("hidden");
     }
 
-    if(!(event.target == document.getElementById("dropdown-office-mobile"))
-      && !(event.target == document.querySelector("#dropdown-office-icon-mobile"))){
-      const menu = document.querySelector("#dropdown-content-office-mobile")!;
-      if(!menu.classList.contains("hidden"))
-        menu.classList.toggle("hidden");
-    }
+    // if(!(event.target == document.getElementById("dropdown-office-mobile"))
+    //   && !(event.target == document.querySelector("#dropdown-office-icon-mobile"))){
+    //   const menu = document.querySelector("#dropdown-content-office-mobile")!;
+    //   if(!menu.classList.contains("hidden"))
+    //     menu.classList.toggle("hidden");
+    // }
 
     if(!(event.target == document.querySelector("#dropdown-user"))
         && !(event.target == document.querySelector("#dropdown-user-img"))
@@ -206,7 +207,7 @@ export class NavbarComponent implements OnInit {
   }
   logout(){
     console.log('test');
-    this.loginService.logout().pipe(finalize(() => {
+    this.apiService.logout().pipe(finalize(() => {
       window.location.reload();
     })).subscribe(response => {
       if(response.status === 204){

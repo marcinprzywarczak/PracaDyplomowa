@@ -21,20 +21,16 @@ const routes: Routes = [
     component: RegisterComponent, canActivate: [LoginGuard]
   },
   {
-    path: 'dom/sprzedaz',
+    path: 'offer/:id',
+    loadChildren: () => import('./pages/offer-details/offer-details.module').then(m => m.OfferDetailsModule),
+  },
+  {
+    path: 'dom/:type',
     loadChildren: () => import('./pages/offers/house-sell/house-sell.module').then(m => m.HouseSellModule),
   },
   {
-    path: 'dom/wynajem',
-    loadChildren: () => import('./pages/offers/house-rent/house-rent.module').then(m => m.HouseRentModule),
-  },
-  {
-    path: 'mieszkanie/sprzedaz',
+    path: 'mieszkanie/:type',
     loadChildren: () => import('./pages/offers/flat-sell/flat-sell.module').then(m => m.FlatSellModule),
-  },
-  {
-    path: 'mieszkanie/wynajem',
-    loadChildren: () => import('./pages/offers/flat-rent/flat-rent.module').then(m => m.FlatRentModule),
   },
   {
     path: 'biuro/sprzedaz',
@@ -47,13 +43,8 @@ const routes: Routes = [
   },
 
   {
-    path: 'dzialka/sprzedaz',
+    path: 'dzialka/:type',
     loadChildren: () => import('./pages/offers/plot-sell/plot-sell.module').then(m => m.PlotSellModule),
-  },
-
-  {
-    path: 'dzialka/wynajem',
-    loadChildren: () => import('./pages/offers/plot-rent/plot-rent.module').then(m => m.PlotRentModule),
   },
   {
     path: 'pokoj/wynajem',

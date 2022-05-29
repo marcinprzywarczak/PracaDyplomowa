@@ -1,0 +1,24 @@
+.input-from{
+  width: 48%;
+}
+
+.input-gap{
+  width: 4%;
+}
+
+::ng-deep p-multiselect .p-multiselect-label{
+  display: flex;
+  flex-wrap: wrap;
+}
+
+::ng-deep p-multiselect .p-multiselect-token{
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+::ng-deep .p-sidebar .p-sidebar-header{
+  padding: 0.25rem 1rem;
+}
+::ng-deep .p-sidebar .p-sidebar-content{
+  padding: 0;
+}

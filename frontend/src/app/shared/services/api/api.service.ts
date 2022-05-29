@@ -10,12 +10,14 @@ import {Filter} from "../../models/filter";
 })
 export class ApiService {
 
+  BASE_API_URL:string = 'http://localhost:8000';
+
   constructor(private http: HttpClient) { }
   register(registerData: FormData){
     const headers = new HttpHeaders();
     headers.append('Content-Type', 'multipart/form-data');
     headers.append('Accept', 'application/json');
-    return this.http.post<any>('http://localhost:8000/register',
+    return this.http.post<any>(`${this.BASE_API_URL}/register`,
         registerData
       ,
         {withCredentials: true,headers: headers},
@@ -23,33 +25,45 @@ export class ApiService {
   }
 
   csrf(){
-    return this.http.get('http://localhost:8000/sanctum/csrf-cookie', {withCredentials: true});
+    return this.http.get(`${this.BASE_API_URL}/sanctum/csrf-cookie`, {withCredentials: true});
   }
 
   login(email: string, password: string){
-    return this.http.post<any>('http://localhost:8000/login', {
+    return this.http.post<any>(`${this.BASE_API_URL}/login`, {
       email: email,
       password: password
     }, {withCredentials: true});
   }
 
   logout(){
-    return this.http.post<any>('http://localhost:8000/logout',{}, {withCredentials: true, observe: 'response'});
+    return this.http.post<any>(`${this.BASE_API_URL}/logout`,{}, {withCredentials: true, observe: 'response'});
   }
 
-  getOffers(page: number, filters:Filter[]){
-    return this.http.post(`http://localhost:8000/api/offers?page=${page}`,{filters: filters}, {withCredentials: true});
+  getOffers(page: number, filters:Filter[], parameterFilters?:Filter[], parameterIn?:Filter[], parameterValueIn?:Filter[]){
+    return this.http.post(`${this.BASE_API_URL}/api/offers?page=${page}`,
+      {filters: filters,
+        parameterFilters: parameterFilters,
+        parameterIn: parameterIn,
+        parameterValueIn: parameterValueIn}, {withCredentials: true});
   }
 
   getPropertyTypes(){
-    return this.http.get('http://localhost:8000/api/getPropertyType');
+    return this.http.get(`${this.BASE_API_URL}/api/getPropertyType`);
   }
 
   getOfferTypes(){
-    return this.http.get('http://localhost:8000/api/getOfferType');
+    return this.http.get(`${this.BASE_API_URL}/api/getOfferType`);
   }
 
   getPropertyAndOfferTypes(){
-    return this.http.get('http://localhost:8000/api/getPropertyAndOfferTypes');
+    return this.http.get(`${this.BASE_API_URL}/api/getPropertyAndOfferTypes`);
+  }
+
+  getParametersForPropertyType(propertyType: number){
+    return this.http.post(`${this.BASE_API_URL}/api/getParameters`, {property_type_id: propertyType});
+  }
+
+  getOffer(offerId: number){
+    return this.http.post(`${this.BASE_API_URL}/api/getOffer`, {id: offerId});
   }
 }

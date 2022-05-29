@@ -19,12 +19,12 @@
               Domy <i id="dropdown-house-icon" class="pi pi-angle-down text-center align-middle"></i>
             </div>
             <div id="dropdown-content-house" class="bg-gray-200 w-auto fixed hidden z-10">
-              <a routerLink="dom/sprzedaz">
+              <a [routerLink]="['/dom', 'sprzedaz']">
                 <div class="p-3 hover:text-green-500 transition duration-300" routerLinkActive="active-link-dropdown">
                   Sprzedaż
                 </div>
               </a>
-              <a routerLink="dom/wynajem" routerLinkActive="active-link-dropdown">
+              <a [routerLink]="['/dom', 'wynajem']" routerLinkActive="active-link-dropdown">
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Wynajem
                 </div>
@@ -36,12 +36,12 @@
               Mieszkania <i id="dropdown-flat-icon" class="pi pi-angle-down text-center align-middle"></i>
             </div>
             <div id="dropdown-content-flat" class="bg-gray-200 w-auto fixed hidden z-10">
-              <a routerLink="mieszkanie/sprzedaz" routerLinkActive="active-link-dropdown">
+              <a [routerLink]="['/mieszkanie', 'sprzedaz']" routerLinkActive="active-link-dropdown">
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Sprzedaż
                 </div>
               </a>
-              <a routerLink="mieszkanie/wynajem" routerLinkActive="active-link-dropdown">
+              <a [routerLink]="['/mieszkanie', 'wynajem']" routerLinkActive="active-link-dropdown">
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Wynajem
                 </div>
@@ -53,12 +53,12 @@
               Działki <i id="dropdown-plot-icon" class="pi pi-angle-down text-center align-middle"></i>
             </div>
             <div id="dropdown-content-plot" class="bg-gray-200 w-auto fixed hidden z-10">
-              <a routerLink="dzialka/sprzedaz" routerLinkActive="active-link-dropdown">
+              <a [routerLink]="['/dzialka', 'sprzedaz']" routerLinkActive="active-link-dropdown">
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Sprzedaż
                 </div>
               </a>
-              <a routerLink="dzialka/wynajem" routerLinkActive="active-link-dropdown">
+              <a [routerLink]="['/dzialka', 'wynajem']" routerLinkActive="active-link-dropdown">
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Wynajem
                 </div>
@@ -66,23 +66,23 @@
             </div>
           </div>
 
-          <div (click)="dropdownWarehouse()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">
-            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-warehouse">
-              Magazyny <i id="dropdown-warehouse-icon" class="pi pi-angle-down text-center align-middle"></i>
-            </div>
-            <div id="dropdown-content-warehouse" class="bg-gray-200 w-auto fixed hidden z-10">
-              <a routerLink="magazyn/sprzedaz" routerLinkActive="active-link-dropdown">
-                <div class="p-3 hover:text-green-500 transition duration-300">
-                  Sprzedaż
-                </div>
-              </a>
-              <a routerLink="magazyn/wynajem" routerLinkActive="active-link-dropdown">
-                <div class="p-3 hover:text-green-500 transition duration-300">
-                  Wynajem
-                </div>
-              </a>
-            </div>
-          </div>
+<!--          <div (click)="dropdownWarehouse()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">-->
+<!--            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-warehouse">-->
+<!--              Magazyny <i id="dropdown-warehouse-icon" class="pi pi-angle-down text-center align-middle"></i>-->
+<!--            </div>-->
+<!--            <div id="dropdown-content-warehouse" class="bg-gray-200 w-auto fixed hidden z-10">-->
+<!--              <a routerLink="magazyn/sprzedaz" routerLinkActive="active-link-dropdown">-->
+<!--                <div class="p-3 hover:text-green-500 transition duration-300">-->
+<!--                  Sprzedaż-->
+<!--                </div>-->
+<!--              </a>-->
+<!--              <a routerLink="magazyn/wynajem" routerLinkActive="active-link-dropdown">-->
+<!--                <div class="p-3 hover:text-green-500 transition duration-300">-->
+<!--                  Wynajem-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </div>-->
+<!--          </div>-->
 
           <div (click)="dropdownRoom()" routerLinkActive="active-link" class="cursor-pointer text-gray-500 font-semibold">
             <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-room">
@@ -97,23 +97,23 @@
             </div>
           </div>
 
-          <div (click)="dropdownOffice()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">
-            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-office">
-              Biura <i id="dropdown-office-icon" class="pi pi-angle-down text-center align-middle"></i>
-            </div>
-            <div id="dropdown-content-office" class="bg-gray-200 w-auto fixed hidden z-10">
-              <a routerLink="biuro/sprzedaz" routerLinkActive="active-link-dropdown">
-                <div class="p-3 hover:text-green-500 transition duration-300">
-                  Sprzedaż
-                </div>
-              </a>
-              <a routerLink="biuro/wynajem" routerLinkActive="active-link-dropdown">
-                <div class="p-3 hover:text-green-500 transition duration-300">
-                  Wynajem
-                </div>
-              </a>
-            </div>
-          </div>
+<!--          <div (click)="dropdownOffice()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">-->
+<!--            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-office">-->
+<!--              Biura <i id="dropdown-office-icon" class="pi pi-angle-down text-center align-middle"></i>-->
+<!--            </div>-->
+<!--            <div id="dropdown-content-office" class="bg-gray-200 w-auto fixed hidden z-10">-->
+<!--              <a routerLink="biuro/sprzedaz" routerLinkActive="active-link-dropdown">-->
+<!--                <div class="p-3 hover:text-green-500 transition duration-300">-->
+<!--                  Sprzedaż-->
+<!--                </div>-->
+<!--              </a>-->
+<!--              <a routerLink="biuro/wynajem" routerLinkActive="active-link-dropdown">-->
+<!--                <div class="p-3 hover:text-green-500 transition duration-300">-->
+<!--                  Wynajem-->
+<!--                </div>-->
+<!--              </a>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
       </div>
       <!-- Secondary Navbar items -->
@@ -194,12 +194,12 @@
             Domy <i id="dropdown-house-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
           </div>
           <div class="bg-gray-200 w-full hidden" id="dropdown-content-house-mobile">
-            <a routerLink="dom/sprzedaz" routerLinkActive="active-link-dropdown">
+            <a [routerLink]="['/dom', 'sprzedaz']" routerLinkActive="active-link-dropdown">
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Sprzedaż
               </div>
             </a>
-            <a routerLink="dom/wynajem" routerLinkActive="active-link-dropdown">
+            <a [routerLink]="['/dom', 'wynajem']" routerLinkActive="active-link-dropdown">
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Wynajem
               </div>
@@ -213,12 +213,12 @@
             Mieszkania <i id="dropdown-flat-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
           </div>
           <div id="dropdown-content-flat-mobile" class="bg-gray-200 w-full hidden">
-            <a routerLink="mieszkanie/sprzedaz" routerLinkActive="active-link-dropdown">
+            <a [routerLink]="['/mieszkanie', 'sprzedaz']" routerLinkActive="active-link-dropdown">
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Sprzedaż
               </div>
             </a>
-            <a routerLink="mieszkanie/wynajem" routerLinkActive="active-link-dropdown">
+            <a [routerLink]="['/mieszkanie', 'wynajem']" routerLinkActive="active-link-dropdown">
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Wynajem
               </div>
@@ -232,12 +232,12 @@
             Działki <i id="dropdown-plot-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
           </div>
           <div id="dropdown-content-plot-mobile" class="bg-gray-200 w-full hidden">
-            <a routerLink="dzialka/sprzedaz" routerLinkActive="active-link-dropdown">
+            <a [routerLink]="['/dzialka', 'sprzedaz']" routerLinkActive="active-link-dropdown">
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Sprzedaż
               </div>
             </a>
-            <a routerLink="dzialka/wynajem" routerLinkActive="active-link-dropdown">
+            <a [routerLink]="['/dzialka', 'wynajem']" routerLinkActive="active-link-dropdown">
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Wynajem
               </div>
