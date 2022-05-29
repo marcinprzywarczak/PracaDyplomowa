@@ -14,5 +14,7 @@ class VerifyCsrfToken extends Middleware
     protected $except = [
         '/api/offers',
         '/api/getPropertyType',
+        '/api/getParameters',
+        '/api/getOffer',
     ];
 }

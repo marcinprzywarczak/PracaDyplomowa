@@ -18,7 +18,7 @@ class OffersSeeder extends Seeder
         Offer::create([
             'property_type_id' => 1,
             'offer_status_id' => 1,
-            'offer_type_id' => 1,
+            'offer_type_id' => 2,
             'user_id' => 1,
             'title' => 'Oferta nr 1',
             'area_square_meters' => 120,
@@ -38,7 +38,7 @@ class OffersSeeder extends Seeder
         Offer::create([
             'property_type_id' => 1,
             'offer_status_id' => 1,
-            'offer_type_id' => 1,
+            'offer_type_id' => 2,
             'user_id' => 2,
             'title' => 'Oferta nr 2',
             'area_square_meters' => 120,
@@ -58,7 +58,7 @@ class OffersSeeder extends Seeder
         Offer::create([
             'property_type_id' => 1,
             'offer_status_id' => 1,
-            'offer_type_id' => 1,
+            'offer_type_id' => 2,
             'user_id' => 2,
             'title' => 'Oferta nr 3',
             'area_square_meters' => 120,

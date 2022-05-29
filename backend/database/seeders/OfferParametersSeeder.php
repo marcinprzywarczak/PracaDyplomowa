@@ -18,27 +18,106 @@ class OfferParametersSeeder extends Seeder
         DB::table('offer_parameter')->insert([
             'parameter_id' => 1,
             'offer_id' => 1,
-            'value' => '5'
+            'value' => 'wolnostojący'
         ]);
         DB::table('offer_parameter')->insert([
             'parameter_id' => 2,
             'offer_id' => 1,
-            'value' => '6'
+            'value' => '3'
         ]);
         DB::table('offer_parameter')->insert([
             'parameter_id' => 3,
             'offer_id' => 1,
-            'value' => '7'
+            'value' => 'cegła'
         ]);
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 4,
+            'offer_id' => 1,
+            'value' => '2010'
+        ]);
+
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 5,
+            'offer_id' => 1,
+            'value' => '1000'
+        ]);
+
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 6,
+            'offer_id' => 1,
+            'value' => '8'
+        ]);
+
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 9,
+            'offer_id' => 1,
+            'value' => 'blacha'
+        ]);
+
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 10,
+            'offer_id' => 1,
+            'value' => 'do zamieszkania'
+        ]);
+
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 12,
+            'offer_id' => 1,
+            'value' => ''
+        ]);
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 13,
+            'offer_id' => 1,
+            'value' => ''
+        ]);
+
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 21,
+            'offer_id' => 1,
+            'value' => ''
+        ]);
+
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 27,
+            'offer_id' => 1,
+            'value' => ''
+        ]);
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 39,
+            'offer_id' => 1,
+            'value' => ''
+        ]);
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 3,
+            'offer_id' => 3,
+            'value' => 'pustak'
+        ]);
+
         DB::table('offer_parameter')->insert([
             'parameter_id' => 3,
             'offer_id' => 2,
-            'value' => '8'
+            'value' => 'beton'
         ]);
-        DB::table('offer_parameter')->insert([
-            'parameter_id' => 1,
-            'offer_id' => 2,
-            'value' => '5'
-        ]);
+//        DB::table('offer_parameter')->insert([
+//            'parameter_id' => 3,
+//            'offer_id' => 2,
+//            'value' => '8'
+//        ]);
+//        DB::table('offer_parameter')->insert([
+//            'parameter_id' => 1,
+//            'offer_id' => 2,
+//            'value' => '5'
+//        ]);
     }
 }
