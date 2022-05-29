@@ -62,15 +62,6 @@ export class NavbarComponent implements OnInit {
     dropdown.classList.toggle("hidden");
   }
 
-  dropdownWarehouse(){
-    const dropdown = document.querySelector("#dropdown-content-warehouse")!;
-    dropdown.classList.toggle("hidden");
-  }
-  dropdownWarehouseMobile(){
-    const dropdown = document.querySelector("#dropdown-content-warehouse-mobile")!;
-    dropdown.classList.toggle("hidden");
-  }
-
   dropdownRoom(){
     const dropdown = document.querySelector("#dropdown-content-room")!;
     dropdown.classList.toggle("hidden");
@@ -80,14 +71,6 @@ export class NavbarComponent implements OnInit {
     dropdown.classList.toggle("hidden");
   }
 
-  dropdownOffice(){
-    const dropdown = document.querySelector("#dropdown-content-office")!;
-    dropdown.classList.toggle("hidden");
-  }
-  dropdownOfficeMobile(){
-    const dropdown = document.querySelector("#dropdown-content-office-mobile")!;
-    dropdown.classList.toggle("hidden");
-  }
 
   dropdownUser(){
     const dropdown = document.querySelector("#dropdown-content-user")!;
@@ -137,12 +120,6 @@ export class NavbarComponent implements OnInit {
         menu.classList.toggle("hidden");
     }
 
-    // if(!(event.target == document.getElementById("dropdown-warehouse"))
-    //   && !(event.target == document.querySelector("#dropdown-warehouse-icon"))){
-    //   const menu = document.querySelector("#dropdown-content-warehouse")!;
-    //   if(!menu.classList.contains("hidden"))
-    //     menu.classList.toggle("hidden");
-    // }
 
     if(!(event.target == document.getElementById("dropdown-room"))
       && !(event.target == document.querySelector("#dropdown-room-icon"))){
@@ -151,12 +128,6 @@ export class NavbarComponent implements OnInit {
         menu.classList.toggle("hidden");
     }
 
-    // if(!(event.target == document.getElementById("dropdown-office"))
-    //   && !(event.target == document.querySelector("#dropdown-office-icon"))){
-    //   const menu = document.querySelector("#dropdown-content-office")!;
-    //   if(!menu.classList.contains("hidden"))
-    //     menu.classList.toggle("hidden");
-    // }
 
     if(!(event.target == document.getElementById("dropdown-flat-mobile"))
       && !(event.target == document.querySelector("#dropdown-flat-icon-mobile"))){
@@ -165,12 +136,6 @@ export class NavbarComponent implements OnInit {
         menu.classList.toggle("hidden");
     }
 
-    // if(!(event.target == document.getElementById("dropdown-warehouse-mobile"))
-    //   && !(event.target == document.querySelector("#dropdown-warehouse-icon-mobile"))){
-    //   const menu = document.querySelector("#dropdown-content-warehouse-mobile")!;
-    //   if(!menu.classList.contains("hidden"))
-    //     menu.classList.toggle("hidden");
-    // }
 
     if(!(event.target == document.getElementById("dropdown-room-mobile"))
       && !(event.target == document.querySelector("#dropdown-room-icon-mobile"))){
@@ -179,12 +144,6 @@ export class NavbarComponent implements OnInit {
         menu.classList.toggle("hidden");
     }
 
-    // if(!(event.target == document.getElementById("dropdown-office-mobile"))
-    //   && !(event.target == document.querySelector("#dropdown-office-icon-mobile"))){
-    //   const menu = document.querySelector("#dropdown-content-office-mobile")!;
-    //   if(!menu.classList.contains("hidden"))
-    //     menu.classList.toggle("hidden");
-    // }
 
     if(!(event.target == document.querySelector("#dropdown-user"))
         && !(event.target == document.querySelector("#dropdown-user-img"))

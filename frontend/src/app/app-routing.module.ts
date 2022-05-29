@@ -33,16 +33,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/offers/flat-sell/flat-sell.module').then(m => m.FlatSellModule),
   },
   {
-    path: 'biuro/sprzedaz',
-    loadChildren: () => import('./pages/offers/office-sell/office-sell.module').then(m => m.OfficeSellModule),
-  },
-
-  {
-    path: 'biuro/wynajem',
-    loadChildren: () => import('./pages/offers/office-rent/office-rent.module').then(m => m.OfficeRentModule),
-  },
-
-  {
     path: 'dzialka/:type',
     loadChildren: () => import('./pages/offers/plot-sell/plot-sell.module').then(m => m.PlotSellModule),
   },
@@ -51,14 +41,6 @@ const routes: Routes = [
     loadChildren: () => import('./pages/offers/room-rent/room-rent.module').then(m => m.RoomRentModule),
   },
 
-  {
-    path: 'magazyn/sprzedaz',
-    loadChildren: () => import('./pages/offers/warehouse-sell/warehouse-sell.module').then(m => m.WarehouseSellModule),
-  },
-  {
-    path: 'magazyn/wynajem',
-    loadChildren: () => import('./pages/offers/warehouse-rent/warehouse-rent.module').then(m => m.WarehouseRentModule),
-  },
   {
     path: '',
     component: DashboardComponent

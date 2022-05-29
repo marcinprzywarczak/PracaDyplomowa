@@ -66,24 +66,6 @@
             </div>
           </div>
 
-<!--          <div (click)="dropdownWarehouse()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">-->
-<!--            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-warehouse">-->
-<!--              Magazyny <i id="dropdown-warehouse-icon" class="pi pi-angle-down text-center align-middle"></i>-->
-<!--            </div>-->
-<!--            <div id="dropdown-content-warehouse" class="bg-gray-200 w-auto fixed hidden z-10">-->
-<!--              <a routerLink="magazyn/sprzedaz" routerLinkActive="active-link-dropdown">-->
-<!--                <div class="p-3 hover:text-green-500 transition duration-300">-->
-<!--                  Sprzedaż-->
-<!--                </div>-->
-<!--              </a>-->
-<!--              <a routerLink="magazyn/wynajem" routerLinkActive="active-link-dropdown">-->
-<!--                <div class="p-3 hover:text-green-500 transition duration-300">-->
-<!--                  Wynajem-->
-<!--                </div>-->
-<!--              </a>-->
-<!--            </div>-->
-<!--          </div>-->
-
           <div (click)="dropdownRoom()" routerLinkActive="active-link" class="cursor-pointer text-gray-500 font-semibold">
             <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-room">
               Pokoje <i id="dropdown-room-icon" class="pi pi-angle-down text-center align-middle"></i>
@@ -97,23 +79,6 @@
             </div>
           </div>
 
-<!--          <div (click)="dropdownOffice()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">-->
-<!--            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-office">-->
-<!--              Biura <i id="dropdown-office-icon" class="pi pi-angle-down text-center align-middle"></i>-->
-<!--            </div>-->
-<!--            <div id="dropdown-content-office" class="bg-gray-200 w-auto fixed hidden z-10">-->
-<!--              <a routerLink="biuro/sprzedaz" routerLinkActive="active-link-dropdown">-->
-<!--                <div class="p-3 hover:text-green-500 transition duration-300">-->
-<!--                  Sprzedaż-->
-<!--                </div>-->
-<!--              </a>-->
-<!--              <a routerLink="biuro/wynajem" routerLinkActive="active-link-dropdown">-->
-<!--                <div class="p-3 hover:text-green-500 transition duration-300">-->
-<!--                  Wynajem-->
-<!--                </div>-->
-<!--              </a>-->
-<!--            </div>-->
-<!--          </div>-->
         </div>
       </div>
       <!-- Secondary Navbar items -->
@@ -245,25 +210,7 @@
           </div>
         </div>
       </li>
-      <li>
-        <div (click)="dropdownWarehouseMobile()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">
-          <div class="py-4 px-2 hover:text-green-500 transition duration-300 flex justify-between" id="dropdown-warehouse-mobile">
-            Magazyny <i id="dropdown-warehouse-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
-          </div>
-          <div id="dropdown-content-warehouse-mobile" class="bg-gray-200 w-full hidden">
-            <a routerLink="magazyn/sprzedaz" routerLinkActive="active-link-dropdown">
-              <div class="p-3 hover:text-green-500 transition duration-300">
-                Sprzedaż
-              </div>
-            </a>
-            <a routerLink="magazyn/wynajem" routerLinkActive="active-link-dropdown">
-              <div class="p-3 hover:text-green-500 transition duration-300">
-                Wynajem
-              </div>
-            </a>
-          </div>
-        </div>
-      </li>
+
       <li>
         <div (click)="dropdownRoomMobile()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">
           <div class="py-4 px-2 hover:text-green-500 flex justify-between transition duration-300 focus:bg-amber-700"
@@ -279,25 +226,7 @@
           </div>
         </div>
       </li>
-      <li>
-        <div (click)="dropdownOfficeMobile()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">
-          <div class="py-4 px-2 hover:text-green-500 transition duration-300 flex justify-between" id="dropdown-office-mobile">
-            Biura <i id="dropdown-office-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
-          </div>
-          <div id="dropdown-content-office-mobile" class="bg-gray-200 w-full hidden">
-            <a routerLink="biuro/sprzedaz" routerLinkActive="active-link-dropdown">
-              <div class="p-3 hover:text-green-500 transition duration-300">
-                Sprzedaż
-              </div>
-            </a>
-            <a routerLink="biuro/wynajem" routerLinkActive="active-link-dropdown">
-              <div class="p-3 hover:text-green-500 transition duration-300">
-                Wynajem
-              </div>
-            </a>
-          </div>
-        </div>
-      </li>
+
       <li class="py-2 flex flex-row items-center space-x-3" [ngClass]="isLogged ? 'justify-start' : 'justify-end' ">
         <div *ngIf="!isLogged; else loggedMobile" class="items-center space-x-3 ">
           <a href="" routerLink="/login" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Zaloguj</a>
