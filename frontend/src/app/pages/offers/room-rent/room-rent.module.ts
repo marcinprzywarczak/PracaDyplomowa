@@ -5,6 +5,10 @@ import {RouterModule} from "@angular/router";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {PaginatorModule} from "primeng/paginator";
 import {SharedModule} from "../../../shared/shared.module";
+import {ReactiveFormsModule} from "@angular/forms";
+import {InputTextModule} from "primeng/inputtext";
+import {MultiSelectModule} from "primeng/multiselect";
+import {SidebarModule} from "primeng/sidebar";
 
 
 
@@ -18,6 +22,10 @@ import {SharedModule} from "../../../shared/shared.module";
     ProgressSpinnerModule,
     PaginatorModule,
     SharedModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    MultiSelectModule,
+    SidebarModule,
   ]
 })
 export class RoomRentModule { }

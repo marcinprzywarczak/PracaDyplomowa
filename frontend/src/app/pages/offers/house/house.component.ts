@@ -58,12 +58,6 @@ export class HouseComponent implements OnInit {
     ) { }
 
   ngOnInit(): void {
-    // console.log(
-    // this.route.paramMap.pipe(
-    //   switchMap((params: ParamMap) =>
-    //   params.get('type')!)
-    // ));
-
     this.form = this.formBuilder.group({
       ogrzewanie: [],
       locality: [this.locality],
@@ -123,20 +117,21 @@ export class HouseComponent implements OnInit {
     });
   }
   getParameters(){
-    this.apiService.getParametersForPropertyType(this.propertyTypeId).subscribe((value: any) => {
-      console.log(value);
-      this.buildingTypeOptions = value.find((x:any) => x.name === 'rodzaj zabudowy').parameter_values;
-      this.buildingMaterialsOptions = value.find((x:any) => x.name === 'materiał budynku').parameter_values;
-      this.roofingTypeOptions = value.find((x:any) => x.name === 'pokrycie dachu').parameter_values;
-      this.buildingCondition = value.find((x:any) => x.name === 'stan wykończenia').parameter_values;
-      this.windowsOptions = value.find((x:any) => x.name === 'okna').parameter_values;
+    this.apiService.getParametersForPropertyType(this.propertyTypeId)
+      .subscribe((value: any) => {
 
-      this.buildingSecurityOptions = value.filter((x: any) => (x.parameter_category !== null && x.parameter_category.name === 'zabezpieczenia budynku'));
-      this.fenceOptions = value.filter((x: any) => (x.parameter_category !== null && x.parameter_category.name === 'ogrodzenie'));
-      this.heatingOptions = value.filter((x: any) => (x.parameter_category !== null && x.parameter_category.name === 'ogrzewanie'));
-      this.utilitiesOptions = value.filter((x: any) => (x.parameter_category !== null && x.parameter_category.name === 'media'));
-      this.additionalInfOptions = value.filter((x: any) => (x.parameter_category !== null && x.parameter_category.name === 'informacje dodatkowe'));
-      this.ogrzewanieOptions = value.filter((x: any) => (x.parameter_category !== null && x.parameter_category.name === 'ogrzewanie'));
+        this.buildingTypeOptions = value.find((x:any) => x.name === 'rodzaj zabudowy').parameter_values;
+        this.buildingMaterialsOptions = value.find((x:any) => x.name === 'materiał budynku').parameter_values;
+        this.roofingTypeOptions = value.find((x:any) => x.name === 'pokrycie dachu').parameter_values;
+        this.buildingCondition = value.find((x:any) => x.name === 'stan wykończenia').parameter_values;
+        this.windowsOptions = value.find((x:any) => x.name === 'okna').parameter_values;
+
+        this.buildingSecurityOptions = value.filter((x: any) => (x.parameter_category !== null && x.parameter_category.name === 'zabezpieczenia budynku'));
+        this.fenceOptions = value.filter((x: any) => (x.parameter_category !== null && x.parameter_category.name === 'ogrodzenie'));
+        this.heatingOptions = value.filter((x: any) => (x.parameter_category !== null && x.parameter_category.name === 'ogrzewanie'));
+        this.utilitiesOptions = value.filter((x: any) => (x.parameter_category !== null && x.parameter_category.name === 'media'));
+        this.additionalInfOptions = value.filter((x: any) => (x.parameter_category !== null && x.parameter_category.name === 'informacje dodatkowe'));
+        this.ogrzewanieOptions = value.filter((x: any) => (x.parameter_category !== null && x.parameter_category.name === 'ogrzewanie'));
     });
   }
   getPropertyId(){
@@ -160,8 +155,8 @@ export class HouseComponent implements OnInit {
   }
 
   getOffers(page: number){
-    this.apiService.getOffers(page, this.filters, this.parameterFilters, this.parameterIn, this.parameterValueIn).subscribe((value:any) => {
-      console.log(value.offers.data);
+    this.apiService.getOffers(page, this.filters, this.parameterFilters, this.parameterIn, this.parameterValueIn)
+      .subscribe((value:any) => {
       this.totalRecords = value.offers.total;
       this.offers = value.offers.data;
       this.currentPage = value.offers.curent_page;
@@ -171,8 +166,8 @@ export class HouseComponent implements OnInit {
 
   clearFilters(){
     this.filters = [];
-    this.filters.push(this.defaultFilters[0]);
-    this.filters.push(this.defaultFilters[1]);
+    this.filters[0] = this.defaultFilters[0];
+    this.filters[0] = this.defaultFilters[1];
     this.parameterValueIn = [];
     this.parameterFilters = [];
     this.parameterIn = [];

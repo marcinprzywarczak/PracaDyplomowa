@@ -43,11 +43,13 @@ const routes: Routes = [
 
   {
     path: '',
-    component: DashboardComponent
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
   },
   {
     path: '**',
-    component: DashboardComponent
+    redirectTo: 'dashboard',
+    pathMatch: 'full'
   },
 
 ];

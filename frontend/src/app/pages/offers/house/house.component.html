@@ -120,7 +120,8 @@
           <label for="buildingType">Rodzaj zabudowy</label>
           <p-multiSelect class="w-full" id="buildingType" name="buildingType" [filter]="false" display="chip"
                          [options]="buildingTypeOptions" optionLabel="value" optionValue="value" placeholder="Wybierz rodzaj zabudowy"
-                         [style]="{'width':'100%'}" formControlName="buildingType" [showClear]="true"
+                         [style]="{'width':'100%'}" formControlName="buildingType" [showClear]="true" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -128,7 +129,8 @@
           <label for="buildingMaterial">Materiał budynku</label>
           <p-multiSelect class="w-full" id="buildingMaterial" name="buildingMaterial" [filter]="false" display="chip"
                          [options]="buildingMaterialsOptions" optionLabel="value" optionValue="value" placeholder="Wybierz materiał budynku"
-                         [style]="{'width':'100%'}" formControlName="buildingMaterial" [showClear]="true"
+                         [style]="{'width':'100%'}" formControlName="buildingMaterial" [showClear]="true" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
       </div>
@@ -139,6 +141,8 @@
           <p-multiSelect class="w-full" id="roofingType" name="roofingType" [filter]="false" display="chip"
                          [options]="roofingTypeOptions" optionLabel="value" optionValue="value" placeholder="Wybierz pokrycie dachu"
                          [style]="{'width':'100%'}" [panelStyle]="{'width':'100%'}" formControlName="roofingType" [showClear]="true"
+                         [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -146,7 +150,8 @@
           <label for="buildingCondition">Stan wykończenia</label>
           <p-multiSelect class="w-full" id="buildingCondition" name="buildingCondition" [filter]="false" display="chip"
                          [options]="buildingCondition" optionLabel="value" optionValue="value" placeholder="Wybierz pokrycie dachu"
-                         [style]="{'width':'100%'}" formControlName="buildingCondition" [showClear]="true"
+                         [style]="{'width':'100%'}" formControlName="buildingCondition" [showClear]="true" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -154,7 +159,8 @@
           <label for="windows">Okna</label>
           <p-multiSelect class="w-full" id="windows" name="windows" [filter]="false" display="chip"
                          [options]="windowsOptions" optionLabel="value" optionValue="value" placeholder="Wybierz pokrycie dachu"
-                         [style]="{'width':'100%'}" formControlName="windows" [showClear]="true"
+                         [style]="{'width':'100%'}" formControlName="windows" [showClear]="true" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
       </div>
@@ -172,7 +178,8 @@
                          display="chip"
                          [filter]="false"
                          [showClear]="true"
-                         [style]="{'width':'100%'}"
+                         [style]="{'width':'100%'}" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -186,7 +193,8 @@
                          display="chip"
                          [filter]="false"
                          [showClear]="true"
-                         [style]="{'width':'100%'}"
+                         [style]="{'width':'100%'}" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -200,7 +208,8 @@
                          display="chip"
                          [filter]="false"
                          [showClear]="true"
-                         [style]="{'width':'100%'}"
+                         [style]="{'width':'100%'}" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
       </div>
@@ -215,7 +224,8 @@
                          display="chip"
                          [filter]="false"
                          [showClear]="true"
-                         [style]="{'width':'100%'}"
+                         [style]="{'width':'100%'}" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -229,7 +239,8 @@
                          display="chip"
                          [filter]="false"
                          [showClear]="true"
-                         [style]="{'width':'100%'}"
+                         [style]="{'width':'100%'}" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -366,7 +377,8 @@
           <label>Rodzaj zabudowy</label>
           <p-multiSelect class="w-full" name="buildingType" [filter]="false" display="chip"
                          [options]="buildingTypeOptions" optionLabel="value" optionValue="value" placeholder="Wybierz rodzaj zabudowy"
-                         [style]="{'width':'100%'}" formControlName="buildingType" [showClear]="true"
+                         [style]="{'width':'100%'}" formControlName="buildingType" [showClear]="true" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -374,7 +386,8 @@
           <label>Materiał budynku</label>
           <p-multiSelect class="w-full" name="buildingMaterial" [filter]="false" display="chip"
                          [options]="buildingMaterialsOptions" optionLabel="value" optionValue="value" placeholder="Wybierz materiał budynku"
-                         [style]="{'width':'100%'}" formControlName="buildingMaterial" [showClear]="true"
+                         [style]="{'width':'100%'}" formControlName="buildingMaterial" [showClear]="true" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
       </div>
@@ -385,6 +398,8 @@
           <p-multiSelect class="w-full" name="roofingType" [filter]="false" display="chip"
                          [options]="roofingTypeOptions" optionLabel="value" optionValue="value" placeholder="Wybierz pokrycie dachu"
                          [style]="{'width':'100%'}" [panelStyle]="{'width':'100%'}" formControlName="roofingType" [showClear]="true"
+                         [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -392,7 +407,8 @@
           <label>Stan wykończenia</label>
           <p-multiSelect class="w-full" name="buildingCondition" [filter]="false" display="chip"
                          [options]="buildingCondition" optionLabel="value" optionValue="value" placeholder="Wybierz pokrycie dachu"
-                         [style]="{'width':'100%'}" formControlName="buildingCondition" [showClear]="true"
+                         [style]="{'width':'100%'}" formControlName="buildingCondition" [showClear]="true" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -400,7 +416,8 @@
           <label>Okna</label>
           <p-multiSelect class="w-full" name="windows" [filter]="false" display="chip"
                          [options]="windowsOptions" optionLabel="value" optionValue="value" placeholder="Wybierz pokrycie dachu"
-                         [style]="{'width':'100%'}" formControlName="windows" [showClear]="true"
+                         [style]="{'width':'100%'}" formControlName="windows" [showClear]="true" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
       </div>
@@ -414,7 +431,8 @@
                          display="chip"
                          [filter]="false"
                          [showClear]="true"
-                         [style]="{'width':'100%'}"
+                         [style]="{'width':'100%'}" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -427,7 +445,8 @@
                          display="chip"
                          [filter]="false"
                          [showClear]="true"
-                         [style]="{'width':'100%'}"
+                         [style]="{'width':'100%'}" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -440,7 +459,8 @@
                          display="chip"
                          [filter]="false"
                          [showClear]="true"
-                         [style]="{'width':'100%'}"
+                         [style]="{'width':'100%'}" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
       </div>
@@ -454,7 +474,8 @@
                          display="chip"
                          [filter]="false"
                          [showClear]="true"
-                         [style]="{'width':'100%'}"
+                         [style]="{'width':'100%'}" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
 
@@ -467,7 +488,8 @@
                          display="chip"
                          [filter]="false"
                          [showClear]="true"
-                         [style]="{'width':'100%'}"
+                         [style]="{'width':'100%'}" [showHeader]="false"
+                         emptyMessage="Brak"
           ></p-multiSelect>
         </div>
         <div class="w-full md:w-1/3 pb-2 px-10 flex justify-end items-end text-white">

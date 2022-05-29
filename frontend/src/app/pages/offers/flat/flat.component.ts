@@ -153,8 +153,8 @@ export class FlatComponent implements OnInit {
 
   clearFilters(){
     this.filters = [];
-    this.filters.push(this.defaultFilters[0]);
-    this.filters.push(this.defaultFilters[1]);
+    this.filters[0] = this.defaultFilters[0];
+    this.filters[0] = this.defaultFilters[1];
     this.parameterValueIn = [];
     this.parameterFilters = [];
     this.parameterIn = [];
@@ -409,10 +409,6 @@ export class FlatComponent implements OnInit {
       this.form.controls['additionalInf'].setValue(null);
     }
 
-    console.log(this.parameterFilters);
-    console.log(this.parameterIn);
-    console.log(this.filters);
-    console.log(this.parameterValueIn);
     this.dataLoad = false;
     this.visibleFilterSidebar = false;
     this.getOffers(1);

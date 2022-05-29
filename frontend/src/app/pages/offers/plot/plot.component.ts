@@ -244,8 +244,8 @@ export class PlotComponent implements OnInit {
 
   clearFilters(){
     this.filters = [];
-    this.filters.push(this.defaultFilters[0]);
-    this.filters.push(this.defaultFilters[1]);
+    this.filters[0] = this.defaultFilters[0];
+    this.filters[0] = this.defaultFilters[1];
     this.parameterValueIn = [];
     this.parameterFilters = [];
     this.parameterIn = [];

@@ -1,3 +1,304 @@
+<div class="w-full hidden md:flex">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full">
+    <div class="bg-gray-200 flex flex-col md:px-20 px-5 items-center justify-center space-y-2">
+      <div class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0">
+        <div class="w-full md:w-1/3 flex flex-col">
+          <label>Lokalizacja</label>
+          <input type="text" placeholder="Wprowadź lokalizację" [style]="{'width':'100%'}" pInputText formControlName="locdality">
+        </div>
+
+        <div class="w-full md:w-1/3">
+          <span>Powierzchnia pokoju</span>
+          <div class="flex flex-row">
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" suffix=" &#13217;" inputId="integeronly" placeholder="Od"
+                             formControlName="areaRoomFrom" >
+              </p-inputNumber>
+            </div>
+            <div class="flex input-gap justify-center items-center">-</div>
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" suffix=" &#13217;" inputId="integeronly" placeholder="Do"
+                             formControlName="areaRoomTo">
+              </p-inputNumber>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-1/3">
+          <span>Cena</span>
+          <div class="flex flex-row">
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" suffix=" PLN" inputId="integeronly" placeholder="Od"
+                             formControlName="priceFrom">
+              </p-inputNumber>
+            </div>
+            <div class="flex input-gap justify-center items-center">-</div>
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" suffix=" PLN" inputId="integeronly" placeholder="Do"
+                             formControlName="priceTo">
+              </p-inputNumber>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0">
+
+        <div class="w-full md:w-1/3">
+          <span>Piętro</span>
+          <div class="flex flex-row">
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" inputId="integeronly" placeholder="Od"
+                             formControlName="floorFrom">
+              </p-inputNumber>
+            </div>
+            <div class="flex input-gap justify-center items-center">-</div>
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" inputId="integeronly" placeholder="Do"
+                             formControlName="floorTo">
+              </p-inputNumber>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full md:w-1/3">
+          <span>Liczba pięter</span>
+          <div class="flex flex-row">
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" inputId="integeronly" placeholder="Od"
+                             formControlName="floorNumberFrom">
+              </p-inputNumber>
+            </div>
+            <div class="flex input-gap justify-center items-center">-</div>
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" inputId="integeronly" placeholder="Do"
+                             formControlName="floorNumberTo">
+              </p-inputNumber>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full md:w-1/3 flex flex-col">
+          <label>Rodzaj zabudowy</label>
+          <p-multiSelect class="w-full" name="buildingType" [filter]="false" display="chip"
+                         [options]="buildingTypeOptions" optionLabel="value" optionValue="value" placeholder="Wybierz rodzaj zabudowy"
+                         [style]="{'width':'100%'}" formControlName="buildingType" [showClear]="true" [showHeader]="false"
+                         emptyMessage="Brak"
+          ></p-multiSelect>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0">
+        <div class="w-full md:w-1/3 flex flex-col">
+          <label>Rodzaj pokoju</label>
+          <p-multiSelect class="w-full" name="roomType" [filter]="false" display="chip"
+                         [options]="roomTypeOptions" optionLabel="value" optionValue="value"
+                         placeholder="Wybierz rodzaj pokoju" [showHeader]="false"
+                         [style]="{'width':'100%'}" formControlName="roomType" [showClear]="true"
+                         emptyMessage="Brak"
+          ></p-multiSelect>
+        </div>
+
+        <div class="w-full md:w-1/3 flex flex-col">
+          <label>Wyposażenie</label>
+          <p-multiSelect [options]="equipmentOptions"
+                         formControlName="equipment"
+                         defaultLabel="Wybierz wyposażenie" optionLabel="name"
+                         optionValue="id"
+                         display="chip"
+                         [filter]="false"
+                         [showClear]="true"
+                         [style]="{'width':'100%'}"
+                         [showHeader]="false"
+                         emptyMessage="Brak"
+          ></p-multiSelect>
+        </div>
+
+        <div class="w-full md:w-1/3 flex flex-col">
+          <label>Informacje dodatkowe</label>
+          <p-multiSelect [options]="additionalInfOptions"
+                         formControlName="additionalInf"
+                         defaultLabel="Wybierz informacje dodatkowe" optionLabel="name"
+                         optionValue="id"
+                         display="chip"
+                         [filter]="false"
+                         [showClear]="true"
+                         [style]="{'width':'100%'}"
+                         [showHeader]="false"
+                         emptyMessage="Brak"
+          ></p-multiSelect>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0">
+        <div class="w-full flex justify-end items-end text-white">
+          <button type="button" (click)="clearFormAndFilters()" class="bg-gray-500 rounded-l py-3 px-4 w-fit hover:bg-gray-600
+           disabled:bg-gray-500">Wyczyść filtry</button>
+          <button type="submit" class="bg-blue-500 rounded-r py-3 px-4 w-fit hover:bg-blue-600
+           disabled:bg-blue-500">Szukaj</button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</div>
+
+<p-sidebar [(visible)]="visibleFilterSidebar" [fullScreen]="true" [baseZIndex]="10000" [blockScroll]="true">
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full">
+    <div class="bg-gray-200 flex flex-col md:px-20 px-5 items-center justify-center space-y-2">
+      <div class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0">
+        <div class="w-full md:w-1/3 flex flex-col">
+          <label>Lokalizacja</label>
+          <input type="text" placeholder="Wprowadź lokalizację" [style]="{'width':'100%'}" pInputText formControlName="locality">
+        </div>
+
+        <div class="w-full md:w-1/3">
+          <span>Powierzchnia pokoju</span>
+          <div class="flex flex-row">
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" suffix=" &#13217;" inputId="integeronly" placeholder="Od"
+                             formControlName="areaRoomFrom" >
+              </p-inputNumber>
+            </div>
+            <div class="flex input-gap justify-center items-center">-</div>
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" suffix=" &#13217;" inputId="integeronly" placeholder="Do"
+                             formControlName="areaRoomTo">
+              </p-inputNumber>
+            </div>
+          </div>
+        </div>
+        <div class="w-full md:w-1/3">
+          <span>Cena</span>
+          <div class="flex flex-row">
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" suffix=" PLN" inputId="integeronly" placeholder="Od"
+                             formControlName="priceFrom">
+              </p-inputNumber>
+            </div>
+            <div class="flex input-gap justify-center items-center">-</div>
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" suffix=" PLN" inputId="integeronly" placeholder="Do"
+                             formControlName="priceTo">
+              </p-inputNumber>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+
+
+      <div class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0">
+
+        <div class="w-full md:w-1/3">
+          <span>Piętro</span>
+          <div class="flex flex-row">
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" inputId="integeronly" placeholder="Od"
+                             formControlName="floorFrom">
+              </p-inputNumber>
+            </div>
+            <div class="flex input-gap justify-center items-center">-</div>
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" inputId="integeronly" placeholder="Do"
+                             formControlName="floorTo">
+              </p-inputNumber>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full md:w-1/3">
+          <span>Liczba pięter</span>
+          <div class="flex flex-row">
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" inputId="integeronly" placeholder="Od"
+                             formControlName="floorNumberFrom">
+              </p-inputNumber>
+            </div>
+            <div class="flex input-gap justify-center items-center">-</div>
+            <div class="flex flex-col input-from">
+              <p-inputNumber [inputStyle]="{'width':'100%'}" [style]="{'width':'100%'}" inputId="integeronly" placeholder="Do"
+                             formControlName="floorNumberTo">
+              </p-inputNumber>
+            </div>
+          </div>
+        </div>
+
+        <div class="w-full md:w-1/3 flex flex-col">
+          <label>Rodzaj zabudowy</label>
+          <p-multiSelect class="w-full" name="buildingType" [filter]="false" display="chip"
+                         [options]="buildingTypeOptions" optionLabel="value" optionValue="value" placeholder="Wybierz rodzaj zabudowy"
+                         [style]="{'width':'100%'}" formControlName="buildingType" [showClear]="true" [showHeader]="false" emptyMessage="Brak"
+          ></p-multiSelect>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0">
+        <div class="w-full md:w-1/3 flex flex-col">
+          <label>Rodzaj pokoju</label>
+          <p-multiSelect class="w-full" name="roomType" [filter]="false" display="chip"
+                         [options]="roomTypeOptions" optionLabel="value" optionValue="value"
+                         placeholder="Wybierz rodzaj pokoju" [showHeader]="false"
+                         [style]="{'width':'100%'}" formControlName="roomType" [showClear]="true" emptyMessage="Brak"
+          ></p-multiSelect>
+        </div>
+
+        <div class="w-full md:w-1/3 flex flex-col">
+          <label>Wyposażenie</label>
+          <p-multiSelect [options]="equipmentOptions"
+                         formControlName="equipment"
+                         optionLabel="name"
+                         placeholder="Wybierz wyposażenie"
+                         optionValue="id"
+                         display="chip"
+                         [filter]="false"
+                         [showClear]="true"
+                         [style]="{'width':'100%'}"
+                         [showHeader]="false"
+                         emptyMessage="Brak"
+          ></p-multiSelect>
+        </div>
+
+        <div class="w-full md:w-1/3 flex flex-col">
+          <label>Informacje dodatkowe</label>
+          <p-multiSelect [options]="additionalInfOptions"
+                         formControlName="additionalInf"
+                         defaultLabel="Wybierz informacje dodatkowe" optionLabel="name"
+                         optionValue="id"
+                         display="chip"
+                         [filter]="false"
+                         [showClear]="true"
+                         [style]="{'width':'100%'}"
+                         [showHeader]="false"
+                         emptyMessage="Brak"
+          ></p-multiSelect>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0">
+        <div class="w-full md:w-1/3 pb-2 px-10 flex justify-end items-end text-white">
+          <button type="button" (click)="clearFormAndFilters()" class="w-1/2 bg-gray-500 rounded-l py-3 px-4 hover:bg-gray-600
+           disabled:bg-gray-500">Wyczyść filtry</button>
+          <button type="submit" class="w-1/2 bg-blue-500 rounded-r py-3 px-4 hover:bg-blue-600
+           disabled:bg-blue-500">Szukaj</button>
+        </div>
+      </div>
+
+    </div>
+  </form>
+</p-sidebar>
+
+<button (click)="visibleFilterSidebar = true" type="button" style="z-index: 100;"
+        class="md:hidden w-full fixed bottom-0 left-0 py-3 bg-green-400 hover:bg-green-500 font-semibold">Filtruj ogłoszenia</button>
+
+
 <div class="w-full flex flex-col justify-center items-center pt-4 space-y-4" *ngIf="dataLoad; else elseBlock">
   <app-offer *ngFor="let offer of offers"  class="w-full md:px-20" [offer]="offer"></app-offer>
   <h1 *ngIf="offers.length === 0">BRAK OFERT</h1>
