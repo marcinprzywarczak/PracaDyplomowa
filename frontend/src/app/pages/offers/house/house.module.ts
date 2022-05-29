@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { HouseSellComponent } from './house-sell.component';
+import { HouseComponent } from './house.component';
 import {RouterModule} from "@angular/router";
 import {AppModule} from "../../../app.module";
 import {PaginatorModule} from "primeng/paginator";
@@ -15,11 +15,11 @@ import {InputTextModule} from "primeng/inputtext";
 
 @NgModule({
   declarations: [
-    HouseSellComponent
+    HouseComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild([{path: '', component: HouseSellComponent}]),
+    RouterModule.forChild([{path: '', component: HouseComponent}]),
     SharedModule,
     PaginatorModule,
     ProgressSpinnerModule,
@@ -29,4 +29,4 @@ import {InputTextModule} from "primeng/inputtext";
     InputTextModule,
   ]
 })
-export class HouseSellModule { }
+export class HouseModule { }

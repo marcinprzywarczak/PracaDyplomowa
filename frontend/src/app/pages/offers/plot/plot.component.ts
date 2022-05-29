@@ -6,11 +6,11 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-plot-sell',
-  templateUrl: './plot-sell.component.html',
-  styleUrls: ['./plot-sell.component.scss']
+  selector: 'app-plot',
+  templateUrl: './plot.component.html',
+  styleUrls: ['./plot.component.scss']
 })
-export class PlotSellComponent implements OnInit {
+export class PlotComponent implements OnInit {
   offers: any;
   totalRecords: number;
   currentPage: number;

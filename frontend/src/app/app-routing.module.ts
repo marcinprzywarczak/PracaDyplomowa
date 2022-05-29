@@ -4,7 +4,7 @@ import {LoginComponent} from "./pages/login/login.component";
 import {DashboardComponent} from "./pages/dashboard/dashboard.component";
 import {LoginGuard} from "./shared/guards/login/login.guard";
 import {RegisterComponent} from "./pages/register/register.component";
-import {HouseSellComponent} from "./pages/offers/house-sell/house-sell.component";
+import {HouseComponent} from "./pages/offers/house/house.component";
 
 const routes: Routes = [
 
@@ -26,15 +26,15 @@ const routes: Routes = [
   },
   {
     path: 'dom/:type',
-    loadChildren: () => import('./pages/offers/house-sell/house-sell.module').then(m => m.HouseSellModule),
+    loadChildren: () => import('./pages/offers/house/house.module').then(m => m.HouseModule),
   },
   {
     path: 'mieszkanie/:type',
-    loadChildren: () => import('./pages/offers/flat-sell/flat-sell.module').then(m => m.FlatSellModule),
+    loadChildren: () => import('./pages/offers/flat/flat.module').then(m => m.FlatModule),
   },
   {
     path: 'dzialka/:type',
-    loadChildren: () => import('./pages/offers/plot-sell/plot-sell.module').then(m => m.PlotSellModule),
+    loadChildren: () => import('./pages/offers/plot/plot.module').then(m => m.PlotModule),
   },
   {
     path: 'pokoj/wynajem',

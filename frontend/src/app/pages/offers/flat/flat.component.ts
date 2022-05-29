@@ -6,11 +6,11 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute} from "@angular/router";
 
 @Component({
-  selector: 'app-flat-sell',
-  templateUrl: './flat-sell.component.html',
-  styleUrls: ['./flat-sell.component.scss']
+  selector: 'app-flat',
+  templateUrl: './flat.component.html',
+  styleUrls: ['./flat.component.scss']
 })
-export class FlatSellComponent implements OnInit {
+export class FlatComponent implements OnInit {
   offers: any;
   totalRecords: number;
   currentPage: number;

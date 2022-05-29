@@ -6,11 +6,11 @@ import {FormBuilder, FormGroup} from "@angular/forms";
 import {ActivatedRoute, ParamMap, Router} from "@angular/router";
 
 @Component({
-  selector: 'app-house-sell',
-  templateUrl: './house-sell.component.html',
-  styleUrls: ['./house-sell.component.scss']
+  selector: 'app-house',
+  templateUrl: './house.component.html',
+  styleUrls: ['./house.component.scss']
 })
-export class HouseSellComponent implements OnInit {
+export class HouseComponent implements OnInit {
   offers: any;
   totalRecords: number;
   currentPage: number;

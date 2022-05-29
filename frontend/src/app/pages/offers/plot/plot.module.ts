@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { PlotSellComponent } from './plot-sell.component';
+import { PlotComponent } from './plot.component';
 import {RouterModule} from "@angular/router";
 import {ProgressSpinnerModule} from "primeng/progressspinner";
 import {PaginatorModule} from "primeng/paginator";
@@ -14,11 +14,11 @@ import {SidebarModule} from "primeng/sidebar";
 
 @NgModule({
   declarations: [
-    PlotSellComponent
+    PlotComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild([{path: '', component: PlotSellComponent}]),
+    RouterModule.forChild([{path: '', component: PlotComponent}]),
     ProgressSpinnerModule,
     PaginatorModule,
     SharedModule,
@@ -28,4 +28,4 @@ import {SidebarModule} from "primeng/sidebar";
     SidebarModule,
   ]
 })
-export class PlotSellModule { }
+export class PlotModule { }

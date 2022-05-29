@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { PlotSellComponent } from './plot-sell.component';
+import { PlotComponent } from './plot.component';
 
 describe('PlotSellComponent', () => {
-  let component: PlotSellComponent;
-  let fixture: ComponentFixture<PlotSellComponent>;
+  let component: PlotComponent;
+  let fixture: ComponentFixture<PlotComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlotSellComponent ]
+      declarations: [ PlotComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlotSellComponent);
+    fixture = TestBed.createComponent(PlotComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
