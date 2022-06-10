@@ -3,21 +3,23 @@ import {
   HttpRequest,
   HttpHandler,
   HttpEvent,
-  HttpInterceptor
+  HttpInterceptor,
 } from '@angular/common/http';
-import {catchError, Observable, throwError} from 'rxjs';
-import {Router} from "@angular/router";
-import {LoginService} from "./services/login/login.service";
+import { catchError, Observable, throwError } from 'rxjs';
+import { Router } from '@angular/router';
+import { LoginService } from './services/login/login.service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-
   constructor(private router: Router, private loginService: LoginService) {}
 
-  intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
+  intercept(
+    request: HttpRequest<unknown>,
+    next: HttpHandler
+  ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
-      catchError(err => {
-        if(err.status === 401){
+      catchError((err) => {
+        if (err.status === 401) {
           this.loginService.logout();
           localStorage.removeItem('isLogged');
           window.location.href = '/login';
@@ -25,7 +27,6 @@ export class AuthInterceptor implements HttpInterceptor {
         }
         return throwError(err);
       })
-
     );
   }
 }

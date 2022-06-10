@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UserService {
   currentUser;
@@ -11,11 +11,11 @@ export class UserService {
     this.currentUser = JSON.parse(localStorage.getItem('user') || '{}');
   }
 
-  getUser(){
+  getUser() {
     return this.currentUser;
   }
 
-  getState(){
+  getState() {
     return this.isLogged;
   }
 }

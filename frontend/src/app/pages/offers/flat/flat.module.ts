@@ -1,31 +1,27 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FlatComponent } from './flat.component';
-import {RouterModule} from "@angular/router";
-import {PaginatorModule} from "primeng/paginator";
-import {SharedModule} from "../../../shared/shared.module";
-import {ProgressSpinnerModule} from "primeng/progressspinner";
-import {MultiSelectModule} from "primeng/multiselect";
-import {ReactiveFormsModule} from "@angular/forms";
-import {InputTextModule} from "primeng/inputtext";
-import {SidebarModule} from "primeng/sidebar";
-
-
+import { RouterModule } from '@angular/router';
+import { PaginatorModule } from 'primeng/paginator';
+import { SharedModule } from '../../../shared/shared.module';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ReactiveFormsModule } from '@angular/forms';
+import { InputTextModule } from 'primeng/inputtext';
+import { SidebarModule } from 'primeng/sidebar';
 
 @NgModule({
-  declarations: [
-    FlatComponent
+  declarations: [FlatComponent],
+  imports: [
+    CommonModule,
+    RouterModule.forChild([{ path: '', component: FlatComponent }]),
+    PaginatorModule,
+    SharedModule,
+    ProgressSpinnerModule,
+    MultiSelectModule,
+    ReactiveFormsModule,
+    InputTextModule,
+    SidebarModule,
   ],
-    imports: [
-        CommonModule,
-        RouterModule.forChild([{path: '', component: FlatComponent}]),
-        PaginatorModule,
-        SharedModule,
-        ProgressSpinnerModule,
-        MultiSelectModule,
-        ReactiveFormsModule,
-        InputTextModule,
-        SidebarModule,
-    ]
 })
-export class FlatModule { }
+export class FlatModule {}

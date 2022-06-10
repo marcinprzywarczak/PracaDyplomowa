@@ -1,271 +1,609 @@
-<div class="flex flex-col items-center justify-center mt-12" >
-  <div class=" p-6 rounded-lg shadow-lg bg-green-300 w-full md:w-1/2">
+<div class="flex flex-col items-center justify-center mt-12">
+  <div class="p-6 rounded-lg shadow-lg bg-green-300 w-full md:w-1/2">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div class="form-group flex flex-row items-center justify-items-center mb-6">
+      <div
+        class="form-group flex flex-row items-center justify-items-center mb-6"
+      >
         <label for="isFirmAccount">Konto firmowe</label>
-        <input class="ml-2" [(ngModel)]="isFirmAccount" (change)="checkValue(isFirmAccount)" type="checkbox" id="isFirmAccount" name="isFirmAccount" formControlName="isFirmAccount">
-<!--        <p-inputSwitch [(ngModel)]="isFirmAccount" formControlName="isFirmAccount"></p-inputSwitch>-->
+        <input
+          class="ml-2"
+          [(ngModel)]="isFirmAccount"
+          (change)="checkValue(isFirmAccount)"
+          type="checkbox"
+          id="isFirmAccount"
+          name="isFirmAccount"
+          formControlName="isFirmAccount"
+        />
+        <!--        <p-inputSwitch [(ngModel)]="isFirmAccount" formControlName="isFirmAccount"></p-inputSwitch>-->
       </div>
       <div class="form-group mb-6 w-full">
-        <label for="email" class="form-label inline-block mb-2 text-gray-700">Adres email</label>
-        <input type="email" id="email" name="email" formControlName="email"
-               class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-               [ngClass]="((f['email'].invalid && (f['email'].touched || f['email'].dirty || isSubmitted)) || serverErrors.email) ?
-                          'border-red-600' : 'border-gray-300'"
-               placeholder="Wprowadź email">
-        <div *ngIf="f['email'].invalid && (f['email'].touched || f['email'].dirty || isSubmitted)" class="text-red-600 font-semibold">
-          <div *ngIf="f['email'].errors?.['required']">Adres e-mail jest wymagany!</div>
-          <div *ngIf="f['email'].errors?.['email']">Niepoprawny adres e-mail!</div>
+        <label for="email" class="form-label inline-block mb-2 text-gray-700"
+          >Adres email</label
+        >
+        <input
+          type="email"
+          id="email"
+          name="email"
+          formControlName="email"
+          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          [ngClass]="
+            (f['email'].invalid &&
+              (f['email'].touched || f['email'].dirty || isSubmitted)) ||
+            serverErrors.email
+              ? 'border-red-600'
+              : 'border-gray-300'
+          "
+          placeholder="Wprowadź email"
+        />
+        <div
+          *ngIf="
+            f['email'].invalid &&
+            (f['email'].touched || f['email'].dirty || isSubmitted)
+          "
+          class="text-red-600 font-semibold"
+        >
+          <div *ngIf="f['email'].errors?.['required']">
+            Adres e-mail jest wymagany!
+          </div>
+          <div *ngIf="f['email'].errors?.['email']">
+            Niepoprawny adres e-mail!
+          </div>
         </div>
         <div *ngIf="serverErrors.email" class="text-red-600 font-semibold">
-          <div *ngFor="let email of serverErrors.email">{{email}}</div>
+          <div *ngFor="let email of serverErrors.email">{{ email }}</div>
         </div>
       </div>
       <div class="form-group mb-6 w-full">
-        <label for="first_name" class="form-label inline-block mb-2 text-gray-700">Imię</label>
-        <input type="text" id="first_name" name="first_name" formControlName="first_name"
-               class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-               [ngClass]="((f['first_name'].invalid && (f['first_name'].touched || f['first_name'].dirty || isSubmitted)) || serverErrors.first_name) ?
-                          'border-red-600' : 'border-gray-300'"
-              placeholder="Wprowadź imię">
-        <div *ngIf="f['first_name'].invalid && (f['first_name'].touched || f['first_name'].dirty || isSubmitted)"
-             class="text-red-600 font-semibold">
-          <div *ngIf="f['first_name'].errors?.['required']">Imię jest wymagane!</div>
+        <label
+          for="first_name"
+          class="form-label inline-block mb-2 text-gray-700"
+          >Imię</label
+        >
+        <input
+          type="text"
+          id="first_name"
+          name="first_name"
+          formControlName="first_name"
+          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          [ngClass]="
+            (f['first_name'].invalid &&
+              (f['first_name'].touched ||
+                f['first_name'].dirty ||
+                isSubmitted)) ||
+            serverErrors.first_name
+              ? 'border-red-600'
+              : 'border-gray-300'
+          "
+          placeholder="Wprowadź imię"
+        />
+        <div
+          *ngIf="
+            f['first_name'].invalid &&
+            (f['first_name'].touched || f['first_name'].dirty || isSubmitted)
+          "
+          class="text-red-600 font-semibold"
+        >
+          <div *ngIf="f['first_name'].errors?.['required']">
+            Imię jest wymagane!
+          </div>
         </div>
         <div *ngIf="serverErrors.first_name" class="text-red-600 font-semibold">
-          <div *ngFor="let first_name of serverErrors.first_name">{{first_name}}</div>
+          <div *ngFor="let first_name of serverErrors.first_name">
+            {{ first_name }}
+          </div>
         </div>
       </div>
 
       <div class="form-group mb-6 w-full">
-        <label for="sure_name" class="form-label inline-block mb-2 text-gray-700">Nazwisko</label>
-        <input type="text" id="sure_name" name="sure_name" formControlName="sure_name"
-               class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-               [ngClass]="((f['sure_name'].invalid && (f['sure_name'].touched || f['sure_name'].dirty || isSubmitted))||serverErrors.sure_name) ?
-                          'border-red-600' : 'border-gray-300'"
-               placeholder="Wprowadź nazwisko">
-        <div *ngIf="f['sure_name'].invalid && (f['sure_name'].touched || f['sure_name'].dirty || isSubmitted)"
-             class="text-red-600 font-semibold">
-          <div *ngIf="f['sure_name'].errors?.['required']">Nazwisko jest wymagane!</div>
+        <label
+          for="sure_name"
+          class="form-label inline-block mb-2 text-gray-700"
+          >Nazwisko</label
+        >
+        <input
+          type="text"
+          id="sure_name"
+          name="sure_name"
+          formControlName="sure_name"
+          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          [ngClass]="
+            (f['sure_name'].invalid &&
+              (f['sure_name'].touched ||
+                f['sure_name'].dirty ||
+                isSubmitted)) ||
+            serverErrors.sure_name
+              ? 'border-red-600'
+              : 'border-gray-300'
+          "
+          placeholder="Wprowadź nazwisko"
+        />
+        <div
+          *ngIf="
+            f['sure_name'].invalid &&
+            (f['sure_name'].touched || f['sure_name'].dirty || isSubmitted)
+          "
+          class="text-red-600 font-semibold"
+        >
+          <div *ngIf="f['sure_name'].errors?.['required']">
+            Nazwisko jest wymagane!
+          </div>
         </div>
         <div *ngIf="serverErrors.sure_name" class="text-red-600 font-semibold">
-          <div *ngFor="let sure_name of serverErrors.sure_name">{{sure_name}}</div>
+          <div *ngFor="let sure_name of serverErrors.sure_name">
+            {{ sure_name }}
+          </div>
         </div>
       </div>
 
       <div class="form-group mb-6 w-full">
-        <label for="phone_number" class="form-label inline-block mb-2 text-gray-700">Numer telefonu</label>
-        <input type="text" id="phone_number" name="phone_number" formControlName="phone_number"
-               class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-               [ngClass]="((f['phone_number'].invalid && (f['phone_number'].touched || f['phone_number'].dirty || isSubmitted))||serverErrors.phone_number) ?
-                          'border-red-600' : 'border-gray-300'"
-        placeholder="Wprowadź numer telefonu">
-        <div *ngIf="f['phone_number'].invalid && (f['phone_number'].touched || f['phone_number'].dirty || isSubmitted)"
-             class="text-red-600 font-semibold">
-          <div *ngIf="f['phone_number'].errors?.['required']">Numer telefonu jest wymagany!</div>
-          <div *ngIf="f['phone_number'].errors?.['pattern']">Numer telefonu powinien mieć format xxx-xxx-xxx</div>
+        <label
+          for="phone_number"
+          class="form-label inline-block mb-2 text-gray-700"
+          >Numer telefonu</label
+        >
+        <input
+          type="text"
+          id="phone_number"
+          name="phone_number"
+          formControlName="phone_number"
+          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          [ngClass]="
+            (f['phone_number'].invalid &&
+              (f['phone_number'].touched ||
+                f['phone_number'].dirty ||
+                isSubmitted)) ||
+            serverErrors.phone_number
+              ? 'border-red-600'
+              : 'border-gray-300'
+          "
+          placeholder="Wprowadź numer telefonu"
+        />
+        <div
+          *ngIf="
+            f['phone_number'].invalid &&
+            (f['phone_number'].touched ||
+              f['phone_number'].dirty ||
+              isSubmitted)
+          "
+          class="text-red-600 font-semibold"
+        >
+          <div *ngIf="f['phone_number'].errors?.['required']">
+            Numer telefonu jest wymagany!
+          </div>
+          <div *ngIf="f['phone_number'].errors?.['pattern']">
+            Numer telefonu powinien mieć format xxx-xxx-xxx
+          </div>
         </div>
-        <div *ngIf="serverErrors.phone_number" class="text-red-600 font-semibold">
-          <div *ngFor="let phone_number of serverErrors.phone_number">{{phone_number}}</div>
+        <div
+          *ngIf="serverErrors.phone_number"
+          class="text-red-600 font-semibold"
+        >
+          <div *ngFor="let phone_number of serverErrors.phone_number">
+            {{ phone_number }}
+          </div>
         </div>
       </div>
 
       <div class="form-group mb-6">
-        <label for="password" class="form-label inline-block mb-2 text-gray-700">Hasło</label>
-        <input type="password" id="password" name="password" formControlName="password"
-               class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-               [ngClass]="((f['password'].invalid && (f['password'].touched || f['password'].dirty || isSubmitted))||serverErrors.password) ?
-                          'border-red-600' : 'border-gray-300'"
-               placeholder="Hasło">
-        <div *ngIf="f['password'].invalid && (f['password'].touched || f['password'].dirty || isSubmitted)" class="text-red-600 font-semibold">
-          <div *ngIf="f['password'].errors?.['required']">Hasło jest wymagane!</div>
-          <div *ngIf="f['password'].errors?.['minlength']">Hasło musi mieć co najmniej 8 znaków!</div>
+        <label for="password" class="form-label inline-block mb-2 text-gray-700"
+          >Hasło</label
+        >
+        <input
+          type="password"
+          id="password"
+          name="password"
+          formControlName="password"
+          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          [ngClass]="
+            (f['password'].invalid &&
+              (f['password'].touched || f['password'].dirty || isSubmitted)) ||
+            serverErrors.password
+              ? 'border-red-600'
+              : 'border-gray-300'
+          "
+          placeholder="Hasło"
+        />
+        <div
+          *ngIf="
+            f['password'].invalid &&
+            (f['password'].touched || f['password'].dirty || isSubmitted)
+          "
+          class="text-red-600 font-semibold"
+        >
+          <div *ngIf="f['password'].errors?.['required']">
+            Hasło jest wymagane!
+          </div>
+          <div *ngIf="f['password'].errors?.['minlength']">
+            Hasło musi mieć co najmniej 8 znaków!
+          </div>
         </div>
         <div *ngIf="serverErrors.password" class="text-red-600 font-semibold">
-          <div *ngFor="let password of serverErrors.password">{{password}}</div>
+          <div *ngFor="let password of serverErrors.password">
+            {{ password }}
+          </div>
         </div>
       </div>
       <div class="form-group mb-6">
-        <label for="password_conf" class="form-label inline-block mb-2 text-gray-700">Potwierdź hasło</label>
-        <input type="password" id="password_conf" name="password_conf" formControlName="password_conf"
-               class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-               [ngClass]="(f['password_conf'].invalid && (f['password_conf'].touched || f['password_conf'].dirty || isSubmitted)) ?
-                          'border-red-600' : 'border-gray-300'"
-               placeholder="Powtórz hasło">
-        <div *ngIf="f['password_conf'].invalid && (f['password_conf'].touched || f['password_conf'].dirty || isSubmitted)" class="text-red-600 font-semibold">
-          <div *ngIf="f['password_conf'].errors?.['required']">Potwierdzenie hasła jest wymagane!</div>
-          <div *ngIf="f['password_conf'].errors?.['confirmedValidator']">Hasło i powtórzone hasło muszą być takie same!</div>
+        <label
+          for="password_conf"
+          class="form-label inline-block mb-2 text-gray-700"
+          >Potwierdź hasło</label
+        >
+        <input
+          type="password"
+          id="password_conf"
+          name="password_conf"
+          formControlName="password_conf"
+          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          [ngClass]="
+            f['password_conf'].invalid &&
+            (f['password_conf'].touched ||
+              f['password_conf'].dirty ||
+              isSubmitted)
+              ? 'border-red-600'
+              : 'border-gray-300'
+          "
+          placeholder="Powtórz hasło"
+        />
+        <div
+          *ngIf="
+            f['password_conf'].invalid &&
+            (f['password_conf'].touched ||
+              f['password_conf'].dirty ||
+              isSubmitted)
+          "
+          class="text-red-600 font-semibold"
+        >
+          <div *ngIf="f['password_conf'].errors?.['required']">
+            Potwierdzenie hasła jest wymagane!
+          </div>
+          <div *ngIf="f['password_conf'].errors?.['confirmedValidator']">
+            Hasło i powtórzone hasło muszą być takie same!
+          </div>
         </div>
       </div>
       <div class="form-group mb-6">
-        <label for="user_avatar" class="form-label inline-block mb-2 text-gray-700">Awatar</label>
-        <input type="file" id="user_avatar" name="user_avatar" formControlName="user_avatar" (change)="onChangeUserAvatar($event)"
-               class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-               placeholder="Wybierz zdjęcie"
-               [ngClass]="((f['user_avatar'].invalid && (f['user_avatar'].touched || f['user_avatar'].dirty || isSubmitted))||serverErrors.user_avatar) ?
-                          'border-red-600' : 'border-gray-300'">
-<!--        <div *ngIf="f['user_avatar'].invalid && (f['user_avatar'].touched || f['user_avatar'].dirty || isSubmitted)" class="text-red-600 font-semibold">-->
-<!--          <div *ngIf="f['user_avatar'].errors?.['required']">Hasło jest wymagane!</div>-->
-<!--        </div>-->
-        <div *ngIf="serverErrors.user_avatar" class="text-red-600 font-semibold">
-          <div *ngFor="let user_avatar of serverErrors.user_avatar">{{user_avatar}}</div>
+        <label
+          for="user_avatar"
+          class="form-label inline-block mb-2 text-gray-700"
+          >Awatar</label
+        >
+        <input
+          type="file"
+          id="user_avatar"
+          name="user_avatar"
+          formControlName="user_avatar"
+          (change)="onChangeUserAvatar($event)"
+          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          placeholder="Wybierz zdjęcie"
+          [ngClass]="
+            (f['user_avatar'].invalid &&
+              (f['user_avatar'].touched ||
+                f['user_avatar'].dirty ||
+                isSubmitted)) ||
+            serverErrors.user_avatar
+              ? 'border-red-600'
+              : 'border-gray-300'
+          "
+        />
+        <!--        <div *ngIf="f['user_avatar'].invalid && (f['user_avatar'].touched || f['user_avatar'].dirty || isSubmitted)" class="text-red-600 font-semibold">-->
+        <!--          <div *ngIf="f['user_avatar'].errors?.['required']">Hasło jest wymagane!</div>-->
+        <!--        </div>-->
+        <div
+          *ngIf="serverErrors.user_avatar"
+          class="text-red-600 font-semibold"
+        >
+          <div *ngFor="let user_avatar of serverErrors.user_avatar">
+            {{ user_avatar }}
+          </div>
         </div>
       </div>
       <div *ngIf="isFirmAccount">
-<!--      <div [ngClass]="isFirmAccount ? 'block' : 'hidden'">-->
+        <!--      <div [ngClass]="isFirmAccount ? 'block' : 'hidden'">-->
         <div class="form-group mb-6">
-          <label for="firm_name" class="form-label inline-block mb-2 text-gray-700">Nazwa firmy</label>
-          <input type="text" id="firm_name" name="firm_name" formControlName="firm_name"
-                 class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                 placeholder="Wprowadź nazwę firmy"
-                 [ngClass]="((f['firm_name'].invalid && (f['firm_name'].touched || f['firm_name'].dirty || isSubmitted))||serverErrors.firm_name) ?
-                          'border-red-600' : 'border-gray-300'">
-          <div *ngIf="f['firm_name'].invalid && (f['firm_name'].touched || f['firm_name'].dirty || isSubmitted)" class="text-red-600 font-semibold">
-            <div *ngIf="f['firm_name'].errors?.['required']">Nazwa firmy jest wymagana!</div>
+          <label
+            for="firm_name"
+            class="form-label inline-block mb-2 text-gray-700"
+            >Nazwa firmy</label
+          >
+          <input
+            type="text"
+            id="firm_name"
+            name="firm_name"
+            formControlName="firm_name"
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            placeholder="Wprowadź nazwę firmy"
+            [ngClass]="
+              (f['firm_name'].invalid &&
+                (f['firm_name'].touched ||
+                  f['firm_name'].dirty ||
+                  isSubmitted)) ||
+              serverErrors.firm_name
+                ? 'border-red-600'
+                : 'border-gray-300'
+            "
+          />
+          <div
+            *ngIf="
+              f['firm_name'].invalid &&
+              (f['firm_name'].touched || f['firm_name'].dirty || isSubmitted)
+            "
+            class="text-red-600 font-semibold"
+          >
+            <div *ngIf="f['firm_name'].errors?.['required']">
+              Nazwa firmy jest wymagana!
+            </div>
           </div>
-          <div *ngIf="serverErrors.firm_name" class="text-red-600 font-semibold">
-            <div *ngFor="let firm_name of serverErrors.firm_name">{{firm_name}}</div>
+          <div
+            *ngIf="serverErrors.firm_name"
+            class="text-red-600 font-semibold"
+          >
+            <div *ngFor="let firm_name of serverErrors.firm_name">
+              {{ firm_name }}
+            </div>
           </div>
         </div>
         <div class="flex flex-row space-x-4">
           <div class="form-group mb-6 w-1/2">
-            <label for="nip" class="form-label inline-block mb-2 text-gray-700">NIP</label>
-            <input type="text" id="nip" name="nip" formControlName="nip"
-                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                   placeholder="Wprowadź numer NIP"
-                   [ngClass]="((f['nip'].invalid && (f['nip'].touched || f['nip'].dirty || isSubmitted))||serverErrors.nip) ?
-                          'border-red-600' : 'border-gray-300'">
-            <div *ngIf="f['nip'].invalid && (f['nip'].touched || f['nip'].dirty || isSubmitted)" class="text-red-600 font-semibold">
-              <div *ngIf="f['nip'].errors?.['required']">NIP jest wymagany!</div>
+            <label for="nip" class="form-label inline-block mb-2 text-gray-700"
+              >NIP</label
+            >
+            <input
+              type="text"
+              id="nip"
+              name="nip"
+              formControlName="nip"
+              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Wprowadź numer NIP"
+              [ngClass]="
+                (f['nip'].invalid &&
+                  (f['nip'].touched || f['nip'].dirty || isSubmitted)) ||
+                serverErrors.nip
+                  ? 'border-red-600'
+                  : 'border-gray-300'
+              "
+            />
+            <div
+              *ngIf="
+                f['nip'].invalid &&
+                (f['nip'].touched || f['nip'].dirty || isSubmitted)
+              "
+              class="text-red-600 font-semibold"
+            >
+              <div *ngIf="f['nip'].errors?.['required']">
+                NIP jest wymagany!
+              </div>
             </div>
             <div *ngIf="serverErrors.nip" class="text-red-600 font-semibold">
-              <div *ngFor="let nip of serverErrors.nip">{{nip}}</div>
+              <div *ngFor="let nip of serverErrors.nip">{{ nip }}</div>
             </div>
           </div>
           <div class="form-group mb-6 w-1/2">
-            <label for="regon" class="form-label inline-block mb-2 text-gray-700">REGON</label>
-            <input type="text" id="regon" name="regon" formControlName="regon"
-                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                   placeholder="Wprowadź numer REGON"
-                   [ngClass]="((f['regon'].invalid && (f['regon'].touched || f['regon'].dirty || isSubmitted))||serverErrors.regon) ?
-                          'border-red-600' : 'border-gray-300'">
-            <div *ngIf="f['regon'].invalid && (f['regon'].touched || f['regon'].dirty || isSubmitted)" class="text-red-600 font-semibold">
-              <div *ngIf="f['regon'].errors?.['required']">REGON jest wymagany!</div>
+            <label
+              for="regon"
+              class="form-label inline-block mb-2 text-gray-700"
+              >REGON</label
+            >
+            <input
+              type="text"
+              id="regon"
+              name="regon"
+              formControlName="regon"
+              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Wprowadź numer REGON"
+              [ngClass]="
+                (f['regon'].invalid &&
+                  (f['regon'].touched || f['regon'].dirty || isSubmitted)) ||
+                serverErrors.regon
+                  ? 'border-red-600'
+                  : 'border-gray-300'
+              "
+            />
+            <div
+              *ngIf="
+                f['regon'].invalid &&
+                (f['regon'].touched || f['regon'].dirty || isSubmitted)
+              "
+              class="text-red-600 font-semibold"
+            >
+              <div *ngIf="f['regon'].errors?.['required']">
+                REGON jest wymagany!
+              </div>
             </div>
             <div *ngIf="serverErrors.regon" class="text-red-600 font-semibold">
-              <div *ngFor="let regon of serverErrors.regon">{{regon}}</div>
+              <div *ngFor="let regon of serverErrors.regon">{{ regon }}</div>
             </div>
           </div>
         </div>
 
         <div class="flex flex-row space-x-4">
           <div class="form-group mb-6 w-1/2">
-            <label for="street" class="form-label inline-block mb-2 text-gray-700">Ulica</label>
-            <input type="text" id="street" name="street" formControlName="street"
-                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                   placeholder="Wprowadź nazwę ulicy">
+            <label
+              for="street"
+              class="form-label inline-block mb-2 text-gray-700"
+              >Ulica</label
+            >
+            <input
+              type="text"
+              id="street"
+              name="street"
+              formControlName="street"
+              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Wprowadź nazwę ulicy"
+            />
           </div>
           <div class="form-group mb-6 w-1/2">
-            <label for="number" class="form-label inline-block mb-2 text-gray-700">Numer budynku</label>
-            <input type="text" id="number" name="number" formControlName="number"
-                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                   placeholder="Wprowadź numer budynku"
-                   [ngClass]="((f['number'].invalid && (f['number'].touched || f['number'].dirty || isSubmitted))||serverErrors.number) ?
-                          'border-red-600' : 'border-gray-300'">
-            <div *ngIf="f['number'].invalid && (f['number'].touched || f['number'].dirty || isSubmitted)" class="text-red-600 font-semibold">
-              <div *ngIf="f['number'].errors?.['required']">Numer budynku jest wymagany!</div>
+            <label
+              for="number"
+              class="form-label inline-block mb-2 text-gray-700"
+              >Numer budynku</label
+            >
+            <input
+              type="text"
+              id="number"
+              name="number"
+              formControlName="number"
+              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Wprowadź numer budynku"
+              [ngClass]="
+                (f['number'].invalid &&
+                  (f['number'].touched || f['number'].dirty || isSubmitted)) ||
+                serverErrors.number
+                  ? 'border-red-600'
+                  : 'border-gray-300'
+              "
+            />
+            <div
+              *ngIf="
+                f['number'].invalid &&
+                (f['number'].touched || f['number'].dirty || isSubmitted)
+              "
+              class="text-red-600 font-semibold"
+            >
+              <div *ngIf="f['number'].errors?.['required']">
+                Numer budynku jest wymagany!
+              </div>
             </div>
             <div *ngIf="serverErrors.number" class="text-red-600 font-semibold">
-              <div *ngFor="let number of serverErrors.number">{{number}}</div>
+              <div *ngFor="let number of serverErrors.number">{{ number }}</div>
             </div>
           </div>
         </div>
 
         <div class="flex flex-row space-x-4">
           <div class="form-group mb-6 w-1/2">
-            <label for="locality" class="form-label inline-block mb-2 text-gray-700">Miejscowość</label>
-            <input type="text" id="locality" name="locality" formControlName="locality"
-                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                   placeholder="Wprowadź miejscowość"
-                   [ngClass]="((f['locality'].invalid && (f['locality'].touched || f['locality'].dirty || isSubmitted))||serverErrors.locality) ?
-                          'border-red-600' : 'border-gray-300'">
-            <div *ngIf="f['locality'].invalid && (f['locality'].touched || f['locality'].dirty || isSubmitted)" class="text-red-600 font-semibold">
-              <div *ngIf="f['locality'].errors?.['required']">Miejscowość jest wymagana!</div>
+            <label
+              for="locality"
+              class="form-label inline-block mb-2 text-gray-700"
+              >Miejscowość</label
+            >
+            <input
+              type="text"
+              id="locality"
+              name="locality"
+              formControlName="locality"
+              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Wprowadź miejscowość"
+              [ngClass]="
+                (f['locality'].invalid &&
+                  (f['locality'].touched ||
+                    f['locality'].dirty ||
+                    isSubmitted)) ||
+                serverErrors.locality
+                  ? 'border-red-600'
+                  : 'border-gray-300'
+              "
+            />
+            <div
+              *ngIf="
+                f['locality'].invalid &&
+                (f['locality'].touched || f['locality'].dirty || isSubmitted)
+              "
+              class="text-red-600 font-semibold"
+            >
+              <div *ngIf="f['locality'].errors?.['required']">
+                Miejscowość jest wymagana!
+              </div>
             </div>
-            <div *ngIf="serverErrors.locality" class="text-red-600 font-semibold">
-              <div *ngFor="let locality of serverErrors.locality">{{locality}}</div>
+            <div
+              *ngIf="serverErrors.locality"
+              class="text-red-600 font-semibold"
+            >
+              <div *ngFor="let locality of serverErrors.locality">
+                {{ locality }}
+              </div>
             </div>
           </div>
           <div class="form-group mb-6 w-1/2">
-            <label for="zip_code" class="form-label inline-block mb-2 text-gray-700">Kod pocztowy</label>
-            <input type="text" id="zip_code" name="zip_code" formControlName="zip_code"
-                   class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                   placeholder="Wprowadź kod pocztowy"
-                   [ngClass]="((f['zip_code'].invalid && (f['zip_code'].touched || f['zip_code'].dirty || isSubmitted))||serverErrors.zip_code) ?
-                          'border-red-600' : 'border-gray-300'">
-            <div *ngIf="f['zip_code'].invalid && (f['zip_code'].touched || f['zip_code'].dirty || isSubmitted)" class="text-red-600 font-semibold">
-              <div *ngIf="f['zip_code'].errors?.['required']">Kod pocztowy jest wymagany!</div>
-              <div *ngIf="f['zip_code'].errors?.['pattern']">Kod pocztowy jest wymagany w formacie xx-xxx!</div>
+            <label
+              for="zip_code"
+              class="form-label inline-block mb-2 text-gray-700"
+              >Kod pocztowy</label
+            >
+            <input
+              type="text"
+              id="zip_code"
+              name="zip_code"
+              formControlName="zip_code"
+              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              placeholder="Wprowadź kod pocztowy"
+              [ngClass]="
+                (f['zip_code'].invalid &&
+                  (f['zip_code'].touched ||
+                    f['zip_code'].dirty ||
+                    isSubmitted)) ||
+                serverErrors.zip_code
+                  ? 'border-red-600'
+                  : 'border-gray-300'
+              "
+            />
+            <div
+              *ngIf="
+                f['zip_code'].invalid &&
+                (f['zip_code'].touched || f['zip_code'].dirty || isSubmitted)
+              "
+              class="text-red-600 font-semibold"
+            >
+              <div *ngIf="f['zip_code'].errors?.['required']">
+                Kod pocztowy jest wymagany!
+              </div>
+              <div *ngIf="f['zip_code'].errors?.['pattern']">
+                Kod pocztowy jest wymagany w formacie xx-xxx!
+              </div>
             </div>
-            <div *ngIf="serverErrors.zip_code" class="text-red-600 font-semibold">
-              <div *ngFor="let zip_code of serverErrors.zip_code">{{zip_code}}</div>
+            <div
+              *ngIf="serverErrors.zip_code"
+              class="text-red-600 font-semibold"
+            >
+              <div *ngFor="let zip_code of serverErrors.zip_code">
+                {{ zip_code }}
+              </div>
             </div>
           </div>
         </div>
         <div class="form-group mb-6">
-          <label for="firm_logo" class="form-label inline-block mb-2 text-gray-700">Logo firmy</label>
-          <input type="file" id="firm_logo" name="firm_logo" formControlName="firm_logo" (change)="onChangeFirmLogo($event)"
-                 class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white
-                      bg-clip-padding border border-solid rounded transition ease-in-out m-0
-                      focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                 placeholder="Wybierz logo firmy"
-                 [ngClass]="((f['firm_logo'].invalid && (f['firm_logo'].touched || f['firm_logo'].dirty || isSubmitted))||serverErrors.firm_logo) ?
-                          'border-red-600' : 'border-gray-300'">
-<!--          <div *ngIf="f['firm_logo'].invalid && (f['firm_logo'].touched || f['firm_logo'].dirty || isSubmitted)" class="text-red-600 font-semibold">-->
-<!--            <div *ngIf="f['firm_logo'].errors?.['required']">Hasło jest wymagane!</div>-->
-<!--          </div>-->
-          <div *ngIf="serverErrors.firm_logo" class="text-red-600 font-semibold">
-            <div *ngFor="let firm_logo of serverErrors.firm_logo">{{firm_logo}}</div>
+          <label
+            for="firm_logo"
+            class="form-label inline-block mb-2 text-gray-700"
+            >Logo firmy</label
+          >
+          <input
+            type="file"
+            id="firm_logo"
+            name="firm_logo"
+            formControlName="firm_logo"
+            (change)="onChangeFirmLogo($event)"
+            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+            placeholder="Wybierz logo firmy"
+            [ngClass]="
+              (f['firm_logo'].invalid &&
+                (f['firm_logo'].touched ||
+                  f['firm_logo'].dirty ||
+                  isSubmitted)) ||
+              serverErrors.firm_logo
+                ? 'border-red-600'
+                : 'border-gray-300'
+            "
+          />
+          <!--          <div *ngIf="f['firm_logo'].invalid && (f['firm_logo'].touched || f['firm_logo'].dirty || isSubmitted)" class="text-red-600 font-semibold">-->
+          <!--            <div *ngIf="f['firm_logo'].errors?.['required']">Hasło jest wymagane!</div>-->
+          <!--          </div>-->
+          <div
+            *ngIf="serverErrors.firm_logo"
+            class="text-red-600 font-semibold"
+          >
+            <div *ngFor="let firm_logo of serverErrors.firm_logo">
+              {{ firm_logo }}
+            </div>
           </div>
         </div>
-
       </div>
-      <button type="submit"
-              class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase
-              rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg
-              focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out">
+      <button
+        type="submit"
+        class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
+      >
         Zarejestruj się!
       </button>
     </form>
   </div>
 </div>
-
-

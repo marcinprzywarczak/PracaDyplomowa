@@ -1,5 +1,5 @@
 export interface Filter {
-  column: string,
-  operator: string,
-  value: any,
+  column: string;
+  operator: string;
+  value: any;
 }

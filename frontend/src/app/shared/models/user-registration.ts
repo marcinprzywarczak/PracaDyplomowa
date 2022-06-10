@@ -1,4 +1,4 @@
-export interface UserRegistration{
+export interface UserRegistration {
   isFirmAccount: boolean;
   email: string;
   first_name: string;
@@ -9,7 +9,7 @@ export interface UserRegistration{
   firm_name?: string;
   nip?: string;
   regon?: string;
-  street? : string;
+  street?: string;
   number?: string;
   locality?: string;
   zip_code?: string;

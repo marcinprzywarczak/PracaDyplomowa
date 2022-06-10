@@ -8,9 +8,8 @@ describe('FlatSellComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FlatComponent ]
-    })
-    .compileComponents();
+      declarations: [FlatComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

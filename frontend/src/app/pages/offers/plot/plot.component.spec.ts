@@ -8,9 +8,8 @@ describe('PlotSellComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ PlotComponent ]
-    })
-    .compileComponents();
+      declarations: [PlotComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {

@@ -2,63 +2,126 @@
   <div class="max-w-6xl mx-auto px-4">
     <div class="flex justify-between">
       <div class="flex space-x-7">
-<!--        <div class="md:hidden">-->
-<!--          &lt;!&ndash; Website Logo &ndash;&gt;-->
-<!--          <a href="#" class="flex items-center py-4 px-2">-->
-<!--&lt;!&ndash;            <img src="logo.png" alt="Logo" class="h-8 w-8 mr-2">&ndash;&gt;-->
-<!--            <span class="font-semibold text-gray-500 text-lg">Navigation</span>-->
-<!--          </a>-->
-<!--        </div>-->
+        <!--        <div class="md:hidden">-->
+        <!--          &lt;!&ndash; Website Logo &ndash;&gt;-->
+        <!--          <a href="#" class="flex items-center py-4 px-2">-->
+        <!--&lt;!&ndash;            <img src="logo.png" alt="Logo" class="h-8 w-8 mr-2">&ndash;&gt;-->
+        <!--            <span class="font-semibold text-gray-500 text-lg">Navigation</span>-->
+        <!--          </a>-->
+        <!--        </div>-->
         <!-- Primary Navbar items -->
         <div class="hidden md:flex items-center space-x-1">
-          <a routerLink="dashboard" class="py-4 px-2  font-semibold hover:text-green-500 transition duration-300 text-gray-500"
-             routerLinkActive="active-link">Strona główna</a>
-          <div (click)="dropdownHouse()" routerLinkActive="active-link" class="cursor-pointer text-gray-500 font-semibold
-          ">
-            <div  class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-house">
-              Domy <i id="dropdown-house-icon" class="pi pi-angle-down text-center align-middle"></i>
+          <a
+            routerLink="dashboard"
+            class="py-4 px-2 font-semibold hover:text-green-500 transition duration-300 text-gray-500"
+            routerLinkActive="active-link"
+            >Strona główna</a
+          >
+          <div
+            (click)="dropdownHouse()"
+            routerLinkActive="active-link"
+            class="cursor-pointer text-gray-500 font-semibold"
+          >
+            <div
+              class="py-4 px-2 hover:text-green-500 transition duration-300"
+              id="dropdown-house"
+            >
+              Domy
+              <i
+                id="dropdown-house-icon"
+                class="pi pi-angle-down text-center align-middle"
+              ></i>
             </div>
-            <div id="dropdown-content-house" class="bg-gray-200 w-auto fixed hidden z-10">
+            <div
+              id="dropdown-content-house"
+              class="bg-gray-200 w-auto fixed hidden z-10"
+            >
               <a [routerLink]="['/dom', 'sprzedaz']">
-                <div class="p-3 hover:text-green-500 transition duration-300" routerLinkActive="active-link-dropdown">
+                <div
+                  class="p-3 hover:text-green-500 transition duration-300"
+                  routerLinkActive="active-link-dropdown"
+                >
                   Sprzedaż
                 </div>
               </a>
-              <a [routerLink]="['/dom', 'wynajem']" routerLinkActive="active-link-dropdown">
+              <a
+                [routerLink]="['/dom', 'wynajem']"
+                routerLinkActive="active-link-dropdown"
+              >
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Wynajem
                 </div>
               </a>
             </div>
           </div>
-          <div (click)="dropdownFlat()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">
-            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-flat">
-              Mieszkania <i id="dropdown-flat-icon" class="pi pi-angle-down text-center align-middle"></i>
+          <div
+            (click)="dropdownFlat()"
+            routerLinkActive="active-link"
+            class="cursor-pointer text-gray-500 font-semibold"
+          >
+            <div
+              class="py-4 px-2 hover:text-green-500 transition duration-300"
+              id="dropdown-flat"
+            >
+              Mieszkania
+              <i
+                id="dropdown-flat-icon"
+                class="pi pi-angle-down text-center align-middle"
+              ></i>
             </div>
-            <div id="dropdown-content-flat" class="bg-gray-200 w-auto fixed hidden z-10">
-              <a [routerLink]="['/mieszkanie', 'sprzedaz']" routerLinkActive="active-link-dropdown">
+            <div
+              id="dropdown-content-flat"
+              class="bg-gray-200 w-auto fixed hidden z-10"
+            >
+              <a
+                [routerLink]="['/mieszkanie', 'sprzedaz']"
+                routerLinkActive="active-link-dropdown"
+              >
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Sprzedaż
                 </div>
               </a>
-              <a [routerLink]="['/mieszkanie', 'wynajem']" routerLinkActive="active-link-dropdown">
+              <a
+                [routerLink]="['/mieszkanie', 'wynajem']"
+                routerLinkActive="active-link-dropdown"
+              >
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Wynajem
                 </div>
               </a>
             </div>
           </div>
-          <div (click)="dropdownPlot()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">
-            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-plot">
-              Działki <i id="dropdown-plot-icon" class="pi pi-angle-down text-center align-middle"></i>
+          <div
+            (click)="dropdownPlot()"
+            routerLinkActive="active-link"
+            class="cursor-pointer text-gray-500 font-semibold"
+          >
+            <div
+              class="py-4 px-2 hover:text-green-500 transition duration-300"
+              id="dropdown-plot"
+            >
+              Działki
+              <i
+                id="dropdown-plot-icon"
+                class="pi pi-angle-down text-center align-middle"
+              ></i>
             </div>
-            <div id="dropdown-content-plot" class="bg-gray-200 w-auto fixed hidden z-10">
-              <a [routerLink]="['/dzialka', 'sprzedaz']" routerLinkActive="active-link-dropdown">
+            <div
+              id="dropdown-content-plot"
+              class="bg-gray-200 w-auto fixed hidden z-10"
+            >
+              <a
+                [routerLink]="['/dzialka', 'sprzedaz']"
+                routerLinkActive="active-link-dropdown"
+              >
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Sprzedaż
                 </div>
               </a>
-              <a [routerLink]="['/dzialka', 'wynajem']" routerLinkActive="active-link-dropdown">
+              <a
+                [routerLink]="['/dzialka', 'wynajem']"
+                routerLinkActive="active-link-dropdown"
+              >
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Wynajem
                 </div>
@@ -66,59 +129,108 @@
             </div>
           </div>
 
-          <div (click)="dropdownRoom()" routerLinkActive="active-link" class="cursor-pointer text-gray-500 font-semibold">
-            <div class="py-4 px-2 hover:text-green-500 transition duration-300" id="dropdown-room">
-              Pokoje <i id="dropdown-room-icon" class="pi pi-angle-down text-center align-middle"></i>
+          <div
+            (click)="dropdownRoom()"
+            routerLinkActive="active-link"
+            class="cursor-pointer text-gray-500 font-semibold"
+          >
+            <div
+              class="py-4 px-2 hover:text-green-500 transition duration-300"
+              id="dropdown-room"
+            >
+              Pokoje
+              <i
+                id="dropdown-room-icon"
+                class="pi pi-angle-down text-center align-middle"
+              ></i>
             </div>
-            <div id="dropdown-content-room" class="bg-gray-200 w-auto fixed hidden z-10">
-              <a routerLink="pokoj/wynajem" routerLinkActive="active-link-dropdown">
+            <div
+              id="dropdown-content-room"
+              class="bg-gray-200 w-auto fixed hidden z-10"
+            >
+              <a
+                routerLink="pokoj/wynajem"
+                routerLinkActive="active-link-dropdown"
+              >
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Wynajem
                 </div>
               </a>
             </div>
           </div>
-
         </div>
       </div>
       <!-- Secondary Navbar items -->
-      <div *ngIf="!isLogged; else logged" class="hidden md:flex items-center space-x-3 ">
-        <a href="" routerLink="/login" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Zaloguj</a>
-        <a href="" routerLink="/register" class="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Zarejestruj</a>
+      <div
+        *ngIf="!isLogged; else logged"
+        class="hidden md:flex items-center space-x-3"
+      >
+        <a
+          href=""
+          routerLink="/login"
+          class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300"
+          >Zaloguj</a
+        >
+        <a
+          href=""
+          routerLink="/register"
+          class="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300"
+          >Zarejestruj</a
+        >
       </div>
       <ng-template #logged>
-<!--        <div (click)="dropdownUser()" class="cursor-pointer hidden md:flex text-gray-500 font-semibold">-->
-<!--          <div id="dropdown-user" class="py-4 px-2 flex flex-row items-center cursor-pointer  text-gray-500 font-semibold hover:text-green-500 transition duration-300">-->
-<!--            <img id="dropdown-user-img" src="{{user.avatar}}" width="30" height="30" alt="zdj"/>-->
-<!--            <div id="dropdown-user-name" class="">{{user.first_name}} {{user.sure_name}}</div>-->
-<!--          </div>-->
-<!--          <div id="dropdown-content-user" class="bg-gray-200 w-auto fixed hidden">-->
-<!--            <a href="#">-->
-<!--              <div class="p-3 hover:text-green-500 transition duration-300">-->
-<!--                Moje konto-->
-<!--              </div>-->
-<!--            </a>-->
-<!--            <a>-->
-<!--              <div (click)="logout()" class="p-3 hover:text-green-500 transition duration-300">-->
-<!--                Wyloguj-->
-<!--              </div>-->
-<!--            </a>-->
-<!--          </div>-->
-<!--        </div>-->
-        <div (click)="dropdownUser()" class="hidden md:block cursor-pointer  text-gray-500 font-semibold">
-          <div id="dropdown-user" class="py-4 px-2 flex flex-row items-center cursor-pointer space-x-1  text-gray-500 font-semibold hover:text-green-500 transition duration-300">
-            <img id="dropdown-user-img" src="{{user.avatar}}" width="30" height="30" alt="zdj"/>
-            <div id="dropdown-user-name" class="">{{user.first_name}} {{user.sure_name}}</div>
+        <!--        <div (click)="dropdownUser()" class="cursor-pointer hidden md:flex text-gray-500 font-semibold">-->
+        <!--          <div id="dropdown-user" class="py-4 px-2 flex flex-row items-center cursor-pointer  text-gray-500 font-semibold hover:text-green-500 transition duration-300">-->
+        <!--            <img id="dropdown-user-img" src="{{user.avatar}}" width="30" height="30" alt="zdj"/>-->
+        <!--            <div id="dropdown-user-name" class="">{{user.first_name}} {{user.sure_name}}</div>-->
+        <!--          </div>-->
+        <!--          <div id="dropdown-content-user" class="bg-gray-200 w-auto fixed hidden">-->
+        <!--            <a href="#">-->
+        <!--              <div class="p-3 hover:text-green-500 transition duration-300">-->
+        <!--                Moje konto-->
+        <!--              </div>-->
+        <!--            </a>-->
+        <!--            <a>-->
+        <!--              <div (click)="logout()" class="p-3 hover:text-green-500 transition duration-300">-->
+        <!--                Wyloguj-->
+        <!--              </div>-->
+        <!--            </a>-->
+        <!--          </div>-->
+        <!--        </div>-->
+        <div
+          (click)="dropdownUser()"
+          class="hidden md:block cursor-pointer text-gray-500 font-semibold"
+        >
+          <div
+            id="dropdown-user"
+            class="py-4 px-2 flex flex-row items-center cursor-pointer space-x-1 text-gray-500 font-semibold hover:text-green-500 transition duration-300"
+          >
+            <img
+              id="dropdown-user-img"
+              src="{{ user.avatar }}"
+              width="30"
+              height="30"
+              alt="zdj"
+            />
+            <div id="dropdown-user-name" class="">
+              {{ user.first_name }} {{ user.sure_name }}
+            </div>
             <i id="dropdown-user-icon" class="pi pi-angle-down"></i>
           </div>
-          <div id="dropdown-content-user" class="bg-gray-200 w-auto fixed hidden">
+          <div
+            id="dropdown-content-user"
+            class="bg-gray-200 w-auto fixed hidden"
+          >
             <a href="#">
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Moje konto
               </div>
             </a>
             <a>
-              <div (click)="logout()" class="p-3 hover:text-green-500 transition duration-300">
+              <div
+                (click)="logout()"
+                class="p-3 hover:text-green-500 transition duration-300"
+              >
                 Wyloguj
               </div>
             </a>
@@ -128,14 +240,18 @@
 
       <!-- Mobile menu button -->
       <div class="md:hidden flex items-center">
-        <button class="py-4 outline-none mobile-menu-button" (click)="showMobileMenu()">
-          <svg class=" w-6 h-6 text-gray-500 hover:text-green-500 "
-               fill="none"
-               stroke-linecap="round"
-               stroke-linejoin="round"
-               stroke-width="2"
-               viewBox="0 0 24 24"
-               stroke="currentColor"
+        <button
+          class="py-4 outline-none mobile-menu-button"
+          (click)="showMobileMenu()"
+        >
+          <svg
+            class="w-6 h-6 text-gray-500 hover:text-green-500"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            stroke-width="2"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
           >
             <path d="M4 6h16M4 12h16M4 18h16"></path>
           </svg>
@@ -148,23 +264,46 @@
     <ul class="">
       <li class="">
         <a routerLink="dashboard" class="w-full">
-          <div class="cursor-pointer  text-gray-500 font-semibold py-4 px-2 hover:text-green-500 transition duration-300" routerLinkActive="active-link">
+          <div
+            class="cursor-pointer text-gray-500 font-semibold py-4 px-2 hover:text-green-500 transition duration-300"
+            routerLinkActive="active-link"
+          >
             Strona główna
           </div>
         </a>
       </li>
       <li>
-        <div (click)="dropdownHouseMobile()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">
-          <div class="py-4 px-2 hover:text-green-500 transition duration-300 flex justify-between" id="dropdown-house-mobile">
-            Domy <i id="dropdown-house-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
+        <div
+          (click)="dropdownHouseMobile()"
+          routerLinkActive="active-link"
+          class="cursor-pointer text-gray-500 font-semibold"
+        >
+          <div
+            class="py-4 px-2 hover:text-green-500 transition duration-300 flex justify-between"
+            id="dropdown-house-mobile"
+          >
+            Domy
+            <i
+              id="dropdown-house-icon-mobile"
+              class="pi pi-angle-down text-right align-middle"
+            ></i>
           </div>
-          <div class="bg-gray-200 w-full hidden" id="dropdown-content-house-mobile">
-            <a [routerLink]="['/dom', 'sprzedaz']" routerLinkActive="active-link-dropdown">
+          <div
+            class="bg-gray-200 w-full hidden"
+            id="dropdown-content-house-mobile"
+          >
+            <a
+              [routerLink]="['/dom', 'sprzedaz']"
+              routerLinkActive="active-link-dropdown"
+            >
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Sprzedaż
               </div>
             </a>
-            <a [routerLink]="['/dom', 'wynajem']" routerLinkActive="active-link-dropdown">
+            <a
+              [routerLink]="['/dom', 'wynajem']"
+              routerLinkActive="active-link-dropdown"
+            >
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Wynajem
               </div>
@@ -173,17 +312,37 @@
         </div>
       </li>
       <li>
-        <div (click)="dropdownFlatMobile()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">
-          <div class="py-4 px-2 hover:text-green-500 flex justify-between transition duration-300" id="dropdown-flat-mobile">
-            Mieszkania <i id="dropdown-flat-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
+        <div
+          (click)="dropdownFlatMobile()"
+          routerLinkActive="active-link"
+          class="cursor-pointer text-gray-500 font-semibold"
+        >
+          <div
+            class="py-4 px-2 hover:text-green-500 flex justify-between transition duration-300"
+            id="dropdown-flat-mobile"
+          >
+            Mieszkania
+            <i
+              id="dropdown-flat-icon-mobile"
+              class="pi pi-angle-down text-right align-middle"
+            ></i>
           </div>
-          <div id="dropdown-content-flat-mobile" class="bg-gray-200 w-full hidden">
-            <a [routerLink]="['/mieszkanie', 'sprzedaz']" routerLinkActive="active-link-dropdown">
+          <div
+            id="dropdown-content-flat-mobile"
+            class="bg-gray-200 w-full hidden"
+          >
+            <a
+              [routerLink]="['/mieszkanie', 'sprzedaz']"
+              routerLinkActive="active-link-dropdown"
+            >
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Sprzedaż
               </div>
             </a>
-            <a [routerLink]="['/mieszkanie', 'wynajem']" routerLinkActive="active-link-dropdown">
+            <a
+              [routerLink]="['/mieszkanie', 'wynajem']"
+              routerLinkActive="active-link-dropdown"
+            >
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Wynajem
               </div>
@@ -192,17 +351,37 @@
         </div>
       </li>
       <li>
-        <div (click)="dropdownPlotMobile()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">
-          <div class="py-4 px-2 hover:text-green-500 transition duration-300 flex justify-between" id="dropdown-plot-mobile">
-            Działki <i id="dropdown-plot-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
+        <div
+          (click)="dropdownPlotMobile()"
+          routerLinkActive="active-link"
+          class="cursor-pointer text-gray-500 font-semibold"
+        >
+          <div
+            class="py-4 px-2 hover:text-green-500 transition duration-300 flex justify-between"
+            id="dropdown-plot-mobile"
+          >
+            Działki
+            <i
+              id="dropdown-plot-icon-mobile"
+              class="pi pi-angle-down text-right align-middle"
+            ></i>
           </div>
-          <div id="dropdown-content-plot-mobile" class="bg-gray-200 w-full hidden">
-            <a [routerLink]="['/dzialka', 'sprzedaz']" routerLinkActive="active-link-dropdown">
+          <div
+            id="dropdown-content-plot-mobile"
+            class="bg-gray-200 w-full hidden"
+          >
+            <a
+              [routerLink]="['/dzialka', 'sprzedaz']"
+              routerLinkActive="active-link-dropdown"
+            >
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Sprzedaż
               </div>
             </a>
-            <a [routerLink]="['/dzialka', 'wynajem']" routerLinkActive="active-link-dropdown">
+            <a
+              [routerLink]="['/dzialka', 'wynajem']"
+              routerLinkActive="active-link-dropdown"
+            >
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Wynajem
               </div>
@@ -212,13 +391,29 @@
       </li>
 
       <li>
-        <div (click)="dropdownRoomMobile()" routerLinkActive="active-link" class="cursor-pointer  text-gray-500 font-semibold">
-          <div class="py-4 px-2 hover:text-green-500 flex justify-between transition duration-300 focus:bg-amber-700"
-               id="dropdown-room-mobile">
-            Pokoje <i id="dropdown-room-icon-mobile" class="pi pi-angle-down text-right align-middle"></i>
+        <div
+          (click)="dropdownRoomMobile()"
+          routerLinkActive="active-link"
+          class="cursor-pointer text-gray-500 font-semibold"
+        >
+          <div
+            class="py-4 px-2 hover:text-green-500 flex justify-between transition duration-300 focus:bg-amber-700"
+            id="dropdown-room-mobile"
+          >
+            Pokoje
+            <i
+              id="dropdown-room-icon-mobile"
+              class="pi pi-angle-down text-right align-middle"
+            ></i>
           </div>
-          <div id="dropdown-content-room-mobile" class="bg-gray-200 w-full hidden">
-            <a routerLink="pokoj/wynajem" routerLinkActive="active-link-dropdown">
+          <div
+            id="dropdown-content-room-mobile"
+            class="bg-gray-200 w-full hidden"
+          >
+            <a
+              routerLink="pokoj/wynajem"
+              routerLinkActive="active-link-dropdown"
+            >
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Wynajem
               </div>
@@ -227,34 +422,70 @@
         </div>
       </li>
 
-      <li class="py-2 flex flex-row items-center space-x-3" [ngClass]="isLogged ? 'justify-start' : 'justify-end' ">
-        <div *ngIf="!isLogged; else loggedMobile" class="items-center space-x-3 ">
-          <a href="" routerLink="/login" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Zaloguj</a>
-          <a href="" routerLink="/register" class="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Zarejestruj</a>
+      <li
+        class="py-2 flex flex-row items-center space-x-3"
+        [ngClass]="isLogged ? 'justify-start' : 'justify-end'"
+      >
+        <div
+          *ngIf="!isLogged; else loggedMobile"
+          class="items-center space-x-3"
+        >
+          <a
+            href=""
+            routerLink="/login"
+            class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300"
+            >Zaloguj</a
+          >
+          <a
+            href=""
+            routerLink="/register"
+            class="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300"
+            >Zarejestruj</a
+          >
         </div>
         <ng-template #loggedMobile>
-          <div (click)="dropdownUserMobile()" class="cursor-pointer text-gray-500 font-semibold w-full">
-            <div id="dropdown-user-mobile" class="py-2 px-2 justify-start space-x-1 flex flex-row items-center cursor-pointer  text-gray-500 font-semibold hover:text-green-500 transition duration-300">
-              <img id="dropdown-user-img-mobile" src="{{user.avatar}}" width="30" height="30" alt="zdj"/>
-              <div id="dropdown-user-name-mobile" class="">{{user.first_name}} {{user.sure_name}}</div>
+          <div
+            (click)="dropdownUserMobile()"
+            class="cursor-pointer text-gray-500 font-semibold w-full"
+          >
+            <div
+              id="dropdown-user-mobile"
+              class="py-2 px-2 justify-start space-x-1 flex flex-row items-center cursor-pointer text-gray-500 font-semibold hover:text-green-500 transition duration-300"
+            >
+              <img
+                id="dropdown-user-img-mobile"
+                src="{{ user.avatar }}"
+                width="30"
+                height="30"
+                alt="zdj"
+              />
+              <div id="dropdown-user-name-mobile" class="">
+                {{ user.first_name }} {{ user.sure_name }}
+              </div>
               <i id="dropdown-user-icon-mobile" class="pi pi-angle-down"></i>
             </div>
-            <div id="dropdown-content-user-mobile" class="bg-gray-200 w-full hidden">
+            <div
+              id="dropdown-content-user-mobile"
+              class="bg-gray-200 w-full hidden"
+            >
               <a href="#">
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Moje konto
                 </div>
               </a>
               <a>
-                <div (click)="logout()" class="p-3 hover:text-green-500 transition duration-300">
+                <div
+                  (click)="logout()"
+                  class="p-3 hover:text-green-500 transition duration-300"
+                >
                   Wyloguj
                 </div>
               </a>
             </div>
           </div>
         </ng-template>
-<!--            <a routerLink="login" type="blank" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Zaloguj</a>-->
-<!--            <a routerLink="/register" class="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Zarejestruj</a>-->
+        <!--            <a routerLink="login" type="blank" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Zaloguj</a>-->
+        <!--            <a routerLink="/register" class="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Zarejestruj</a>-->
       </li>
     </ul>
   </div>
