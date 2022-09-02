@@ -3,6 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from '../../shared/services/api/api.service';
 import { LoginService } from '../../shared/services/login/login.service';
 import { Router } from '@angular/router';
+import { Location } from '@angular/common';
+import { RouteService } from '../../shared/services/route/route.service';
 
 @Component({
   selector: 'app-login',
@@ -18,7 +20,9 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
-    private apiService: ApiService
+    private apiService: ApiService,
+    private location: Location,
+    private routeService: RouteService
   ) {}
 
   ngOnInit(): void {
@@ -46,10 +50,15 @@ export class LoginComponent implements OnInit {
                 this.error = value.error;
                 this.errors = [];
               } else {
+                console.log(this.routeService.getPreviousUrl());
                 console.log(value);
                 localStorage.setItem('isLogged', 'true');
                 localStorage.setItem('user', JSON.stringify(value.user));
-                window.location.href = '/dashboard';
+                if (this.routeService.getPreviousUrl() !== '/login')
+                  window.location.href = this.routeService.getPreviousUrl();
+                else {
+                  window.location.href = '/dashboard';
+                }
               }
             },
             error: (err) => {

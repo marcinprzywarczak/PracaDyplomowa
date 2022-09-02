@@ -1,0 +1,32 @@
+img{
+  height: 100%;
+}
+
+::ng-deep .p-galleria-item-wrapper{
+  height: 500px;
+}
+
+::ng-deep .p-galleria .p-galleria-thumbnail-container{
+  padding: 0;
+  background: rgb(177 177 177 / 90%);
+}
+
+::ng-deep .p-galleria .p-galleria-item-nav{
+  color: black;
+}
+
+::ng-deep .p-galleria .p-galleria-item-nav:not(.p-disabled):hover{
+  color: gray;
+}
+
+::ng-deep .p-link:focus{
+  box-shadow: none;
+}
+
+::ng-deep .p-galleria .p-galleria-thumbnail-container .p-galleria-thumbnail-item-content:focus{
+  box-shadow: none;
+}
+
+.capitalize-first::first-letter {
+  text-transform: uppercase;
+}

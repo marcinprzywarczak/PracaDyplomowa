@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
@@ -19,7 +19,9 @@ import { RegisterModule } from './pages/register/register.module';
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { OfferComponent } from './shared/components/offer/offer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
+import { registerLocaleData } from '@angular/common';
+import localePl from '@angular/common/locales/pl';
+registerLocaleData(localePl);
 @NgModule({
   declarations: [AppComponent, LoginComponent, NavbarComponent],
   imports: [
@@ -35,6 +37,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
+    {
+      provide: LOCALE_ID,
+      useValue: 'pl', // 'de-DE' for Germany, 'fr-FR' for France ...
+    },
   ],
   exports: [],
   bootstrap: [AppComponent],
