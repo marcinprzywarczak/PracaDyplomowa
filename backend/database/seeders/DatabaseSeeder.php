@@ -62,6 +62,7 @@ class DatabaseSeeder extends Seeder
         $this->call(OffersSeeder::class);
         $this->call(ParametersSeeder::class);
         $this->call(OfferParametersSeeder::class);
+        $this->call(OfferPhotoSeeder::class);
         // \App\Models\User::factory(10)->create();
     }
 }

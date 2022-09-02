@@ -17,26 +17,6 @@ class ParametersSeeder extends Seeder
      */
     public function run()
     {
-//        Parameter::create([
-//            'property_type_id' => 1,
-//            'name' => 'liczba okien',
-//            'isAny' => false,
-//            'type' => 'int',
-//        ]);
-//
-//        Parameter::create([
-//            'property_type_id' => 1,
-//            'name' => 'liczba drzwi',
-//            'isAny' => false,
-//            'type' => 'int',
-//        ]);
-//
-//        Parameter::create([
-//            'property_type_id' => 1,
-//            'name' => 'liczba pokoi',
-//            'isAny' => false,
-//            'type' => 'int',
-//        ]);
 
         $parameter_category = ParameterCategory::create([
             'name' => 'informacje szczegółowe',

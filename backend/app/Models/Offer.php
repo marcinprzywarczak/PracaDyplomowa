@@ -43,5 +43,10 @@ class Offer extends Model
             ->withPivot('value')->using(OfferParameter::class);
     }
 
+    public function photos(){
+        return $this->belongsToMany(Photo::class)
+            ->withPivot('isMain');
+    }
+
 
 }

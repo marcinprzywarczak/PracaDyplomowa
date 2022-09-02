@@ -29,7 +29,7 @@ class OfferController extends Controller
     }
 
     public function getOffer(Request $request){
-        $offer = Offer::with('user','user.firm', 'property_type', 'offer_type', 'offer_status', 'parameters')
+        $offer = Offer::with('user','user.firm', 'property_type', 'offer_type', 'offer_status', 'parameters', 'photos')
             ->where('id', $request->id)->first();
         $parameter_category = ParameterCategory::
             whereHas('parameters.offers', function (Builder $query) use($request){

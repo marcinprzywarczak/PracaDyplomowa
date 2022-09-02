@@ -109,6 +109,48 @@ class OfferParametersSeeder extends Seeder
             'offer_id' => 2,
             'value' => 'beton'
         ]);
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 94,
+            'offer_id' => 19,
+            'value' => ''
+        ]);
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 95,
+            'offer_id' => 19,
+            'value' => ''
+        ]);
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 96,
+            'offer_id' => 19,
+            'value' => ''
+        ]);
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 92,
+            'offer_id' => 19,
+            'value' => ''
+        ]);
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 91,
+            'offer_id' => 19,
+            'value' => ''
+        ]);
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 83,
+            'offer_id' => 19,
+            'value' => 12
+        ]);
+
+        DB::table('offer_parameter')->insert([
+            'parameter_id' => 82,
+            'offer_id' => 19,
+            'value' => 'blok'
+        ]);
 //        DB::table('offer_parameter')->insert([
 //            'parameter_id' => 3,
 //            'offer_id' => 2,

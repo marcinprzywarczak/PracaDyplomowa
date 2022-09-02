@@ -10,6 +10,12 @@ class Photo extends Model
     use HasFactory;
 
     protected $fillable = [
-        'directory',
+        'path',
+        'description'
     ];
+
+    public function offers(){
+        return $this->belongsToMany(Offer::class)
+            ->withPivot('isMain');
+    }
 }
