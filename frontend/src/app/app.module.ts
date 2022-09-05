@@ -21,6 +21,7 @@ import { OfferComponent } from './shared/components/offer/offer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { registerLocaleData } from '@angular/common';
 import localePl from '@angular/common/locales/pl';
+import { SharedModule } from './shared/shared.module';
 registerLocaleData(localePl);
 @NgModule({
   declarations: [AppComponent, LoginComponent, NavbarComponent],
@@ -33,6 +34,7 @@ registerLocaleData(localePl);
     LoginModule,
     RegisterModule,
     BrowserAnimationsModule,
+    SharedModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true },

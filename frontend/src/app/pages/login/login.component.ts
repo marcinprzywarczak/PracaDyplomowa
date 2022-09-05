@@ -38,8 +38,8 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     this.isSubmitted = true;
     if (!this.form.invalid) {
-      this.apiService.csrf().subscribe(() => {
-        this.apiService
+      this.loginService.csrf().subscribe(() => {
+        this.loginService
           .login(
             this.form.controls['email'].value,
             this.form.controls['password'].value

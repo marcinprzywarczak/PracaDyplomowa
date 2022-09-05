@@ -67,7 +67,6 @@ export class OfferDetailsComponent implements OnInit {
         this.parameterCategories = value.parameterCategories;
       });
   }
-
   setValue() {
     this.owner = this.offerDetails.user;
     this.firm = this.owner.firm;

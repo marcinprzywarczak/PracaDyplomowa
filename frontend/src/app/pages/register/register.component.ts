@@ -171,8 +171,8 @@ export class RegisterComponent implements OnInit {
           : ''
       );
 
-      this.apiService.csrf().subscribe(() => {
-        this.apiService.register(formData).subscribe({
+      this.loginService.csrf().subscribe(() => {
+        this.loginService.register(formData).subscribe({
           next: (value) => {
             if (value.success) {
               localStorage.setItem('isLogged', 'true');

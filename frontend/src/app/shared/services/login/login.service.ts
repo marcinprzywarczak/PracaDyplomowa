@@ -1,23 +1,26 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { finalize } from 'rxjs';
 import { error } from '@angular/compiler/src/util';
 import { ApiService } from '../api/api.service';
 import { UserRegistration } from '../../models/user-registration';
+import { environment } from '../../../../environments/environment';
 
+const BASE_API_URL: string = environment.apiUrl;
 @Injectable({
   providedIn: 'root',
 })
 export class LoginService {
-  constructor(private http: HttpClient, private apiService: ApiService) {}
+  constructor(private http: HttpClient) {}
+
   csrf() {
-    return this.http.get('http://localhost:8000/sanctum/csrf-cookie', {
+    return this.http.get(`${BASE_API_URL}/sanctum/csrf-cookie`, {
       withCredentials: true,
     });
   }
   login(email: string, password: string) {
     return this.http.post<any>(
-      'http://localhost:8000/login',
+      `${BASE_API_URL}/login`,
       {
         email: email,
         password: password,
@@ -25,15 +28,10 @@ export class LoginService {
       { withCredentials: true }
     );
   }
-  test() {
-    return this.http.get<any>('http://localhost:8000/api/user', {
-      withCredentials: true,
-    });
-  }
 
   isLogged() {
     return this.http.post<{ isLogged: boolean }>(
-      'http://localhost:8000/api/isLogged',
+      `${BASE_API_URL}/api/isLogged`,
       {},
       { withCredentials: true }
     );
@@ -41,13 +39,19 @@ export class LoginService {
 
   logout() {
     return this.http.post<any>(
-      'http://localhost:8000/logout',
+      `${BASE_API_URL}/logout`,
       {},
       { withCredentials: true, observe: 'response' }
     );
   }
 
   register(registerData: FormData) {
-    return this.apiService.register(registerData);
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+    return this.http.post<any>(`${BASE_API_URL}/register`, registerData, {
+      withCredentials: true,
+      headers: headers,
+    });
   }
 }
