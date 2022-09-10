@@ -9,8 +9,8 @@ export interface User {
   avatar: string;
   firm_id: number;
   firm: Firm;
-  permissions: any[];
-  roles: any[];
+  permissions?: any[];
+  roles?: any[];
   created_at: Date;
   updated_at: Date;
 }

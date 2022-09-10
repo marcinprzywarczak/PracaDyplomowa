@@ -1,0 +1,13 @@
+.add-offer-option{
+  @apply bg-gray-400 hover:bg-gray-200 rounded-full flex flex-col items-center justify-center cursor-pointer;
+  height: 150px;
+  width: 150px;
+}
+
+.add-offer-option-link {
+  @apply hover:text-gray-400 hover:underline hover:decoration-solid;
+}
+
+.add-offer-option-caption {
+  @apply text-2xl;
+}

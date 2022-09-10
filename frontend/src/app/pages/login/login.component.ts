@@ -50,14 +50,15 @@ export class LoginComponent implements OnInit {
                 this.error = value.error;
                 this.errors = [];
               } else {
-                console.log(this.routeService.getPreviousUrl());
-                console.log(value);
                 localStorage.setItem('isLogged', 'true');
                 localStorage.setItem('user', JSON.stringify(value.user));
-                if (this.routeService.getPreviousUrl() !== '/login')
+                if (
+                  this.routeService.getPreviousUrl() !== '/login' &&
+                  this.routeService.getPreviousUrl() !== '/'
+                )
                   window.location.href = this.routeService.getPreviousUrl();
                 else {
-                  window.location.href = '/dashboard';
+                  window.location.reload();
                 }
               }
             },

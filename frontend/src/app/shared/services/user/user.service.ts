@@ -15,7 +15,7 @@ export class UserService {
     return this.currentUser;
   }
 
-  getState() {
+  getState(): boolean {
     return this.isLogged;
   }
 }

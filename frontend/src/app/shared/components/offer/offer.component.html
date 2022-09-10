@@ -2,11 +2,20 @@
   <div class="w-full min-w-full p-3 flex flex-row bg-amber-200 space-x-5">
     <div class="flex">
       <img
-        src="../../../../assets/default_avatar.jpg"
-        width="300px"
-        height="300px"
-        alt="zdj"
+        *ngIf="mainPhoto; else placeHolderPhoto"
+        src="{{ mainPhoto.path }}"
+        width="400px"
+        height="400px"
+        alt="{{ mainPhoto.description }}"
       />
+      <ng-template #placeHolderPhoto>
+        <img
+          src="assets/default-photo.jpg"
+          width="400px"
+          height="400px"
+          alt="Zdjęcie główne ogłoszenia"
+        />
+      </ng-template>
     </div>
     <div class="flex flex-col w-full">
       <div class="w-full flex flex-row justify-between">

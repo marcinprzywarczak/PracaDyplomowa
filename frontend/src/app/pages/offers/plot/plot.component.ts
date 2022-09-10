@@ -4,6 +4,9 @@ import { ApiService } from '../../../shared/services/api/api.service';
 import { finalize } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { Offer } from '../../../shared/models/offer';
+import { PropertyType } from '../../../shared/models/property-type';
+import { OfferType } from '../../../shared/models/offer-type';
 
 @Component({
   selector: 'app-plot',
@@ -11,7 +14,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./plot.component.scss'],
 })
 export class PlotComponent implements OnInit {
-  offers: any;
+  offers: Offer[];
   totalRecords: number;
   currentPage: number;
   dataLoad: boolean = false;
@@ -31,8 +34,8 @@ export class PlotComponent implements OnInit {
       value: '',
     },
   ];
-  propertyTypes: any = [];
-  offerTypes: any = [];
+  propertyTypes: PropertyType[] = [];
+  offerTypes: OfferType[] = [];
   form: FormGroup;
   plotTypeOptions: any = [];
   fenceOptions: any = [];
@@ -68,35 +71,25 @@ export class PlotComponent implements OnInit {
           this.getRouteParameters();
         })
       )
-      .subscribe((value: any) => {
-        this.propertyTypes = value.propertyTypes.map((res: any) => {
-          return {
-            id: res.id,
-            name: res.name,
-          };
-        });
-        this.offerTypes = value.offerTypes.map((res: any) => {
-          return {
-            id: res.id,
-            name: res.name,
-          };
-        });
+      .subscribe((value) => {
+        this.propertyTypes = value.propertyTypes;
+        this.offerTypes = value.offerTypes;
       });
   }
 
   getPropertyId() {
     this.propertyTypeId = this.propertyTypes.find(
-      (x: any) => x.name === 'działka'
-    ).id;
+      (x) => x.name === 'działka'
+    )!.id;
   }
 
   setDefaultFilters() {
     this.defaultFilters[0].value = this.propertyTypes.find(
-      (x: any) => x.name === 'działka'
-    ).id;
+      (x) => x.name === 'działka'
+    )!.id;
     this.defaultFilters[1].value = this.offerTypes.find(
-      (x: any) => x.name === this.offerType
-    ).id;
+      (x) => x.name === this.offerType
+    )!.id;
     this.filters[0] = this.defaultFilters[0];
     this.filters[1] = this.defaultFilters[1];
   }
@@ -126,20 +119,20 @@ export class PlotComponent implements OnInit {
   getParameters() {
     this.apiService
       .getParametersForPropertyType(this.propertyTypeId)
-      .subscribe((value: any) => {
+      .subscribe((value) => {
         this.plotTypeOptions = value.find(
-          (x: any) => x.name === 'typ działki'
-        ).parameter_values;
+          (x) => x.name === 'typ działki'
+        )!.parameter_values;
         this.fenceOptions = value.find(
-          (x: any) => x.name === 'ogrodzenie'
-        ).parameter_values;
+          (x) => x.name === 'ogrodzenie'
+        )!.parameter_values;
         this.drivewayTypeOptions = value.filter(
-          (x: any) =>
+          (x) =>
             x.parameter_category !== null &&
             x.parameter_category.name === 'dojazd'
         );
         this.utilitiesOptions = value.filter(
-          (x: any) =>
+          (x) =>
             x.parameter_category !== null &&
             x.parameter_category.name === 'media'
         );
@@ -154,10 +147,10 @@ export class PlotComponent implements OnInit {
         this.parameterIn,
         this.parameterValueIn
       )
-      .subscribe((value: any) => {
+      .subscribe((value) => {
         this.totalRecords = value.offers.total;
         this.offers = value.offers.data;
-        this.currentPage = value.offers.curent_page;
+        this.currentPage = value.offers.current_page;
         this.dataLoad = true;
       });
   }

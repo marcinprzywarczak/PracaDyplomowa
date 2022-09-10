@@ -3,6 +3,9 @@ import { Filter } from '../../../shared/models/filter';
 import { ApiService } from '../../../shared/services/api/api.service';
 import { finalize } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Offer } from '../../../shared/models/offer';
+import { PropertyType } from '../../../shared/models/property-type';
+import { OfferType } from '../../../shared/models/offer-type';
 
 @Component({
   selector: 'app-room-rent',
@@ -10,7 +13,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
   styleUrls: ['./room-rent.component.scss'],
 })
 export class RoomRentComponent implements OnInit {
-  offers: any;
+  offers: Offer[];
   totalRecords: number;
   currentPage: number;
   dataLoad: boolean = false;
@@ -30,8 +33,8 @@ export class RoomRentComponent implements OnInit {
       value: '',
     },
   ];
-  propertyTypes: any = [];
-  offerTypes: any = [];
+  propertyTypes: PropertyType[] = [];
+  offerTypes: OfferType[] = [];
   form: FormGroup;
   buildingTypeOptions: any = [];
   roomTypeOptions: any = [];
@@ -70,35 +73,25 @@ export class RoomRentComponent implements OnInit {
           this.getOffers(1);
         })
       )
-      .subscribe((value: any) => {
-        this.propertyTypes = value.propertyTypes.map((res: any) => {
-          return {
-            id: res.id,
-            name: res.name,
-          };
-        });
-        this.offerTypes = value.offerTypes.map((res: any) => {
-          return {
-            id: res.id,
-            name: res.name,
-          };
-        });
+      .subscribe((value) => {
+        this.propertyTypes = value.propertyTypes;
+        this.offerTypes = value.offerTypes;
       });
   }
 
   getPropertyId() {
     this.propertyTypeId = this.propertyTypes.find(
-      (x: any) => x.name === 'pokój'
-    ).id;
+      (x) => x.name === 'pokój'
+    )!.id;
   }
 
   setDefaultFilters() {
     this.defaultFilters[0].value = this.propertyTypes.find(
-      (x: any) => x.name === 'pokój'
-    ).id;
+      (x) => x.name === 'pokój'
+    )!.id;
     this.defaultFilters[1].value = this.offerTypes.find(
-      (x: any) => x.name === 'wynajem'
-    ).id;
+      (x) => x.name === 'wynajem'
+    )!.id;
     this.filters[0] = this.defaultFilters[0];
     this.filters[1] = this.defaultFilters[1];
   }
@@ -106,21 +99,21 @@ export class RoomRentComponent implements OnInit {
   getParameters() {
     this.apiService
       .getParametersForPropertyType(this.propertyTypeId)
-      .subscribe((value: any) => {
+      .subscribe((value) => {
         this.buildingTypeOptions = value.find(
-          (x: any) => x.name === 'rodzaj zabudowy'
-        ).parameter_values;
+          (x) => x.name === 'rodzaj zabudowy'
+        )!.parameter_values;
         this.roomTypeOptions = value.find(
-          (x: any) => x.name === 'liczba osób w pokoju'
-        ).parameter_values;
+          (x) => x.name === 'liczba osób w pokoju'
+        )!.parameter_values;
 
         this.additionalInfOptions = value.filter(
-          (x: any) =>
+          (x) =>
             x.parameter_category !== null &&
             x.parameter_category.name === 'informacje dodatkowe'
         );
         this.equipmentOptions = value.filter(
-          (x: any) =>
+          (x) =>
             x.parameter_category !== null &&
             x.parameter_category.name === 'wyposażenie'
         );
@@ -142,10 +135,10 @@ export class RoomRentComponent implements OnInit {
         this.parameterIn,
         this.parameterValueIn
       )
-      .subscribe((value: any) => {
+      .subscribe((value) => {
         this.totalRecords = value.offers.total;
         this.offers = value.offers.data;
-        this.currentPage = value.offers.curent_page;
+        this.currentPage = value.offers.current_page;
         this.dataLoad = true;
       });
   }

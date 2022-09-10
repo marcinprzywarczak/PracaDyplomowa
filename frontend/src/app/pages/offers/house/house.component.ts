@@ -4,6 +4,9 @@ import { Filter } from '../../../shared/models/filter';
 import { finalize, switchMap } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { PropertyType } from '../../../shared/models/property-type';
+import { OfferType } from '../../../shared/models/offer-type';
+import { Offer } from '../../../shared/models/offer';
 
 @Component({
   selector: 'app-house',
@@ -11,7 +14,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
   styleUrls: ['./house.component.scss'],
 })
 export class HouseComponent implements OnInit {
-  offers: any;
+  offers: Offer[];
   totalRecords: number;
   currentPage: number;
   dataLoad: boolean = false;
@@ -32,8 +35,8 @@ export class HouseComponent implements OnInit {
     },
   ];
   propertyTypeId: number;
-  propertyTypes: any = [];
-  offerTypes: any = [];
+  propertyTypes: PropertyType[] = [];
+  offerTypes: OfferType[] = [];
   ogrzewanieOptions: any = [];
   buildingTypeOptions: any = [];
   buildingMaterialsOptions: any = [];
@@ -93,19 +96,9 @@ export class HouseComponent implements OnInit {
           this.getRouteParameters();
         })
       )
-      .subscribe((value: any) => {
-        this.propertyTypes = value.propertyTypes.map((res: any) => {
-          return {
-            id: res.id,
-            name: res.name,
-          };
-        });
-        this.offerTypes = value.offerTypes.map((res: any) => {
-          return {
-            id: res.id,
-            name: res.name,
-          };
-        });
+      .subscribe((value) => {
+        this.propertyTypes = value.propertyTypes;
+        this.offerTypes = value.offerTypes;
       });
   }
   getRouteParameters() {
@@ -121,67 +114,65 @@ export class HouseComponent implements OnInit {
   getParameters() {
     this.apiService
       .getParametersForPropertyType(this.propertyTypeId)
-      .subscribe((value: any) => {
+      .subscribe((value) => {
         this.buildingTypeOptions = value.find(
-          (x: any) => x.name === 'rodzaj zabudowy'
-        ).parameter_values;
+          (x) => x.name === 'rodzaj zabudowy'
+        )!.parameter_values;
         this.buildingMaterialsOptions = value.find(
-          (x: any) => x.name === 'materiał budynku'
-        ).parameter_values;
+          (x) => x.name === 'materiał budynku'
+        )!.parameter_values;
         this.roofingTypeOptions = value.find(
-          (x: any) => x.name === 'pokrycie dachu'
-        ).parameter_values;
+          (x) => x.name === 'pokrycie dachu'
+        )!.parameter_values;
         this.buildingCondition = value.find(
-          (x: any) => x.name === 'stan wykończenia'
-        ).parameter_values;
+          (x) => x.name === 'stan wykończenia'
+        )!.parameter_values;
         this.windowsOptions = value.find(
-          (x: any) => x.name === 'okna'
-        ).parameter_values;
+          (x) => x.name === 'okna'
+        )!.parameter_values;
 
         this.buildingSecurityOptions = value.filter(
-          (x: any) =>
+          (x) =>
             x.parameter_category !== null &&
             x.parameter_category.name === 'zabezpieczenia budynku'
         );
         this.fenceOptions = value.filter(
-          (x: any) =>
+          (x) =>
             x.parameter_category !== null &&
             x.parameter_category.name === 'ogrodzenie'
         );
         this.heatingOptions = value.filter(
-          (x: any) =>
+          (x) =>
             x.parameter_category !== null &&
             x.parameter_category.name === 'ogrzewanie'
         );
         this.utilitiesOptions = value.filter(
-          (x: any) =>
+          (x) =>
             x.parameter_category !== null &&
             x.parameter_category.name === 'media'
         );
         this.additionalInfOptions = value.filter(
-          (x: any) =>
+          (x) =>
             x.parameter_category !== null &&
             x.parameter_category.name === 'informacje dodatkowe'
         );
         this.ogrzewanieOptions = value.filter(
-          (x: any) =>
+          (x) =>
             x.parameter_category !== null &&
             x.parameter_category.name === 'ogrzewanie'
         );
       });
   }
   getPropertyId() {
-    this.propertyTypeId = this.propertyTypes.find(
-      (x: any) => x.name === 'dom'
-    ).id;
+    this.propertyTypeId = this.propertyTypes.find((x) => x.name === 'dom')!.id;
   }
   setDefaultFilters() {
     this.defaultFilters[0].value = this.propertyTypes.find(
-      (x: any) => x.name === 'dom'
-    ).id;
+      (x) => x.name === 'dom'
+    )!.id;
     this.defaultFilters[1].value = this.offerTypes.find(
-      (x: any) => x.name === this.offerType
-    ).id;
+      (x) => x.name === this.offerType
+    )!.id;
     this.filters[0] = this.defaultFilters[0];
     this.filters[1] = this.defaultFilters[1];
   }
@@ -205,10 +196,10 @@ export class HouseComponent implements OnInit {
         this.parameterIn,
         this.parameterValueIn
       )
-      .subscribe((value: any) => {
+      .subscribe((value) => {
         this.totalRecords = value.offers.total;
         this.offers = value.offers.data;
-        this.currentPage = value.offers.curent_page;
+        this.currentPage = value.offers.current_page;
         this.dataLoad = true;
       });
   }

@@ -1,4 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { Offer } from '../../models/offer';
+import { Photo } from '../../models/photo';
 
 @Component({
   selector: 'app-offer',
@@ -6,8 +8,11 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./offer.component.scss'],
 })
 export class OfferComponent implements OnInit {
-  @Input() offer: any;
+  @Input() offer: Offer;
+  mainPhoto: Photo;
   constructor() {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.mainPhoto = this.offer.photos.find((x) => x.pivot.isMain === 1)!;
+  }
 }

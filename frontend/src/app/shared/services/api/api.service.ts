@@ -5,6 +5,12 @@ import { emitDistinctChangesOnlyDefaultValue } from '@angular/compiler';
 import { UserRegistration } from '../../models/user-registration';
 import { Filter } from '../../models/filter';
 import { environment } from '../../../../environments/environment';
+import { Offer } from '../../models/offer';
+import { ParameterCategory } from '../../models/parameter-category';
+import { OffersPaginate } from '../../models/offers-paginate';
+import { PropertyType } from '../../models/property-type';
+import { OfferType } from '../../models/offer-type';
+import { PropertyParameter } from '../../models/property-parameter';
 
 @Injectable({
   providedIn: 'root',
@@ -21,7 +27,7 @@ export class ApiService {
     parameterIn?: Filter[],
     parameterValueIn?: Filter[]
   ) {
-    return this.http.post(
+    return this.http.post<{ offers: OffersPaginate }>(
       `${this.BASE_API_URL}/api/offers?page=${page}`,
       {
         filters: filters,
@@ -34,24 +40,35 @@ export class ApiService {
   }
 
   getPropertyTypes() {
-    return this.http.get(`${this.BASE_API_URL}/api/getPropertyType`);
+    return this.http.get<PropertyType[]>(
+      `${this.BASE_API_URL}/api/getPropertyType`
+    );
   }
 
   getOfferTypes() {
-    return this.http.get(`${this.BASE_API_URL}/api/getOfferType`);
+    return this.http.get<OfferType[]>(`${this.BASE_API_URL}/api/getOfferType`);
   }
 
   getPropertyAndOfferTypes() {
-    return this.http.get(`${this.BASE_API_URL}/api/getPropertyAndOfferTypes`);
+    return this.http.get<{
+      offerTypes: OfferType[];
+      propertyTypes: PropertyType[];
+    }>(`${this.BASE_API_URL}/api/getPropertyAndOfferTypes`);
   }
 
   getParametersForPropertyType(propertyType: number) {
-    return this.http.post(`${this.BASE_API_URL}/api/getParameters`, {
-      property_type_id: propertyType,
-    });
+    return this.http.post<PropertyParameter[]>(
+      `${this.BASE_API_URL}/api/getParameters`,
+      {
+        property_type_id: propertyType,
+      }
+    );
   }
 
   getOffer(offerId: number) {
-    return this.http.post(`${this.BASE_API_URL}/api/getOffer`, { id: offerId });
+    return this.http.post<{
+      offer: Offer;
+      parameterCategories: ParameterCategory;
+    }>(`${this.BASE_API_URL}/api/getOffer`, { id: offerId });
   }
 }

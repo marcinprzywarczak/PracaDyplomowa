@@ -5,6 +5,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { LoginGuard } from './shared/guards/login/login.guard';
 import { RegisterComponent } from './pages/register/register.component';
 import { HouseComponent } from './pages/offers/house/house.component';
+import { AuthGuard } from './shared/guards/auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -50,7 +51,14 @@ const routes: Routes = [
         (m) => m.RoomRentModule
       ),
   },
-
+  {
+    path: 'dodaj-ogloszenie',
+    loadChildren: () =>
+      import('./pages/add-offer/add-offer.module').then(
+        (m) => m.AddOfferModule
+      ),
+    canActivate: [AuthGuard],
+  },
   {
     path: '',
     redirectTo: 'dashboard',

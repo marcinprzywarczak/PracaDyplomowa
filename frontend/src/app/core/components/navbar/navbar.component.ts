@@ -5,10 +5,10 @@ import {
   OnInit,
   SimpleChanges,
 } from '@angular/core';
-import { LoginService } from '../../shared/services/login/login.service';
+import { LoginService } from '../../../shared/services/login/login.service';
 import { finalize } from 'rxjs';
-import { UserService } from '../../shared/services/user/user.service';
-import { ApiService } from '../../shared/services/api/api.service';
+import { UserService } from '../../../shared/services/user/user.service';
+import { ApiService } from '../../../shared/services/api/api.service';
 
 @Component({
   selector: 'app-navbar',
@@ -41,7 +41,6 @@ export class NavbarComponent implements OnInit {
   ngOnInit(): void {
     this.isLogged = this.userService.getState();
     this.user = this.userService.getUser();
-    console.log('on init', this.user);
   }
 
   logout() {

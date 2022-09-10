@@ -3,7 +3,6 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import {
   HTTP_INTERCEPTORS,
@@ -16,15 +15,15 @@ import { DashboardModule } from './pages/dashboard/dashboard.module';
 import { LoginModule } from './pages/login/login.module';
 import { AuthInterceptor } from './shared/auth.interceptor';
 import { RegisterModule } from './pages/register/register.module';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { OfferComponent } from './shared/components/offer/offer.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { registerLocaleData } from '@angular/common';
+import { CommonModule, registerLocaleData } from '@angular/common';
 import localePl from '@angular/common/locales/pl';
 import { SharedModule } from './shared/shared.module';
+import { CoreModule } from './core/core.module';
 registerLocaleData(localePl);
 @NgModule({
-  declarations: [AppComponent, LoginComponent, NavbarComponent],
+  declarations: [AppComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -35,6 +34,7 @@ registerLocaleData(localePl);
     RegisterModule,
     BrowserAnimationsModule,
     SharedModule,
+    CoreModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true },

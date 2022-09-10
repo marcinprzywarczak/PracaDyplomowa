@@ -215,11 +215,16 @@
           <div
             [ngClass]="userDropdown ? 'absolute' : 'hidden'"
             id="dropdown-content-user"
-            class="bg-gray-200 w-auto"
+            class="bg-gray-300 w-auto"
           >
             <a href="#">
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Moje konto
+              </div>
+            </a>
+            <a routerLink="dodaj-ogloszenie">
+              <div class="p-3 hover:text-green-500 transition duration-300">
+                Dodaj ogłoszenie
               </div>
             </a>
             <a>
@@ -472,6 +477,11 @@
               id="dropdown-content-user-mobile"
               class="bg-gray-200 w-full"
             >
+              <a href="#">
+                <div class="p-3 hover:text-green-500 transition duration-300">
+                  Dodaj ogłoszenie
+                </div>
+              </a>
               <a href="#">
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Moje konto

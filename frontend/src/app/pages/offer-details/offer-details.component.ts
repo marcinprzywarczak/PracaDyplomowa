@@ -4,6 +4,8 @@ import { ApiService } from '../../shared/services/api/api.service';
 import { finalize, switchMap } from 'rxjs';
 import { UserService } from '../../shared/services/user/user.service';
 import { RouteService } from '../../shared/services/route/route.service';
+import { Offer } from '../../shared/models/offer';
+import { Photo } from '../../shared/models/photo';
 
 @Component({
   selector: 'app-offer-details',
@@ -11,7 +13,7 @@ import { RouteService } from '../../shared/services/route/route.service';
   styleUrls: ['./offer-details.component.scss'],
 })
 export class OfferDetailsComponent implements OnInit {
-  photos: any[];
+  photos: Photo[];
 
   dataLoaded: boolean = false;
   responsiveOptions: any[] = [
@@ -29,7 +31,7 @@ export class OfferDetailsComponent implements OnInit {
     },
   ];
 
-  offerDetails: any;
+  offerDetails: Offer;
   owner: any;
   firm: any;
   isLogged: boolean;
@@ -55,13 +57,19 @@ export class OfferDetailsComponent implements OnInit {
           this.getParameters();
         })
       )
-      .subscribe((value: any) => {
+      .subscribe((value) => {
         this.offerDetails = value.offer;
         this.photos = value.offer.photos;
-        console.log(this.photos);
         if (this.photos.length === 0) {
           this.photos = [
-            { path: '/assets/default-photo.jpg', description: 'zdj' },
+            {
+              path: '/assets/default-photo.jpg',
+              description: 'zdj',
+              id: 0,
+              pivot: { offer_id: id, isMain: 1, photo_id: 0 },
+              created_at: '',
+              updated_at: '',
+            },
           ];
         }
         this.parameterCategories = value.parameterCategories;
@@ -77,8 +85,8 @@ export class OfferDetailsComponent implements OnInit {
       let params: any = [];
 
       this.offerDetails.parameters
-        .filter((x: any) => x.parameter_category_id === parameterCategory.id)
-        .forEach((x: any) => {
+        .filter((x) => x.parameter_category_id === parameterCategory.id)
+        .forEach((x) => {
           if (x.pivot.value === '') {
             params.push(x.name);
           } else {
@@ -122,8 +130,6 @@ export class OfferDetailsComponent implements OnInit {
     //     console.log(params);
     //   }
     // });
-    console.log('test');
-    console.log(this.parameters);
   }
 
   getStringOfArray(values: any[]) {
@@ -131,7 +137,6 @@ export class OfferDetailsComponent implements OnInit {
     values.forEach((x) => {
       val += x + ', ';
     });
-    console.log(val);
   }
 
   isArray(val: any): boolean {

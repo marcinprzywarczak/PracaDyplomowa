@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Builder;
 class OfferRepository
 {
     public function offerFilter($filters, $parameterFilters, $parameterIn, $parameterValueIn){
-        $offers = Offer::with('user','user.firm', 'property_type', 'offer_type', 'offer_status', 'parameters')
+        $offers = Offer::with('user','user.firm', 'property_type', 'offer_type', 'offer_status', 'parameters', 'photos')
             ->where($filters !== null ? $filters : []);
         if($parameterFilters !== null)
             foreach ($parameterFilters as $parameter){

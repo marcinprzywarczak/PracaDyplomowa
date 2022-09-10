@@ -4,6 +4,10 @@ import { Router } from '@angular/router';
 import { ApiService } from '../../shared/services/api/api.service';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Filter } from '../../shared/models/filter';
+import { Offer } from '../../shared/models/offer';
+import { PropertyType } from '../../shared/models/property-type';
+import { OfferType } from '../../shared/models/offer-type';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-dashboard',
@@ -12,20 +16,14 @@ import { Filter } from '../../shared/models/filter';
 })
 export class DashboardComponent implements OnInit {
   selected: string[] = [];
-  isLogged: boolean;
-  name: string;
-  email: string;
-  avatar_url: string;
-  isFirmAccount: boolean;
-  firmName: string;
-  offers: any;
+  offers: Offer[];
   totalRecords: number;
   currentPage: number;
   dataLoad: boolean = false;
 
   form: FormGroup;
-  propertyTypes: any = [];
-  offerTypes: any = [];
+  propertyTypes: PropertyType[] = [];
+  offerTypes: OfferType[] = [];
   filters: Filter[] = [];
   disabledButton: boolean;
   visibleFilterSidebar: boolean = false;
@@ -50,23 +48,9 @@ export class DashboardComponent implements OnInit {
       checkboxy: [],
     });
     this.onChange();
-    this.isLogged = !!localStorage.getItem('isLogged');
-    this.apiService.getPropertyTypes().subscribe((value: any) => {
-      this.propertyTypes = value.map((res: any) => {
-        return {
-          id: res.id,
-          name: res.name,
-        };
-      });
-    });
-
-    this.apiService.getOfferTypes().subscribe((value: any) => {
-      this.offerTypes = value.map((res: any) => {
-        return {
-          id: res.id,
-          name: res.name,
-        };
-      });
+    this.apiService.getPropertyAndOfferTypes().subscribe((value) => {
+      this.propertyTypes = value.propertyTypes;
+      this.offerTypes = value.offerTypes;
     });
     this.getOffers();
   }
@@ -88,7 +72,7 @@ export class DashboardComponent implements OnInit {
     if (this.currentPage !== event.page + 1) {
       this.apiService
         .getOffers(event.page + 1, this.filters)
-        .subscribe((value: any) => {
+        .subscribe((value) => {
           this.offers = value.offers.data;
         });
       window.scroll({
@@ -223,10 +207,10 @@ export class DashboardComponent implements OnInit {
   }
 
   getOffers() {
-    this.apiService.getOffers(1, this.filters).subscribe((value: any) => {
+    this.apiService.getOffers(1, this.filters).subscribe((value) => {
       this.totalRecords = value.offers.total;
       this.offers = value.offers.data;
-      this.currentPage = value.offers.curent_page;
+      this.currentPage = value.offers.current_page;
       this.dataLoad = true;
     });
   }
