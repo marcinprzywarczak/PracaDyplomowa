@@ -45,6 +45,16 @@ Route::get('/getOfferType', [\App\Http\Controllers\OfferTypeController::class, '
 
 Route::get('/getPropertyAndOfferTypes', [\App\Http\Controllers\OfferController::class, 'getOfferAndPropertyTypes']);
 
-Route::post('/getParameters', [\App\Http\Controllers\ParameterController::class, 'index']);
+Route::post('/getParameters', [\App\Http\Controllers\ParameterController::class, 'getParametersForPropertyType']);
 
 Route::post('/getOffer', [\App\Http\Controllers\OfferController::class, 'getOffer']);
+
+
+Route::middleware('auth:sanctum')->group(function(){
+    Route::name('offers.')->prefix('offers')->group(function (){
+        Route::post('/store', [\App\Http\Controllers\OfferController::class, 'store']);
+    });
+});
+
+
+

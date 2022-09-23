@@ -1254,7 +1254,7 @@ class ParametersSeeder extends Seeder
             'property_type_id' => 3,
             'name' => 'wymiary',
             'isAny' => true,
-            'type' => 'int',
+            'type' => 'string',
         ]);
 
         $parameter = Parameter::create([

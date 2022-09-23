@@ -5,7 +5,7 @@ import { ParameterValue } from './parameter-value';
 export interface PropertyParameter {
   id: number;
   name: string;
-  is_any: number;
+  isAny: number;
   parameter_category: ParameterCategory;
   parameter_category_id: number;
   property_type_id: number;

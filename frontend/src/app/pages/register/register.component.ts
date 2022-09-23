@@ -80,7 +80,6 @@ export class RegisterComponent implements OnInit {
   }
   onSubmit() {
     this.isSubmitted = true;
-    console.log('czy niepoprawne', this.form.invalid);
     if (!this.form.invalid) {
       const formData = new FormData();
       if (this.userAvatar)

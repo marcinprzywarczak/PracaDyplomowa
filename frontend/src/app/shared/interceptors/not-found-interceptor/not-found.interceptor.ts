@@ -7,11 +7,11 @@ import {
 } from '@angular/common/http';
 import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { LoginService } from './services/login/login.service';
+import { LoginService } from '../../services/login/login.service';
 
 @Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private loginService: LoginService) {}
+export class NotFoundInterceptor implements HttpInterceptor {
+  constructor(private router: Router) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -19,11 +19,9 @@ export class AuthInterceptor implements HttpInterceptor {
   ): Observable<HttpEvent<unknown>> {
     return next.handle(request).pipe(
       catchError((err) => {
-        if (err.status === 401) {
-          this.loginService.logout();
-          localStorage.removeItem('isLogged');
-          window.location.href = '/login';
-          // this.router.navigate(['/login']);
+        if (err.status === 404) {
+          // window.location.href = '/nie-znaleziono';
+          this.router.navigate(['/nie-znaleziono']);
         }
         return throwError(err);
       })

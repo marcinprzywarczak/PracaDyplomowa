@@ -57,7 +57,13 @@ const routes: Routes = [
       import('./pages/add-offer/add-offer.module').then(
         (m) => m.AddOfferModule
       ),
-    canActivate: [AuthGuard],
+  },
+  {
+    path: 'nie-znaleziono',
+    loadChildren: () =>
+      import('./pages/not-found-page/not-found-page.module').then(
+        (m) => m.NotFoundPageModule
+      ),
   },
   {
     path: '',

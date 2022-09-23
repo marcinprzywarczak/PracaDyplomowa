@@ -3,3 +3,7 @@
 @tailwind components;
 @tailwind utilities;
 html, body, app-root { height: 100% !important;}
+
+.capitalize-first::first-letter {
+  text-transform: uppercase;
+}
