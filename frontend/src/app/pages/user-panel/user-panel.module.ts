@@ -11,6 +11,9 @@ import { FormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { UserPanelFollowingOffersComponent } from './components/user-panel-following-offers/user-panel-following-offers.component';
+import { UserPanelFirmUsersComponent } from './components/user-panel-firm-users/user-panel-firm-users.component';
+import { TableModule } from 'primeng/table';
+import { InputTextModule } from 'primeng/inputtext';
 
 @NgModule({
   declarations: [
@@ -18,6 +21,7 @@ import { UserPanelFollowingOffersComponent } from './components/user-panel-follo
     UserPanelNavbarComponent,
     UserPanelOffersComponent,
     UserPanelFollowingOffersComponent,
+    UserPanelFirmUsersComponent,
   ],
   imports: [
     CommonModule,
@@ -34,6 +38,10 @@ import { UserPanelFollowingOffersComponent } from './components/user-panel-follo
             path: 'ogloszenia-obserwowane',
             component: UserPanelFollowingOffersComponent,
           },
+          {
+            path: 'pracownicy',
+            component: UserPanelFirmUsersComponent,
+          },
         ],
       },
     ]),
@@ -43,6 +51,8 @@ import { UserPanelFollowingOffersComponent } from './components/user-panel-follo
     FormsModule,
     PaginatorModule,
     ProgressSpinnerModule,
+    TableModule,
+    InputTextModule,
   ],
 })
 export class UserPanelModule {}
