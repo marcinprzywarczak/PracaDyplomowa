@@ -55,4 +55,8 @@ class User extends Authenticatable
         return $this->hasMany(Offer::class);
     }
 
+    public function followOffers(){
+        return $this->belongsToMany(Offer::class);
+    }
+
 }

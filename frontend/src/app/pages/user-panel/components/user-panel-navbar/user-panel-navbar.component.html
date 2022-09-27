@@ -1,0 +1,21 @@
+<div
+  class="w-full flex text-center md:px-28 px-10 py-12 divide-x-2 divide-gray-400"
+>
+  <a
+    [routerLink]="['ogloszenia']"
+    routerLinkActive="user-panel-navbar-item-active"
+    class="user-panel-navbar-item rounded-l-md"
+    >Ogłoszenia</a
+  >
+  <a
+    routerLink="dashboard"
+    [routerLink]="['ogloszenia-obserwowane']"
+    routerLinkActive="user-panel-navbar-item-active"
+    class="user-panel-navbar-item"
+    >Obserwowane</a
+  >
+  <a routerLink="dashboard" class="user-panel-navbar-item">Wiadomości</a>
+  <a routerLink="dashboard" class="user-panel-navbar-item rounded-r-md"
+    >Ustawienia</a
+  >
+</div>

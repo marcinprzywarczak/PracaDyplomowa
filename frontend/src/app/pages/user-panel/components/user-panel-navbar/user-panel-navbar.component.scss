@@ -1,0 +1,7 @@
+.user-panel-navbar-item {
+  @apply w-full bg-gray-100 py-4 hover:text-green-500 text-gray-500 font-semibold;
+}
+
+.user-panel-navbar-item-active {
+  @apply text-green-500 bg-gray-200;
+}

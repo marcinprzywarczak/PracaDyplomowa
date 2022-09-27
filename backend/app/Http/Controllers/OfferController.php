@@ -141,9 +141,76 @@ class OfferController extends Controller
             }
             return response()->json([
                 'error' => $error
-            ], 404);
+            ], 400);
+        }
+    }
+
+    public function getUserOffers(Request $request) {
+        $offerStatusName = $request->get('status');
+        $offerStatus = OfferStatus::where('name', $offerStatusName)->first();
+        if ($offerStatus === null) {
+            return response()->json([
+                'error' => 'Błąd. Podany status ogłoszenia nie istnieje'
+            ], 400);
+        }
+        $user = User::with('firm')->where('id', Auth::id())->first();
+
+        $offers = Offer::with('user','user.firm', 'property_type', 'offer_type', 'offer_status',
+            'parameters', 'photos')
+            ->where([['user_id', Auth::id()], ['offer_status_id', $offerStatus->id]])->paginate(10);
+
+        if($user->firm !== null) {
+            $offers = Offer::with('user','user.firm', 'property_type', 'offer_type', 'offer_status',
+                'parameters', 'photos')
+                ->where('offer_status_id', $offerStatus->id)
+                ->whereHas('user.firm', function (Builder $query) use ($user) {
+                    $query->where('id', '=', $user->firm->id);
+                })->orderBy('id', 'ASC')
+                ->paginate(10);
         }
 
-
+        return response()->json([
+            'offers' => $offers
+        ], 200);
     }
+
+    public function getFollowOffers(Request $request) {
+        $offers = Offer::with('users', 'user','user.firm', 'property_type', 'offer_type', 'offer_status',
+            'parameters', 'photos')->whereHas('users', function (Builder $query) {
+            $query->where('user_id', '=', Auth::id());
+        })->paginate(10);
+
+        return response()->json([
+            'offers' => $offers
+        ], 200);
+    }
+
+
+    public function addOfferToFollowing(Request $request) {
+        $offerId = $request->get('offerId');
+        $offer = Offer::with('users')->where('id', $offerId)->first();
+
+        if($offer === null) {
+            return response()->json([
+                'error' => 'Podane ogłoszenie nie istnieje!'
+            ], 400);
+        }
+        if($offer->user_id === Auth::id()) {
+            return response()->json([
+                'error' => 'Nie możesz obserwować ogłoszenia, którego jesteś autorem.'
+            ], 400);
+        }
+        if($offer->users->find(Auth::id()) !== null) {
+            return response()->json([
+                'error' => 'Ogłoszenie znajduje się już w twoich obserwowanych ogłoszeniach.'
+            ], 400);
+        }
+        $offer->users()->attach(
+            Auth::id()
+        );
+        return response()->json([
+            'message' => 'Ogłoszenie pomyślnie dodane do obserwowanych.'
+        ], 200);
+    }
+
 }

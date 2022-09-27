@@ -1,5 +1,5 @@
-<a [routerLink]="['/offer', offer.id]">
-  <div class="w-full min-w-full p-3 flex flex-row bg-amber-200 space-x-5">
+<div class="w-full min-w-full p-3 flex flex-row bg-amber-200 space-x-5">
+  <a [routerLink]="['/offer', offer.id]">
     <div class="flex">
       <img
         *ngIf="mainPhoto; else placeHolderPhoto"
@@ -15,21 +15,93 @@
           height="400px"
           alt="Zdjęcie główne ogłoszenia"
         />
-      </ng-template>
-    </div>
-    <div class="flex flex-col w-full">
-      <div class="w-full flex flex-row justify-between">
-        <div class="text-2xl">Tytuł: {{ offer.title }}</div>
+      </ng-template></div
+  ></a>
+  <div class="flex flex-col w-full">
+    <div class="w-full flex flex-row justify-between">
+      <a [routerLink]="['/offer', offer.id]"
+        ><div class="text-2xl">Tytuł: {{ offer.title }}</div></a
+      >
+      <div
+        *ngIf="!userPanel; else userPanelButtons"
+        (click)="addOfferToFollowing()"
+      >
         <i
           class="pi pi-plus-circle hover:text-green-400"
           style="font-size: 2rem"
         ></i>
       </div>
-
-      <div class="text-base">Cena: {{ offer.price }}</div>
+    </div>
+    <a [routerLink]="['/offer', offer.id]">
+      <div class="text-base">Cena: {{ offer.price | number }} zł</div>
       <div class="text-base">Kategoria: {{ offer.property_type.name }}</div>
       <div class="text-base">Lokalizacja: {{ offer.locality }}</div>
       <div class="text-base">Typ oferty: {{ offer.offer_type.name }}</div>
-    </div>
+    </a>
   </div>
-</a>
+</div>
+
+<ng-template #userPanelButtons>
+  <ng-container *ngIf="!userFollowingOffers; else followingOfferButtons">
+    <ng-container
+      *ngIf="offer.offer_status.name === 'aktywne'; else restoreButton"
+    >
+      <div>
+        <a
+          routerLink="/dodaj-ogloszenie"
+          pButton
+          pRipple
+          pTooltip="Edytuj"
+          tooltipPosition="top"
+          icon="pi pi-pencil"
+          style="
+            border-bottom-right-radius: 0 !important;
+            border-top-right-radius: 0 !important;
+          "
+        >
+        </a>
+        <a
+          routerLink="/dodaj-ogloszenie"
+          pButton
+          pRipple
+          pTooltip="Edytuj zdjęcia"
+          tooltipPosition="top"
+          icon="pi pi-image"
+          style="border-radius: 0 !important"
+        ></a>
+        <a
+          routerLink="/dodaj-ogloszenie"
+          pButton
+          pRipple
+          pTooltip="Zakończ ogłoszenie"
+          tooltipPosition="top"
+          icon="pi pi-times"
+          style="
+            border-bottom-left-radius: 0 !important;
+            border-top-left-radius: 0 !important;
+          "
+        ></a>
+      </div>
+    </ng-container>
+  </ng-container>
+</ng-template>
+<ng-template #restoreButton>
+  <button
+    pButton
+    pRipple
+    pTooltip="Przywróć ogłoszenie"
+    tooltipPosition="top"
+    icon="pi pi-history"
+  ></button>
+</ng-template>
+
+<ng-template #followingOfferButtons>
+  <button
+    appClickStopPropagation
+    pButton
+    pRipple
+    pTooltip="Usuń z obserwowanych"
+    tooltipPosition="top"
+    icon="pi pi-trash"
+  ></button>
+</ng-template>

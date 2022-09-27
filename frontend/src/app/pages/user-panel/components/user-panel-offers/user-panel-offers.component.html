@@ -1,0 +1,45 @@
+<div class="w-full h-full justify-center items-center md:px-28 px-10">
+  <div class="flex flex-col w-full justify-center items-center">
+    <div class="flex self-end">
+      <a routerLink="/dodaj-ogloszenie">
+        <button
+          pButton
+          label="Dodaj ogłoszenie"
+          icon="pi pi-plus"
+          iconPos="right"
+        ></button>
+      </a>
+    </div>
+    <div class="flex">
+      <p-selectButton
+        [options]="offerStatusOptions"
+        [(ngModel)]="offerStatus"
+        (onChange)="offerStatusChang($event)"
+      ></p-selectButton>
+    </div>
+
+    <div
+      class="w-full flex flex-col justify-center items-center pt-4 space-y-4"
+      *ngIf="dataLoaded; else elseBlock"
+    >
+      <app-offer
+        *ngFor="let offer of offers"
+        class="w-full"
+        [userPanel]="true"
+        [offer]="offer"
+      ></app-offer>
+      <h1 *ngIf="offers.length === 0">BRAK OFERT</h1>
+      <p-paginator
+        class="pb-14 md:pb-0"
+        [rows]="10"
+        [totalRecords]="totalRecords"
+        (onPageChange)="paginate($event)"
+      ></p-paginator>
+    </div>
+    <ng-template #elseBlock>
+      <div class="w-full pt-16 flex items-center justify-center">
+        <p-progressSpinner></p-progressSpinner>
+      </div>
+    </ng-template>
+  </div>
+</div>

@@ -53,6 +53,11 @@ Route::post('/getOffer', [\App\Http\Controllers\OfferController::class, 'getOffe
 Route::middleware('auth:sanctum')->group(function(){
     Route::name('offers.')->prefix('offers')->group(function (){
         Route::post('/store', [\App\Http\Controllers\OfferController::class, 'store']);
+        Route::post('/userOffer', [\App\Http\Controllers\OfferController::class, 'getUserOffers']);
+        Route::post('/addOfferToFollowing', [\App\Http\Controllers\OfferController::class, 'addOfferToFollowing']);
+        Route::post('/getFollowingOffers', [\App\Http\Controllers\OfferController::class, 'getFollowOffers']);
+
+
     });
 });
 

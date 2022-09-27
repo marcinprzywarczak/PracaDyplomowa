@@ -48,5 +48,9 @@ class Offer extends Model
             ->withPivot('isMain');
     }
 
+    public function users(){
+        return $this->belongsToMany(User::class);
+    }
+
 
 }

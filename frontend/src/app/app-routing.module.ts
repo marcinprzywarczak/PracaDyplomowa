@@ -59,6 +59,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'uzytkownik',
+    loadChildren: () =>
+      import('./pages/user-panel/user-panel.module').then(
+        (m) => m.UserPanelModule
+      ),
+  },
+  {
     path: 'nie-znaleziono',
     loadChildren: () =>
       import('./pages/not-found-page/not-found-page.module').then(
@@ -78,7 +85,9 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [
+    RouterModule.forRoot(routes, { scrollPositionRestoration: 'enabled' }),
+  ],
   exports: [RouterModule],
 })
 export class AppRoutingModule {}

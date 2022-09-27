@@ -16,19 +16,19 @@ class OfferStatusesSeeder extends Seeder
     public function run()
     {
         OfferStatus::create([
-            'name' => 'aktywna'
+            'name' => 'aktywne'
         ]);
 
         OfferStatus::create([
-            'name' => 'zakończona'
+            'name' => 'zakończone'
         ]);
 
         OfferStatus::create([
-            'name' => 'usunięta'
+            'name' => 'usunięte'
         ]);
 
         OfferStatus::create([
-            'name' => 'wstrzymana'
+            'name' => 'wstrzymane'
         ]);
     }
 }
