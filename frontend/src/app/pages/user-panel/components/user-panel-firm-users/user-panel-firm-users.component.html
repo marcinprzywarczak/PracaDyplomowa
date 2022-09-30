@@ -1,4 +1,13 @@
 <div class="px-12">
+  <div class="flex py-4 justify-end">
+    <button
+      pButton
+      label="Dodaj użytkownika"
+      icon="pi pi-plus"
+      iconPos="right"
+      (click)="displaySidebar = true"
+    ></button>
+  </div>
   <p-table
     #usersTable
     [value]="users"
@@ -23,7 +32,7 @@
             (input)="
               usersTable.filterGlobal($any($event.target).value, 'contains')
             "
-            placeholder="Global Search"
+            placeholder="Wyszukaj"
           />
         </span>
       </div>
@@ -60,3 +69,7 @@
     </ng-template>
   </p-table>
 </div>
+
+<p-sidebar class="sidebar" [(visible)]="displaySidebar" position="left">
+  <app-firm-user-form></app-firm-user-form>
+</p-sidebar>

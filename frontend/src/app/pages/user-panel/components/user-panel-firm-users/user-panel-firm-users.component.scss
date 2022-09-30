@@ -1,0 +1,12 @@
+::ng-deep .sidebar .p-sidebar-left {
+  width: 100% !important;
+  @screen md{
+    width: 50% !important;
+  }
+}
+
+:host ::ng-deep .sidebar {
+  .p-sidebar .p-sidebar-header {
+    padding-bottom: 0;
+  }
+}

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { environment } from '../../../../environments/environment';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LazyLoadEvent } from 'primeng/api';
 
 @Injectable({
@@ -15,6 +15,15 @@ export class FirmUserService {
     return this.http.post<any>(
       `${this.BASE_API_URL}/api/users/getUsers`,
       { filters: event },
+      {
+        withCredentials: true,
+      }
+    );
+  }
+  addNewFirmUser(newFirmUserData: FormData) {
+    return this.http.post<any>(
+      `${this.BASE_API_URL}/api/users/addUser`,
+      newFirmUserData,
       {
         withCredentials: true,
       }

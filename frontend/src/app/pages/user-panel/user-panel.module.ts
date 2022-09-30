@@ -7,13 +7,17 @@ import { UserPanelOffersComponent } from './components/user-panel-offers/user-pa
 import { ButtonModule } from 'primeng/button';
 import { SharedModule } from '../../shared/shared.module';
 import { SelectButtonModule } from 'primeng/selectbutton';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PaginatorModule } from 'primeng/paginator';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { UserPanelFollowingOffersComponent } from './components/user-panel-following-offers/user-panel-following-offers.component';
 import { UserPanelFirmUsersComponent } from './components/user-panel-firm-users/user-panel-firm-users.component';
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
+import { SidebarModule } from 'primeng/sidebar';
+import { FirmUserFormComponent } from './components/firm-user-form/firm-user-form.component';
+import { PasswordModule } from 'primeng/password';
+import { UserPanelEditOfferComponent } from './components/user-panel-edit-offer/user-panel-edit-offer.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +26,8 @@ import { InputTextModule } from 'primeng/inputtext';
     UserPanelOffersComponent,
     UserPanelFollowingOffersComponent,
     UserPanelFirmUsersComponent,
+    FirmUserFormComponent,
+    UserPanelEditOfferComponent,
   ],
   imports: [
     CommonModule,
@@ -53,6 +59,9 @@ import { InputTextModule } from 'primeng/inputtext';
     ProgressSpinnerModule,
     TableModule,
     InputTextModule,
+    SidebarModule,
+    ReactiveFormsModule,
+    PasswordModule,
   ],
 })
 export class UserPanelModule {}

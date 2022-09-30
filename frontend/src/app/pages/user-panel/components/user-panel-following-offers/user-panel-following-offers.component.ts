@@ -1,23 +1,43 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OfferService } from '../../../../shared/services/offer/offer.service';
 import { Offer } from '../../../../shared/models/offer';
+import { ReloadDataTriggerService } from '../../../../shared/services/reload-data-trigger/reload-data-trigger.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-panel-following-offers',
   templateUrl: './user-panel-following-offers.component.html',
   styleUrls: ['./user-panel-following-offers.component.scss'],
 })
-export class UserPanelFollowingOffersComponent implements OnInit {
+export class UserPanelFollowingOffersComponent implements OnInit, OnDestroy {
   offers: Offer[] = [];
   dataLoaded: boolean = false;
   totalRecords: number;
   currentPage: number;
-  constructor(private offerService: OfferService) {}
+  triggerSubscription: Subscription;
+  constructor(
+    private offerService: OfferService,
+    private reloadDataTriggerService: ReloadDataTriggerService
+  ) {}
 
   ngOnInit(): void {
     this.getOffers();
+    this.listenOnTrigger();
   }
 
+  ngOnDestroy() {
+    this.triggerSubscription.unsubscribe();
+  }
+
+  private listenOnTrigger(): void {
+    this.triggerSubscription =
+      this.reloadDataTriggerService.followingOfferReloadTrigger.subscribe(
+        () => {
+          this.dataLoaded = false;
+          this.getOffers();
+        }
+      );
+  }
   getOffers() {
     this.offerService
       .getFollowingOffers(this.currentPage)

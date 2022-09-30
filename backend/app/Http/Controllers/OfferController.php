@@ -213,4 +213,23 @@ class OfferController extends Controller
         ], 200);
     }
 
+    public function removeOfferFromFollowing(Request $request){
+        $offerId =  $request->get('offerId');
+        $offer = Offer::with('users')->where('id', $offerId)->first();
+
+        if($offer->users->find(Auth::id()) === null) {
+            return response()->json([
+                'error' => 'Błąd podczas usuwania ogłoszenia z obserwowanych',
+            ], 400);
+        }
+
+        $offer->users()->detach(
+            Auth::id()
+        );
+
+        return response()->json([
+            'message' => 'Ogłoszenie pomyślnie usunięte z obserwowanych.'
+        ], 200);
+    }
+
 }

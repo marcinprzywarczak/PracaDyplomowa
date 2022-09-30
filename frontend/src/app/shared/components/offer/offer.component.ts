@@ -5,6 +5,7 @@ import { OfferService } from '../../services/offer/offer.service';
 import { UserService } from '../../services/user/user.service';
 import { AlertService } from '../../services/alert-service/alert.service';
 import { Router } from '@angular/router';
+import { ReloadDataTriggerService } from '../../services/reload-data-trigger/reload-data-trigger.service';
 
 @Component({
   selector: 'app-offer',
@@ -21,7 +22,8 @@ export class OfferComponent implements OnInit {
     private offerService: OfferService,
     private userService: UserService,
     private alertService: AlertService,
-    private router: Router
+    private router: Router,
+    private reloadDataTriggerService: ReloadDataTriggerService
   ) {}
 
   ngOnInit(): void {
@@ -38,8 +40,26 @@ export class OfferComponent implements OnInit {
     }
     this.offerService.addOfferToFollowing(this.offer.id).subscribe({
       next: (result) => {
-        console.log(result);
         this.alertService.showSuccess(result.message);
+      },
+      error: (err) => {
+        this.alertService.showError(err.error.error);
+        console.log(err);
+      },
+    });
+  }
+
+  removeFromFollowing() {
+    if (!this.userService.getState()) {
+      this.alertService.showError(
+        'Aby obserwować ofertę musisz się zalogować!'
+      );
+      this.router.navigate(['/login']);
+    }
+    this.offerService.removeOfferFromFollowing(this.offer.id).subscribe({
+      next: (result) => {
+        this.alertService.showSuccess(result.message);
+        this.reloadDataTriggerService.triggerFollowingOfferReload();
       },
       error: (err) => {
         this.alertService.showError(err.error.error);

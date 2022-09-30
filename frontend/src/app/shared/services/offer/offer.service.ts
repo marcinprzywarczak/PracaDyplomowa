@@ -32,6 +32,16 @@ export class OfferService {
     );
   }
 
+  removeOfferFromFollowing(offerId: number) {
+    return this.http.post<any>(
+      `${this.BASE_API_URL}/api/offers/removeOfferFromFollowing`,
+      { offerId: offerId },
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
   getFollowingOffers(page: number) {
     return this.http.post<any>(
       `${this.BASE_API_URL}/api/offers/getFollowingOffers?page=${page}`,

@@ -23,6 +23,7 @@
         ><div class="text-2xl">Tytuł: {{ offer.title }}</div></a
       >
       <div
+        class="cursor-pointer"
         *ngIf="!userPanel; else userPanelButtons"
         (click)="addOfferToFollowing()"
       >
@@ -97,7 +98,7 @@
 
 <ng-template #followingOfferButtons>
   <button
-    appClickStopPropagation
+    (click)="removeFromFollowing()"
     pButton
     pRipple
     pTooltip="Usuń z obserwowanych"
