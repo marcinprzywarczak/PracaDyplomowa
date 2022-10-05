@@ -23,7 +23,8 @@ import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { NotFoundInterceptor } from './shared/interceptors/not-found-interceptor/not-found.interceptor';
 import { ToastModule } from 'primeng/toast';
-import { MessageService } from 'primeng/api';
+import { ConfirmationService, MessageService } from 'primeng/api';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 registerLocaleData(localePl);
 @NgModule({
   declarations: [AppComponent],
@@ -39,6 +40,7 @@ registerLocaleData(localePl);
     SharedModule,
     CoreModule,
     ToastModule,
+    ConfirmDialogModule,
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true },
@@ -49,6 +51,7 @@ registerLocaleData(localePl);
       useValue: 'pl', // 'de-DE' for Germany, 'fr-FR' for France ...
     },
     MessageService,
+    ConfirmationService,
   ],
   exports: [],
   bootstrap: [AppComponent],

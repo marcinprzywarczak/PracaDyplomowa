@@ -6,6 +6,8 @@ import { UserService } from '../../shared/services/user/user.service';
 import { RouteService } from '../../shared/services/route/route.service';
 import { Offer } from '../../shared/models/offer';
 import { Photo } from '../../shared/models/photo';
+import { User } from '../../shared/models/user';
+import { Firm } from '../../shared/models/firm';
 
 @Component({
   selector: 'app-offer-details',
@@ -32,8 +34,8 @@ export class OfferDetailsComponent implements OnInit {
   ];
 
   offerDetails: Offer;
-  owner: any;
-  firm: any;
+  owner: User;
+  firm: Firm;
   isLogged: boolean;
   parameters: any = [];
   parameterCategories: any;
@@ -64,6 +66,7 @@ export class OfferDetailsComponent implements OnInit {
           this.photos = [
             {
               path: '/assets/default-photo.jpg',
+              photo_url: '/assets/default-photo.jpg',
               description: 'zdj',
               id: 0,
               pivot: { offer_id: id, isMain: 1, photo_id: 0 },

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\OfferRequest;
+use App\Http\Requests\Offers\EditOfferRequest;
 use App\Models\Offer;
 use App\Models\OfferStatus;
 use App\Models\OfferType;
@@ -91,7 +92,7 @@ class OfferController extends Controller
                 }
             }
 
-            $offerStatuses = OfferStatus::where('name', 'aktywna')->first();
+            $offerStatuses = OfferStatus::where('name', 'aktywne')->firstOrFail();
             DB::transaction(function () use ($request, $offerStatuses, $photoPaths, $mainPhotoSrc){
                 $offer = Offer::create(
                     $request->merge(array(
@@ -110,7 +111,8 @@ class OfferController extends Controller
                 }
                 foreach ($photoPaths as $photo) {
                      $photoModel = Photo::create([
-                        "path" => asset($photo),
+                        "photo_url" => asset($photo),
+                        "path" => $photo,
                         "description" => ''
                     ]);
                     $offer->photos()->attach($photoModel->id,
@@ -118,14 +120,17 @@ class OfferController extends Controller
                         'isMain' => 0,
                     ]);
                 }
-                $mainPhoto = Photo::create([
-                    "path" => asset($mainPhotoSrc),
-                    "description" => ''
-                ]);
-                $offer->photos()->attach($mainPhoto->id,
-                [
-                    'isMain' => 1,
-                ]);
+                if($mainPhotoSrc) {
+                    $mainPhoto = Photo::create([
+                        "photo_url" => asset($mainPhotoSrc),
+                        "path" => $mainPhotoSrc,
+                        "description" => ''
+                    ]);
+                    $offer->photos()->attach($mainPhoto->id,
+                        [
+                            'isMain' => 1,
+                        ]);
+                }
             });
 
             return response()->json([], 200);
@@ -229,6 +234,145 @@ class OfferController extends Controller
 
         return response()->json([
             'message' => 'Ogłoszenie pomyślnie usunięte z obserwowanych.'
+        ], 200);
+    }
+
+    public function update(EditOfferRequest $request) {
+        try{
+            $photoPaths = [];
+            $mainPhotoSrc = '';
+            if($request->get('photo_changed')) {
+                $offerPhotos = Photo::with('offers')->whereHas('offers', function (Builder $query) use($request)
+                {
+                    $query->where('offers.id', $request->get('offer_id'));
+                })->get();
+
+                foreach ($offerPhotos as $photo) {
+                    error_log($photo->path);
+                    Storage::delete($photo->path);
+                }
+
+
+                if($request->hasFile('files')) {
+                    $files = $request->file('files');
+                    foreach ($files as $file) {
+                        if($file->isValid()){
+                            $photo = $file->store('offers');
+                            if(!is_string($photo)){
+                                return response()->json([
+                                    'error' => 'Błąd podczas zapisywania zdjęcia'
+                                ], 400);
+                            }
+                            $photoPaths[] = $photo;
+                        }
+                    }
+                }
+
+                if($request->hasFile('main_photo') && $request->file('main_photo')->isValid()) {
+                    $mainPhoto = $request->file('main_photo');
+                    $mainPhotoSrc = $mainPhoto->store('offers');
+                    if(!is_string($mainPhotoSrc)){
+                        return response()->json([
+                            'error' => 'Błąd podczas zapisywania zdjęcia'
+                        ], 400);
+                    }
+                }
+
+            }
+
+            DB::transaction(function () use ($request, $photoPaths, $mainPhotoSrc, $offerPhotos) {
+                $offer = Offer::findOrFail($request->get('offer_id'));
+                $offer->fill(
+                    $request->merge(array(
+                        'user_id' => Auth::id()
+                    ))->all()
+                )->save();
+
+                $parameters = $request->get('parameters');
+                $offer->parameters()->detach();
+                foreach ($parameters as $parameter){
+                    $parameterValue = $parameter["value"] === null ? '' : $parameter["value"];
+                    $offer->parameters()->attach(
+                        $parameter["parameterId"],
+                        [
+                            'value' => $parameterValue,
+                        ]
+                    );
+                }
+                if($request->get('photo_changed')) {
+
+                    $offer->photos()->detach();
+                    foreach ($photoPaths as $photo) {
+                        $photoModel = Photo::create([
+                            "photo_url" => asset($photo),
+                            "path" => $photo,
+                            "description" => ''
+                        ]);
+                        $offer->photos()->attach($photoModel->id,
+                            [
+                                'isMain' => 0,
+                            ]);
+                    }
+                    if($mainPhotoSrc) {
+                        $mainPhoto = Photo::create([
+                            "photo_url" => asset($mainPhotoSrc),
+                            "path" => $mainPhotoSrc,
+                            "description" => ''
+                        ]);
+                        $offer->photos()->attach($mainPhoto->id,
+                            [
+                                'isMain' => 1,
+                            ]);
+                    }
+                    foreach ($offerPhotos as $photo) {
+                        $photo->delete();
+                    }
+                }
+            });
+
+            return response()->json([], 200);
+
+        } catch (Exception $error){
+            foreach ($photoPaths as $photo) {
+                if(is_string($photo)){
+                    Storage::delete($photo);
+                }
+            }
+            if(is_string($mainPhotoSrc)){
+                Storage::delete($mainPhotoSrc);
+            }
+            return response()->json([
+                'error' => $error
+            ], 400);
+        }
+    }
+
+    public function completeOffer(Request $request)
+    {
+        $offerId =  $request->get('offerId');
+        $offerStatus = OfferStatus::where('name', 'zakończone')->firstOrFail();
+
+        $offer = Offer::findOrFail($offerId);
+
+        $offer->offer_status_id = $offerStatus->id;
+        $offer->save();
+
+
+        return response()->json([
+            'message' => 'Ogłoszenie pomyślnie zakończone.'
+        ], 200);
+    }
+
+    public function restoreOffer(Request $request)
+    {
+        $offerId =  $request->get('offerId');
+        $offerStatus = OfferStatus::where('name', 'aktywne')->firstOrFail();
+        $offer = Offer::findOrFail($offerId);
+        $offer->offer_status_id = $offerStatus->id;
+        $offer->save();
+
+        return response()->json([
+            'message' => 'Ogłoszenie pomyślnie przywrócone.'
         ], 200);
     }
 

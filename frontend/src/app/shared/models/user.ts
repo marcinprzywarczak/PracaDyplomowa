@@ -7,6 +7,7 @@ export interface User {
   email: string;
   phone_number: string;
   avatar: string;
+  avatar_url: string;
   firm_id: number;
   firm: Firm;
   permissions?: any[];

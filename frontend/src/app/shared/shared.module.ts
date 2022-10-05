@@ -8,15 +8,21 @@ import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
 import { ClickStopPropagationDirective } from './directives/click-stop-propagation/click-stop-propagation.directive';
+import { ConfirmDialogModule } from 'primeng/confirmdialog';
 
 @NgModule({
-  declarations: [OfferComponent, ClickOutsideDirective, ClickStopPropagationDirective],
+  declarations: [
+    OfferComponent,
+    ClickOutsideDirective,
+    ClickStopPropagationDirective,
+  ],
   imports: [
     CommonModule,
     RouterModule,
     ButtonModule,
     RippleModule,
     TooltipModule,
+    ConfirmDialogModule,
   ],
   exports: [OfferComponent, ClickOutsideDirective],
 })

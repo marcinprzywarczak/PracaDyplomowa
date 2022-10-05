@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('zip_code', 6);
             $table->string('locality', 100);
             $table->string('logo', 100)->nullable();
+            $table->string('logo_url', 100)->nullable();
             $table->timestamps();
         });
     }

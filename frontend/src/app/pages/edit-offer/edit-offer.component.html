@@ -1,0 +1,443 @@
+<div
+  class="flex flex-col md:px-36 px-12 pt-10 items-center justify-center w-full"
+  [ngClass]="!dataLoaded ? 'h-full' : ''"
+>
+  <p-progressSpinner *ngIf="!dataLoaded; else form"></p-progressSpinner>
+  <ng-template #form>
+    <form
+      *ngIf="dataLoaded"
+      [formGroup]="addOfferForm"
+      (ngSubmit)="submitForm()"
+      class="w-full"
+    >
+      <div class="flex items-center gap-x-2">
+        <div class="text-2xl">Informacje podstawowe</div>
+        <div class="h-full">
+          <i
+            class="self-center pi pi-question-circle"
+            style="vertical-align: middle"
+            tooltipPosition="top"
+            pTooltip="Wszystkie iformacje podstawowe są wymagane."
+          ></i>
+        </div>
+      </div>
+      <div class="flex flex-col gap-y-4">
+        <div class="form-control">
+          <label>Tytuł *</label>
+          <input
+            pInputText
+            formControlName="title"
+            [ngClass]="
+              (f['title'].invalid &&
+                (f['title'].touched || f['title'].dirty || isSubmitted)) ||
+              serverErrors.title
+                ? 'border-red-600'
+                : 'border-gray-300'
+            "
+          />
+          <div
+            *ngIf="
+              f['title'].invalid &&
+              (f['title'].touched || f['title'].dirty || isSubmitted)
+            "
+            class="text-red-600 font-semibold"
+          >
+            <div *ngIf="f['title'].errors?.['required']">
+              Tytuł jest wymagany!
+            </div>
+            <div *ngIf="f['title'].errors?.['minlength']">
+              Tytuł musi mieć przynajmniej 10 znaków.
+            </div>
+          </div>
+          <div *ngIf="serverErrors.title" class="text-red-600 font-semibold">
+            <div *ngFor="let title of serverErrors.title">{{ title }}</div>
+          </div>
+        </div>
+        <div class="flex w-full gap-x-2">
+          <div class="form-control w-1/2">
+            <div class="flex items-center gap-x-2">
+              <label>Rodzaj nieruchomości *</label>
+              <div class="h-full">
+                <i
+                  class="self-center pi pi-question-circle"
+                  style="vertical-align: middle; font-size: 0.8rem"
+                  tooltipPosition="top"
+                  pTooltip="Zmiana rodzaju nieruchomości przekieruje do innego formularza. Wprowadzone dane zostaną utracone."
+                ></i>
+              </div>
+            </div>
+            <p-dropdown
+              styleClass="w-full"
+              [options]="propertyTypes"
+              optionValue="id"
+              optionLabel="name"
+              formControlName="propertyType"
+              (onChange)="propertyTypeChange($event)"
+            ></p-dropdown>
+          </div>
+          <div class="form-control w-1/2">
+            <label>Typ ogłoszenia *</label>
+            <p-dropdown
+              styleClass="w-full"
+              [options]="offerTypes"
+              optionValue="id"
+              optionLabel="name"
+              formControlName="offerType"
+            ></p-dropdown>
+          </div>
+        </div>
+
+        <div class="flex flex-col md:flex-row w-full gap-x-2">
+          <div class="form-control md:w-1/2">
+            <label>Powierzchnia *</label>
+
+            <p-inputNumber
+              styleClass="w-full min-w-full"
+              mode="decimal"
+              [minFractionDigits]="0"
+              [maxFractionDigits]="2"
+              formControlName="areaSquareMeters"
+              (onInput)="f['areaSquareMeters'].setValue($event.value)"
+              [ngClass]="
+                f['areaSquareMeters'].invalid &&
+                (f['areaSquareMeters'].touched ||
+                  f['areaSquareMeters'].dirty ||
+                  isSubmitted)
+                  ? 'invalid-input-number'
+                  : ''
+              "
+            >
+            </p-inputNumber>
+            <div
+              *ngIf="
+                f['areaSquareMeters'].invalid &&
+                (f['areaSquareMeters'].touched ||
+                  f['areaSquareMeters'].dirty ||
+                  isSubmitted)
+              "
+              class="text-red-600 font-semibold"
+            >
+              <div *ngIf="f['areaSquareMeters'].errors?.['required']">
+                Powierzchnia jest wymagana!
+              </div>
+              <div *ngIf="f['areaSquareMeters'].errors?.['min']">
+                Powirzchnia nie może być mniejsza od 1!
+              </div>
+            </div>
+          </div>
+          <div class="form-control md:w-1/2">
+            <label>Cena</label>
+            <p-inputNumber
+              styleClass="w-full min-w-full"
+              mode="currency"
+              currency="PLN"
+              locale="pl-PL"
+              formControlName="price"
+              (onInput)="f['price'].setValue($event.value)"
+              [ngClass]="
+                f['price'].invalid &&
+                (f['price'].touched || f['price'].dirty || isSubmitted)
+                  ? 'invalid-input-number'
+                  : ''
+              "
+            >
+            </p-inputNumber>
+            <div
+              *ngIf="
+                f['price'].invalid &&
+                (f['price'].touched || f['price'].dirty || isSubmitted)
+              "
+              class="text-red-600 font-semibold"
+            >
+              <div *ngIf="f['price'].errors?.['required']">
+                Cena jest wymagana!
+              </div>
+              <div *ngIf="f['price'].errors?.['min']">
+                Cena nie może być mniejsza od 1!
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-control w-full">
+          <label>Lokalizacja *</label>
+          <input
+            pInputText
+            formControlName="locality"
+            [ngClass]="
+              f['locality'].invalid &&
+              (f['locality'].touched || f['locality'].dirty || isSubmitted)
+                ? 'border-red-600'
+                : 'border-gray-300'
+            "
+          />
+          <div
+            *ngIf="
+              f['locality'].invalid &&
+              (f['locality'].touched || f['locality'].dirty || isSubmitted)
+            "
+            class="text-red-600 font-semibold"
+          >
+            <div *ngIf="f['locality'].errors?.['required']">
+              Lokalizacja jest wymagana!
+            </div>
+          </div>
+        </div>
+
+        <div class="form-control w-full">
+          <div class="flex flex-row justify-between">
+            <label>Opis *</label>
+            <div>
+              {{
+                f["description"].value
+                  ? f["description"].value.length + " / 1000 znaków"
+                  : "0 / 1000 znaków"
+              }}
+            </div>
+          </div>
+          <textarea
+            [rows]="8"
+            formControlName="description"
+            pInputTextarea
+            [ngClass]="
+              f['description'].invalid &&
+              (f['description'].touched ||
+                f['description'].dirty ||
+                isSubmitted)
+                ? 'border-red-600'
+                : 'border-gray-300'
+            "
+          ></textarea>
+          <div
+            *ngIf="
+              f['description'].invalid &&
+              (f['description'].touched ||
+                f['description'].dirty ||
+                isSubmitted)
+            "
+            class="text-red-600 font-semibold"
+          >
+            <div *ngIf="f['description'].errors?.['required']">
+              Opis jest wymagany!
+            </div>
+            <div *ngIf="f['description'].errors?.['minlength']">
+              Minimalna długość opisu to 20 znaków.
+            </div>
+            <div *ngIf="f['description'].errors?.['maxlength']">
+              Maksymalna długość opisu to 1000 znaków.
+            </div>
+          </div>
+        </div>
+
+        <div class="flex items-center gap-x-2">
+          <div class="text-2xl">Zdjęcia</div>
+          <div class="h-full">
+            <i
+              class="self-center pi pi-question-circle"
+              style="vertical-align: middle"
+              tooltipPosition="top"
+              pTooltip="Pierwsze zdjęcie będzie zdjęciem głównym. Jest ono wymagane."
+            ></i>
+          </div>
+        </div>
+        <div
+          *ngIf="
+            f['mainPhoto'].invalid &&
+            (f['mainPhoto'].touched || f['mainPhoto'].dirty || isSubmitted)
+          "
+          class="text-red-600 font-semibold"
+        >
+          <div *ngIf="f['mainPhoto'].errors?.['required']">
+            Zdjęcie główne jest wymagane!
+          </div>
+        </div>
+        <div class="flex flex-wrap px-3 gap-x-3 gap-y-3">
+          <div class="photo-input">
+            <label
+              for="mainPhoto"
+              class="photo-input-label"
+              [ngClass]="[
+                mainPhotoSrc !== '' ? 'hidden' : ' flex',
+                f['mainPhoto'].invalid &&
+                (f['mainPhoto'].touched || f['mainPhoto'].dirty || isSubmitted)
+                  ? 'border border-red-600'
+                  : ''
+              ]"
+              ><i class="pi pi-plus-circle text-xl"></i
+            ></label>
+            <input
+              id="mainPhoto"
+              class="hidden"
+              type="file"
+              formControlName="mainPhoto"
+              (change)="onChangeMainPhoto($event)"
+            />
+            <ng-container *ngIf="mainPhotoSrc">
+              <div class="relative w-fit">
+                <img [src]="mainPhotoSrc" width="300px" height="100px" />
+                <i
+                  class="pi pi-times photo-input-delete"
+                  (click)="deleteMainPhoto()"
+                ></i>
+              </div>
+            </ng-container>
+          </div>
+          <div class="photo-input" *ngFor="let photo of files; let i = index">
+            <label
+              for="photo{{ i }}"
+              class="photo-input-label"
+              [ngClass]="photo.src !== '' ? 'hidden' : ' flex'"
+              ><i class="pi pi-plus-circle text-xl"></i
+            ></label>
+            <input
+              id="photo{{ i }}"
+              class="hidden"
+              type="file"
+              (change)="onChangePhoto($event)"
+            />
+            <ng-container *ngIf="photo.src">
+              <div class="relative w-fit">
+                <img [src]="photo.src" width="300px" height="100px" />
+                <i
+                  class="pi pi-times photo-input-delete"
+                  (click)="deletePhoto(photo.src, i)"
+                ></i>
+              </div>
+            </ng-container>
+          </div>
+        </div>
+        <div class="flex items-center gap-x-2">
+          <div class="text-2xl">Informacje szczegółowe</div>
+          <div class="h-full">
+            <i
+              class="self-center pi pi-question-circle"
+              style="vertical-align: middle"
+              tooltipPosition="top"
+              pTooltip="Parametry dodatkowe są opcjonalne, jednak dzięki ich wypełnieniu ogłoszenie stanie się bardziej atrakcyjne."
+            ></i>
+          </div>
+        </div>
+        <ng-container *ngFor="let category of parameterCategories">
+          <div
+            class="text-2xl capitalize-first"
+            *ngIf="category.name !== 'informacje szczegółowe'"
+          >
+            {{ category.name }}
+          </div>
+
+          <div class="w-full flex flex-wrap gap-y-4 items-center justify-start">
+            <ng-container
+              *ngFor="let parameter of propertyParameters"
+              class="w-full flex flex-wrap"
+            >
+              <div
+                class="form-control w-1/2 md:w-1/3 px-2"
+                *ngIf="
+                  parameter.isAny === 1 &&
+                  category.id === parameter.parameter_category.id
+                "
+              >
+                <label class="capitalize-first">{{ parameter.name }}</label>
+                <input
+                  *ngIf="parameter.type === 'string'"
+                  pInputText
+                  [formControlName]="parameter.name"
+                />
+                <ng-container *ngIf="parameter.type === 'int'">
+                  <ng-container [ngSwitch]="parameter.name">
+                    <p-inputNumber
+                      *ngSwitchCase="'powierzchnia działki'"
+                      styleClass="w-full"
+                      [formControlName]="parameter.name"
+                      [minFractionDigits]="0"
+                      [maxFractionDigits]="4"
+                    >
+                    </p-inputNumber>
+                    <p-inputNumber
+                      *ngSwitchCase="'kaucja'"
+                      styleClass="w-full"
+                      mode="currency"
+                      currency="PLN"
+                      locale="pl-PL"
+                      [formControlName]="parameter.name"
+                    ></p-inputNumber>
+
+                    <p-inputNumber
+                      *ngSwitchCase="'dodatkowe opłaty'"
+                      styleClass="w-full"
+                      mode="currency"
+                      currency="PLN"
+                      locale="pl-PL"
+                      [formControlName]="parameter.name"
+                    ></p-inputNumber>
+
+                    <p-inputNumber
+                      *ngSwitchCase="'czynsz'"
+                      styleClass="w-full"
+                      mode="currency"
+                      currency="PLN"
+                      locale="pl-PL"
+                      [formControlName]="parameter.name"
+                    >
+                    </p-inputNumber>
+                    <p-inputNumber
+                      *ngSwitchDefault
+                      styleClass="w-full"
+                      [formControlName]="parameter.name"
+                    ></p-inputNumber>
+                  </ng-container>
+                </ng-container>
+              </div>
+
+              <div
+                class="form-control w-1/2 md:w-1/3 px-2"
+                *ngIf="
+                  parameter.parameter_values.length > 0 &&
+                  category.id === parameter.parameter_category.id
+                "
+              >
+                <label class="capitalize-first">{{ parameter.name }}</label>
+                <p-dropdown
+                  [options]="parameter.parameter_values"
+                  optionLabel="value"
+                  optionValue="value"
+                  styleClass="w-full"
+                  placeholder="Wybierz opcję..."
+                  [showClear]="true"
+                  [formControlName]="parameter.name"
+                ></p-dropdown>
+              </div>
+
+              <div
+                class="px-2"
+                *ngIf="
+                  parameter.parameter_values.length === 0 &&
+                  parameter.isAny === 0 &&
+                  category.id === parameter.parameter_category.id
+                "
+              >
+                <p-checkbox
+                  class="pr-2"
+                  [name]="parameter.name"
+                  [value]="parameter.name"
+                  formControlName="{{ parameter.name }}"
+                  [inputId]="parameter.name"
+                ></p-checkbox>
+                <label for="{{ parameter.name }}">{{ parameter.name }}</label>
+              </div>
+            </ng-container>
+          </div>
+        </ng-container>
+      </div>
+      <div class="w-full flex items-end justify-end pt-2">
+        <button
+          pButton
+          label="Wyślij"
+          type="submit"
+          class="p-button-info"
+          [loading]="loading"
+        ></button>
+      </div>
+    </form>
+  </ng-template>
+</div>

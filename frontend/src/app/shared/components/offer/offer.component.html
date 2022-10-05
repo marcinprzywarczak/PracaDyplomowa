@@ -3,7 +3,7 @@
     <div class="flex">
       <img
         *ngIf="mainPhoto; else placeHolderPhoto"
-        src="{{ mainPhoto.path }}"
+        src="{{ mainPhoto.photo_url }}"
         width="400px"
         height="400px"
         alt="{{ mainPhoto.description }}"
@@ -49,7 +49,7 @@
     >
       <div>
         <a
-          routerLink="/dodaj-ogloszenie"
+          [routerLink]="['/ogloszenie/', offer.id, 'edytuj']"
           pButton
           pRipple
           pTooltip="Edytuj"
@@ -61,17 +61,8 @@
           "
         >
         </a>
-        <a
-          routerLink="/dodaj-ogloszenie"
-          pButton
-          pRipple
-          pTooltip="Edytuj zdjęcia"
-          tooltipPosition="top"
-          icon="pi pi-image"
-          style="border-radius: 0 !important"
-        ></a>
-        <a
-          routerLink="/dodaj-ogloszenie"
+        <button
+          (click)="completeOffer()"
           pButton
           pRipple
           pTooltip="Zakończ ogłoszenie"
@@ -81,13 +72,14 @@
             border-bottom-left-radius: 0 !important;
             border-top-left-radius: 0 !important;
           "
-        ></a>
+        ></button>
       </div>
     </ng-container>
   </ng-container>
 </ng-template>
 <ng-template #restoreButton>
   <button
+    (click)="restoreOffer()"
     pButton
     pRipple
     pTooltip="Przywróć ogłoszenie"

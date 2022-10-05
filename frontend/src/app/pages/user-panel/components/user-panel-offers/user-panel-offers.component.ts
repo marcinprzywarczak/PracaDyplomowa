@@ -1,14 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { OfferService } from '../../../../shared/services/offer/offer.service';
 import { Offer } from '../../../../shared/models/offer';
 import { OfferStatus } from '../../../../shared/models/offer-status';
+import { ReloadDataTriggerService } from '../../../../shared/services/reload-data-trigger/reload-data-trigger.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-user-panel-offers',
   templateUrl: './user-panel-offers.component.html',
   styleUrls: ['./user-panel-offers.component.scss'],
 })
-export class UserPanelOffersComponent implements OnInit {
+export class UserPanelOffersComponent implements OnInit, OnDestroy {
   offers: Offer[] = [];
   offerStatuses: OfferStatus[] = [];
   offerStatusOptions: string[] = ['aktywne', 'zakończone'];
@@ -17,10 +19,27 @@ export class UserPanelOffersComponent implements OnInit {
   // offerStatusModel: string = 'aktywne';
   totalRecords: number;
   currentPage: number;
-  constructor(private offerService: OfferService) {}
+  triggerSubscription: Subscription;
+  constructor(
+    private offerService: OfferService,
+    private reloadDataTriggerService: ReloadDataTriggerService
+  ) {}
 
   ngOnInit(): void {
     this.getOffers();
+    this.listenOnTrigger();
+  }
+
+  ngOnDestroy() {
+    this.triggerSubscription.unsubscribe();
+  }
+
+  listenOnTrigger() {
+    this.triggerSubscription =
+      this.reloadDataTriggerService.userOffersReloadTrigger.subscribe(() => {
+        this.dataLoaded = false;
+        this.getOffers();
+      });
   }
 
   offerStatusChang(event: any) {

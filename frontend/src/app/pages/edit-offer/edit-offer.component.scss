@@ -1,0 +1,31 @@
+.form-control{
+  @apply flex flex-col px-3;
+}
+.photo-input-label{
+  @apply w-full h-full bg-gray-200 rounded justify-center items-center cursor-pointer hover:text-white;
+}
+
+.photo-input-delete{
+  @apply absolute top-0.5 right-0.5 cursor-pointer p-1 rounded-full text-white bg-red-700;
+}
+
+.photo-input{
+  @apply w-28 h-28;
+}
+
+
+:host ::ng-deep {
+  p-inputnumber.ng-dirty.ng-invalid .ui-inputtext ,
+  p-inputnumber.ng-touched.ng-invalid .ui-inputtext {
+    border: 1px solid red !important;
+    background: rgba(255, 0, 0, 0.35);
+    box-shadow: 0 0 5px 1px rgba(255, 0, 0, 0.2) inset !important;
+  }
+}
+
+:host ::ng-deep .invalid-input-number{
+  .p-inputnumber-input
+  {
+    border-color: red !important;
+  }
+}

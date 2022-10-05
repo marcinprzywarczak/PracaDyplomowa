@@ -6,6 +6,7 @@ import { UserService } from '../../services/user/user.service';
 import { AlertService } from '../../services/alert-service/alert.service';
 import { Router } from '@angular/router';
 import { ReloadDataTriggerService } from '../../services/reload-data-trigger/reload-data-trigger.service';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-offer',
@@ -23,7 +24,8 @@ export class OfferComponent implements OnInit {
     private userService: UserService,
     private alertService: AlertService,
     private router: Router,
-    private reloadDataTriggerService: ReloadDataTriggerService
+    private reloadDataTriggerService: ReloadDataTriggerService,
+    private confirmationService: ConfirmationService
   ) {}
 
   ngOnInit(): void {
@@ -64,6 +66,44 @@ export class OfferComponent implements OnInit {
       error: (err) => {
         this.alertService.showError(err.error.error);
         console.log(err);
+      },
+    });
+  }
+
+  completeOffer() {
+    this.confirmationService.confirm({
+      message: 'Czy na pewno chcesz zakończyć to ogłoszenie?',
+      acceptButtonStyleClass: 'p-button-danger',
+      accept: () => {
+        this.offerService.completeOffer(this.offer.id).subscribe({
+          next: (result) => {
+            this.alertService.showSuccess(result.message);
+            this.reloadDataTriggerService.triggerUserOffersReload();
+          },
+          error: (err) => {
+            this.alertService.showError(err.error.error);
+            console.log(err);
+          },
+        });
+      },
+    });
+  }
+
+  restoreOffer() {
+    this.confirmationService.confirm({
+      message: 'Czy na pewno chcesz przywrócić to ogłoszenie?',
+      acceptButtonStyleClass: 'p-button-danger',
+      accept: () => {
+        this.offerService.restoreOffer(this.offer.id).subscribe({
+          next: (result) => {
+            this.alertService.showSuccess(result.message);
+            this.reloadDataTriggerService.triggerUserOffersReload();
+          },
+          error: (err) => {
+            this.alertService.showError(err.error.error);
+            console.log(err);
+          },
+        });
       },
     });
   }

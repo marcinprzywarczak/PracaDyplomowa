@@ -49,4 +49,24 @@ export class OfferService {
       { withCredentials: true }
     );
   }
+
+  completeOffer(offerId: number) {
+    return this.http.post<any>(
+      `${this.BASE_API_URL}/api/offers/completeOffer`,
+      { offerId: offerId },
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  restoreOffer(offerId: number) {
+    return this.http.post<any>(
+      `${this.BASE_API_URL}/api/offers/restoreOffer`,
+      { offerId: offerId },
+      {
+        withCredentials: true,
+      }
+    );
+  }
 }

@@ -8,6 +8,8 @@ export class ReloadDataTriggerService {
   followingOfferReloadTrigger = new Subject<boolean>();
 
   firmUsersReloadTrigger = new Subject<boolean>();
+
+  userOffersReloadTrigger = new Subject<boolean>();
   constructor() {}
 
   public triggerFollowingOfferReload(): void {
@@ -16,5 +18,9 @@ export class ReloadDataTriggerService {
 
   public triggerFirmUsersReload(): void {
     this.firmUsersReloadTrigger.next(true);
+  }
+
+  public triggerUserOffersReload(): void {
+    this.userOffersReloadTrigger.next(true);
   }
 }

@@ -9,6 +9,7 @@ import { LoginService } from '../../../shared/services/login/login.service';
 import { finalize } from 'rxjs';
 import { UserService } from '../../../shared/services/user/user.service';
 import { ApiService } from '../../../shared/services/api/api.service';
+import { User } from '../../../shared/models/user';
 
 @Component({
   selector: 'app-navbar',
@@ -17,7 +18,7 @@ import { ApiService } from '../../../shared/services/api/api.service';
 })
 export class NavbarComponent implements OnInit {
   isLogged: boolean;
-  user: any;
+  user: User;
 
   userDropdown: boolean = false;
   houseDropdown: boolean = false;

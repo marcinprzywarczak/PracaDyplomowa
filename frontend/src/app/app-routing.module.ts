@@ -66,6 +66,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'ogloszenie/:offerId/edytuj',
+    loadChildren: () =>
+      import('./pages/edit-offer/edit-offer.module').then(
+        (m) => m.EditOfferModule
+      ),
+  },
+  {
     path: 'nie-znaleziono',
     loadChildren: () =>
       import('./pages/not-found-page/not-found-page.module').then(

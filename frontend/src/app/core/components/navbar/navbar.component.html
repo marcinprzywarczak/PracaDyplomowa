@@ -202,7 +202,7 @@
           >
             <img
               id="dropdown-user-img"
-              src="{{ user.avatar }}"
+              src="{{ user.avatar_url }}"
               width="30"
               height="30"
               alt="zdj"
@@ -217,7 +217,7 @@
             id="dropdown-content-user"
             class="bg-gray-300 w-auto"
           >
-            <a routerLink="uzytkownik">
+            <a routerLink="uzytkownik/ogloszenia">
               <div class="p-3 hover:text-green-500 transition duration-300">
                 Moje konto
               </div>
@@ -462,7 +462,7 @@
             >
               <img
                 id="dropdown-user-img-mobile"
-                src="{{ user.avatar }}"
+                src="{{ user.avatar_url }}"
                 width="30"
                 height="30"
                 alt="zdj"
@@ -482,7 +482,7 @@
                   Dodaj ogłoszenie
                 </div>
               </a>
-              <a href="#">
+              <a routerLink="uzytkownik/ogloszenia">
                 <div class="p-3 hover:text-green-500 transition duration-300">
                   Moje konto
                 </div>

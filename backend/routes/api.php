@@ -53,11 +53,16 @@ Route::post('/getOffer', [\App\Http\Controllers\OfferController::class, 'getOffe
 Route::middleware('auth:sanctum')->group(function(){
     Route::name('offers.')->prefix('offers')->group(function (){
         Route::post('/store', [\App\Http\Controllers\OfferController::class, 'store']);
+        Route::post('/update', [\App\Http\Controllers\OfferController::class, 'update']);
         Route::post('/userOffer', [\App\Http\Controllers\OfferController::class, 'getUserOffers']);
         Route::post('/addOfferToFollowing', [\App\Http\Controllers\OfferController::class, 'addOfferToFollowing']);
         Route::post('/getFollowingOffers', [\App\Http\Controllers\OfferController::class, 'getFollowOffers']);
         Route::post('/removeOfferFromFollowing',
             [\App\Http\Controllers\OfferController::class, 'removeOfferFromFollowing']);
+        Route::post('/completeOffer', [\App\Http\Controllers\OfferController::class, 'completeOffer']);
+        Route::post('/restoreOffer', [\App\Http\Controllers\OfferController::class, 'restoreOffer']);
+
+
     });
 
     Route::name('user.')->prefix('users')->group(function (){
@@ -68,4 +73,9 @@ Route::middleware('auth:sanctum')->group(function(){
 
 Route::post('/getUsersTest', [\App\Http\Controllers\UserController::class, 'test']);
 
+Route::get('image/{path}/{filename}', function ($path, $filename){
+
+   $file = \Illuminate\Support\Facades\Storage::get("$path/$filename");
+   return response($file, 200)->header('Content-Type', 'image/jpeg');
+});
 

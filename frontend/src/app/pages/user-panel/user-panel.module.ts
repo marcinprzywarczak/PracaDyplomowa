@@ -18,6 +18,9 @@ import { SidebarModule } from 'primeng/sidebar';
 import { FirmUserFormComponent } from './components/firm-user-form/firm-user-form.component';
 import { PasswordModule } from 'primeng/password';
 import { UserPanelEditOfferComponent } from './components/user-panel-edit-offer/user-panel-edit-offer.component';
+import { CheckboxModule } from 'primeng/checkbox';
+import { LoginGuard } from '../../shared/guards/login/login.guard';
+import { AuthGuard } from '../../shared/guards/auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -49,6 +52,7 @@ import { UserPanelEditOfferComponent } from './components/user-panel-edit-offer/
             component: UserPanelFirmUsersComponent,
           },
         ],
+        canActivate: [AuthGuard],
       },
     ]),
     ButtonModule,
@@ -62,6 +66,7 @@ import { UserPanelEditOfferComponent } from './components/user-panel-edit-offer/
     SidebarModule,
     ReactiveFormsModule,
     PasswordModule,
+    CheckboxModule,
   ],
 })
 export class UserPanelModule {}

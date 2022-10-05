@@ -9,11 +9,11 @@
         [showItemNavigators]="true"
       >
         <ng-template pTemplate="item" let-item>
-          <img class="object-contain" [src]="item.path" />
+          <img class="object-contain" [src]="item.photo_url" />
         </ng-template>
         <ng-template pTemplate="thumbnail" let-item>
           <div class="flex justify-center">
-            <img [src]="item.path" width="70px" />
+            <img [src]="item.photo_url" width="70px" />
           </div>
         </ng-template>
         <ng-template *ngIf="photos.length === 0" pTemplate="item">
@@ -64,7 +64,7 @@
           class="flex flex-row justify-center items-center space-x-2"
         >
           <div class="w-1/3 flex justify-center">
-            <img class="rounded-full" [src]="firm.logo" width="100px" />
+            <img class="rounded-full" [src]="firm.logo_url" width="100px" />
           </div>
           <div class="w-2/3 flex flex-col">
             <div>Biuro nieruchomości: {{ firm.name }}</div>
@@ -76,7 +76,7 @@
         </div>
         <div class="flex flex-row justify-center items-center space-x-2">
           <div class="w-1/3 flex justify-center">
-            <img class="rounded-full" [src]="owner.avatar" width="100px" />
+            <img class="rounded-full" [src]="owner.avatar_url" width="100px" />
           </div>
           <div class="w-2/3 flex flex-col">
             <div>{{ owner.first_name }} {{ owner.sure_name }}</div>

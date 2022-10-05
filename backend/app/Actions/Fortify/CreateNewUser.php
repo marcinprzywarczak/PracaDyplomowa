@@ -125,7 +125,8 @@ class CreateNewUser implements CreatesNewUsers
                     'number' => $input['number'],
                     'zip_code' => $input['zip_code'],
                     'locality' => $input['locality'],
-                    'logo' => asset($firm_logo),
+                    'logo_url' => asset($firm_logo),
+                    'logo' => $firm_logo,
                 ]);
                 $user = User::create([
                     'first_name' => $input['first_name'],
@@ -134,7 +135,8 @@ class CreateNewUser implements CreatesNewUsers
                     'email' => $input['email'],
                     'phone_number' => $input['phone_number'],
                     'password' => Hash::make($input['password']),
-                    'avatar' => asset($user_avatar),
+                    'avatar_url' => asset($user_avatar),
+                    'avatar' => $user_avatar,
                 ]);
                 $firmOwnerRole = Role::findByName(config('app.firm_owner_role'));
                 if(isset($firmOwnerRole))
@@ -148,7 +150,8 @@ class CreateNewUser implements CreatesNewUsers
                     'email' => $input['email'],
                     'phone_number' => $input['phone_number'],
                     'password' => Hash::make($input['password']),
-                    'avatar' => asset($user_avatar),
+                    'avatar_url' => asset($user_avatar),
+                    'avatar' => $user_avatar,
                 ]);
                 $userRole = Role::findByName(config('app.user_role'));
                 if(isset($userRole))

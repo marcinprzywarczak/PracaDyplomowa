@@ -1,27 +1,26 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
 import {
-  AbstractControl,
   FormBuilder,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { AddOfferService } from '../../../../shared/services/add-offer/add-offer.service';
-import { ApiService } from '../../../../shared/services/api/api.service';
 import { OfferType } from '../../../../shared/models/offer-type';
 import { PropertyType } from '../../../../shared/models/property-type';
-import { finalize, of, tap } from 'rxjs';
 import { PropertyParameter } from '../../../../shared/models/property-parameter';
 import { ParameterCategory } from '../../../../shared/models/parameter-category';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../../../../shared/services/api/api.service';
+import { AddOfferService } from '../../../../shared/services/add-offer/add-offer.service';
 import { MessageService } from 'primeng/api';
+import { finalize, tap } from 'rxjs';
 
 @Component({
-  selector: 'app-add-offer-form',
-  templateUrl: './add-offer-form.component.html',
-  styleUrls: ['./add-offer-form.component.scss'],
+  selector: 'app-user-panel-edit-offer',
+  templateUrl: './user-panel-edit-offer.component.html',
+  styleUrls: ['./user-panel-edit-offer.component.scss'],
 })
-export class AddOfferFormComponent implements OnInit {
+export class UserPanelEditOfferComponent implements OnInit {
   offerType: string;
   propertyType: string;
   addOfferForm: FormGroup;
@@ -123,6 +122,7 @@ export class AddOfferFormComponent implements OnInit {
   }
 
   submitForm() {
+    console.log(this.f['title'].errors);
     this.isSubmitted = true;
     if (this.addOfferForm.invalid) {
       return;
@@ -168,7 +168,6 @@ export class AddOfferFormComponent implements OnInit {
       },
       error: (err) => {
         console.log('error', err);
-        this.loading = false;
         this.serverErrors = err.error.errors;
         this.messageService.add({
           severity: 'error',

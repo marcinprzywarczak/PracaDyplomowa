@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\User\UserRequest;
+use App\Models\Offer;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,6 +17,13 @@ use Spatie\Permission\Models\Role;
 class UserController extends \Illuminate\Routing\Controller
 {
     public function index(Request $request){
+        if(Auth::user()->firm_id === null){
+            return response()->json([
+                'users' => [],
+                'totalRecords' => 0
+            ]);
+        }
+
         $filters = $request->get('filters');
         $globalFilter = $filters['globalFilter'];
 
@@ -42,6 +50,17 @@ class UserController extends \Illuminate\Routing\Controller
 
 
     public function test(Request $request){
+        $offer = Offer::with('parameters')->where('id', 2)->first();
+//        $offer->parameters()->attach(
+//            2,
+//            [
+//                'value' => 'qqtest',
+//            ]
+//        );
+        $offer->parameters()->sync([1 => ['value' => 'test'], 2 => ['value' => 'test2']]);
+        return response()->json([
+            'offer' => $offer
+        ]);
     }
 
     public function addNewFirmUser(UserRequest $request) {
@@ -69,7 +88,8 @@ class UserController extends \Illuminate\Routing\Controller
                     'firm_id' => Auth::user()->firm_id,
                     'phone_number' => $request['phone_number'],
                     'password' => Hash::make($request['password']),
-                    'avatar' => asset($avatarSrc),
+                    'avatar_url' => asset($avatarSrc),
+                    'avatar' => $avatarSrc,
                 ]);
                 $employeeRole = Role::where('name', config('app.employee_role'))->first();
                 if(isset($employeeRole))

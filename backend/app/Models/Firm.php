@@ -17,7 +17,8 @@ class Firm extends Model
         'number',
         'zip_code',
         'locality',
-        'logo'
+        'logo',
+        'logo_url',
     ];
 
     public function users(){

@@ -17,7 +17,8 @@ class OfferPhotoSeeder extends Seeder
     public function run()
     {
         $photo = Photo::create([
-            'path' => 'http://localhost:8000/avatars/1zdj1.png',
+            'path' => 'avatars/1zdj1.png',
+            'photo_url' => 'http://localhost:8000/avatars/1zdj1.png',
             'description' => 'zdjecie'
         ]);
 
@@ -28,81 +29,87 @@ class OfferPhotoSeeder extends Seeder
         ]);
 
         $photo = Photo::create([
-            'path' => 'http://localhost:8000/avatars/1zdj2.png',
+            'path' => 'avatars/1zdj2.png',
+            'photo_url' => 'http://localhost:8000/avatars/1zdj2.png',
             'description' => 'zdjecie'
         ]);
 
         DB::table('offer_photo')->insert([
             'photo_id' => $photo->id,
             'offer_id' => 1,
-            'isMain' => true
+            'isMain' => false
         ]);
 
         $photo = Photo::create([
-            'path' => 'http://localhost:8000/avatars/1zdj3.png',
+            'path' => 'avatars/1zdj3.png',
+            'photo_url' => 'http://localhost:8000/avatars/1zdj3.png',
             'description' => 'zdjecie'
         ]);
 
         DB::table('offer_photo')->insert([
             'photo_id' => $photo->id,
             'offer_id' => 1,
-            'isMain' => true
+            'isMain' => false
         ]);
 
         $photo = Photo::create([
-            'path' => 'http://localhost:8000/avatars/DbWY97v72y55kI5vzEZGeXg8OvzQyquKtn9uVqcr.jpg',
+            'path' => 'avatars/DbWY97v72y55kI5vzEZGeXg8OvzQyquKtn9uVqcr.jpg',
+            'photo_url' => 'http://localhost:8000/avatars/DbWY97v72y55kI5vzEZGeXg8OvzQyquKtn9uVqcr.jpg',
             'description' => 'zdjecie'
         ]);
 
         DB::table('offer_photo')->insert([
             'photo_id' => $photo->id,
             'offer_id' => 1,
-            'isMain' => true
+            'isMain' => false
         ]);
 
         $photo = Photo::create([
-            'path' => 'http://localhost:8000/avatars/1zdj4.png',
+            'path' => 'avatars/1zdj4.png',
+            'photo_url' => 'http://localhost:8000/avatars/1zdj4.png',
             'description' => 'zdjecie'
         ]);
 
         DB::table('offer_photo')->insert([
             'photo_id' => $photo->id,
             'offer_id' => 1,
-            'isMain' => true
+            'isMain' => false
         ]);
 
         DB::table('offer_photo')->insert([
             'photo_id' => $photo->id,
             'offer_id' => 1,
-            'isMain' => true
+            'isMain' => false
         ]);
 
         $photo = Photo::create([
-            'path' => 'http://localhost:8000/avatars/1zdj5.png',
+            'path' => 'avatars/1zdj5.png',
+            'photo_url' => 'http://localhost:8000/avatars/1zdj5.png',
             'description' => 'zdjecie'
         ]);
 
         DB::table('offer_photo')->insert([
             'photo_id' => $photo->id,
             'offer_id' => 1,
-            'isMain' => true
+            'isMain' => false
         ]);
 
         DB::table('offer_photo')->insert([
             'photo_id' => $photo->id,
             'offer_id' => 1,
-            'isMain' => true
+            'isMain' => false
         ]);
 
         $photo = Photo::create([
-            'path' => 'http://localhost:8000/avatars/default_avatar.jpg',
+            'path' => 'avatars/default_avatar.png',
+            'photo_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
             'description' => 'zdjecie'
         ]);
 
         DB::table('offer_photo')->insert([
             'photo_id' => $photo->id,
             'offer_id' => 1,
-            'isMain' => true
+            'isMain' => false
         ]);
     }
 }

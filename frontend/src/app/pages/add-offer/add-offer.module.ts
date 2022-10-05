@@ -14,6 +14,7 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { RippleModule } from 'primeng/ripple';
 import { AfterAddOfferComponent } from './components/after-add-offer/after-add-offer.component';
 import { TooltipModule } from 'primeng/tooltip';
+import { AuthGuard } from '../../shared/guards/auth/auth.guard';
 
 @NgModule({
   declarations: [
@@ -24,38 +25,46 @@ import { TooltipModule } from 'primeng/tooltip';
   imports: [
     CommonModule,
     RouterModule.forChild([
-      { path: '', component: AddOfferComponent },
+      { path: '', component: AddOfferComponent, canActivate: [AuthGuard] },
       {
         path: 'dom/sprzedaz',
         component: AddOfferFormComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'dom/wynajem',
         component: AddOfferFormComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'mieszkanie/sprzedaz',
         component: AddOfferFormComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'mieszkanie/wynajem',
         component: AddOfferFormComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'dzialka/sprzedaz',
         component: AddOfferFormComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'dzialka/wynajem',
         component: AddOfferFormComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'pokoj/wynajem',
         component: AddOfferFormComponent,
+        canActivate: [AuthGuard],
       },
       {
         path: 'oferta-dodana',
         component: AfterAddOfferComponent,
+        canActivate: [AuthGuard],
       },
     ]),
     ReactiveFormsModule,

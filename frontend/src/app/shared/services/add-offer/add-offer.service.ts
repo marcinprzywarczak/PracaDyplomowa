@@ -23,4 +23,18 @@ export class AddOfferService {
       }
     );
   }
+
+  editOffer(offerData: FormData) {
+    const headers = new HttpHeaders();
+    headers.append('Content-Type', 'multipart/form-data');
+    headers.append('Accept', 'application/json');
+    return this.http.post<any>(
+      `${this.BASE_API_URL}/api/offers/update`,
+      offerData,
+      {
+        withCredentials: true,
+        headers: headers,
+      }
+    );
+  }
 }

@@ -1,5 +1,6 @@
 export interface Photo {
   id: number;
+  photo_url: string;
   path: string;
   description: string;
   created_at: string;
