@@ -1,0 +1,14 @@
+:host ::ng-deep .sendMessageButton {
+  .p-button:enabled:hover{
+    @apply hover:bg-messages-messages text-gray-600;
+  }
+}
+:host ::ng-deep .messageInputDiv{
+  .p-inputtext:enabled:hover {
+    border-color: #A7C4A0;
+  }
+  .p-inputtext:enabled:focus {
+    border-color: #A7C4A0;
+    box-shadow: none;
+  }
+}

@@ -29,8 +29,7 @@ export class OfferComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log(this.offer);
-    this.mainPhoto = this.offer.photos.find((x) => x.pivot.isMain === 1)!;
+    this.mainPhoto = this.offer.photos?.find((x) => x.pivot.isMain === 1)!;
   }
 
   addOfferToFollowing() {

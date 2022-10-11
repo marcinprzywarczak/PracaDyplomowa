@@ -12,14 +12,14 @@ export interface Offer {
   description: string;
   id: number;
   locality: string;
-  offer_status: OfferStatus;
+  offer_status?: OfferStatus;
   offer_status_id: number;
   offer_type: OfferType;
   offer_type_id: number;
   parameters: Parameter[];
   photos: Photo[];
   price: number;
-  property_type: PropertyType;
+  property_type?: PropertyType;
   property_type_id: number;
   title: string;
   updated_at: string;

@@ -5,3 +5,8 @@
 .user-panel-navbar-item-active {
   @apply text-green-500 bg-gray-200;
 }
+
+:host ::ng-deep .p-badge{
+  background-color: #A7C4A0;
+  color: black;
+}

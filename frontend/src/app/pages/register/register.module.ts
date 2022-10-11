@@ -5,6 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from '../../shared/shared.module';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { PaginatorModule } from 'primeng/paginator';
+import { InputTextModule } from 'primeng/inputtext';
+import { PasswordModule } from 'primeng/password';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -13,6 +16,9 @@ import { PaginatorModule } from 'primeng/paginator';
     CommonModule,
     InputSwitchModule,
     PaginatorModule,
+    InputTextModule,
+    PasswordModule,
+    ButtonModule,
   ],
 })
 export class RegisterModule {}

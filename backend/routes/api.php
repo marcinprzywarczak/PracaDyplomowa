@@ -69,6 +69,14 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::post('/getUsers', [\App\Http\Controllers\UserController::class, 'index']);
         Route::post('/addUser', [\App\Http\Controllers\UserController::class, 'addNewFirmUser']);
     });
+
+    Route::name('messages.')->prefix('messages')->group(function (){
+        Route::post('/getAllMessages', [\App\Http\Controllers\ChatsController::class, 'getAllMessages']);
+        Route::post('/getMessagesForHeader', [\App\Http\Controllers\ChatsController::class, 'getMessagesForMessageHeader']);
+        Route::post('/replyMessage', [\App\Http\Controllers\ChatsController::class, 'replyMessage']);
+        Route::post('/setMessagesStatus', [\App\Http\Controllers\ChatsController::class, 'setMessagesStatus']);
+
+    });
 });
 
 Route::post('/getUsersTest', [\App\Http\Controllers\UserController::class, 'test']);
@@ -78,4 +86,8 @@ Route::get('image/{path}/{filename}', function ($path, $filename){
    $file = \Illuminate\Support\Facades\Storage::get("$path/$filename");
    return response($file, 200)->header('Content-Type', 'image/jpeg');
 });
+Route::get('messages', [\App\Http\Controllers\ChatsController::class, 'fetchMessages']);
+Route::post('messages', [\App\Http\Controllers\ChatsController::class, 'sendMessage']);
+Route::post('messages/test', [\App\Http\Controllers\ChatsController::class, 'test']);
+
 

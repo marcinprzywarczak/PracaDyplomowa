@@ -204,5 +204,6 @@ class DatabaseSeeder extends Seeder
             'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
             'avatar' => 'avatars/default_avatar.jpg'
         ]);
+        $this->call(MessageSeeder::class);
     }
 }

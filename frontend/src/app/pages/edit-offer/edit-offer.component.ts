@@ -16,6 +16,7 @@ import { MessageService } from 'primeng/api';
 import { finalize, tap } from 'rxjs';
 import { Offer } from '../../shared/models/offer';
 import { HttpClient } from '@angular/common/http';
+import { AlertService } from '../../shared/services/alert-service/alert.service';
 
 @Component({
   selector: 'app-edit-offer',
@@ -55,7 +56,8 @@ export class EditOfferComponent implements OnInit {
     private addOfferService: AddOfferService,
     private router: Router,
     private messageService: MessageService,
-    private http: HttpClient
+    private http: HttpClient,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -139,7 +141,7 @@ export class EditOfferComponent implements OnInit {
           Validators.maxLength(1000),
         ],
       ],
-      mainPhoto: [null, []],
+      mainPhoto: ['', []],
     });
   }
 
@@ -149,11 +151,14 @@ export class EditOfferComponent implements OnInit {
       return;
     }
     this.loading = true;
+    console.log(this.addOfferForm.controls);
     let propertyParameters: { parameterId: number; value: string }[] = [];
     this.propertyParameters.forEach((parameter) => {
       if (this.addOfferForm.controls[parameter.name].value !== null) {
         if (parameter.type === 'boolean') {
-          propertyParameters.push({ parameterId: parameter.id, value: '' });
+          if (this.addOfferForm.controls[parameter.name].value.length > 0) {
+            propertyParameters.push({ parameterId: parameter.id, value: '' });
+          }
         } else {
           propertyParameters.push({
             parameterId: parameter.id,
@@ -188,6 +193,7 @@ export class EditOfferComponent implements OnInit {
     this.addOfferService.editOffer(formData).subscribe({
       next: (value) => {
         this.loading = false;
+        this.alertService.showSuccess('Ogłoszenie pomyślnie zaktualizowane!');
         this.router.navigate(['uzytkownik/ogloszenia']);
       },
       error: (err) => {
@@ -205,7 +211,7 @@ export class EditOfferComponent implements OnInit {
 
   setFormControls() {
     this.propertyParameters.forEach((x) => {
-      const param = this.offer.parameters.find(
+      const param = this.offer.parameters?.find(
         (param) => param.name === x.name
       );
       this.addOfferForm.addControl(
@@ -292,7 +298,7 @@ export class EditOfferComponent implements OnInit {
 
   setPhotos() {
     this.files = [];
-    this.offer.photos.forEach((photo) => {
+    this.offer.photos?.forEach((photo) => {
       if (photo.pivot.isMain === 1) {
         this.http
           .get(`http://localhost:8000/api/image/${photo.path}`, {
@@ -302,7 +308,7 @@ export class EditOfferComponent implements OnInit {
             this.mainPhoto = new File([result], 'photo');
           });
         this.mainPhotoSrc = photo.photo_url;
-        this.addOfferForm.get('mainPhoto')?.setValue(this.mainPhotoSrc);
+        // this.addOfferForm.get('mainPhoto')?.setValue(this.mainPhotoSrc);
       } else {
         this.http
           .get(`http://localhost:8000/api/image/${photo.path}`, {

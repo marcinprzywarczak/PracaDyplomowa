@@ -1,0 +1,78 @@
+<div class="flex flex-col w-full h-full bg-messages-messagesBg rounded-r-lg">
+  <div
+    #messagesDiv
+    class="h-full w-full flex flex-col space-y-2 overflow-y-auto px-2 py-2"
+    *ngIf="messages && dataLoaded; else loader"
+  >
+    <ng-container *ngFor="let message of messages; let i = index">
+      <div
+        class="w-full text-center text-sm text-gray-800 py-1 border-gray-600"
+        *ngIf="i === 0"
+      >
+        <div class="pt-1">
+          {{ messages[i].created_at | date: "dd MMMM yyyy" }}
+        </div>
+      </div>
+      <div
+        class="w-full text-center text-sm text-gray-800 py-1 border-t-2 border-gray-600"
+        *ngIf="
+          i > 1 &&
+          (messages[i - 1].created_at | date: 'dd') !==
+            (messages[i].created_at | date: 'dd')
+        "
+      >
+        <div class="pt-1">
+          {{ messages[i].created_at | date: "dd MMMM yyyy" }}
+        </div>
+      </div>
+      <app-message
+        [ngClass]="[
+          isUserSender
+            ? message.is_from_sender
+              ? 'self-end justify-end'
+              : 'self-start justify-start'
+            : message.is_from_sender
+            ? 'self-start justify-start'
+            : 'self-end justify-end'
+        ]"
+        class="max-w-full w-full flex"
+        [message]="message.message"
+        [date]="message.created_at"
+        [justify]="
+          isUserSender
+            ? message.is_from_sender
+              ? 'justify-end'
+              : 'justify-start'
+            : message.is_from_sender
+            ? 'justify-start'
+            : 'justify-end'
+        "
+      ></app-message>
+    </ng-container>
+  </div>
+  <div class="flex flex-row w-full messageInputDiv">
+    <textarea
+      rows="1"
+      cols="30"
+      pInputTextarea
+      class="w-full"
+      [autoResize]="true"
+      [(ngModel)]="message"
+    ></textarea>
+    <p-button
+      iconPos="left"
+      label="Wyslij"
+      class="sendMessageButton"
+      styleClass="bg-messages-messages text-gray-800 border-none "
+      (click)="sendMessage()"
+      icon="pi pi-send"
+      [loading]="loading"
+      [disabled]="message === ''"
+    ></p-button>
+  </div>
+</div>
+<ng-template #loader>
+  <div class="w-full h-full flex items-center justify-center">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</ng-template>

@@ -39,7 +39,7 @@
           </div>
           <div class="flex flex-row py-2">
             <div class="w-1/4">Opis:</div>
-            <div class="w-3/4">{{ offerDetails.description }}</div>
+            <div class="w-3/4 break-words">{{ offerDetails.description }}</div>
           </div>
           <div class="text-3xl border-none pb-2">Informacje szczegółowe</div>
           <div
@@ -107,20 +107,24 @@
           pInputText
           class=""
           placeholder="Temat wiadomości"
+          [(ngModel)]="messageSubject"
         />
         <textarea
           [disabled]="!isLogged"
           [style]="{ width: '100%' }"
+          [(ngModel)]="message"
           pInputTextarea
           placeholder="Treść wiadomości"
           rows="10"
         ></textarea>
         <p-button
           [disabled]="!isLogged"
+          (click)="sendMessage()"
           styleClass="bg-blue-600 justify-self-end self-end"
           icon="pi pi-send"
           iconPos="left"
           label="Wyślij wiadomość"
+          [loading]="messageSendLoading"
         ></p-button>
       </div>
     </div>

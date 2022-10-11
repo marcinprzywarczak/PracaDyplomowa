@@ -35,7 +35,7 @@
     </div>
     <a [routerLink]="['/offer', offer.id]">
       <div class="text-base">Cena: {{ offer.price | number }} zł</div>
-      <div class="text-base">Kategoria: {{ offer.property_type.name }}</div>
+      <div class="text-base">Kategoria: {{ offer.property_type?.name }}</div>
       <div class="text-base">Lokalizacja: {{ offer.locality }}</div>
       <div class="text-base">Typ oferty: {{ offer.offer_type.name }}</div>
     </a>
@@ -45,7 +45,7 @@
 <ng-template #userPanelButtons>
   <ng-container *ngIf="!userFollowingOffers; else followingOfferButtons">
     <ng-container
-      *ngIf="offer.offer_status.name === 'aktywne'; else restoreButton"
+      *ngIf="offer.offer_status?.name === 'aktywne'; else restoreButton"
     >
       <div>
         <a

@@ -9,11 +9,12 @@
           >Adres email</label
         >
         <input
+          pInputText
           type="email"
           id="email"
           name="email"
           formControlName="email"
-          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          class="w-full"
           [ngClass]="
             (f['email'].invalid &&
               (f['email'].touched || f['email'].dirty || isSubmitted)) ||
@@ -21,7 +22,6 @@
               ? 'border-red-600'
               : 'border-gray-300'
           "
-          aria-describedby="emailHelp"
           placeholder="Wprowadź email"
         />
         <div
@@ -42,16 +42,16 @@
           <div>{{ errors.email[0] }}</div>
         </div>
       </div>
-      <div class="form-group mb-6">
+      <div class="form-group mb-6 w-full">
         <label for="password" class="form-label inline-block mb-2 text-gray-700"
           >Hasło</label
         >
-        <input
+        <p-password
+          styleClass="w-full"
           type="password"
           id="password"
-          name="password"
+          class="password-input"
           formControlName="password"
-          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           [ngClass]="
             (f['password'].invalid &&
               (f['password'].touched || f['password'].dirty || isSubmitted)) ||
@@ -59,8 +59,9 @@
               ? 'border-red-600'
               : 'border-gray-300'
           "
+          [feedback]="false"
           placeholder="Wprowadź hasło"
-        />
+        ></p-password>
         <div
           *ngIf="
             f['password'].invalid &&
@@ -76,12 +77,16 @@
           <div *ngFor="let password of errors.password">{{ password }}</div>
         </div>
       </div>
-      <button
-        type="submit"
-        class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-      >
-        Zaloguj
-      </button>
+      <div class="w-full flex items-center justify-center">
+        <p-button
+          type="submit"
+          class="p-button-secondary"
+          label="Zaloguj"
+          styleClass="bg-blue-600 hover:bg-blue-500 px-6"
+          [loading]="loading"
+          [disabled]="form.invalid || form.pristine"
+        ></p-button>
+      </div>
     </form>
   </div>
 </div>

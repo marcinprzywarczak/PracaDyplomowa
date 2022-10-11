@@ -21,6 +21,8 @@ import { UserPanelEditOfferComponent } from './components/user-panel-edit-offer/
 import { CheckboxModule } from 'primeng/checkbox';
 import { LoginGuard } from '../../shared/guards/login/login.guard';
 import { AuthGuard } from '../../shared/guards/auth/auth.guard';
+import { UserPanelMessagesComponent } from './components/user-panel-messages/user-panel-messages.component';
+import { BadgeModule } from 'primeng/badge';
 
 @NgModule({
   declarations: [
@@ -31,6 +33,7 @@ import { AuthGuard } from '../../shared/guards/auth/auth.guard';
     UserPanelFirmUsersComponent,
     FirmUserFormComponent,
     UserPanelEditOfferComponent,
+    UserPanelMessagesComponent,
   ],
   imports: [
     CommonModule,
@@ -51,6 +54,10 @@ import { AuthGuard } from '../../shared/guards/auth/auth.guard';
             path: 'pracownicy',
             component: UserPanelFirmUsersComponent,
           },
+          {
+            path: 'wiadomosci',
+            component: UserPanelMessagesComponent,
+          },
         ],
         canActivate: [AuthGuard],
       },
@@ -67,6 +74,7 @@ import { AuthGuard } from '../../shared/guards/auth/auth.guard';
     ReactiveFormsModule,
     PasswordModule,
     CheckboxModule,
+    BadgeModule,
   ],
 })
 export class UserPanelModule {}

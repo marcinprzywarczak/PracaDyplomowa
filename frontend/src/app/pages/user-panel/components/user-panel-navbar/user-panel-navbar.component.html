@@ -14,7 +14,16 @@
     class="user-panel-navbar-item"
     >Obserwowane</a
   >
-  <a routerLink="dashboard" class="user-panel-navbar-item">Wiadomości</a>
+  <a
+    routerLink="wiadomosci"
+    routerLinkActive="user-panel-navbar-item-active"
+    class="user-panel-navbar-item"
+    >Wiadomości<p-badge
+      *ngIf="unreadMessages > 0"
+      [value]="unreadMessages <= 10 ? unreadMessages.toString() : '10+'"
+      styleClass="ml-2 bg-messages-message"
+    ></p-badge
+  ></a>
   <a
     routerLink="pracownicy"
     routerLinkActive="user-panel-navbar-item-active"

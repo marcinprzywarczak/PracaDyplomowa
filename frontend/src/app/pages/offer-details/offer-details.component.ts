@@ -8,6 +8,9 @@ import { Offer } from '../../shared/models/offer';
 import { Photo } from '../../shared/models/photo';
 import { User } from '../../shared/models/user';
 import { Firm } from '../../shared/models/firm';
+import { MessageService } from '../../shared/services/message-service/message.service';
+import { AlertService } from '../../shared/services/alert-service/alert.service';
+import { NewMessage } from '../../shared/models/new-message';
 
 @Component({
   selector: 'app-offer-details',
@@ -39,12 +42,16 @@ export class OfferDetailsComponent implements OnInit {
   isLogged: boolean;
   parameters: any = [];
   parameterCategories: any;
-
+  message: string;
+  messageSubject: string;
+  messageSendLoading: boolean = false;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
     private apiService: ApiService,
-    private userService: UserService
+    private userService: UserService,
+    private messageService: MessageService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -144,5 +151,27 @@ export class OfferDetailsComponent implements OnInit {
 
   isArray(val: any): boolean {
     return typeof val === 'object';
+  }
+
+  sendMessage() {
+    this.messageSendLoading = true;
+    const message: NewMessage = {
+      user_message_to: this.owner.id,
+      offer_id: this.offerDetails.id,
+      subject: this.messageSubject,
+      message: this.message,
+    };
+    this.messageService.sendMessage(message).subscribe({
+      next: (value) => {
+        this.message = '';
+        this.messageSubject = '';
+        this.messageSendLoading = false;
+        this.alertService.showSuccess('Wiadomość pomyślnie wysłana!');
+      },
+      error: (err) => {
+        this.messageSendLoading = false;
+        this.alertService.showError('Błąd podczas wysyłania wiadomości.');
+      },
+    });
   }
 }

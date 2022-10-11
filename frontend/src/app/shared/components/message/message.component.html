@@ -1,0 +1,10 @@
+<div class="flex flex-row w-2/3 break-words break-all" [ngClass]="justify">
+  <div
+    appendTo="body"
+    tooltipPosition="top"
+    [pTooltip]="(date | date: 'HH:mm:ss') ?? ''"
+    class="bg-messages-messages text-gray-800 py-1 px-2 rounded-lg w-fit"
+  >
+    {{ message }}
+  </div>
+</div>

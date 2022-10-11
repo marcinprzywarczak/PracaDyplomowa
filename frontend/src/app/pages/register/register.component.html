@@ -1,9 +1,7 @@
 <div class="flex flex-col items-center justify-center mt-12">
   <div class="p-6 rounded-lg shadow-lg bg-green-300 w-full md:w-1/2">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
-      <div
-        class="form-group flex flex-row items-center justify-items-center mb-6"
-      >
+      <div class="form-group flex flex-row items-center justify-items-center">
         <label for="isFirmAccount">Konto firmowe</label>
         <input
           class="ml-2"
@@ -16,8 +14,8 @@
         />
         <!--        <p-inputSwitch [(ngModel)]="isFirmAccount" formControlName="isFirmAccount"></p-inputSwitch>-->
       </div>
-      <div class="form-group mb-6 w-full">
-        <label for="email" class="form-label inline-block mb-2 text-gray-700"
+      <div class="form-group w-full">
+        <label for="email" class="form-label inline-block pb-1 text-gray-700"
           >Adres email</label
         >
         <input
@@ -25,7 +23,8 @@
           id="email"
           name="email"
           formControlName="email"
-          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          pInputText
+          class="w-full"
           [ngClass]="
             (f['email'].invalid &&
               (f['email'].touched || f['email'].dirty || isSubmitted)) ||
@@ -53,10 +52,10 @@
           <div *ngFor="let email of serverErrors.email">{{ email }}</div>
         </div>
       </div>
-      <div class="form-group mb-6 w-full">
+      <div class="form-group w-full">
         <label
           for="first_name"
-          class="form-label inline-block mb-2 text-gray-700"
+          class="form-label inline-block pb-1 text-gray-700"
           >Imię</label
         >
         <input
@@ -64,7 +63,8 @@
           id="first_name"
           name="first_name"
           formControlName="first_name"
-          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          pInputText
+          class="w-full"
           [ngClass]="
             (f['first_name'].invalid &&
               (f['first_name'].touched ||
@@ -94,10 +94,10 @@
         </div>
       </div>
 
-      <div class="form-group mb-6 w-full">
+      <div class="form-group w-full">
         <label
           for="sure_name"
-          class="form-label inline-block mb-2 text-gray-700"
+          class="form-label inline-block pb-1 text-gray-700"
           >Nazwisko</label
         >
         <input
@@ -105,7 +105,8 @@
           id="sure_name"
           name="sure_name"
           formControlName="sure_name"
-          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          pInputText
+          class="w-full"
           [ngClass]="
             (f['sure_name'].invalid &&
               (f['sure_name'].touched ||
@@ -135,10 +136,10 @@
         </div>
       </div>
 
-      <div class="form-group mb-6 w-full">
+      <div class="form-group w-full">
         <label
           for="phone_number"
-          class="form-label inline-block mb-2 text-gray-700"
+          class="form-label inline-block pb-1 text-gray-700"
           >Numer telefonu</label
         >
         <input
@@ -146,7 +147,8 @@
           id="phone_number"
           name="phone_number"
           formControlName="phone_number"
-          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+          pInputText
+          class="w-full"
           [ngClass]="
             (f['phone_number'].invalid &&
               (f['phone_number'].touched ||
@@ -184,16 +186,16 @@
         </div>
       </div>
 
-      <div class="form-group mb-6">
-        <label for="password" class="form-label inline-block mb-2 text-gray-700"
+      <div class="form-group">
+        <label for="password" class="form-label inline-block pb-1 text-gray-700"
           >Hasło</label
         >
-        <input
+        <p-password
+          styleClass="w-full"
           type="password"
           id="password"
-          name="password"
+          class="password-input"
           formControlName="password"
-          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           [ngClass]="
             (f['password'].invalid &&
               (f['password'].touched || f['password'].dirty || isSubmitted)) ||
@@ -202,7 +204,8 @@
               : 'border-gray-300'
           "
           placeholder="Hasło"
-        />
+          [feedback]="false"
+        ></p-password>
         <div
           *ngIf="
             f['password'].invalid &&
@@ -223,18 +226,17 @@
           </div>
         </div>
       </div>
-      <div class="form-group mb-6">
+      <div class="form-group">
         <label
           for="password_conf"
-          class="form-label inline-block mb-2 text-gray-700"
+          class="form-label inline-block pb-1 text-gray-700"
           >Potwierdź hasło</label
         >
-        <input
-          type="password"
+        <p-password
+          class="password-input"
+          styleClass="w-full"
           id="password_conf"
-          name="password_conf"
           formControlName="password_conf"
-          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
           [ngClass]="
             f['password_conf'].invalid &&
             (f['password_conf'].touched ||
@@ -244,7 +246,8 @@
               : 'border-gray-300'
           "
           placeholder="Powtórz hasło"
-        />
+          [feedback]="false"
+        ></p-password>
         <div
           *ngIf="
             f['password_conf'].invalid &&
@@ -262,10 +265,10 @@
           </div>
         </div>
       </div>
-      <div class="form-group mb-6">
+      <div class="form-group">
         <label
           for="user_avatar"
-          class="form-label inline-block mb-2 text-gray-700"
+          class="form-label inline-block pb-1 text-gray-700"
           >Awatar</label
         >
         <input
@@ -300,18 +303,19 @@
       </div>
       <div *ngIf="isFirmAccount">
         <!--      <div [ngClass]="isFirmAccount ? 'block' : 'hidden'">-->
-        <div class="form-group mb-6">
+        <div class="form-group">
           <label
             for="firm_name"
-            class="form-label inline-block mb-2 text-gray-700"
+            class="form-label inline-block pb-1 text-gray-700"
             >Nazwa firmy</label
           >
           <input
+            pInputText
+            class="w-full"
             type="text"
             id="firm_name"
             name="firm_name"
             formControlName="firm_name"
-            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
             placeholder="Wprowadź nazwę firmy"
             [ngClass]="
               (f['firm_name'].invalid &&
@@ -344,16 +348,17 @@
           </div>
         </div>
         <div class="flex flex-row space-x-4">
-          <div class="form-group mb-6 w-1/2">
-            <label for="nip" class="form-label inline-block mb-2 text-gray-700"
+          <div class="form-group w-1/2">
+            <label for="nip" class="form-label inline-block pb-1 text-gray-700"
               >NIP</label
             >
             <input
+              pInputText
+              class="w-full"
               type="text"
               id="nip"
               name="nip"
               formControlName="nip"
-              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               placeholder="Wprowadź numer NIP"
               [ngClass]="
                 (f['nip'].invalid &&
@@ -378,18 +383,19 @@
               <div *ngFor="let nip of serverErrors.nip">{{ nip }}</div>
             </div>
           </div>
-          <div class="form-group mb-6 w-1/2">
+          <div class="form-group w-1/2">
             <label
               for="regon"
-              class="form-label inline-block mb-2 text-gray-700"
+              class="form-label inline-block pb-1 text-gray-700"
               >REGON</label
             >
             <input
+              pInputText
+              class="w-full"
               type="text"
               id="regon"
               name="regon"
               formControlName="regon"
-              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
               placeholder="Wprowadź numer REGON"
               [ngClass]="
                 (f['regon'].invalid &&
@@ -417,10 +423,10 @@
         </div>
 
         <div class="flex flex-row space-x-4">
-          <div class="form-group mb-6 w-1/2">
+          <div class="form-group w-1/2">
             <label
               for="street"
-              class="form-label inline-block mb-2 text-gray-700"
+              class="form-label inline-block pb-1 text-gray-700"
               >Ulica</label
             >
             <input
@@ -428,14 +434,15 @@
               id="street"
               name="street"
               formControlName="street"
-              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              pInputText
+              class="w-full"
               placeholder="Wprowadź nazwę ulicy"
             />
           </div>
-          <div class="form-group mb-6 w-1/2">
+          <div class="form-group w-1/2">
             <label
               for="number"
-              class="form-label inline-block mb-2 text-gray-700"
+              class="form-label inline-block pb-1 text-gray-700"
               >Numer budynku</label
             >
             <input
@@ -443,7 +450,8 @@
               id="number"
               name="number"
               formControlName="number"
-              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              pInputText
+              class="w-full"
               placeholder="Wprowadź numer budynku"
               [ngClass]="
                 (f['number'].invalid &&
@@ -471,10 +479,10 @@
         </div>
 
         <div class="flex flex-row space-x-4">
-          <div class="form-group mb-6 w-1/2">
+          <div class="form-group w-1/2">
             <label
               for="locality"
-              class="form-label inline-block mb-2 text-gray-700"
+              class="form-label inline-block pb-1 text-gray-700"
               >Miejscowość</label
             >
             <input
@@ -482,7 +490,8 @@
               id="locality"
               name="locality"
               formControlName="locality"
-              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              pInputText
+              class="w-full"
               placeholder="Wprowadź miejscowość"
               [ngClass]="
                 (f['locality'].invalid &&
@@ -514,10 +523,10 @@
               </div>
             </div>
           </div>
-          <div class="form-group mb-6 w-1/2">
+          <div class="form-group w-1/2">
             <label
               for="zip_code"
-              class="form-label inline-block mb-2 text-gray-700"
+              class="form-label inline-block pb-1 text-gray-700"
               >Kod pocztowy</label
             >
             <input
@@ -525,7 +534,8 @@
               id="zip_code"
               name="zip_code"
               formControlName="zip_code"
-              class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+              pInputText
+              class="w-full"
               placeholder="Wprowadź kod pocztowy"
               [ngClass]="
                 (f['zip_code'].invalid &&
@@ -561,10 +571,10 @@
             </div>
           </div>
         </div>
-        <div class="form-group mb-6">
+        <div class="form-group">
           <label
             for="firm_logo"
-            class="form-label inline-block mb-2 text-gray-700"
+            class="form-label inline-block pb-1 text-gray-700"
             >Logo firmy</label
           >
           <input
@@ -598,12 +608,21 @@
           </div>
         </div>
       </div>
-      <button
-        type="submit"
-        class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"
-      >
-        Zarejestruj się!
-      </button>
+      <div class="w-full flex items-center justify-center">
+        <p-button
+          type="submit"
+          class="p-button-secondary"
+          label="Zarejestruj"
+          styleClass="bg-blue-600 hover:bg-blue-500 px-6"
+          [disabled]="form.invalid || form.pristine"
+        ></p-button>
+      </div>
+      <!--      <button-->
+      <!--        type="submit"-->
+      <!--        class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"-->
+      <!--      >-->
+      <!--        Zarejestruj się!-->
+      <!--      </button>-->
     </form>
   </div>
 </div>

@@ -10,6 +10,7 @@ import { finalize } from 'rxjs';
 import { UserService } from '../../../shared/services/user/user.service';
 import { ApiService } from '../../../shared/services/api/api.service';
 import { User } from '../../../shared/models/user';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-navbar',
@@ -36,7 +37,8 @@ export class NavbarComponent implements OnInit {
 
   constructor(
     private loginService: LoginService,
-    private userService: UserService
+    private userService: UserService,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {
@@ -55,6 +57,7 @@ export class NavbarComponent implements OnInit {
       )
       .subscribe((response) => {
         if (response.status === 204) {
+          // this.cookieService.deleteAll('/', 'localhost');
           localStorage.removeItem('isLogged');
           localStorage.removeItem('user');
         }

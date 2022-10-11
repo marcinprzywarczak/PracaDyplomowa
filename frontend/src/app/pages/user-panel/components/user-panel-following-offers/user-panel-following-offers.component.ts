@@ -13,7 +13,7 @@ export class UserPanelFollowingOffersComponent implements OnInit, OnDestroy {
   offers: Offer[] = [];
   dataLoaded: boolean = false;
   totalRecords: number;
-  currentPage: number;
+  currentPage: number = 0;
   triggerSubscription: Subscription;
   constructor(
     private offerService: OfferService,

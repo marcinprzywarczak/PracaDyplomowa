@@ -16,6 +16,7 @@ export class LoginComponent implements OnInit {
   errors: any = [];
   error: any;
   isSubmitted: boolean = false;
+  loading: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private loginService: LoginService,
@@ -37,6 +38,7 @@ export class LoginComponent implements OnInit {
   }
   onSubmit() {
     this.isSubmitted = true;
+    this.loading = true;
     if (!this.form.invalid) {
       this.loginService.csrf().subscribe(() => {
         this.loginService
@@ -46,6 +48,7 @@ export class LoginComponent implements OnInit {
           )
           .subscribe({
             next: (value) => {
+              this.loading = false;
               if (value.error) {
                 this.error = value.error;
                 this.errors = [];
@@ -63,6 +66,7 @@ export class LoginComponent implements OnInit {
               }
             },
             error: (err) => {
+              this.loading = false;
               this.errors = err.error.errors;
               this.error = '';
               //console.log('err', err.error.errors)

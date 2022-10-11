@@ -25,6 +25,8 @@ import { NotFoundInterceptor } from './shared/interceptors/not-found-interceptor
 import { ToastModule } from 'primeng/toast';
 import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
+import { PusherService } from './shared/services/pusher/pusher.service';
+import { CookieService } from 'ngx-cookie-service';
 registerLocaleData(localePl);
 @NgModule({
   declarations: [AppComponent],
@@ -52,6 +54,8 @@ registerLocaleData(localePl);
     },
     MessageService,
     ConfirmationService,
+    PusherService,
+    CookieService,
   ],
   exports: [],
   bootstrap: [AppComponent],

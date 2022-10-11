@@ -240,6 +240,7 @@ class OfferController extends Controller
     public function update(EditOfferRequest $request) {
         try{
             $photoPaths = [];
+            $offerPhotos = [];
             $mainPhotoSrc = '';
             if($request->get('photo_changed')) {
                 $offerPhotos = Photo::with('offers')->whereHas('offers', function (Builder $query) use($request)
@@ -279,13 +280,10 @@ class OfferController extends Controller
                 }
 
             }
-
             DB::transaction(function () use ($request, $photoPaths, $mainPhotoSrc, $offerPhotos) {
                 $offer = Offer::findOrFail($request->get('offer_id'));
                 $offer->fill(
-                    $request->merge(array(
-                        'user_id' => Auth::id()
-                    ))->all()
+                    $request->all()
                 )->save();
 
                 $parameters = $request->get('parameters');

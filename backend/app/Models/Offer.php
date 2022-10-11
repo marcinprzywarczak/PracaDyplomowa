@@ -53,4 +53,8 @@ class Offer extends Model
     }
 
 
+    public function messageHeaders(){
+        return $this->hasMany(MessageHeader::class);
+    }
+
 }

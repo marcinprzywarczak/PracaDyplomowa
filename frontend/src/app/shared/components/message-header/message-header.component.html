@@ -1,0 +1,37 @@
+<div
+  class="flex flex-row items-center p-2 m-0 cursor-pointer"
+  [ngClass]="
+    active
+      ? 'bg-messages-messagesBg'
+      : 'bg-messages-messageHeader hover:bg-messages-messagesBg'
+  "
+>
+  <div class="flex">
+    <div class="offer-avatar mr-2">
+      <img [src]="mainPhoto.photo_url" style="height: 100%" />
+    </div>
+  </div>
+  <div class="flex flex-col w-full">
+    <div class="flex flex-row justify-between text-sm">
+      <div
+        *ngIf="userId === messageHeader.recipient; else elseBlock"
+        class="flex"
+      >
+        {{ messageHeader.sender_user.first_name }}
+        {{ messageHeader.sender_user.sure_name }}
+      </div>
+      <div class="flex">
+        {{ messageHeader.updated_at | date: "dd-MM-yyyy" }}
+      </div>
+    </div>
+
+    <div>{{ messageHeader.subject }}</div>
+    <div>{{ messageHeader.offer.title }}</div>
+  </div>
+</div>
+<ng-template #elseBlock>
+  <div class="flex">
+    {{ messageHeader.recipient_user.first_name }}
+    {{ messageHeader.recipient_user.sure_name }}
+  </div>
+</ng-template>

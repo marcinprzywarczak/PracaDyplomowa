@@ -17,5 +17,6 @@ class VerifyCsrfToken extends Middleware
         '/api/getParameters',
         '/api/getOffer',
         '/api/getUsersTest',
+        '/api/messages/test'
     ];
 }

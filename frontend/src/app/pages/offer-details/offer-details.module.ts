@@ -7,6 +7,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { ButtonModule } from 'primeng/button';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [OfferDetailsComponent],
@@ -18,6 +19,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     InputTextareaModule,
     ButtonModule,
     ProgressSpinnerModule,
+    FormsModule,
   ],
 })
 export class OfferDetailsModule {}

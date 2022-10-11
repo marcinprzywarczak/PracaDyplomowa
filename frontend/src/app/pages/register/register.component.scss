@@ -1,0 +1,9 @@
+:host ::ng-deep .password-input{
+  .p-inputtext {
+    width: 100%;
+  }
+}
+
+.form-group {
+  @apply pb-3;
+}

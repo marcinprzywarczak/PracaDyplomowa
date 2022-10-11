@@ -60,4 +60,16 @@ class User extends Authenticatable
         return $this->belongsToMany(Offer::class);
     }
 
+    public function messages()
+    {
+        return $this->hasMany(Message::class);
+    }
+
+    public function messageHeadersSend(){
+        return $this->hasMany(MessageHeader::class, 'sender');
+    }
+
+    public function messageHeadersReceived(){
+        return $this->hasMany(MessageHeader::class, 'recipient');
+    }
 }

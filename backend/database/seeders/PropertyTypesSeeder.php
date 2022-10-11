@@ -31,13 +31,6 @@ class PropertyTypesSeeder extends Seeder
             'name' => 'pokój'
         ]);
 
-        PropertyType::create([
-            'name' => 'biuro'
-        ]);
-
-        PropertyType::create([
-            'name' => 'magazyn'
-        ]);
     }
 
 }

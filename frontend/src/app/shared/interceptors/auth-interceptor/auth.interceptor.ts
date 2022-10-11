@@ -8,10 +8,15 @@ import {
 import { catchError, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/login/login.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
-  constructor(private router: Router, private loginService: LoginService) {}
+  constructor(
+    private router: Router,
+    private loginService: LoginService,
+    private cookieService: CookieService
+  ) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -20,7 +25,9 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err) => {
         if (err.status === 401 || err.status === 419) {
-          this.loginService.logout();
+          this.loginService.logout().subscribe(() => {
+            // this.cookieService.deleteAll('http://localhost:4200');
+          });
           localStorage.removeItem('isLogged');
           window.location.href = '/login';
           // this.router.navigate(['/login']);
