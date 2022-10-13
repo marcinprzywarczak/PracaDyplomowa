@@ -2,6 +2,7 @@
 
 namespace App\Events;
 
+use App\Http\Resources\MessageHeaderResource;
 use App\Models\Message;
 use App\Models\MessageHeader;
 use App\Models\User;
@@ -47,7 +48,7 @@ class MessageHeaderSent implements ShouldBroadcast
     {
         $this->user = $user;
         $this->toUser = $toUser;
-        $this->messageHeader = $messageHeader;
+        $this->messageHeader = new MessageHeaderResource($messageHeader);
     }
 
     /**
@@ -55,10 +56,6 @@ class MessageHeaderSent implements ShouldBroadcast
      *
      * @return \Illuminate\Broadcasting\Channel|array
      */
-//    public function broadcastOn()
-//    {
-//        return new PrivateChannel('chat');
-//    }
 
     public function broadcastOn()
     {

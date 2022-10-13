@@ -16,7 +16,7 @@
       <div
         class="w-full text-center text-sm text-gray-800 py-1 border-t-2 border-gray-600"
         *ngIf="
-          i > 1 &&
+          i >= 1 &&
           (messages[i - 1].created_at | date: 'dd') !==
             (messages[i].created_at | date: 'dd')
         "

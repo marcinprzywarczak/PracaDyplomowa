@@ -31,4 +31,14 @@ class MessageHeader extends Model
     public function messages(){
         return $this->hasMany(Message::class);
     }
+
+    public function getUnreadRecipientMessagesCount(){
+        return $this->messages()->where('received', 0)
+            ->where('is_from_sender', 1)->count();
+    }
+
+    public function getUnreadSenderMessagesCount(){
+        return $this->messages()->where('received', 0)
+            ->where('is_from_sender', 0)->count();
+    }
 }

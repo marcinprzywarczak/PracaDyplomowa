@@ -14,9 +14,13 @@ export class MessageService {
   constructor(private http: HttpClient) {}
 
   sendMessage(message: NewMessage) {
-    return this.http.post(`${this.BASE_API_URL}/api/messages`, message, {
-      withCredentials: true,
-    });
+    return this.http.post(
+      `${this.BASE_API_URL}/api/messages/sendNewMessage`,
+      message,
+      {
+        withCredentials: true,
+      }
+    );
   }
 
   getAllMessages() {

@@ -75,7 +75,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::post('/getMessagesForHeader', [\App\Http\Controllers\ChatsController::class, 'getMessagesForMessageHeader']);
         Route::post('/replyMessage', [\App\Http\Controllers\ChatsController::class, 'replyMessage']);
         Route::post('/setMessagesStatus', [\App\Http\Controllers\ChatsController::class, 'setMessagesStatus']);
-
+        Route::post('/sendNewMessage', [\App\Http\Controllers\ChatsController::class, 'sendMessage']);
     });
 });
 
@@ -87,7 +87,7 @@ Route::get('image/{path}/{filename}', function ($path, $filename){
    return response($file, 200)->header('Content-Type', 'image/jpeg');
 });
 Route::get('messages', [\App\Http\Controllers\ChatsController::class, 'fetchMessages']);
-Route::post('messages', [\App\Http\Controllers\ChatsController::class, 'sendMessage']);
+
 Route::post('messages/test', [\App\Http\Controllers\ChatsController::class, 'test']);
 
 
