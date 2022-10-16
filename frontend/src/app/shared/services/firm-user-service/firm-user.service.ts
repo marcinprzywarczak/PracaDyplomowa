@@ -29,4 +29,15 @@ export class FirmUserService {
       }
     );
   }
+  deleteFirmUser(userId: number) {
+    return this.http.post<any>(
+      `${this.BASE_API_URL}/api/users/deleteFirmUser`,
+      {
+        userId: userId,
+      },
+      {
+        withCredentials: true,
+      }
+    );
+  }
 }

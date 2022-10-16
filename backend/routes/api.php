@@ -68,6 +68,7 @@ Route::middleware('auth:sanctum')->group(function(){
     Route::name('user.')->prefix('users')->group(function (){
         Route::post('/getUsers', [\App\Http\Controllers\UserController::class, 'index']);
         Route::post('/addUser', [\App\Http\Controllers\UserController::class, 'addNewFirmUser']);
+        Route::post('/deleteFirmUser', [\App\Http\Controllers\UserController::class, 'deleteFirmUser']);
     });
 
     Route::name('messages.')->prefix('messages')->group(function (){

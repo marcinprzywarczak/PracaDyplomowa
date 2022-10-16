@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   FormBuilder,
   FormGroup,
@@ -13,6 +13,7 @@ import { ReloadDataTriggerService } from '../../../../shared/services/reload-dat
 import { FirmUserService } from '../../../../shared/services/firm-user-service/firm-user.service';
 import { AlertService } from '../../../../shared/services/alert-service/alert.service';
 import { HideSidebarTriggerService } from '../../../../shared/services/hide-sidebar-trigger/hide-sidebar-trigger.service';
+import { User } from '../../../../shared/models/user';
 
 const confirmedValidator = (fg: FormGroup) => {
   const control = fg.get('password');
@@ -32,6 +33,8 @@ const confirmedValidator = (fg: FormGroup) => {
   styleUrls: ['./firm-user-form.component.scss'],
 })
 export class FirmUserFormComponent implements OnInit {
+  @Input() edit: boolean;
+  @Input() user: User;
   form: FormGroup;
   isFirmAccount: boolean = false;
   userAvatar: File;
@@ -49,20 +52,33 @@ export class FirmUserFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log(this.edit, this.user);
     this.form = this.formBuilder.group(
       {
-        email: ['', [Validators.required, Validators.email]],
-        first_name: ['', [Validators.required]],
-        password: ['', [Validators.required, Validators.minLength(8)]],
-        password_conf: ['', [Validators.required]],
-        phone_number: [
+        email: [
+          this.edit ? this.user.email : null,
+          [Validators.required, Validators.email],
+        ],
+        first_name: [
+          this.edit ? this.user.first_name : null,
+          [Validators.required],
+        ],
+        password: [
           '',
+          this.edit ? [] : [Validators.required, Validators.minLength(8)],
+        ],
+        password_conf: ['', this.edit ? [] : [Validators.required]],
+        phone_number: [
+          this.edit ? this.user.phone_number : null,
           [
             Validators.required,
             Validators.pattern(/^(?:\(?\?)?(?:[-\s]*(\d)){9}\)?$/),
           ],
         ],
-        sure_name: ['', [Validators.required]],
+        sure_name: [
+          this.edit ? this.user.sure_name : null,
+          [Validators.required],
+        ],
         user_avatar: [],
       },
       { validators: confirmedValidator }

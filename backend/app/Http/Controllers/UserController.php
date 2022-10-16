@@ -109,4 +109,26 @@ class UserController extends \Illuminate\Routing\Controller
             ], 400);
         }
     }
+
+    public function deleteFirmUser(Request $request) {
+        $user = User::findOrFail($request->input('userId'));
+        $user->delete();
+        return response()->json([
+            'message' => 'suksces'
+        ]);
+    }
+
+    public function updateFirmUser(Request $request) {
+        $user = User::findOrFail($request->input('userId'));
+        $user->update([
+            'email' => $request->input('email'),
+            'first_name' => $request->input('first_name'),
+            'sure_name' => $request->input('sure_name'),
+            'phone_number' => $request->input('phone_number'),
+        ]);
+
+        return response()->json([
+            'message' => 'suksces'
+        ]);
+    }
 }
