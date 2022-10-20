@@ -19,4 +19,11 @@ export class UserService {
   getState(): boolean {
     return this.isLogged;
   }
+
+  setUser(user: User) {
+    this.currentUser = user;
+    this.isLogged = true;
+    localStorage.setItem('isLogged', 'true');
+    localStorage.setItem('user', JSON.stringify(user));
+  }
 }

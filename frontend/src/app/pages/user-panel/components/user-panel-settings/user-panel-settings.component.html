@@ -1,0 +1,147 @@
+<div class="w-full flex flex-col md:px-28 px-10 space-y-6">
+  <div
+    class="flex flex-row w-full p-4 bg-messages-messagesBg rounded justify-between"
+    *ngIf="dataLoaded; else skeletonUser"
+  >
+    <div class="flex flex-row items-center space-x-4">
+      <div class="user-avatar">
+        <img [src]="user.avatar_url" />
+      </div>
+
+      <div class="flex flex-col">
+        <div>{{ user.first_name }} {{ user.sure_name }}</div>
+        <div>{{ user.email }}</div>
+        <div>{{ user.phone_number }}</div>
+      </div>
+    </div>
+    <div>
+      <span class="p-buttonset">
+        <button
+          (click)="editUser()"
+          pButton
+          pRipple
+          icon="pi pi-pencil"
+          pTooltip="Edytuj dane konta"
+          tooltipPosition="top"
+        ></button>
+        <button
+          (click)="changePassword()"
+          pButton
+          pRipple
+          icon="pi pi-key"
+          pTooltip="Zmień hasło"
+          tooltipPosition="top"
+        ></button>
+      </span>
+    </div>
+  </div>
+  <ng-container *ngIf="dataLoaded; else skeletonFirm">
+    <div
+      class="flex flex-row w-full p-4 justify-between bg-messages-messagesBg rounded"
+      *ngIf="user.firm"
+    >
+      <div class="flex flex-row items-center space-x-4">
+        <div class="user-avatar">
+          <img [src]="user.firm.logo_url" style="height: 100%" />
+        </div>
+        <div class="flex flex-col">
+          <div>{{ user.firm.name }}</div>
+          <div>
+            {{ user.firm.street }} {{ user.firm.number }},
+            {{ user.firm.zip_code }}
+            {{ user.firm.locality }}
+          </div>
+          <div>NIP: {{ user.firm.NIP }}</div>
+          <div>REGON: {{ user.firm.REGON }}</div>
+        </div>
+      </div>
+      <div>
+        <button
+          pButton
+          pRipple
+          icon="pi pi-pencil"
+          pTooltip="Edytuj dane firmy"
+          tooltipPosition="top"
+          (click)="editFirm()"
+        ></button>
+      </div></div
+  ></ng-container>
+</div>
+
+<p-sidebar class="sidebar" [(visible)]="displaySidebar" position="left">
+  <app-firm-user-form
+    *ngIf="displaySidebar && editingUser"
+    [edit]="true"
+    [userSetting]="true"
+    [user]="user"
+  ></app-firm-user-form>
+  <app-firm-edit-form
+    *ngIf="displaySidebar && editingFirm"
+    [firm]="user.firm"
+  ></app-firm-edit-form>
+
+  <app-user-change-password-form
+    *ngIf="displaySidebar && changingPassword"
+  ></app-user-change-password-form>
+</p-sidebar>
+<ng-template #skeletonUser>
+  <div
+    class="flex flex-row w-full p-4 bg-messages-messagesBg rounded justify-between"
+  >
+    <div class="flex flex-row items-center space-x-4 w-full">
+      <p-skeleton shape="circle" size="8rem"></p-skeleton>
+
+      <div class="flex flex-col w-full">
+        <p-skeleton
+          styleClass="mb-2"
+          width="25%"
+          borderRadius="16px"
+        ></p-skeleton>
+        <p-skeleton
+          width="25%"
+          styleClass="mb-2"
+          borderRadius="16px"
+        ></p-skeleton>
+        <p-skeleton
+          width="25%"
+          styleClass="mb-2"
+          borderRadius="16px"
+        ></p-skeleton>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</ng-template>
+<ng-template #skeletonFirm>
+  <div
+    class="flex flex-row w-full p-4 bg-messages-messagesBg rounded justify-between"
+  >
+    <div class="flex flex-row items-center space-x-4 w-full">
+      <p-skeleton shape="circle" size="8rem"></p-skeleton>
+
+      <div class="flex flex-col w-full">
+        <p-skeleton
+          styleClass="mb-2"
+          width="25%"
+          borderRadius="16px"
+        ></p-skeleton>
+        <p-skeleton
+          width="25%"
+          styleClass="mb-2"
+          borderRadius="16px"
+        ></p-skeleton>
+        <p-skeleton
+          width="25%"
+          styleClass="mb-2"
+          borderRadius="16px"
+        ></p-skeleton>
+        <p-skeleton
+          width="25%"
+          styleClass="mb-2"
+          borderRadius="16px"
+        ></p-skeleton>
+      </div>
+    </div>
+    <div></div>
+  </div>
+</ng-template>

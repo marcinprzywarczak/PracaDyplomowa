@@ -15,14 +15,18 @@ import { UserPanelFirmUsersComponent } from './components/user-panel-firm-users/
 import { TableModule } from 'primeng/table';
 import { InputTextModule } from 'primeng/inputtext';
 import { SidebarModule } from 'primeng/sidebar';
-import { FirmUserFormComponent } from './components/firm-user-form/firm-user-form.component';
 import { PasswordModule } from 'primeng/password';
-import { UserPanelEditOfferComponent } from './components/user-panel-edit-offer/user-panel-edit-offer.component';
 import { CheckboxModule } from 'primeng/checkbox';
 import { LoginGuard } from '../../shared/guards/login/login.guard';
 import { AuthGuard } from '../../shared/guards/auth/auth.guard';
 import { UserPanelMessagesComponent } from './components/user-panel-messages/user-panel-messages.component';
 import { BadgeModule } from 'primeng/badge';
+import { InputMaskModule } from 'primeng/inputmask';
+import { UserPanelSettingsComponent } from './components/user-panel-settings/user-panel-settings.component';
+import { RippleModule } from 'primeng/ripple';
+import { TooltipModule } from 'primeng/tooltip';
+import { AvatarModule } from 'primeng/avatar';
+import { SkeletonModule } from 'primeng/skeleton';
 
 @NgModule({
   declarations: [
@@ -31,9 +35,8 @@ import { BadgeModule } from 'primeng/badge';
     UserPanelOffersComponent,
     UserPanelFollowingOffersComponent,
     UserPanelFirmUsersComponent,
-    FirmUserFormComponent,
-    UserPanelEditOfferComponent,
     UserPanelMessagesComponent,
+    UserPanelSettingsComponent,
   ],
   imports: [
     CommonModule,
@@ -58,6 +61,10 @@ import { BadgeModule } from 'primeng/badge';
             path: 'wiadomosci',
             component: UserPanelMessagesComponent,
           },
+          {
+            path: 'ustawienia',
+            component: UserPanelSettingsComponent,
+          },
         ],
         canActivate: [AuthGuard],
       },
@@ -75,6 +82,11 @@ import { BadgeModule } from 'primeng/badge';
     PasswordModule,
     CheckboxModule,
     BadgeModule,
+    InputMaskModule,
+    RippleModule,
+    TooltipModule,
+    AvatarModule,
+    SkeletonModule,
   ],
 })
 export class UserPanelModule {}

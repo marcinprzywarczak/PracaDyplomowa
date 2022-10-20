@@ -1,6 +1,6 @@
 <div class="h-full flex flex-col items-center justify-center">
   <div
-    class="block p-6 rounded-lg shadow-lg bg-white max-w-sm w-full md:w-1/3 md:max-w-full"
+    class="block p-6 rounded-lg shadow-lg bg-messages-messagesBg max-w-sm w-full md:w-1/3 md:max-w-full"
   >
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <span class="text-red-600" *ngIf="error">{{ error }}</span>
@@ -10,6 +10,7 @@
         >
         <input
           pInputText
+          autocomplete="email"
           type="email"
           id="email"
           name="email"
@@ -46,11 +47,12 @@
         <label for="password" class="form-label inline-block mb-2 text-gray-700"
           >Hasło</label
         >
-        <p-password
-          styleClass="w-full"
+        <input
+          pPassword
+          autocomplete="current-password"
+          class="w-full"
           type="password"
           id="password"
-          class="password-input"
           formControlName="password"
           [ngClass]="
             (f['password'].invalid &&
@@ -61,7 +63,7 @@
           "
           [feedback]="false"
           placeholder="Wprowadź hasło"
-        ></p-password>
+        />
         <div
           *ngIf="
             f['password'].invalid &&
@@ -78,14 +80,13 @@
         </div>
       </div>
       <div class="w-full flex items-center justify-center">
-        <p-button
-          type="submit"
-          class="p-button-secondary"
+        <button
+          class="w-full"
+          pButton
           label="Zaloguj"
-          styleClass="bg-blue-600 hover:bg-blue-500 px-6"
           [loading]="loading"
           [disabled]="form.invalid || form.pristine"
-        ></p-button>
+        ></button>
       </div>
     </form>
   </div>

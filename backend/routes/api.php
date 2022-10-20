@@ -69,6 +69,9 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::post('/getUsers', [\App\Http\Controllers\UserController::class, 'index']);
         Route::post('/addUser', [\App\Http\Controllers\UserController::class, 'addNewFirmUser']);
         Route::post('/deleteFirmUser', [\App\Http\Controllers\UserController::class, 'deleteFirmUser']);
+        Route::post('/updateFirmUser', [\App\Http\Controllers\UserController::class, 'updateFirmUser']);
+        Route::post('/updateUser', [\App\Http\Controllers\UserController::class, 'updateUser']);
+        Route::post('/updateFirm', [\App\Http\Controllers\UserController::class, 'updateFirm']);
     });
 
     Route::name('messages.')->prefix('messages')->group(function (){

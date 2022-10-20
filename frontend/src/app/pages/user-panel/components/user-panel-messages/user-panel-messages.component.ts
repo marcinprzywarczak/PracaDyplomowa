@@ -33,7 +33,8 @@ export class UserPanelMessagesComponent implements OnInit, OnDestroy {
     this.messageService.getAllMessages().subscribe({
       next: (result) => {
         this.messageHeaders = result.messages;
-        this.currentMessageHeader = this.messageHeaders[0];
+        if (this.messageHeaders.length > 0)
+          this.currentMessageHeader = this.messageHeaders[0];
         this.dataLoaded = true;
         this.calculateUnreadMessages();
       },
@@ -46,10 +47,10 @@ export class UserPanelMessagesComponent implements OnInit, OnDestroy {
   listenOnMessages() {
     this.pusherService.channel.bind('message-header-sent', (data: any) => {
       this.messageHeaders.unshift(data.messageHeader);
-      console.log(data);
+      if (this.messageHeaders.length === 1)
+        this.currentMessageHeader = this.messageHeaders[0];
     });
     this.pusherService.channel.bind('message-sent', (data: any) => {
-      console.log('message sent', data);
       this.messageHeaders.find(
         (x) => x.id === data.messageHeader.id
       )!.updated_at = data.messageHeader.updated_at;

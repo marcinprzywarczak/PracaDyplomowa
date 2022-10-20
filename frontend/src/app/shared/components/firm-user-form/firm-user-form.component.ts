@@ -5,15 +5,16 @@ import {
   ValidatorFn,
   Validators,
 } from '@angular/forms';
-import { LoginService } from '../../../../shared/services/login/login.service';
+import { LoginService } from '../../services/login/login.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { ApiService } from '../../../../shared/services/api/api.service';
-import { ReloadDataTriggerService } from '../../../../shared/services/reload-data-trigger/reload-data-trigger.service';
-import { FirmUserService } from '../../../../shared/services/firm-user-service/firm-user.service';
-import { AlertService } from '../../../../shared/services/alert-service/alert.service';
-import { HideSidebarTriggerService } from '../../../../shared/services/hide-sidebar-trigger/hide-sidebar-trigger.service';
-import { User } from '../../../../shared/models/user';
+import { ApiService } from '../../services/api/api.service';
+import { ReloadDataTriggerService } from '../../services/reload-data-trigger/reload-data-trigger.service';
+import { FirmUserService } from '../../services/firm-user-service/firm-user.service';
+import { AlertService } from '../../services/alert-service/alert.service';
+import { HideSidebarTriggerService } from '../../services/hide-sidebar-trigger/hide-sidebar-trigger.service';
+import { User } from '../../models/user';
+import { environment } from '../../../../environments/environment';
 
 const confirmedValidator = (fg: FormGroup) => {
   const control = fg.get('password');
@@ -33,26 +34,27 @@ const confirmedValidator = (fg: FormGroup) => {
   styleUrls: ['./firm-user-form.component.scss'],
 })
 export class FirmUserFormComponent implements OnInit {
+  BASE_API_URL: string = environment.apiUrl;
   @Input() edit: boolean;
   @Input() user: User;
+  @Input() userSetting: boolean;
   form: FormGroup;
-  isFirmAccount: boolean = false;
   userAvatar: File;
-  firmLogo: File;
   isSubmitted: boolean = false;
   serverErrors: any = [];
   userAvatarSrc: string | ArrayBuffer | null = '';
   loading: boolean = false;
+  photoChanged: boolean = false;
   constructor(
     private formBuilder: FormBuilder,
     private reloadDataTrigger: ReloadDataTriggerService,
     private firmUserService: FirmUserService,
     private alertService: AlertService,
-    private hideSidebarTrigger: HideSidebarTriggerService
+    private hideSidebarTrigger: HideSidebarTriggerService,
+    private http: HttpClient
   ) {}
 
   ngOnInit(): void {
-    console.log(this.edit, this.user);
     this.form = this.formBuilder.group(
       {
         email: [
@@ -72,7 +74,7 @@ export class FirmUserFormComponent implements OnInit {
           this.edit ? this.user.phone_number : null,
           [
             Validators.required,
-            Validators.pattern(/^(?:\(?\?)?(?:[-\s]*(\d)){9}\)?$/),
+            // Validators.pattern(/^(?:\(?\?)?(?:[-\s]*(\d)){9}\)?$/),
           ],
         ],
         sure_name: [
@@ -83,6 +85,7 @@ export class FirmUserFormComponent implements OnInit {
       },
       { validators: confirmedValidator }
     );
+    if (this.edit) this.setPhoto();
   }
   get f() {
     return this.form.controls;
@@ -90,39 +93,73 @@ export class FirmUserFormComponent implements OnInit {
   onSubmit() {
     if (this.form.invalid) return;
 
-    this.loading = true;
     const formData = new FormData();
     if (this.userAvatarSrc !== '') {
       formData.append('user_avatar', this.userAvatar, this.userAvatar.name);
     }
-
     formData.append('email', this.form.controls['email'].value);
     formData.append('first_name', this.form.controls['first_name'].value);
     formData.append('sure_name', this.form.controls['sure_name'].value);
     formData.append('phone_number', this.form.controls['phone_number'].value);
-    formData.append('password', this.form.controls['password'].value);
-    formData.append(
-      'password_confirmation',
-      this.form.controls['password_conf'].value
-    );
+    this.loading = true;
+    if (this.edit) {
+      formData.append('photo_changed', this.photoChanged ? 'true' : 'false');
+      if (this.userSetting) {
+        this.editUser(formData);
+      } else {
+        this.editFirmUser(formData);
+      }
+    } else {
+      formData.append('password', this.form.controls['password'].value);
+      formData.append(
+        'password_confirmation',
+        this.form.controls['password_conf'].value
+      );
+      this.addNewUser(formData);
+    }
+  }
+
+  addNewUser(formData: FormData) {
     this.firmUserService.addNewFirmUser(formData).subscribe({
       next: (result) => {
         this.alertService.showSuccess('Użytkownik pomyślnie dodany!');
-        this.reloadDataTrigger.triggerFirmUsersReload();
-        this.hideSidebarTrigger.triggerAddFirmUserSidebarHide();
-        this.form.reset();
-        this.userAvatarSrc = '';
-        this.userAvatar = null as any;
-        this.loading = false;
+        this.afterRequestSuccess();
       },
       error: (err) => {
         this.alertService.showError('Błąd podczas dodawania pracownika');
-        this.serverErrors = err.error.errors;
+        if (err.error.errors) this.serverErrors = err.error.errors;
         this.loading = false;
       },
     });
-    console.log(this.form.errors);
-    console.log(this.form.errors?.confirmedPassword);
+  }
+
+  editFirmUser(formData: FormData) {
+    this.firmUserService.editFirmUser(formData).subscribe({
+      next: (result) => {
+        this.alertService.showSuccess('Użytkownik pomyślnie zaktualizowany!');
+        this.afterRequestSuccess();
+      },
+      error: (err) => {
+        this.alertService.showError('Błąd podczas aktualizacji pracownika');
+        if (err.error.errors) this.serverErrors = err.error.errors;
+        this.loading = false;
+      },
+    });
+  }
+
+  editUser(formData: FormData) {
+    this.firmUserService.editUser(formData).subscribe({
+      next: (result) => {
+        this.alertService.showSuccess('Dane pomyślnie zaktualizowane');
+        this.afterRequestSuccess();
+        this.reloadDataTrigger.triggerUserInfoReload();
+      },
+      error: (err) => {
+        this.alertService.showError('Błąd podczas aktualizacji danych');
+        if (err.error.errors) this.serverErrors = err.error.errors;
+        this.loading = false;
+      },
+    });
   }
 
   onChangeUserAvatar(event: any) {
@@ -135,6 +172,28 @@ export class FirmUserFormComponent implements OnInit {
   deleteUserAvatar() {
     this.userAvatarSrc = '';
     this.userAvatar = null as any;
-    this.f['mainPhoto'].setValue(null);
+    if (this.edit) this.photoChanged = true;
+    this.f['user_avatar'].patchValue('');
+    this.form.markAsDirty();
+  }
+
+  setPhoto() {
+    this.http
+      .get(`${this.BASE_API_URL}/api/image/${this.user.avatar}`, {
+        responseType: 'blob',
+      })
+      .subscribe((result) => {
+        this.userAvatar = new File([result], 'photo');
+      });
+    this.userAvatarSrc = this.user.avatar_url;
+  }
+
+  afterRequestSuccess() {
+    this.reloadDataTrigger.triggerFirmUsersReload();
+    this.hideSidebarTrigger.triggerAddFirmUserSidebarHide();
+    this.form.reset();
+    this.userAvatarSrc = '';
+    this.userAvatar = null as any;
+    this.loading = false;
   }
 }

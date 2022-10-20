@@ -29,12 +29,32 @@ export class FirmUserService {
       }
     );
   }
+
+  editFirmUser(firmUserData: FormData) {
+    return this.http.post<any>(
+      `${this.BASE_API_URL}/api/users/updateFirmUser`,
+      firmUserData,
+      {
+        withCredentials: true,
+      }
+    );
+  }
   deleteFirmUser(userId: number) {
     return this.http.post<any>(
       `${this.BASE_API_URL}/api/users/deleteFirmUser`,
       {
         userId: userId,
       },
+      {
+        withCredentials: true,
+      }
+    );
+  }
+
+  editUser(userData: FormData) {
+    return this.http.post<any>(
+      `${this.BASE_API_URL}/api/users/updateUser`,
+      userData,
       {
         withCredentials: true,
       }

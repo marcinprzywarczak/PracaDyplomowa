@@ -2,9 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\UpdateFirmRequest;
+use App\Http\Requests\User\UpdateFirmUserRequest;
+use App\Http\Requests\User\UpdateUserRequest;
 use App\Http\Requests\User\UserRequest;
+use App\Models\Firm;
 use App\Models\Offer;
 use App\Models\User;
+use App\Services\UserService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Exception;
@@ -118,17 +123,75 @@ class UserController extends \Illuminate\Routing\Controller
         ]);
     }
 
-    public function updateFirmUser(Request $request) {
-        $user = User::findOrFail($request->input('userId'));
-        $user->update([
-            'email' => $request->input('email'),
-            'first_name' => $request->input('first_name'),
-            'sure_name' => $request->input('sure_name'),
-            'phone_number' => $request->input('phone_number'),
-        ]);
+    public function updateFirmUser(UpdateFirmUserRequest $request) {
+        $user = User::findOrFail($request->input('user_id'));
+        return UserService::updateUser($request, $user);
+    }
 
-        return response()->json([
-            'message' => 'suksces'
-        ]);
+    public function updateUser(UpdateUserRequest $request) {
+        $user = Auth::user();
+        return UserService::updateUser($request, $user);
+    }
+
+    public function updateFirm(UpdateFirmRequest $request) {
+
+        $photoChanged = filter_var($request->input('photo_changed'), FILTER_VALIDATE_BOOLEAN);
+        try {
+            $firmLogo = '';
+            $firm = Firm::findOrFail($request->input('firm_id'));
+            if($photoChanged){
+                if($firm->logo !== 'avatars/default_avatar.jpg' && $firm->logo !== null)
+                {
+                    Storage::delete($firm->logo);
+                }
+                if($request->hasFile('firm_logo') && $request->file('firm_logo')->isValid()){
+                    $firmLogo = $request->file('firm_logo')->store('avatars');
+
+                    if(!is_string($firmLogo)){
+                        return response()->json([
+                            'error' => 'Błąd podczas zapisywania logo firmy'
+                        ], 400);
+                    }
+                } else {
+                    $firmLogo = 'avatars/default_avatar.jpg';
+                }
+            }
+            if($photoChanged) {
+                $firm->update([
+                    'name' => $request->input('name'),
+                    'NIP' => $request->input('NIP'),
+                    'REGON' => $request->input('REGON'),
+                    'street' => $request->input('street'),
+                    'number' => $request->input('number'),
+                    'zip_code' => $request->input('zip_code'),
+                    'locality' => $request->input('locality'),
+                    'logo' => $firmLogo,
+                    'logo_url' => asset($firmLogo),
+                ]);
+            } else {
+                $firm->update([
+                    'name' => $request->input('name'),
+                    'NIP' => $request->input('NIP'),
+                    'REGON' => $request->input('REGON'),
+                    'street' => $request->input('street'),
+                    'number' => $request->input('number'),
+                    'zip_code' => $request->input('zip_code'),
+                    'locality' => $request->input('locality'),
+                ]);
+            }
+
+            return response()->json([
+                'message' => 'suksces'
+            ]);
+
+        } catch (Exception $error){
+            if(is_string($firmLogo)) {
+                Storage::delete($firmLogo);
+            }
+
+            return response()->json([
+                'error' => $error
+            ], 400);
+        }
     }
 }

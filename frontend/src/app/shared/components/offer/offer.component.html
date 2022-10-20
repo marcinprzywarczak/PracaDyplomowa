@@ -48,18 +48,18 @@
       *ngIf="offer.offer_status?.name === 'aktywne'; else restoreButton"
     >
       <div>
-        <a
-          [routerLink]="['/ogloszenie/', offer.id, 'edytuj']"
-          pButton
-          pRipple
-          pTooltip="Edytuj"
-          tooltipPosition="top"
-          icon="pi pi-pencil"
-          style="
-            border-bottom-right-radius: 0 !important;
-            border-top-right-radius: 0 !important;
-          "
-        >
+        <a [routerLink]="['/ogloszenie/', offer.id, 'edytuj']">
+          <button
+            pButton
+            pRipple
+            pTooltip="Edytuj"
+            tooltipPosition="top"
+            icon="pi pi-pencil"
+            style="
+              border-bottom-right-radius: 0 !important;
+              border-top-right-radius: 0 !important;
+            "
+          ></button>
         </a>
         <button
           (click)="completeOffer()"

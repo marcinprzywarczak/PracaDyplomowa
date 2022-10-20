@@ -1,17 +1,17 @@
 <div class="flex flex-col items-center justify-center mt-12">
-  <div class="p-6 rounded-lg shadow-lg bg-green-300 w-full md:w-1/2">
+  <div class="p-6 rounded-lg shadow-lg bg-messages-messagesBg w-full md:w-1/2">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-group flex flex-row items-center justify-items-center">
         <label for="isFirmAccount">Konto firmowe</label>
-        <input
+        <p-checkbox
           class="ml-2"
-          [(ngModel)]="isFirmAccount"
-          (change)="checkValue(isFirmAccount)"
+          [binary]="true"
+          (onChange)="checkValue($event)"
           type="checkbox"
           id="isFirmAccount"
           name="isFirmAccount"
           formControlName="isFirmAccount"
-        />
+        ></p-checkbox>
         <!--        <p-inputSwitch [(ngModel)]="isFirmAccount" formControlName="isFirmAccount"></p-inputSwitch>-->
       </div>
       <div class="form-group w-full">
@@ -19,6 +19,7 @@
           >Adres email</label
         >
         <input
+          autocomplete="email"
           type="email"
           id="email"
           name="email"
@@ -190,11 +191,12 @@
         <label for="password" class="form-label inline-block pb-1 text-gray-700"
           >Hasło</label
         >
-        <p-password
-          styleClass="w-full"
+        <input
+          pPassword
+          autocomplete="new-password"
+          class="w-full"
           type="password"
           id="password"
-          class="password-input"
           formControlName="password"
           [ngClass]="
             (f['password'].invalid &&
@@ -205,7 +207,7 @@
           "
           placeholder="Hasło"
           [feedback]="false"
-        ></p-password>
+        />
         <div
           *ngIf="
             f['password'].invalid &&
@@ -232,11 +234,13 @@
           class="form-label inline-block pb-1 text-gray-700"
           >Potwierdź hasło</label
         >
-        <p-password
-          class="password-input"
-          styleClass="w-full"
+        <input
+          type="password"
+          class="w-full"
           id="password_conf"
           formControlName="password_conf"
+          pPassword
+          autocomplete="new-password"
           [ngClass]="
             f['password_conf'].invalid &&
             (f['password_conf'].touched ||
@@ -247,10 +251,10 @@
           "
           placeholder="Powtórz hasło"
           [feedback]="false"
-        ></p-password>
+        />
         <div
           *ngIf="
-            f['password_conf'].invalid &&
+            (f['password_conf'].invalid || form.errors?.confirmedPassword) &&
             (f['password_conf'].touched ||
               f['password_conf'].dirty ||
               isSubmitted)
@@ -260,45 +264,44 @@
           <div *ngIf="f['password_conf'].errors?.['required']">
             Potwierdzenie hasła jest wymagane!
           </div>
-          <div *ngIf="f['password_conf'].errors?.['confirmedValidator']">
+          <div *ngIf="form.errors?.confirmedPassword">
             Hasło i powtórzone hasło muszą być takie same!
           </div>
         </div>
       </div>
       <div class="form-group">
-        <label
-          for="user_avatar"
-          class="form-label inline-block pb-1 text-gray-700"
-          >Awatar</label
-        >
-        <input
-          type="file"
-          id="user_avatar"
-          name="user_avatar"
-          formControlName="user_avatar"
-          (change)="onChangeUserAvatar($event)"
-          class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-          placeholder="Wybierz zdjęcie"
-          [ngClass]="
-            (f['user_avatar'].invalid &&
+        <label>Awatar</label>
+        <div class="photo-input">
+          <label
+            for="userAvatar"
+            class="photo-input-label"
+            [ngClass]="[
+              userAvatarSrc !== '' ? 'hidden' : ' flex',
+              f['user_avatar'].invalid &&
               (f['user_avatar'].touched ||
                 f['user_avatar'].dirty ||
-                isSubmitted)) ||
-            serverErrors.user_avatar
-              ? 'border-red-600'
-              : 'border-gray-300'
-          "
-        />
-        <!--        <div *ngIf="f['user_avatar'].invalid && (f['user_avatar'].touched || f['user_avatar'].dirty || isSubmitted)" class="text-red-600 font-semibold">-->
-        <!--          <div *ngIf="f['user_avatar'].errors?.['required']">Hasło jest wymagane!</div>-->
-        <!--        </div>-->
-        <div
-          *ngIf="serverErrors.user_avatar"
-          class="text-red-600 font-semibold"
-        >
-          <div *ngFor="let user_avatar of serverErrors.user_avatar">
-            {{ user_avatar }}
-          </div>
+                isSubmitted)
+                ? 'border border-red-600'
+                : ''
+            ]"
+            ><i class="pi pi-plus-circle text-xl"></i
+          ></label>
+          <input
+            id="userAvatar"
+            class="hidden"
+            type="file"
+            formControlName="user_avatar"
+            (change)="onChangeUserAvatar($event)"
+          />
+          <ng-container *ngIf="userAvatarSrc">
+            <div class="relative w-fit">
+              <img [src]="userAvatarSrc" width="300px" height="100px" />
+              <i
+                class="pi pi-times photo-input-delete"
+                (click)="deleteUserAvatar()"
+              ></i>
+            </div>
+          </ng-container>
         </div>
       </div>
       <div *ngIf="isFirmAccount">
@@ -577,27 +580,36 @@
             class="form-label inline-block pb-1 text-gray-700"
             >Logo firmy</label
           >
-          <input
-            type="file"
-            id="firm_logo"
-            name="firm_logo"
-            formControlName="firm_logo"
-            (change)="onChangeFirmLogo($event)"
-            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-            placeholder="Wybierz logo firmy"
-            [ngClass]="
-              (f['firm_logo'].invalid &&
-                (f['firm_logo'].touched ||
-                  f['firm_logo'].dirty ||
-                  isSubmitted)) ||
-              serverErrors.firm_logo
-                ? 'border-red-600'
-                : 'border-gray-300'
-            "
-          />
-          <!--          <div *ngIf="f['firm_logo'].invalid && (f['firm_logo'].touched || f['firm_logo'].dirty || isSubmitted)" class="text-red-600 font-semibold">-->
-          <!--            <div *ngIf="f['firm_logo'].errors?.['required']">Hasło jest wymagane!</div>-->
-          <!--          </div>-->
+          <div class="photo-input">
+            <label
+              for="firm_logo"
+              class="photo-input-label"
+              [ngClass]="[
+                firmLogoSrc !== '' ? 'hidden' : ' flex',
+                f['firm_logo'].invalid &&
+                (f['firm_logo'].touched || f['firm_logo'].dirty || isSubmitted)
+                  ? 'border border-red-600'
+                  : ''
+              ]"
+              ><i class="pi pi-plus-circle text-xl"></i
+            ></label>
+            <input
+              id="firm_logo"
+              class="hidden"
+              type="file"
+              formControlName="firm_logo"
+              (change)="onChangeFirmLogo($event)"
+            />
+            <ng-container *ngIf="firmLogoSrc">
+              <div class="relative w-fit">
+                <img [src]="firmLogoSrc" width="300px" height="100px" />
+                <i
+                  class="pi pi-times photo-input-delete"
+                  (click)="deleteFirmLogo()"
+                ></i>
+              </div>
+            </ng-container>
+          </div>
           <div
             *ngIf="serverErrors.firm_logo"
             class="text-red-600 font-semibold"
@@ -607,22 +619,51 @@
             </div>
           </div>
         </div>
+        <!--        <div class="form-group">-->
+        <!--          <label-->
+        <!--            for="firm_logo"-->
+        <!--            class="form-label inline-block pb-1 text-gray-700"-->
+        <!--            >Logo firmy</label-->
+        <!--          >-->
+        <!--          <input-->
+        <!--            type="file"-->
+        <!--            id="firm_logo"-->
+        <!--            name="firm_logo"-->
+        <!--            formControlName="firm_logo"-->
+        <!--            (change)="onChangeFirmLogo($event)"-->
+        <!--            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"-->
+        <!--            placeholder="Wybierz logo firmy"-->
+        <!--            [ngClass]="-->
+        <!--              (f['firm_logo'].invalid &&-->
+        <!--                (f['firm_logo'].touched ||-->
+        <!--                  f['firm_logo'].dirty ||-->
+        <!--                  isSubmitted)) ||-->
+        <!--              serverErrors.firm_logo-->
+        <!--                ? 'border-red-600'-->
+        <!--                : 'border-gray-300'-->
+        <!--            "-->
+        <!--          />-->
+        <!--          &lt;!&ndash;          <div *ngIf="f['firm_logo'].invalid && (f['firm_logo'].touched || f['firm_logo'].dirty || isSubmitted)" class="text-red-600 font-semibold">&ndash;&gt;-->
+        <!--          &lt;!&ndash;            <div *ngIf="f['firm_logo'].errors?.['required']">Hasło jest wymagane!</div>&ndash;&gt;-->
+        <!--          &lt;!&ndash;          </div>&ndash;&gt;-->
+        <!--          <div-->
+        <!--            *ngIf="serverErrors.firm_logo"-->
+        <!--            class="text-red-600 font-semibold"-->
+        <!--          >-->
+        <!--            <div *ngFor="let firm_logo of serverErrors.firm_logo">-->
+        <!--              {{ firm_logo }}-->
+        <!--            </div>-->
+        <!--          </div>-->
+        <!--        </div>-->
       </div>
       <div class="w-full flex items-center justify-center">
-        <p-button
-          type="submit"
-          class="p-button-secondary"
+        <button
+          class="w-full"
+          pButton
           label="Zarejestruj"
-          styleClass="bg-blue-600 hover:bg-blue-500 px-6"
           [disabled]="form.invalid || form.pristine"
-        ></p-button>
+        ></button>
       </div>
-      <!--      <button-->
-      <!--        type="submit"-->
-      <!--        class="w-full px-6 py-2.5 bg-blue-600 text-white font-medium text-xs leading-tight uppercase rounded shadow-md hover:bg-blue-700 hover:shadow-lg focus:bg-blue-700 focus:shadow-lg focus:outline-none focus:ring-0 active:bg-blue-800 active:shadow-lg transition duration-150 ease-in-out"-->
-      <!--      >-->
-      <!--        Zarejestruj się!-->
-      <!--      </button>-->
     </form>
   </div>
 </div>

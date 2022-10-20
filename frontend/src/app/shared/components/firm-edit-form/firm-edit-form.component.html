@@ -1,0 +1,286 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="space-y-2 px-6">
+    <div class="form-group">
+      <label for="name" class="form-label inline-block pb-1 text-gray-700"
+        >Nazwa firmy</label
+      >
+      <input
+        pInputText
+        class="w-full"
+        type="text"
+        id="name"
+        name="name"
+        formControlName="name"
+        placeholder="Wprowadź nazwę firmy"
+        [ngClass]="
+          (f['name'].invalid &&
+            (f['name'].touched || f['name'].dirty || isSubmitted)) ||
+          serverErrors.name
+            ? 'border-red-600'
+            : 'border-gray-300'
+        "
+      />
+      <div
+        *ngIf="
+          f['name'].invalid &&
+          (f['name'].touched || f['name'].dirty || isSubmitted)
+        "
+        class="text-red-600 font-semibold"
+      >
+        <div *ngIf="f['name'].errors?.['required']">
+          Nazwa firmy jest wymagana!
+        </div>
+      </div>
+      <div *ngIf="serverErrors.name" class="text-red-600 font-semibold">
+        <div *ngFor="let name of serverErrors.name">
+          {{ name }}
+        </div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="NIP" class="form-label inline-block pb-1 text-gray-700"
+        >NIP</label
+      >
+      <input
+        pInputText
+        class="w-full"
+        type="text"
+        id="NIP"
+        name="NIP"
+        formControlName="NIP"
+        placeholder="Wprowadź numer NIP"
+        [ngClass]="
+          (f['NIP'].invalid &&
+            (f['NIP'].touched || f['NIP'].dirty || isSubmitted)) ||
+          serverErrors.NIP
+            ? 'border-red-600'
+            : 'border-gray-300'
+        "
+      />
+      <div
+        *ngIf="
+          f['NIP'].invalid &&
+          (f['NIP'].touched || f['NIP'].dirty || isSubmitted)
+        "
+        class="text-red-600 font-semibold"
+      >
+        <div *ngIf="f['NIP'].errors?.['required']">NIP jest wymagany!</div>
+      </div>
+      <div *ngIf="serverErrors.NIP" class="text-red-600 font-semibold">
+        <div *ngFor="let NIP of serverErrors.NIP">{{ NIP }}</div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="REGON" class="form-label inline-block pb-1 text-gray-700"
+        >REGON</label
+      >
+      <input
+        pInputText
+        class="w-full"
+        type="text"
+        id="REGON"
+        name="REGON"
+        formControlName="REGON"
+        placeholder="Wprowadź numer REGON"
+        [ngClass]="
+          (f['REGON'].invalid &&
+            (f['REGON'].touched || f['REGON'].dirty || isSubmitted)) ||
+          serverErrors.REGON
+            ? 'border-red-600'
+            : 'border-gray-300'
+        "
+      />
+      <div
+        *ngIf="
+          f['REGON'].invalid &&
+          (f['REGON'].touched || f['REGON'].dirty || isSubmitted)
+        "
+        class="text-red-600 font-semibold"
+      >
+        <div *ngIf="f['REGON'].errors?.['required']">REGON jest wymagany!</div>
+      </div>
+      <div *ngIf="serverErrors.REGON" class="text-red-600 font-semibold">
+        <div *ngFor="let REGON of serverErrors.REGON">{{ REGON }}</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="street" class="form-label inline-block pb-1 text-gray-700"
+        >Ulica</label
+      >
+      <input
+        type="text"
+        id="street"
+        name="street"
+        formControlName="street"
+        pInputText
+        class="w-full"
+        placeholder="Wprowadź nazwę ulicy"
+      />
+    </div>
+    <div class="form-group">
+      <label for="number" class="form-label inline-block pb-1 text-gray-700"
+        >Numer budynku</label
+      >
+      <input
+        type="text"
+        id="number"
+        name="number"
+        formControlName="number"
+        pInputText
+        class="w-full"
+        placeholder="Wprowadź numer budynku"
+        [ngClass]="
+          (f['number'].invalid &&
+            (f['number'].touched || f['number'].dirty || isSubmitted)) ||
+          serverErrors.number
+            ? 'border-red-600'
+            : 'border-gray-300'
+        "
+      />
+      <div
+        *ngIf="
+          f['number'].invalid &&
+          (f['number'].touched || f['number'].dirty || isSubmitted)
+        "
+        class="text-red-600 font-semibold"
+      >
+        <div *ngIf="f['number'].errors?.['required']">
+          Numer budynku jest wymagany!
+        </div>
+      </div>
+      <div *ngIf="serverErrors.number" class="text-red-600 font-semibold">
+        <div *ngFor="let number of serverErrors.number">{{ number }}</div>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="locality" class="form-label inline-block pb-1 text-gray-700"
+        >Miejscowość</label
+      >
+      <input
+        type="text"
+        id="locality"
+        name="locality"
+        formControlName="locality"
+        pInputText
+        class="w-full"
+        placeholder="Wprowadź miejscowość"
+        [ngClass]="
+          (f['locality'].invalid &&
+            (f['locality'].touched || f['locality'].dirty || isSubmitted)) ||
+          serverErrors.locality
+            ? 'border-red-600'
+            : 'border-gray-300'
+        "
+      />
+      <div
+        *ngIf="
+          f['locality'].invalid &&
+          (f['locality'].touched || f['locality'].dirty || isSubmitted)
+        "
+        class="text-red-600 font-semibold"
+      >
+        <div *ngIf="f['locality'].errors?.['required']">
+          Miejscowość jest wymagana!
+        </div>
+      </div>
+      <div *ngIf="serverErrors.locality" class="text-red-600 font-semibold">
+        <div *ngFor="let locality of serverErrors.locality">
+          {{ locality }}
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="zip_code" class="form-label inline-block pb-1 text-gray-700"
+        >Kod pocztowy</label
+      >
+      <p-inputMask
+        styleClass="w-full {{ serverErrors.zip_code ? 'border-red-600' : '' }}"
+        type="text"
+        id="zip_code"
+        name="zip_code"
+        formControlName="zip_code"
+        mask="9999-999"
+        class="w-full"
+        placeholder="Wprowadź kod pocztowy"
+        [ngClass]="
+          (f['zip_code'].invalid &&
+            (f['zip_code'].touched || f['zip_code'].dirty || isSubmitted)) ||
+          serverErrors.zip_code
+            ? 'border-red-600'
+            : 'border-gray-300'
+        "
+      ></p-inputMask>
+      <div
+        *ngIf="
+          f['zip_code'].invalid &&
+          (f['zip_code'].touched || f['zip_code'].dirty || isSubmitted)
+        "
+        class="text-red-600 font-semibold"
+      >
+        <div *ngIf="f['zip_code'].errors?.['required']">
+          Kod pocztowy jest wymagany!
+        </div>
+        <div *ngIf="f['zip_code'].errors?.['pattern']">
+          Kod pocztowy jest wymagany w formacie xx-xxx!
+        </div>
+      </div>
+      <div *ngIf="serverErrors.zip_code" class="text-red-600 font-semibold">
+        <div *ngFor="let zip_code of serverErrors.zip_code">
+          {{ zip_code }}
+        </div>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="firm_logo" class="form-label inline-block pb-1 text-gray-700"
+        >Logo firmy</label
+      >
+      <div class="photo-input">
+        <label
+          for="firm_logo"
+          class="photo-input-label"
+          [ngClass]="[
+            firmLogoSrc !== '' ? 'hidden' : ' flex',
+            f['firm_logo'].invalid &&
+            (f['firm_logo'].touched || f['firm_logo'].dirty || isSubmitted)
+              ? 'border border-red-600'
+              : ''
+          ]"
+          ><i class="pi pi-plus-circle text-xl"></i
+        ></label>
+        <input
+          id="firm_logo"
+          class="hidden"
+          type="file"
+          formControlName="firm_logo"
+          (change)="onChangeFirmLogo($event)"
+        />
+        <ng-container *ngIf="firmLogoSrc">
+          <div class="relative w-fit">
+            <img [src]="firmLogoSrc" width="300px" height="100px" />
+            <i
+              class="pi pi-times photo-input-delete"
+              (click)="deleteFirmLogo()"
+            ></i>
+          </div>
+        </ng-container>
+      </div>
+      <div *ngIf="serverErrors.firm_logo" class="text-red-600 font-semibold">
+        <div *ngFor="let firm_logo of serverErrors.firm_logo">
+          {{ firm_logo }}
+        </div>
+      </div>
+    </div>
+    <div class="w-full">
+      <button
+        class="w-full"
+        pButton
+        [loading]="loading"
+        label="Aktualizuj"
+        [disabled]="form.invalid || form.pristine"
+      ></button>
+    </div>
+  </div>
+</form>

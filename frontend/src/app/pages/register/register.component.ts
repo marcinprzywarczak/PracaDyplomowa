@@ -13,7 +13,17 @@ import { Router } from '@angular/router';
 import { UserRegistration } from '../../shared/models/user-registration';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { ApiService } from '../../shared/services/api/api.service';
-
+const confirmedValidator = (fg: FormGroup) => {
+  const control = fg.get('password');
+  const matchingControl = fg.get('password_conf');
+  if (control?.value !== matchingControl?.value) {
+    control?.updateValueAndValidity({ onlySelf: true });
+    matchingControl?.updateValueAndValidity({ onlySelf: true });
+    return { ['confirmedPassword']: true };
+  } else {
+    return null;
+  }
+};
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -25,18 +35,8 @@ export class RegisterComponent implements OnInit {
   userAvatar: File;
   firmLogo: File;
   isSubmitted: boolean = false;
-  // emailErrors: any = [];
-  // firmNameErrors: any = [];
-  // firstNameErrors: any = [];
-  // localityErrors: any = [];
-  // nipErrors: any = [];
-  // numberErrors: any = [];
-  // passwordErrors: any = [];
-  // phoneNumberErrors: any = [];
-  // regonErrors: any = [];
-  // sureNameErrors: any = [];
-  // zipCodeErrors: any = [];
-
+  userAvatarSrc: string | ArrayBuffer | null = '';
+  firmLogoSrc: string | ArrayBuffer | null = '';
   serverErrors: any = [];
   constructor(
     private formBuilder: FormBuilder,
@@ -72,7 +72,7 @@ export class RegisterComponent implements OnInit {
         user_avatar: [],
         firm_logo: [],
       },
-      { validator: this.confirmedValidator('password', 'password_conf') }
+      { validators: confirmedValidator }
     );
   }
   get f() {
@@ -82,7 +82,7 @@ export class RegisterComponent implements OnInit {
     this.isSubmitted = true;
     if (!this.form.invalid) {
       const formData = new FormData();
-      if (this.userAvatar)
+      if (this.userAvatarSrc !== '')
         formData.append('user_avatar', this.userAvatar, this.userAvatar.name);
       if (this.firmLogo)
         formData.append('firm_logo', this.firmLogo, this.firmLogo.name);
@@ -182,19 +182,7 @@ export class RegisterComponent implements OnInit {
           error: (err) => {
             if (err.status === 422) {
               //nie przeszło walidacji po stronie serwera
-              console.log(err.error.errors);
-              // this.emailErrors = err.error.errors.email;
-              // this.firmNameErrors = err.error.errors.firm_name;
-              // this.firstNameErrors = err.error.errors.first_name;
-              // this.localityErrors = err.error.errors.locality;
-              // this.nipErrors = err.error.errors.nip;
-              // this.numberErrors = err.error.errors.number;
-              // this.passwordErrors = err.error.errors.password;
-              // this.phoneNumberErrors = err.error.errors.phone_number;
-              // this.regonErrors = err.error.errors.regon;
-              // this.sureNameErrors = err.error.errors.sure_name;
-              // this.zipCodeErrors = err.error.errors.zip_code;
-              this.serverErrors = err.error.errors;
+              if (err.error.errors) this.serverErrors = err.error.errors;
             } else {
               //wyświetlić toast z informacją o błędzie serwera
               console.log('err', err);
@@ -206,14 +194,14 @@ export class RegisterComponent implements OnInit {
   }
 
   checkValue(event: any) {
-    if (event) {
+    if (event.checked) {
       this.setFirmValidators();
     } else {
       this.clearFirmValidators();
       this.f['firm_name'].clearValidators();
       this.f['firm_name'].updateValueAndValidity();
     }
-    this.isFirmAccount = event;
+    this.isFirmAccount = event.checked;
   }
   setFirmValidators() {
     this.f['firm_name'].setValidators([Validators.required]);
@@ -244,33 +232,27 @@ export class RegisterComponent implements OnInit {
 
   onChangeUserAvatar(event: any) {
     this.userAvatar = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e) => (this.userAvatarSrc = reader.result);
+    reader.readAsDataURL(this.userAvatar);
+  }
+
+  deleteUserAvatar() {
+    this.userAvatarSrc = '';
+    this.userAvatar = null as any;
+    this.f['user_avatar'].patchValue('');
   }
 
   onChangeFirmLogo(event: any) {
     this.firmLogo = event.target.files[0];
+    const reader = new FileReader();
+    reader.onload = (e) => (this.firmLogoSrc = reader.result);
+    reader.readAsDataURL(this.firmLogo);
   }
 
-  checkPasswords: ValidatorFn = (group: any): ValidationErrors | null => {
-    //console.log(group.controls);
-    let pass = group.controls['password'].value;
-    let confirmPass = group.controls['password_conf'].value;
-    return pass === confirmPass ? null : { notSame: true };
-  };
-  confirmedValidator(controlName: string, matchingControlName: string) {
-    return (formGroup: FormGroup) => {
-      const control = formGroup.controls[controlName];
-      const matchingControl = formGroup.controls[matchingControlName];
-      if (
-        matchingControl.errors &&
-        !matchingControl.errors['confirmedValidator']
-      ) {
-        return;
-      }
-      if (control.value !== matchingControl.value) {
-        matchingControl.setErrors({ confirmedValidator: true });
-      } else {
-        matchingControl.setErrors(null);
-      }
-    };
+  deleteFirmLogo() {
+    this.firmLogoSrc = '';
+    this.firmLogo = null as any;
+    this.f['firm_logo'].patchValue('');
   }
 }

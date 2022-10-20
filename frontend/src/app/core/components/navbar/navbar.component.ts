@@ -2,22 +2,24 @@ import {
   Component,
   HostListener,
   OnChanges,
+  OnDestroy,
   OnInit,
   SimpleChanges,
 } from '@angular/core';
 import { LoginService } from '../../../shared/services/login/login.service';
-import { finalize } from 'rxjs';
+import { finalize, Subscription } from 'rxjs';
 import { UserService } from '../../../shared/services/user/user.service';
 import { ApiService } from '../../../shared/services/api/api.service';
 import { User } from '../../../shared/models/user';
 import { CookieService } from 'ngx-cookie-service';
+import { ReloadDataTriggerService } from '../../../shared/services/reload-data-trigger/reload-data-trigger.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent implements OnInit, OnDestroy {
   isLogged: boolean;
   user: User;
 
@@ -34,20 +36,26 @@ export class NavbarComponent implements OnInit {
   roomDropdownMobile: boolean = false;
 
   mobileMenu: boolean = false;
+  reloadUserNavbarInfoSubscription: Subscription;
 
   constructor(
     private loginService: LoginService,
     private userService: UserService,
-    private cookieService: CookieService
+    private cookieService: CookieService,
+    private reloadDataTrigger: ReloadDataTriggerService
   ) {}
 
   ngOnInit(): void {
     this.isLogged = this.userService.getState();
     this.user = this.userService.getUser();
+    this.listenOnUserNavbarInfoReloadTrigger();
+  }
+
+  ngOnDestroy() {
+    this.reloadUserNavbarInfoSubscription.unsubscribe();
   }
 
   logout() {
-    console.log('test');
     this.loginService
       .logout()
       .pipe(
@@ -61,6 +69,13 @@ export class NavbarComponent implements OnInit {
           localStorage.removeItem('isLogged');
           localStorage.removeItem('user');
         }
+      });
+  }
+
+  private listenOnUserNavbarInfoReloadTrigger() {
+    this.reloadUserNavbarInfoSubscription =
+      this.reloadDataTrigger.userNavbarInfoReloadTrigger.subscribe(() => {
+        this.user = this.userService.getUser();
       });
   }
 }

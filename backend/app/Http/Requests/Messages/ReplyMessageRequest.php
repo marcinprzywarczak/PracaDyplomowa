@@ -19,7 +19,7 @@ class ReplyMessageRequest extends FormRequest
     public function rules()
     {
         return [
-            'message_header_id' => ['integer', 'required', 'exists:message_headers,id'],
+            'messageHeaderId' => ['integer', 'required', 'exists:message_headers,id'],
             'message' => ['string', 'required'],
         ];
     }

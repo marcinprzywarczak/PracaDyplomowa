@@ -8,6 +8,7 @@ import { PaginatorModule } from 'primeng/paginator';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
+import { CheckboxModule } from 'primeng/checkbox';
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -19,6 +20,7 @@ import { ButtonModule } from 'primeng/button';
     InputTextModule,
     PasswordModule,
     ButtonModule,
+    CheckboxModule,
   ],
 })
 export class RegisterModule {}

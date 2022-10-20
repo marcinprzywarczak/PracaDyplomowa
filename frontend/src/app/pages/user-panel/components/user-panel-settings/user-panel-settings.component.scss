@@ -1,0 +1,18 @@
+.user-avatar {
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: transparent;
+  width: 8rem;
+  height: 8rem;
+  circle: 8rem;
+  box-sizing: border-box;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+::ng-deep .sidebar .p-sidebar-left {
+  width: 100% !important;
+  @screen md{
+    width: 50% !important;
+  }
+}

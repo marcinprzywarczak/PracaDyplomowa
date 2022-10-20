@@ -1,5 +1,5 @@
 <div class="flex flex-col items-center justify-center">
-  <div class="p-6 w-full">
+  <div class="px-6 w-full">
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="space-y-2">
         <div class="flex flex-col w-full">
@@ -133,23 +133,26 @@
             class="form-label inline-block pb-1 text-gray-700"
             >Numer telefonu</label
           >
-          <input
+          <p-inputMask
+            styleClass="w-full {{
+              serverErrors.phone_number ? 'border-red-600' : ''
+            }}"
             type="text"
             id="phone_number"
             name="phone_number"
             formControlName="phone_number"
-            pInputText
+            mask="+48 999 999 999"
             [ngClass]="
               (f['phone_number'].invalid &&
                 (f['phone_number'].touched ||
                   f['phone_number'].dirty ||
                   isSubmitted)) ||
-              serverErrors.phone_number
+              serverErrors.phone_number !== null
                 ? 'border-red-600'
                 : 'border-gray-300'
             "
             placeholder="Wprowadź numer telefonu"
-          />
+          ></p-inputMask>
           <div
             *ngIf="
               f['phone_number'].invalid &&
@@ -183,7 +186,7 @@
             >Hasło</label
           >
           <input
-            autocomplete="on"
+            autocomplete="new-password"
             type="password"
             id="password"
             name="password"
@@ -227,7 +230,7 @@
             >Potwierdź hasło</label
           >
           <input
-            autocomplete="on"
+            autocomplete="new-password"
             type="password"
             id="password_conf"
             name="password_conf"
@@ -300,7 +303,7 @@
           <button
             pButton
             [loading]="loading"
-            label="Dodaj użytkownika"
+            label="{{ edit ? 'Aktualizuj' : 'Dodaj użytkownika' }}"
             [disabled]="form.invalid || form.pristine"
           ></button>
         </div>

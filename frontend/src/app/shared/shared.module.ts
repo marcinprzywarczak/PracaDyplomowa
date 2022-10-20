@@ -14,9 +14,14 @@ import { MessagesComponent } from './components/messages/messages.component';
 import { AvatarModule } from 'primeng/avatar';
 import { MessageComponent } from './components/message/message.component';
 import { InputTextModule } from 'primeng/inputtext';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { InputTextareaModule } from 'primeng/inputtextarea';
+import { FirmUserFormComponent } from './components/firm-user-form/firm-user-form.component';
+import { InputMaskModule } from 'primeng/inputmask';
+import { PasswordModule } from 'primeng/password';
+import { FirmEditFormComponent } from './components/firm-edit-form/firm-edit-form.component';
+import { UserChangePasswordFormComponent } from './components/user-change-password-form/user-change-password-form.component';
 
 @NgModule({
   declarations: [
@@ -26,6 +31,9 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     MessageHeaderComponent,
     MessagesComponent,
     MessageComponent,
+    FirmUserFormComponent,
+    FirmEditFormComponent,
+    UserChangePasswordFormComponent,
   ],
   imports: [
     CommonModule,
@@ -39,12 +47,18 @@ import { InputTextareaModule } from 'primeng/inputtextarea';
     FormsModule,
     ProgressSpinnerModule,
     InputTextareaModule,
+    ReactiveFormsModule,
+    InputMaskModule,
+    PasswordModule,
   ],
   exports: [
     OfferComponent,
     ClickOutsideDirective,
     MessageHeaderComponent,
     MessagesComponent,
+    FirmUserFormComponent,
+    FirmEditFormComponent,
+    UserChangePasswordFormComponent,
   ],
 })
 export class SharedModule {}

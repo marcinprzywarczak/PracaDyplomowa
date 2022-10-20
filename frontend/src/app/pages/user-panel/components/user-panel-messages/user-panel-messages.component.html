@@ -3,27 +3,32 @@
   style="height: 30rem"
   *ngIf="dataLoaded"
 >
-  <div
-    class="flex flex-col w-1/3 divide-y-2 divide-gray-500 overflow-y-auto rounded"
-    *ngIf="messageHeaders"
-  >
-    <app-message-header
-      [ngClass]="
-        messageHeader.sender === userId
-          ? messageHeader.unread_sender_messages > 0
+  <ng-container *ngIf="messageHeaders.length > 0; else noMessage">
+    <div
+      class="flex flex-col w-1/3 divide-y-2 divide-gray-500 overflow-y-auto rounded"
+      *ngIf="messageHeaders"
+    >
+      <app-message-header
+        [ngClass]="
+          messageHeader.sender === userId
+            ? messageHeader.unread_sender_messages > 0
+              ? 'font-semibold'
+              : ''
+            : messageHeader.unread_recipient_messages > 0
             ? 'font-semibold'
             : ''
-          : messageHeader.unread_recipient_messages > 0
-          ? 'font-semibold'
-          : ''
-      "
-      (click)="currentMessageHeader = messageHeader"
-      *ngFor="let messageHeader of messageHeaders"
-      [messageHeader]="messageHeader"
-      [active]="currentMessageHeader.id === messageHeader.id"
-    ></app-message-header>
-  </div>
-  <div class="w-2/3 rounded">
-    <app-messages [messageHeader]="currentMessageHeader"></app-messages>
-  </div>
+        "
+        (click)="currentMessageHeader = messageHeader"
+        *ngFor="let messageHeader of messageHeaders"
+        [messageHeader]="messageHeader"
+        [active]="currentMessageHeader.id === messageHeader.id"
+      ></app-message-header>
+    </div>
+    <div class="w-2/3 rounded">
+      <app-messages [messageHeader]="currentMessageHeader"></app-messages>
+    </div>
+  </ng-container>
 </div>
+<ng-template #noMessage>
+  <div class="w-full text-center">BRAK WIADOMOŚCI</div>
+</ng-template>
