@@ -82,4 +82,10 @@ export class ApiService {
       { withCredentials: true }
     );
   }
+
+  getUserPermissions() {
+    return this.http.get<any>(`${this.BASE_API_URL}/api/users/getPermissions`, {
+      withCredentials: true,
+    });
+  }
 }

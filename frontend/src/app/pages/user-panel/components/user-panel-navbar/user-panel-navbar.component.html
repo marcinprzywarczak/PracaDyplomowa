@@ -25,6 +25,7 @@
     ></p-badge
   ></a>
   <a
+    *ngxPermissionsOnly="'users.index'"
     routerLink="pracownicy"
     routerLinkActive="user-panel-navbar-item-active"
     class="user-panel-navbar-item"

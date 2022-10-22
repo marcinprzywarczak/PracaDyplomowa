@@ -6,6 +6,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { RippleModule } from 'primeng/ripple';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [LoginComponent],
@@ -16,6 +17,7 @@ import { RippleModule } from 'primeng/ripple';
     PasswordModule,
     ButtonModule,
     RippleModule,
+    SharedModule,
   ],
 })
 export class LoginModule {}

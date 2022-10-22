@@ -184,4 +184,11 @@ class UserController extends Controller
             ], 400);
         }
     }
+    public function getPermissions(){
+        $user = User::findOrFail(Auth::id());
+        return response()->json([
+            'permissions' => $user->getAllPermissions(),
+        ], 200);
+    }
+
 }

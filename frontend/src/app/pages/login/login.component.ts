@@ -7,6 +7,7 @@ import { Location } from '@angular/common';
 import { RouteService } from '../../shared/services/route/route.service';
 import { CookieService } from 'ngx-cookie-service';
 import { finalize } from 'rxjs';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent implements OnInit {
     private apiService: ApiService,
     private location: Location,
     private routeService: RouteService,
-    private cookieService: CookieService
+    private ngxPermissionsService: NgxPermissionsService
   ) {}
 
   ngOnInit(): void {
@@ -49,6 +50,36 @@ export class LoginComponent implements OnInit {
             this.form.controls['email'].value,
             this.form.controls['password'].value
           )
+          .pipe(
+            finalize(() => {
+              this.apiService
+                .getUserPermissions()
+                .pipe(
+                  finalize(() => {
+                    if (
+                      this.routeService.getPreviousUrl() !== '/login' &&
+                      this.routeService.getPreviousUrl() !== '/'
+                    )
+                      window.location.href = this.routeService.getPreviousUrl();
+                    else {
+                      window.location.reload();
+                    }
+                  })
+                )
+                .subscribe({
+                  next: (result) => {
+                    const permissions = result.permissions.map((x: any) => {
+                      return x.name;
+                    });
+                    this.ngxPermissionsService.loadPermissions(permissions);
+                    localStorage.setItem(
+                      'app.permissions',
+                      JSON.stringify(permissions)
+                    );
+                  },
+                });
+            })
+          )
           .subscribe({
             next: (value) => {
               this.loading = false;
@@ -58,21 +89,12 @@ export class LoginComponent implements OnInit {
               } else {
                 localStorage.setItem('isLogged', 'true');
                 localStorage.setItem('user', JSON.stringify(value.user));
-                if (
-                  this.routeService.getPreviousUrl() !== '/login' &&
-                  this.routeService.getPreviousUrl() !== '/'
-                )
-                  window.location.href = this.routeService.getPreviousUrl();
-                else {
-                  window.location.reload();
-                }
               }
             },
             error: (err) => {
               this.loading = false;
               this.errors = err.error.errors;
               this.error = '';
-              //console.log('err', err.error.errors)
             },
           });
       });

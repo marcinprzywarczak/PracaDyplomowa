@@ -22,6 +22,7 @@ import { InputMaskModule } from 'primeng/inputmask';
 import { PasswordModule } from 'primeng/password';
 import { FirmEditFormComponent } from './components/firm-edit-form/firm-edit-form.component';
 import { UserChangePasswordFormComponent } from './components/user-change-password-form/user-change-password-form.component';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { UserChangePasswordFormComponent } from './components/user-change-passwo
     FirmUserFormComponent,
     FirmEditFormComponent,
     UserChangePasswordFormComponent,
+    NgxPermissionsModule,
   ],
 })
 export class SharedModule {}

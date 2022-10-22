@@ -55,7 +55,7 @@
           <div>REGON: {{ user.firm.REGON }}</div>
         </div>
       </div>
-      <div>
+      <div *ngxPermissionsOnly="'firm.update'">
         <button
           pButton
           pRipple

@@ -5,6 +5,8 @@ import { MessagesTriggerService } from '../../../../shared/services/messages-tri
 import { MessageService } from '../../../../shared/services/message-service/message.service';
 import { MessageHeader } from '../../../../shared/models/message-header';
 import { UserService } from '../../../../shared/services/user/user.service';
+import { ApiService } from '../../../../shared/services/api/api.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-user-panel-navbar',
@@ -20,12 +22,14 @@ export class UserPanelNavbarComponent implements OnInit, OnDestroy {
     private pusherService: PusherService,
     private messagesTriggerService: MessagesTriggerService,
     private messageService: MessageService,
-    private userService: UserService
+    private userService: UserService,
+    private apiService: ApiService,
+    private ngxPermissionsService: NgxPermissionsService
   ) {}
 
   ngOnInit(): void {
     this.userId = this.userService.getUser().id;
-
+    this.getUserPermissions();
     this.messageService.getAllMessages().subscribe({
       next: (result) => {
         this.messageHeaders = result.messages;
@@ -62,5 +66,20 @@ export class UserPanelNavbarComponent implements OnInit, OnDestroy {
       }
     });
     this.unreadMessages = unreadMessages;
+  }
+
+  getUserPermissions() {
+    this.apiService.getUserPermissions().subscribe({
+      next: (result) => {
+        const permissions = result.permissions.map((x: any) => {
+          return x.name;
+        });
+        console.log(permissions);
+        this.ngxPermissionsService.loadPermissions(permissions);
+        localStorage.setItem('app.permissions', JSON.stringify(permissions));
+      },
+    });
+
+    console.log(this.ngxPermissionsService.getPermissions());
   }
 }

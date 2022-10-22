@@ -17,6 +17,7 @@ import { finalize, tap } from 'rxjs';
 import { Offer } from '../../shared/models/offer';
 import { HttpClient } from '@angular/common/http';
 import { AlertService } from '../../shared/services/alert-service/alert.service';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-edit-offer',
@@ -24,6 +25,8 @@ import { AlertService } from '../../shared/services/alert-service/alert.service'
   styleUrls: ['./edit-offer.component.scss'],
 })
 export class EditOfferComponent implements OnInit {
+  BASE_API_URL: string = environment.apiUrl;
+
   offerType: string;
   propertyType: string;
   addOfferForm: FormGroup;
@@ -301,7 +304,7 @@ export class EditOfferComponent implements OnInit {
     this.offer.photos?.forEach((photo) => {
       if (photo.pivot.isMain === 1) {
         this.http
-          .get(`http://localhost:8000/api/image/${photo.path}`, {
+          .get(`${this.BASE_API_URL}/api/image/${photo.path}`, {
             responseType: 'blob',
           })
           .subscribe((result) => {
@@ -311,7 +314,7 @@ export class EditOfferComponent implements OnInit {
         // this.addOfferForm.get('mainPhoto')?.setValue(this.mainPhotoSrc);
       } else {
         this.http
-          .get(`http://localhost:8000/api/image/${photo.path}`, {
+          .get(`${this.BASE_API_URL}/api/image/${photo.path}`, {
             responseType: 'blob',
           })
           .subscribe((result) => {

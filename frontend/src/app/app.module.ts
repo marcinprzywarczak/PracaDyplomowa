@@ -27,6 +27,8 @@ import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { PusherService } from './shared/services/pusher/pusher.service';
 import { CookieService } from 'ngx-cookie-service';
+import { NgxPermissionsModule } from 'ngx-permissions';
+import { ForbiddenInterceptor } from './shared/interceptors/forbidden-interceptor/forbidden.interceptor';
 registerLocaleData(localePl);
 @NgModule({
   declarations: [AppComponent],
@@ -43,11 +45,13 @@ registerLocaleData(localePl);
     CoreModule,
     ToastModule,
     ConfirmDialogModule,
+    NgxPermissionsModule.forRoot(),
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpXsrfInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },
     { provide: HTTP_INTERCEPTORS, useClass: NotFoundInterceptor, multi: true },
+    { provide: HTTP_INTERCEPTORS, useClass: ForbiddenInterceptor, multi: true },
     {
       provide: LOCALE_ID,
       useValue: 'pl', // 'de-DE' for Germany, 'fr-FR' for France ...

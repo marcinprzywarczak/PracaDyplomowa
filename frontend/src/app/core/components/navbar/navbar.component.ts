@@ -68,6 +68,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         if (response.status === 204) {
           // this.cookieService.deleteAll('/', 'localhost');
+          localStorage.removeItem('app.permissions');
           localStorage.removeItem('isLogged');
           localStorage.removeItem('user');
         }

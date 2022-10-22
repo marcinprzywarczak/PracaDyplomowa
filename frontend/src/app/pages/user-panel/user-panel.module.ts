@@ -27,6 +27,7 @@ import { RippleModule } from 'primeng/ripple';
 import { TooltipModule } from 'primeng/tooltip';
 import { AvatarModule } from 'primeng/avatar';
 import { SkeletonModule } from 'primeng/skeleton';
+import { NgxPermissionsGuard, NgxPermissionsModule } from 'ngx-permissions';
 
 @NgModule({
   declarations: [
@@ -56,6 +57,13 @@ import { SkeletonModule } from 'primeng/skeleton';
           {
             path: 'pracownicy',
             component: UserPanelFirmUsersComponent,
+            canActivate: [NgxPermissionsGuard],
+            data: {
+              permissions: {
+                only: ['users.index'],
+                redirectTo: '/brak-dostepu',
+              },
+            },
           },
           {
             path: 'wiadomosci',

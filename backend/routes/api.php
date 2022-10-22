@@ -72,6 +72,7 @@ Route::middleware('auth:sanctum')->group(function(){
         Route::post('/updateFirmUser', [\App\Http\Controllers\UserController::class, 'updateFirmUser']);
         Route::post('/updateUser', [\App\Http\Controllers\UserController::class, 'updateUser']);
         Route::post('/updateFirm', [\App\Http\Controllers\UserController::class, 'updateFirm']);
+        Route::get('/getPermissions', [\App\Http\Controllers\UserController::class, 'getPermissions']);
     });
 
     Route::name('messages.')->prefix('messages')->group(function (){
