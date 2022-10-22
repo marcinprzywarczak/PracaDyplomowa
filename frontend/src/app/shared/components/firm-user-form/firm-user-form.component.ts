@@ -107,6 +107,7 @@ export class FirmUserFormComponent implements OnInit {
       if (this.userSetting) {
         this.editUser(formData);
       } else {
+        formData.append('user_id', this.user.id.toString());
         this.editFirmUser(formData);
       }
     } else {

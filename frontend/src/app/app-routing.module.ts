@@ -80,6 +80,13 @@ const routes: Routes = [
       ),
   },
   {
+    path: 'brak-dostepu',
+    loadChildren: () =>
+      import('./pages/forbidden-page/forbidden-page.module').then(
+        (m) => m.ForbiddenPageModule
+      ),
+  },
+  {
     path: '',
     redirectTo: 'dashboard',
     pathMatch: 'full',

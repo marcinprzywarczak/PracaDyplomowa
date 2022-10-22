@@ -19,9 +19,11 @@ use Illuminate\Support\Facades\Storage;
 use Spatie\Permission\Models\Role;
 
 
-class UserController extends \Illuminate\Routing\Controller
+class UserController extends Controller
 {
     public function index(Request $request){
+        $this->authorize('index', User::class);
+
         if(Auth::user()->firm_id === null){
             return response()->json([
                 'users' => [],
@@ -53,22 +55,8 @@ class UserController extends \Illuminate\Routing\Controller
         ]);
     }
 
-
-    public function test(Request $request){
-        $offer = Offer::with('parameters')->where('id', 2)->first();
-//        $offer->parameters()->attach(
-//            2,
-//            [
-//                'value' => 'qqtest',
-//            ]
-//        );
-        $offer->parameters()->sync([1 => ['value' => 'test'], 2 => ['value' => 'test2']]);
-        return response()->json([
-            'offer' => $offer
-        ]);
-    }
-
     public function addNewFirmUser(UserRequest $request) {
+        $this->authorize('addNewFirmUser', User::class);
         try {
             $avatarSrc = '';
             if($request->hasFile('user_avatar') && $request->file('user_avatar')->isValid()){
@@ -83,7 +71,7 @@ class UserController extends \Illuminate\Routing\Controller
 
             DB::transaction(function () use ($request, $avatarSrc){
                 if($avatarSrc === ''){
-                    $avatarSrc = 'avatars/default_avatar.jpg';
+                    $avatarSrc = 'public/default_avatar.jpg';
                 }
 
                 $user = User::create([
@@ -117,6 +105,7 @@ class UserController extends \Illuminate\Routing\Controller
 
     public function deleteFirmUser(Request $request) {
         $user = User::findOrFail($request->input('userId'));
+        $this->authorize('deleteFirmUser', $user);
         $user->delete();
         return response()->json([
             'message' => 'suksces'
@@ -125,6 +114,7 @@ class UserController extends \Illuminate\Routing\Controller
 
     public function updateFirmUser(UpdateFirmUserRequest $request) {
         $user = User::findOrFail($request->input('user_id'));
+        $this->authorize('updateFirmUser', $user);
         return UserService::updateUser($request, $user);
     }
 
@@ -134,13 +124,13 @@ class UserController extends \Illuminate\Routing\Controller
     }
 
     public function updateFirm(UpdateFirmRequest $request) {
-
+        $firm = Firm::findOrFail($request->input('firm_id'));
+        $this->authorize('updateFirm', $firm);
         $photoChanged = filter_var($request->input('photo_changed'), FILTER_VALIDATE_BOOLEAN);
         try {
             $firmLogo = '';
-            $firm = Firm::findOrFail($request->input('firm_id'));
-            if($photoChanged){
-                if($firm->logo !== 'avatars/default_avatar.jpg' && $firm->logo !== null)
+            if($photoChanged) {
+                if($firm->logo !== 'public/default_avatar.jpg' && $firm->logo !== null)
                 {
                     Storage::delete($firm->logo);
                 }
@@ -153,7 +143,7 @@ class UserController extends \Illuminate\Routing\Controller
                         ], 400);
                     }
                 } else {
-                    $firmLogo = 'avatars/default_avatar.jpg';
+                    $firmLogo = 'public/default_avatar.jpg';
                 }
             }
             if($photoChanged) {

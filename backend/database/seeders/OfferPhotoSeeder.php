@@ -17,8 +17,8 @@ class OfferPhotoSeeder extends Seeder
     public function run()
     {
         $photo = Photo::create([
-            'path' => 'avatars/1zdj1.png',
-            'photo_url' => 'http://localhost:8000/avatars/1zdj1.png',
+            'path' => 'public/1zdj1.jpg',
+            'photo_url' => 'http://localhost:8000/public/1zdj1.jpg',
             'description' => 'zdjecie'
         ]);
 
@@ -29,8 +29,8 @@ class OfferPhotoSeeder extends Seeder
         ]);
 
         $photo = Photo::create([
-            'path' => 'avatars/1zdj2.png',
-            'photo_url' => 'http://localhost:8000/avatars/1zdj2.png',
+            'path' => 'public/1zdj2.jpg',
+            'photo_url' => 'http://localhost:8000/public/1zdj2.jpg',
             'description' => 'zdjecie'
         ]);
 
@@ -41,32 +41,8 @@ class OfferPhotoSeeder extends Seeder
         ]);
 
         $photo = Photo::create([
-            'path' => 'avatars/1zdj3.png',
-            'photo_url' => 'http://localhost:8000/avatars/1zdj3.png',
-            'description' => 'zdjecie'
-        ]);
-
-        DB::table('offer_photo')->insert([
-            'photo_id' => $photo->id,
-            'offer_id' => 1,
-            'isMain' => false
-        ]);
-
-        $photo = Photo::create([
-            'path' => 'avatars/DbWY97v72y55kI5vzEZGeXg8OvzQyquKtn9uVqcr.jpg',
-            'photo_url' => 'http://localhost:8000/avatars/DbWY97v72y55kI5vzEZGeXg8OvzQyquKtn9uVqcr.jpg',
-            'description' => 'zdjecie'
-        ]);
-
-        DB::table('offer_photo')->insert([
-            'photo_id' => $photo->id,
-            'offer_id' => 1,
-            'isMain' => false
-        ]);
-
-        $photo = Photo::create([
-            'path' => 'avatars/1zdj4.png',
-            'photo_url' => 'http://localhost:8000/avatars/1zdj4.png',
+            'path' => 'public/1zdj3.jpg',
+            'photo_url' => 'http://localhost:8000/public/1zdj3.jpg',
             'description' => 'zdjecie'
         ]);
 
@@ -83,8 +59,8 @@ class OfferPhotoSeeder extends Seeder
         ]);
 
         $photo = Photo::create([
-            'path' => 'avatars/1zdj5.png',
-            'photo_url' => 'http://localhost:8000/avatars/1zdj5.png',
+            'path' => 'public/1zdj4.jpg',
+            'photo_url' => 'http://localhost:8000/public/1zdj4.jpg',
             'description' => 'zdjecie'
         ]);
 
@@ -101,9 +77,15 @@ class OfferPhotoSeeder extends Seeder
         ]);
 
         $photo = Photo::create([
-            'path' => 'avatars/default_avatar.png',
-            'photo_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
+            'path' => 'public/1zdj5.jpg',
+            'photo_url' => 'http://localhost:8000/public/1zdj5.jpg',
             'description' => 'zdjecie'
+        ]);
+
+        DB::table('offer_photo')->insert([
+            'photo_id' => $photo->id,
+            'offer_id' => 1,
+            'isMain' => false
         ]);
 
         DB::table('offer_photo')->insert([

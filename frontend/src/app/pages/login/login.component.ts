@@ -5,6 +5,8 @@ import { LoginService } from '../../shared/services/login/login.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { RouteService } from '../../shared/services/route/route.service';
+import { CookieService } from 'ngx-cookie-service';
+import { finalize } from 'rxjs';
 
 @Component({
   selector: 'app-login',
@@ -23,7 +25,8 @@ export class LoginComponent implements OnInit {
     private router: Router,
     private apiService: ApiService,
     private location: Location,
-    private routeService: RouteService
+    private routeService: RouteService,
+    private cookieService: CookieService
   ) {}
 
   ngOnInit(): void {

@@ -22,7 +22,6 @@ use Illuminate\Support\Facades\Storage;
 class OfferController extends Controller
 {
     public function index(Request $request, OfferRepository $repository){
-
         $offers = $repository->offerFilter($request->filters,
             $request->parameterFilters,
             $request->parameterIn,
@@ -36,32 +35,15 @@ class OfferController extends Controller
         return response()->json(['propertyTypes' => $propertyTypes, 'offerTypes' => $offerTypes]);
     }
 
-    public function getOffer(Request $request){
-        try {
-            $offer = Offer::with('user','user.firm', 'property_type', 'offer_type', 'offer_status', 'parameters', 'photos')
-                ->where('id', $request->id)->first();
-            $parameter_category = ParameterCategory::
-            whereHas('parameters.offers', function (Builder $query) use($request){
-                $query->where('offers.id', $request->id);
-            })->get();
-//        with('parameters', 'parameters.offers')->get();
-            if($offer === null){
-                return response()->json([
-                    'error' => 'Nie znaleziono oferty o podanym id'
-                ], 404);
-            }
-            return response()->json(
-                [
-                    'offer' => $offer,
-                    'parameterCategories' => $parameter_category
-                ]
-            );
-        } catch (Exception $error){
-            return response()->json([
-                'error' => $error
-            ], 404);
-        }
+    public function getOffer(Request $request, OfferRepository $repository) {
+        return $repository->getOffer($request);
+    }
 
+    public function getOfferToEdit(Request $request, OfferRepository $repository) {
+        $offer = Offer::findOrFail($request->id);
+        $this->authorize('update', $offer);
+
+        return $repository->getOffer($request);
     }
 
     public function store(OfferRequest $request) {
@@ -238,6 +220,8 @@ class OfferController extends Controller
     }
 
     public function update(EditOfferRequest $request) {
+        $offer = Offer::findOrFail($request->get('offer_id'));
+        $this->authorize('update', $offer);
         try{
             $photoPaths = [];
             $offerPhotos = [];
@@ -249,8 +233,11 @@ class OfferController extends Controller
                 })->get();
 
                 foreach ($offerPhotos as $photo) {
+                    if($photo->path !== 'public/default_photo.jpg')
+                        $test = Storage::delete($photo->path);
+                    error_log('update offer');
                     error_log($photo->path);
-                    Storage::delete($photo->path);
+                    error_log($test);
                 }
 
 
@@ -258,7 +245,11 @@ class OfferController extends Controller
                     $files = $request->file('files');
                     foreach ($files as $file) {
                         if($file->isValid()){
+                            error_log('if file is valid');
                             $photo = $file->store('offers');
+                            error_log('store file');
+                            error_log($photo);
+                            error_log($file);
                             if(!is_string($photo)){
                                 return response()->json([
                                     'error' => 'Błąd podczas zapisywania zdjęcia'
@@ -280,8 +271,7 @@ class OfferController extends Controller
                 }
 
             }
-            DB::transaction(function () use ($request, $photoPaths, $mainPhotoSrc, $offerPhotos) {
-                $offer = Offer::findOrFail($request->get('offer_id'));
+            DB::transaction(function () use ($request, $photoPaths, $mainPhotoSrc, $offerPhotos, $offer) {
                 $offer->fill(
                     $request->all()
                 )->save();
@@ -323,7 +313,8 @@ class OfferController extends Controller
                             ]);
                     }
                     foreach ($offerPhotos as $photo) {
-                        $photo->delete();
+                        if($photo->path !== 'public/default_photo.jpg')
+                            $photo->delete();
                     }
                 }
             });
@@ -348,9 +339,9 @@ class OfferController extends Controller
     public function completeOffer(Request $request)
     {
         $offerId =  $request->get('offerId');
-        $offerStatus = OfferStatus::where('name', 'zakończone')->firstOrFail();
-
         $offer = Offer::findOrFail($offerId);
+        $this->authorize('completeOffer', $offer);
+        $offerStatus = OfferStatus::where('name', 'zakończone')->firstOrFail();
 
         $offer->offer_status_id = $offerStatus->id;
         $offer->save();
@@ -364,8 +355,10 @@ class OfferController extends Controller
     public function restoreOffer(Request $request)
     {
         $offerId =  $request->get('offerId');
-        $offerStatus = OfferStatus::where('name', 'aktywne')->firstOrFail();
         $offer = Offer::findOrFail($offerId);
+        $this->authorize('restoreOffer', $offer);
+
+        $offerStatus = OfferStatus::where('name', 'aktywne')->firstOrFail();
         $offer->offer_status_id = $offerStatus->id;
         $offer->save();
 

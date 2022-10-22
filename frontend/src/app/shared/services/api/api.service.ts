@@ -71,4 +71,15 @@ export class ApiService {
       parameterCategories: ParameterCategory;
     }>(`${this.BASE_API_URL}/api/getOffer`, { id: offerId });
   }
+
+  getOfferEdit(offerId: number) {
+    return this.http.post<{
+      offer: Offer;
+      parameterCategories: ParameterCategory;
+    }>(
+      `${this.BASE_API_URL}/api/offers/getOfferToEdit`,
+      { id: offerId },
+      { withCredentials: true }
+    );
+  }
 }

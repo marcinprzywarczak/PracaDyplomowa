@@ -63,7 +63,7 @@ export class EditOfferComponent implements OnInit {
   ngOnInit(): void {
     const id: number = +this.route.snapshot.paramMap.get('offerId')!;
     this.apiService
-      .getOffer(id)
+      .getOfferEdit(id)
       .pipe(
         finalize(() => {
           this.buildForm();
@@ -198,7 +198,7 @@ export class EditOfferComponent implements OnInit {
       },
       error: (err) => {
         console.log('error', err);
-        this.serverErrors = err?.error?.errors;
+        if (err.error.errors) this.serverErrors = err?.error?.errors;
         this.messageService.add({
           severity: 'error',
           summary: 'Error',

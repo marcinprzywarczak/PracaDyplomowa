@@ -26,10 +26,9 @@ export class AuthInterceptor implements HttpInterceptor {
       catchError((err) => {
         if (err.status === 401 || err.status === 419) {
           this.loginService.logout().subscribe(() => {
-            // this.cookieService.deleteAll('http://localhost:4200');
+            localStorage.removeItem('isLogged');
+            window.location.href = '/login';
           });
-          localStorage.removeItem('isLogged');
-          window.location.href = '/login';
           // this.router.navigate(['/login']);
         }
         return throwError(err);

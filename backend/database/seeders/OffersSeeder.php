@@ -3,8 +3,10 @@
 namespace Database\Seeders;
 
 use App\Models\Offer;
+use App\Models\Photo;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class OffersSeeder extends Seeder
 {
@@ -75,6 +77,21 @@ class OffersSeeder extends Seeder
              pulvinar mauris.',
         ]);
 
-        Offer::factory()->count(300)->create();
+        $offers = Offer::factory()->count(300)->create();
+
+        $photo = Photo::create([
+            'path' => 'storage/default_photo.jpg',
+            'photo_url' => 'http://localhost:8000/storage/default_photo.jpg',
+            'description' => 'zdjecie'
+        ]);
+
+
+        foreach ($offers as $offer){
+            DB::table('offer_photo')->insert([
+                'photo_id' => $photo->id,
+                'offer_id' => $offer->id,
+                'isMain' => true
+            ]);
+        }
     }
 }

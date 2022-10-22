@@ -14,7 +14,7 @@ class UserService
             $userAvatar = '';
 //            $user = User::findOrFail($request->input('user_id'));
             if($photoChanged){
-                if($user->avatar !== 'avatars/default_avatar.jpg' && $user->avatar !== null)
+                if($user->avatar !== 'public/default_avatar.jpg' && $user->avatar !== null)
                 {
                     Storage::delete($user->avatar);
                 }
@@ -27,7 +27,7 @@ class UserService
                         ], 400);
                     }
                 } else {
-                    $userAvatar = 'avatars/default_avatar.jpg';
+                    $userAvatar = 'public/default_avatar.jpg';
                 }
             }
             if($photoChanged) {

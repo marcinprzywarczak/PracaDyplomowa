@@ -15,11 +15,15 @@ class PermissionsSeeder extends Seeder
         Permission::create(['name' => 'users.index']);
         Permission::create(['name' => 'users.store']);
         Permission::create(['name' => 'users.destroy']);
+        Permission::create(['name' => 'users.update']);
+        Permission::create(['name' => 'firm.update']);
 
         $userRole = Role::findByName(config('app.firm_owner_role'));
         $userRole->givePermissionTo('users.index');
         $userRole->givePermissionTo('users.store');
         $userRole->givePermissionTo('users.destroy');
+        $userRole->givePermissionTo('users.update');
+        $userRole->givePermissionTo('firm.update');
 
     }
 }

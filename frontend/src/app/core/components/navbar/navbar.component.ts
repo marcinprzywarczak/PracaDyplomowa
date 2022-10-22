@@ -13,6 +13,7 @@ import { ApiService } from '../../../shared/services/api/api.service';
 import { User } from '../../../shared/models/user';
 import { CookieService } from 'ngx-cookie-service';
 import { ReloadDataTriggerService } from '../../../shared/services/reload-data-trigger/reload-data-trigger.service';
+import { NavbarService } from '../../../shared/services/navbar/navbar.service';
 
 @Component({
   selector: 'app-navbar',
@@ -42,7 +43,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private loginService: LoginService,
     private userService: UserService,
     private cookieService: CookieService,
-    private reloadDataTrigger: ReloadDataTriggerService
+    private reloadDataTrigger: ReloadDataTriggerService,
+    public navbarService: NavbarService
   ) {}
 
   ngOnInit(): void {

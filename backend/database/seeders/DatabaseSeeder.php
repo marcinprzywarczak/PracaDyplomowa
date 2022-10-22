@@ -30,8 +30,8 @@ class DatabaseSeeder extends Seeder
             'number' => '33',
             'zip_code' => '62-800',
             'locality' => 'Kalisz',
-            'logo_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'logo' => 'avatars/default_avatar.jpg'
+            'logo_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'logo' => 'public/default_avatar.jpg'
         ]);
         $user = User::create([
             'first_name' => 'test',
@@ -40,8 +40,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test@test.com',
             'password' => Hash::make('12345678'),
-            'avatar' => 'avatars/default_avatar.jpg',
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg'
+            'avatar' => 'public/default_avatar.jpg',
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg'
         ]);
         $firmOwnerRole = Role::findByName(config('app.firm_owner_role'));
         if(isset($firmOwnerRole))
@@ -52,8 +52,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 255 888 555',
             'email' => 'user@testowy.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
         $userRole = Role::findByName(config('app.user_role'));
         if(isset($userRole))
@@ -74,8 +74,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test1@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
         $user = User::create([
             'first_name' => 'Jan',
@@ -84,8 +84,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test2@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
         $user = User::create([
             'first_name' => 'Piotr',
@@ -94,8 +94,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test3@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
         $user = User::create([
             'first_name' => 'Paweł',
@@ -104,8 +104,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test4@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
         $user = User::create([
             'first_name' => 'Andrzej',
@@ -114,8 +114,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test5@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
         $user = User::create([
             'first_name' => 'Andrzej',
@@ -124,8 +124,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test6@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
 
         $user = User::create([
@@ -135,8 +135,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test7@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
 
         $user = User::create([
@@ -146,8 +146,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test8@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
 
         $user = User::create([
@@ -157,8 +157,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test9@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
 
         $user = User::create([
@@ -168,8 +168,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test10@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
 
         $user = User::create([
@@ -179,8 +179,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test11@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
 
         $user = User::create([
@@ -190,8 +190,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test12@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
 
         $user = User::create([
@@ -201,8 +201,8 @@ class DatabaseSeeder extends Seeder
             'phone_number' => '+48 655 888 555',
             'email' => 'test13@test.com',
             'password' => Hash::make('12345678'),
-            'avatar_url' => 'http://localhost:8000/avatars/default_avatar.jpg',
-            'avatar' => 'avatars/default_avatar.jpg'
+            'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
+            'avatar' => 'public/default_avatar.jpg'
         ]);
         $this->call(MessageSeeder::class);
     }

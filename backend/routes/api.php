@@ -61,7 +61,7 @@ Route::middleware('auth:sanctum')->group(function(){
             [\App\Http\Controllers\OfferController::class, 'removeOfferFromFollowing']);
         Route::post('/completeOffer', [\App\Http\Controllers\OfferController::class, 'completeOffer']);
         Route::post('/restoreOffer', [\App\Http\Controllers\OfferController::class, 'restoreOffer']);
-
+        Route::post('/getOfferToEdit', [\App\Http\Controllers\OfferController::class, 'getOfferToEdit']);
 
     });
 
@@ -85,8 +85,7 @@ Route::middleware('auth:sanctum')->group(function(){
 
 Route::post('/getUsersTest', [\App\Http\Controllers\UserController::class, 'test']);
 
-Route::get('image/{path}/{filename}', function ($path, $filename){
-
+Route::get('image/{path}/{filename}', function ($path, $filename) {
    $file = \Illuminate\Support\Facades\Storage::get("$path/$filename");
    return response($file, 200)->header('Content-Type', 'image/jpeg');
 });

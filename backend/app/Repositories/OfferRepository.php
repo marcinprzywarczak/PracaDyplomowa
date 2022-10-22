@@ -3,6 +3,8 @@
 namespace App\Repositories;
 
 use App\Models\Offer;
+use App\Models\ParameterCategory;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 
 class OfferRepository
@@ -31,7 +33,32 @@ class OfferRepository
                         ->whereIn('value', $parameter['value']);
                 });
             }
-//        dd($offers);
         return $offers->paginate(10);
+    }
+
+    public function getOffer($request) {
+        try {
+            $offer = Offer::with('user','user.firm', 'property_type', 'offer_type', 'offer_status', 'parameters', 'photos')
+                ->findOrFail($request->id);
+            $parameter_category = ParameterCategory::
+            whereHas('parameters.offers', function (Builder $query) use($request){
+                $query->where('offers.id', $request->id);
+            })->get();
+            if($offer === null){
+                return response()->json([
+                    'error' => 'Nie znaleziono oferty o podanym id'
+                ], 404);
+            }
+            return response()->json(
+                [
+                    'offer' => $offer,
+                    'parameterCategories' => $parameter_category
+                ]
+            );
+        } catch (Exception $error){
+            return response()->json([
+                'error' => $error
+            ], 404);
+        }
     }
 }

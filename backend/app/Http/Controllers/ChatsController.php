@@ -61,6 +61,8 @@ class ChatsController extends Controller
 
     public function getMessagesForMessageHeader(GetMessagesForHeaderRequest $request) {
         $messageHeaderId = $request->input('messageHeaderId');
+        $messageHeader = MessageHeader::findOrFail($messageHeaderId);
+        $this->authorize('getMessagesForMessageHeader', $messageHeader);
         $messages = Message::where('message_header_id', $messageHeaderId)->orderBy('created_at', 'asc')->get();
         return response()->json([
             'messages' => $messages,
@@ -69,6 +71,7 @@ class ChatsController extends Controller
 
     public function replyMessage(ReplyMessageRequest $request) {
         $messageHeader = MessageHeader::findOrFail($request->input('messageHeaderId'));
+        $this->authorize('replyMessage', $messageHeader);
         $authUserId = Auth::id();
         $isFromSender = $messageHeader->sender === $authUserId;
         $message = DB::transaction(function () use ($request, $messageHeader, $isFromSender){
@@ -96,6 +99,7 @@ class ChatsController extends Controller
     public function setMessagesStatus(GetMessagesForHeaderRequest $request) {
         $messageHeaderId = $request->input('messageHeaderId');
         $messageHeader = MessageHeader::findOrFail($messageHeaderId);
+        $this->authorize('setMessagesStatus', $messageHeader);
         if($messageHeader->sender === Auth::id()){
             $isFromSender = 0;
         } else {
