@@ -10,6 +10,7 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
 import { SharedModule } from '../../shared/shared.module';
 import { SidebarModule } from 'primeng/sidebar';
 import { CheckboxModule } from 'primeng/checkbox';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [DashboardComponent],
@@ -23,6 +24,7 @@ import { CheckboxModule } from 'primeng/checkbox';
     ProgressSpinnerModule,
     SidebarModule,
     CheckboxModule,
+    ButtonModule,
   ],
 })
 export class DashboardModule {}

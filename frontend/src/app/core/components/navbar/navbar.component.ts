@@ -14,6 +14,7 @@ import { User } from '../../../shared/models/user';
 import { CookieService } from 'ngx-cookie-service';
 import { ReloadDataTriggerService } from '../../../shared/services/reload-data-trigger/reload-data-trigger.service';
 import { NavbarService } from '../../../shared/services/navbar/navbar.service';
+import { NgxPermissionsService } from 'ngx-permissions';
 
 @Component({
   selector: 'app-navbar',
@@ -44,7 +45,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private userService: UserService,
     private cookieService: CookieService,
     private reloadDataTrigger: ReloadDataTriggerService,
-    public navbarService: NavbarService
+    public navbarService: NavbarService,
+    private ngxPermissions: NgxPermissionsService
   ) {}
 
   ngOnInit(): void {
@@ -68,6 +70,7 @@ export class NavbarComponent implements OnInit, OnDestroy {
       .subscribe((response) => {
         if (response.status === 204) {
           // this.cookieService.deleteAll('/', 'localhost');
+          this.ngxPermissions.flushPermissions();
           localStorage.removeItem('app.permissions');
           localStorage.removeItem('isLogged');
           localStorage.removeItem('user');

@@ -13,3 +13,14 @@
 ::ng-deep .p-sidebar .p-sidebar-content{
   padding: 0;
 }
+
+:host ::ng-deep .filter-button{
+  .p-button {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    @screen md {
+      display: none;
+    }
+  }
+}

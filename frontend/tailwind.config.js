@@ -9,6 +9,14 @@ module.exports = {
           messages: '#A7C4A0',
           messageHeaderHover: '#8F8389',
         },
+        customPalette: {
+          green: '#CCD5AE',
+          lightGreen: '#E9EDC9',
+          gray: '#FEFAE0',
+          beige: '#FAEDCD',
+          brown: '#D4A373',
+          brownHover: '#c19263',
+        }
       },
     },
   },

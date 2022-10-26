@@ -1,4 +1,4 @@
-<div *ngIf="navbarService.visible" class="bg-white shadow-lg">
+<div *ngIf="navbarService.visible" class="shadow-md mb-3">
   <div class="mx-auto px-4">
     <div class="flex justify-between">
       <div class="flex space-x-7">
@@ -6,14 +6,14 @@
         <!--          &lt;!&ndash; Website Logo &ndash;&gt;-->
         <!--          <a href="#" class="flex items-center py-4 px-2">-->
         <!--&lt;!&ndash;            <img src="logo.png" alt="Logo" class="h-8 w-8 mr-2">&ndash;&gt;-->
-        <!--            <span class="font-semibold text-gray-500 text-lg">Navigation</span>-->
+        <!--            <span class="font-semibold text-gray-800 text-lg">Navigation</span>-->
         <!--          </a>-->
         <!--        </div>-->
         <!-- Primary Navbar items -->
         <div class="hidden md:flex items-center space-x-1">
           <a
             routerLink="dashboard"
-            class="py-4 px-2 font-semibold hover:text-green-500 transition duration-300 text-gray-500"
+            class="py-4 px-2 font-semibold hover:text-customPalette-brownHover transition duration-300 text-gray-800"
             routerLinkActive="active-link"
             >Strona główna</a
           >
@@ -22,10 +22,10 @@
             (click)="houseDropdown = !houseDropdown"
             (clickOutside)="houseDropdown = false"
             routerLinkActive="active-link"
-            class="cursor-pointer text-gray-500 font-semibold"
+            class="cursor-pointer text-gray-800 font-semibold"
           >
             <div
-              class="py-4 px-2 hover:text-green-500 transition duration-300"
+              class="py-4 px-2 hover:text-customPalette-brown transition duration-300"
               id="dropdown-house"
             >
               Domy
@@ -37,11 +37,11 @@
             <div
               [ngClass]="houseDropdown ? 'absolute' : 'hidden'"
               id="dropdown-content-house"
-              class="bg-gray-200 w-auto z-10"
+              class="dropdown-menu-items w-auto z-10"
             >
               <a [routerLink]="['/dom', 'sprzedaz']">
                 <div
-                  class="p-3 hover:text-green-500 transition duration-300"
+                  class="p-3 hover:text-customPalette-brown transition duration-300"
                   routerLinkActive="active-link-dropdown"
                 >
                   Sprzedaż
@@ -51,7 +51,9 @@
                 [routerLink]="['/dom', 'wynajem']"
                 routerLinkActive="active-link-dropdown"
               >
-                <div class="p-3 hover:text-green-500 transition duration-300">
+                <div
+                  class="p-3 hover:text-customPalette-brown transition duration-300"
+                >
                   Wynajem
                 </div>
               </a>
@@ -62,10 +64,10 @@
             (clickOutside)="flatDropdown = false"
             (click)="flatDropdown = !flatDropdown"
             routerLinkActive="active-link"
-            class="cursor-pointer text-gray-500 font-semibold"
+            class="cursor-pointer text-gray-800 font-semibold"
           >
             <div
-              class="py-4 px-2 hover:text-green-500 transition duration-300"
+              class="py-4 px-2 hover:text-customPalette-brown transition duration-300"
               id="dropdown-flat"
             >
               Mieszkania
@@ -77,13 +79,15 @@
             <div
               [ngClass]="flatDropdown ? 'absolute' : 'hidden'"
               id="dropdown-content-flat"
-              class="bg-gray-200 w-auto z-10"
+              class="bg-customPalette-green w-auto z-10 px-2"
             >
               <a
                 [routerLink]="['/mieszkanie', 'sprzedaz']"
                 routerLinkActive="active-link-dropdown"
               >
-                <div class="p-3 hover:text-green-500 transition duration-300">
+                <div
+                  class="p-3 hover:text-customPalette-brown transition duration-300"
+                >
                   Sprzedaż
                 </div>
               </a>
@@ -91,7 +95,9 @@
                 [routerLink]="['/mieszkanie', 'wynajem']"
                 routerLinkActive="active-link-dropdown"
               >
-                <div class="p-3 hover:text-green-500 transition duration-300">
+                <div
+                  class="p-3 hover:text-customPalette-brown transition duration-300"
+                >
                   Wynajem
                 </div>
               </a>
@@ -102,10 +108,10 @@
             (click)="plotDropdown = !plotDropdown"
             (clickOutside)="plotDropdown = false"
             routerLinkActive="active-link"
-            class="cursor-pointer text-gray-500 font-semibold"
+            class="cursor-pointer text-gray-800 font-semibold"
           >
             <div
-              class="py-4 px-2 hover:text-green-500 transition duration-300"
+              class="py-4 px-2 hover:text-customPalette-brown transition duration-300"
               id="dropdown-plot"
             >
               Działki
@@ -116,13 +122,15 @@
             </div>
             <div
               [ngClass]="plotDropdown ? 'absolute' : 'hidden'"
-              class="bg-gray-200 w-auto z-10"
+              class="dropdown-menu-items w-auto z-10"
             >
               <a
                 [routerLink]="['/dzialka', 'sprzedaz']"
                 routerLinkActive="active-link-dropdown"
               >
-                <div class="p-3 hover:text-green-500 transition duration-300">
+                <div
+                  class="p-3 hover:text-customPalette-brown transition duration-300"
+                >
                   Sprzedaż
                 </div>
               </a>
@@ -130,7 +138,9 @@
                 [routerLink]="['/dzialka', 'wynajem']"
                 routerLinkActive="active-link-dropdown"
               >
-                <div class="p-3 hover:text-green-500 transition duration-300">
+                <div
+                  class="p-3 hover:text-customPalette-brown transition duration-300"
+                >
                   Wynajem
                 </div>
               </a>
@@ -142,10 +152,10 @@
             (click)="roomDropdown = !roomDropdown"
             (clickOutside)="roomDropdown = false"
             routerLinkActive="active-link"
-            class="cursor-pointer text-gray-500 font-semibold"
+            class="cursor-pointer text-gray-800 font-semibold"
           >
             <div
-              class="py-4 px-2 hover:text-green-500 transition duration-300"
+              class="py-4 px-2 hover:text-customPalette-brown transition duration-300"
               id="dropdown-room"
             >
               Pokoje
@@ -157,13 +167,15 @@
             <div
               [ngClass]="roomDropdown ? 'absolute' : 'hidden'"
               id="dropdown-content-room"
-              class="bg-gray-200 w-auto z-10"
+              class="dropdown-menu-items w-auto z-10"
             >
               <a
                 routerLink="pokoj/wynajem"
                 routerLinkActive="active-link-dropdown"
               >
-                <div class="p-3 hover:text-green-500 transition duration-300">
+                <div
+                  class="p-3 hover:text-customPalette-brown transition duration-300"
+                >
                   Wynajem
                 </div>
               </a>
@@ -179,13 +191,13 @@
         <a
           href=""
           routerLink="/login"
-          class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300"
+          class="py-2 px-2 font-medium text-gray-800 rounded hover:bg-customPalette-brown hover:text-white transition duration-300"
           >Zaloguj</a
         >
         <a
           href=""
           routerLink="/register"
-          class="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300"
+          class="py-2 px-2 font-medium text-white bg-customPalette-brown rounded hover:bg-customPalette-brownHover transition duration-300"
           >Zarejestruj</a
         >
       </div>
@@ -194,11 +206,11 @@
           appClickOutside
           (click)="userDropdown = !userDropdown"
           (clickOutside)="userDropdown = false"
-          class="hidden md:block cursor-pointer text-gray-500 font-semibold"
+          class="hidden md:block cursor-pointer text-gray-800 font-semibold"
         >
           <div
             id="dropdown-user"
-            class="py-4 px-2 flex flex-row items-center cursor-pointer space-x-1 text-gray-500 font-semibold hover:text-green-500 transition duration-300"
+            class="py-4 px-2 flex flex-row items-center cursor-pointer space-x-1 text-gray-800 font-semibold hover:text-customPalette-brown transition duration-300"
           >
             <img
               id="dropdown-user-img"
@@ -215,22 +227,26 @@
           <div
             [ngClass]="userDropdown ? 'absolute' : 'hidden'"
             id="dropdown-content-user"
-            class="bg-gray-300 w-auto"
+            class="dropdown-menu-items"
           >
             <a routerLink="uzytkownik/ogloszenia">
-              <div class="p-3 hover:text-green-500 transition duration-300">
+              <div
+                class="p-3 hover:text-customPalette-brown transition duration-300"
+              >
                 Moje konto
               </div>
             </a>
             <a routerLink="dodaj-ogloszenie">
-              <div class="p-3 hover:text-green-500 transition duration-300">
+              <div
+                class="p-3 hover:text-customPalette-brown transition duration-300"
+              >
                 Dodaj ogłoszenie
               </div>
             </a>
             <a>
               <div
                 (click)="logout()"
-                class="p-3 hover:text-green-500 transition duration-300"
+                class="p-3 hover:text-customPalette-brown transition duration-300"
               >
                 Wyloguj
               </div>
@@ -246,7 +262,7 @@
           (click)="mobileMenu = !mobileMenu"
         >
           <svg
-            class="w-6 h-6 text-gray-500 hover:text-green-500"
+            class="w-6 h-6 text-gray-800 hover:text-customPalette-brown"
             fill="none"
             stroke-linecap="round"
             stroke-linejoin="round"
@@ -262,14 +278,14 @@
   </div>
   <!-- mobile menu -->
   <div
-    class="md:hidden w-full mobile-menu"
-    [ngClass]="mobileMenu ? 'flex' : 'hidden'"
+    class="md:hidden w-full mobile-menu bg-white z-50"
+    [ngClass]="mobileMenu ? 'absolute' : 'hidden'"
   >
     <ul class="w-full">
       <li class="">
         <a routerLink="dashboard" class="w-full">
           <div
-            class="cursor-pointer text-gray-500 font-semibold py-4 px-2 hover:text-green-500 transition duration-300"
+            class="cursor-pointer text-gray-800 font-semibold py-4 px-2 hover:text-customPalette-brown transition duration-300"
             routerLinkActive="active-link"
           >
             Strona główna
@@ -280,10 +296,10 @@
         <div
           (click)="houseDropdownMobile = !houseDropdownMobile"
           routerLinkActive="active-link"
-          class="cursor-pointer text-gray-500 font-semibold"
+          class="cursor-pointer text-gray-800 font-semibold"
         >
           <div
-            class="py-4 px-2 hover:text-green-500 transition duration-300 flex justify-between"
+            class="py-4 px-2 hover:text-customPalette-brown transition duration-300 flex justify-between"
             id="dropdown-house-mobile"
           >
             Domy
@@ -294,14 +310,16 @@
           </div>
           <div
             [ngClass]="houseDropdownMobile ? 'flex' : 'hidden'"
-            class="bg-gray-200 w-full"
+            class="dropdown-menu-items w-full"
             id="dropdown-content-house-mobile"
           >
             <a
               [routerLink]="['/dom', 'sprzedaz']"
               routerLinkActive="active-link-dropdown"
             >
-              <div class="p-3 hover:text-green-500 transition duration-300">
+              <div
+                class="p-3 hover:text-customPalette-brown transition duration-300"
+              >
                 Sprzedaż
               </div>
             </a>
@@ -309,7 +327,9 @@
               [routerLink]="['/dom', 'wynajem']"
               routerLinkActive="active-link-dropdown"
             >
-              <div class="p-3 hover:text-green-500 transition duration-300">
+              <div
+                class="p-3 hover:text-customPalette-brown transition duration-300"
+              >
                 Wynajem
               </div>
             </a>
@@ -320,10 +340,10 @@
         <div
           (click)="flatDropdownMobile = !flatDropdownMobile"
           routerLinkActive="active-link"
-          class="cursor-pointer text-gray-500 font-semibold"
+          class="cursor-pointer text-gray-800 font-semibold"
         >
           <div
-            class="py-4 px-2 hover:text-green-500 flex justify-between transition duration-300"
+            class="py-4 px-2 hover:text-customPalette-brown flex justify-between transition duration-300"
             id="dropdown-flat-mobile"
           >
             Mieszkania
@@ -335,13 +355,15 @@
           <div
             [ngClass]="flatDropdownMobile ? 'flex' : 'hidden'"
             id="dropdown-content-flat-mobile"
-            class="bg-gray-200 w-full"
+            class="dropdown-menu-items w-full"
           >
             <a
               [routerLink]="['/mieszkanie', 'sprzedaz']"
               routerLinkActive="active-link-dropdown"
             >
-              <div class="p-3 hover:text-green-500 transition duration-300">
+              <div
+                class="p-3 hover:text-customPalette-brown transition duration-300"
+              >
                 Sprzedaż
               </div>
             </a>
@@ -349,7 +371,9 @@
               [routerLink]="['/mieszkanie', 'wynajem']"
               routerLinkActive="active-link-dropdown"
             >
-              <div class="p-3 hover:text-green-500 transition duration-300">
+              <div
+                class="p-3 hover:text-customPalette-brown transition duration-300"
+              >
                 Wynajem
               </div>
             </a>
@@ -360,10 +384,10 @@
         <div
           (click)="plotDropdownMobile = !plotDropdownMobile"
           routerLinkActive="active-link"
-          class="cursor-pointer text-gray-500 font-semibold"
+          class="cursor-pointer text-gray-800 font-semibold"
         >
           <div
-            class="py-4 px-2 hover:text-green-500 transition duration-300 flex justify-between"
+            class="py-4 px-2 hover:text-customPalette-brown transition duration-300 flex justify-between"
             id="dropdown-plot-mobile"
           >
             Działki
@@ -375,13 +399,15 @@
           <div
             [ngClass]="plotDropdownMobile ? 'flex' : 'hidden'"
             id="dropdown-content-plot-mobile"
-            class="bg-gray-200 w-full"
+            class="dropdown-menu-items w-full"
           >
             <a
               [routerLink]="['/dzialka', 'sprzedaz']"
               routerLinkActive="active-link-dropdown"
             >
-              <div class="p-3 hover:text-green-500 transition duration-300">
+              <div
+                class="p-3 hover:text-customPalette-brown transition duration-300"
+              >
                 Sprzedaż
               </div>
             </a>
@@ -389,7 +415,9 @@
               [routerLink]="['/dzialka', 'wynajem']"
               routerLinkActive="active-link-dropdown"
             >
-              <div class="p-3 hover:text-green-500 transition duration-300">
+              <div
+                class="p-3 hover:text-customPalette-brown transition duration-300"
+              >
                 Wynajem
               </div>
             </a>
@@ -401,10 +429,10 @@
         <div
           (click)="roomDropdownMobile = !roomDropdownMobile"
           routerLinkActive="active-link"
-          class="cursor-pointer text-gray-500 font-semibold"
+          class="cursor-pointer text-gray-800 font-semibold"
         >
           <div
-            class="py-4 px-2 hover:text-green-500 flex justify-between transition duration-300 focus:bg-amber-700"
+            class="py-4 px-2 hover:text-customPalette-brown flex justify-between transition duration-300 focus:bg-amber-700"
             id="dropdown-room-mobile"
           >
             Pokoje
@@ -416,13 +444,15 @@
           <div
             [ngClass]="roomDropdownMobile ? 'flex' : 'hidden'"
             id="dropdown-content-room-mobile"
-            class="bg-gray-200 w-full"
+            class="dropdown-menu-items w-full"
           >
             <a
               routerLink="pokoj/wynajem"
               routerLinkActive="active-link-dropdown"
             >
-              <div class="p-3 hover:text-green-500 transition duration-300">
+              <div
+                class="p-3 hover:text-customPalette-brown transition duration-300"
+              >
                 Wynajem
               </div>
             </a>
@@ -441,7 +471,7 @@
           <a
             href=""
             routerLink="/login"
-            class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300"
+            class="py-2 px-2 font-medium text-gray-800 rounded hover:bg-green-500 hover:text-white transition duration-300"
             >Zaloguj</a
           >
           <a
@@ -454,11 +484,11 @@
         <ng-template #loggedMobile>
           <div
             (click)="userDropdownMobile = !userDropdownMobile"
-            class="cursor-pointer text-gray-500 font-semibold w-full"
+            class="cursor-pointer text-gray-800 font-semibold w-full"
           >
             <div
               id="dropdown-user-mobile"
-              class="py-2 px-2 justify-start space-x-1 flex flex-row items-center cursor-pointer text-gray-500 font-semibold hover:text-green-500 transition duration-300"
+              class="py-2 px-2 justify-start space-x-1 flex flex-row items-center cursor-pointer text-gray-800 font-semibold hover:text-customPalette-brown transition duration-300"
             >
               <img
                 id="dropdown-user-img-mobile"
@@ -475,22 +505,26 @@
             <div
               [ngClass]="userDropdownMobile ? 'flex' : 'hidden'"
               id="dropdown-content-user-mobile"
-              class="bg-gray-200 w-full"
+              class="dropdown-menu-items w-full"
             >
               <a href="#">
-                <div class="p-3 hover:text-green-500 transition duration-300">
+                <div
+                  class="p-3 hover:text-customPalette-brown transition duration-300"
+                >
                   Dodaj ogłoszenie
                 </div>
               </a>
               <a routerLink="uzytkownik/ogloszenia">
-                <div class="p-3 hover:text-green-500 transition duration-300">
+                <div
+                  class="p-3 hover:text-customPalette-brown transition duration-300"
+                >
                   Moje konto
                 </div>
               </a>
               <a>
                 <div
                   (click)="logout()"
-                  class="p-3 hover:text-green-500 transition duration-300"
+                  class="p-3 hover:text-customPalette-brown transition duration-300"
                 >
                   Wyloguj
                 </div>
@@ -498,7 +532,7 @@
             </div>
           </div>
         </ng-template>
-        <!--            <a routerLink="login" type="blank" class="py-2 px-2 font-medium text-gray-500 rounded hover:bg-green-500 hover:text-white transition duration-300">Zaloguj</a>-->
+        <!--            <a routerLink="login" type="blank" class="py-2 px-2 font-medium text-gray-800 rounded hover:bg-green-500 hover:text-white transition duration-300">Zaloguj</a>-->
         <!--            <a routerLink="/register" class="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Zarejestruj</a>-->
       </li>
     </ul>

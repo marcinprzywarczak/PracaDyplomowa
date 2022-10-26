@@ -1,9 +1,9 @@
 .user-panel-navbar-item {
-  @apply w-full bg-gray-100 py-4 hover:text-green-500 text-gray-500 font-semibold;
+  @apply w-full bg-customPalette-green py-4 hover:text-customPalette-brown text-gray-800 font-semibold;
 }
 
 .user-panel-navbar-item-active {
-  @apply text-green-500 bg-gray-200;
+  @apply text-customPalette-brown bg-customPalette-lightGreen;
 }
 
 :host ::ng-deep .p-badge{

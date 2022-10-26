@@ -1,6 +1,10 @@
 .active-link{
-  @apply border-b-4 border-green-500;
+  @apply border-b-4 border-customPalette-brown text-customPalette-brown;
 }
 .active-link-dropdown{
-  @apply text-green-500;
+  @apply text-customPalette-brown;
+}
+
+.dropdown-menu-items {
+  @apply bg-customPalette-green w-auto z-10 px-2 divide-customPalette-brown divide-y-2;
 }

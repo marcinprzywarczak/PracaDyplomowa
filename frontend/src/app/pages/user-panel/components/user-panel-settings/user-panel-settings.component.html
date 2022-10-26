@@ -1,6 +1,6 @@
 <div class="w-full flex flex-col md:px-28 px-10 space-y-6">
   <div
-    class="flex flex-row w-full p-4 bg-messages-messagesBg rounded justify-between"
+    class="hidden md:flex flex-row w-full p-4 bg-messages-messagesBg rounded justify-between"
     *ngIf="dataLoaded; else skeletonUser"
   >
     <div class="flex flex-row items-center space-x-4">
@@ -35,9 +35,46 @@
       </span>
     </div>
   </div>
+  <div
+    class="md:hidden flex flex-col w-full p-4 bg-messages-messagesBg rounded justify-between"
+    *ngIf="dataLoaded"
+  >
+    <div class="flex flex-row items-center justify-center pb-3">
+      <div class="user-avatar">
+        <img [src]="user.avatar_url" />
+      </div>
+    </div>
+    <div>
+      <div class="flex justify-between">
+        <div class="flex flex-col">
+          <div>{{ user.first_name }} {{ user.sure_name }}</div>
+          <div>{{ user.email }}</div>
+          <div>{{ user.phone_number }}</div>
+        </div>
+        <span class="p-buttonset">
+          <button
+            (click)="editUser()"
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            pTooltip="Edytuj dane konta"
+            tooltipPosition="top"
+          ></button>
+          <button
+            (click)="changePassword()"
+            pButton
+            pRipple
+            icon="pi pi-key"
+            pTooltip="Zmień hasło"
+            tooltipPosition="top"
+          ></button>
+        </span>
+      </div>
+    </div>
+  </div>
   <ng-container *ngIf="dataLoaded; else skeletonFirm">
     <div
-      class="flex flex-row w-full p-4 justify-between bg-messages-messagesBg rounded"
+      class="md:flex hidden flex-row w-full p-4 justify-between bg-messages-messagesBg rounded"
       *ngIf="user.firm"
     >
       <div class="flex flex-row items-center space-x-4">
@@ -64,8 +101,41 @@
           tooltipPosition="top"
           (click)="editFirm()"
         ></button>
-      </div></div
-  ></ng-container>
+      </div>
+    </div>
+    <div
+      class="md:hidden flex flex-col w-full p-4 justify-between bg-messages-messagesBg rounded"
+      *ngIf="user.firm"
+    >
+      <div class="flex flex-row items-center justify-center">
+        <div class="user-avatar">
+          <img [src]="user.firm.logo_url" style="height: 100%" />
+        </div>
+      </div>
+      <div class="flex flex-row justify-between">
+        <div class="flex flex-col">
+          <div>{{ user.firm.name }}</div>
+          <div>
+            {{ user.firm.street }} {{ user.firm.number }},
+            {{ user.firm.zip_code }}
+            {{ user.firm.locality }}
+          </div>
+          <div>NIP: {{ user.firm.NIP }}</div>
+          <div>REGON: {{ user.firm.REGON }}</div>
+        </div>
+        <div *ngxPermissionsOnly="'firm.update'">
+          <button
+            pButton
+            pRipple
+            icon="pi pi-pencil"
+            pTooltip="Edytuj dane firmy"
+            tooltipPosition="top"
+            (click)="editFirm()"
+          ></button>
+        </div>
+      </div>
+    </div>
+  </ng-container>
 </div>
 
 <p-sidebar class="sidebar" [(visible)]="displaySidebar" position="left">

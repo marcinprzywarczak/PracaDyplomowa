@@ -1,298 +1,298 @@
-<div class="flex justify-center hidden md:flex">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full">
-    <div
-      class="bg-gray-200 flex flex-col md:px-20 px-5 items-center justify-center"
-    >
-      <div
-        class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
-      >
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label for="propertyType">Typ nieruchomości</label>
-          <p-dropdown
-            class="w-full"
-            id="propertyType"
-            name="propertType"
-            [options]="propertyTypes"
-            optionLabel="name"
-            optionValue="id"
-            placeholder="Wybierz typ nieruchomości"
-            [style]="{ width: '100%' }"
-            formControlName="propertyType"
-            [showClear]="true"
-          ></p-dropdown>
-        </div>
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label for="offerType">Typ ogłoszenia</label>
-          <p-dropdown
-            class="w-full"
-            id="offerType"
-            name="offerType"
-            [options]="offerTypes"
-            optionLabel="name"
-            optionValue="id"
-            placeholder="Wybierz typ ogłoszenia"
-            [style]="{ width: '100%' }"
-            formControlName="offerType"
-            [showClear]="true"
-          ></p-dropdown>
-        </div>
-        <div class="w-full md:w-1/3">
-          <span>Cena</span>
-          <div class="flex flex-row">
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" PLN"
-                inputId="integeronly"
-                placeholder="Od"
-                formControlName="priceFrom"
-              >
-              </p-inputNumber>
-            </div>
-            <div class="flex input-gap justify-center items-center">-</div>
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" PLN"
-                inputId="integeronly"
-                placeholder="Do"
-                formControlName="priceTo"
-              >
-              </p-inputNumber>
-            </div>
+<div class="w-full h-full">
+  <div class="flex justify-center hidden md:flex">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full">
+      <div class="flex flex-col md:px-20 px-5 items-center justify-center">
+        <div
+          class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
+        >
+          <div class="w-full md:w-1/3 flex flex-col">
+            <label for="propertyType">Typ nieruchomości</label>
+            <p-dropdown
+              class="w-full"
+              id="propertyType"
+              name="propertType"
+              [options]="propertyTypes"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Wybierz typ nieruchomości"
+              [style]="{ width: '100%' }"
+              formControlName="propertyType"
+              [showClear]="true"
+            ></p-dropdown>
           </div>
-        </div>
-      </div>
-
-      <div
-        class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
-      >
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label for="locality">Lokalizacja</label>
-          <input
-            id="locality"
-            type="text"
-            placeholder="Wprowadź lokalizację"
-            pInputText
-            formControlName="locality"
-          />
-        </div>
-
-        <div class="w-full md:w-1/3">
-          <span>Powierzchnia domu</span>
-          <div class="flex flex-row">
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" &#13217;"
-                inputId="integeronly"
-                placeholder="Od"
-                formControlName="areaFrom"
-              >
-              </p-inputNumber>
-            </div>
-            <div class="flex input-gap justify-center items-center">-</div>
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" &#13217;"
-                inputId="integeronly"
-                placeholder="Do"
-                formControlName="areaTo"
-              >
-              </p-inputNumber>
-            </div>
+          <div class="w-full md:w-1/3 flex flex-col">
+            <label for="offerType">Typ ogłoszenia</label>
+            <p-dropdown
+              class="w-full"
+              id="offerType"
+              name="offerType"
+              [options]="offerTypes"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Wybierz typ ogłoszenia"
+              [style]="{ width: '100%' }"
+              formControlName="offerType"
+              [showClear]="true"
+            ></p-dropdown>
           </div>
-        </div>
-
-        <div class="w-full md:w-1/3 flex justify-end items-end text-white">
-          <button
-            [disabled]="!this.form.dirty || !this.form.touched"
-            type="button"
-            (click)="clearFilters()"
-            class="bg-gray-500 rounded-l py-3 px-4 w-fit hover:bg-gray-600 disabled:bg-gray-500"
-          >
-            Wyczyść filtry
-          </button>
-          <button
-            type="submit"
-            class="bg-blue-500 rounded-r py-3 px-4 w-fit hover:bg-blue-600 disabled:bg-blue-500"
-          >
-            Szukaj
-          </button>
-        </div>
-      </div>
-    </div>
-    <!--    <p-checkbox name="group1" value="val1" label="Value 1" [formControl]="$any(form).controls['checkboxy']"></p-checkbox>-->
-    <!--    <p-checkbox name="group1" value="val12" label="Value 12" [formControl]="$any(form).controls['checkboxy']"></p-checkbox>-->
-    <!--    <p-checkbox name="group1" value="val13" label="Value 13" [formControl]="$any(form).controls['checkboxy']"></p-checkbox>-->
-  </form>
-</div>
-<p-sidebar
-  [(visible)]="visibleFilterSidebar"
-  [fullScreen]="true"
-  [baseZIndex]="10000"
-  [blockScroll]="true"
->
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full">
-    <div
-      class="bg-gray-200 flex flex-col md:px-20 px-5 items-center justify-center space-y-3"
-    >
-      <div
-        class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
-      >
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Typ nieruchomości</label>
-          <p-dropdown
-            class="w-full"
-            name="propertType"
-            [options]="propertyTypes"
-            optionLabel="name"
-            optionValue="id"
-            placeholder="Wybierz typ nieruchomości"
-            [style]="{ width: '100%' }"
-            formControlName="propertyType"
-            [showClear]="true"
-          ></p-dropdown>
-        </div>
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Typ ogłoszenia</label>
-          <p-dropdown
-            class="w-full"
-            name="offerType"
-            [options]="offerTypes"
-            optionLabel="name"
-            optionValue="id"
-            placeholder="Wybierz typ ogłoszenia"
-            [style]="{ width: '100%' }"
-            formControlName="offerType"
-            [showClear]="true"
-          ></p-dropdown>
-        </div>
-        <div class="w-full md:w-1/3">
-          <span>Cena</span>
-          <div class="flex flex-row">
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" PLN"
-                inputId="integeronly"
-                placeholder="Od"
-                formControlName="priceFrom"
-              >
-              </p-inputNumber>
-            </div>
-            <div class="flex input-gap justify-center items-center">-</div>
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" PLN"
-                inputId="integeronly"
-                placeholder="Do"
-                formControlName="priceTo"
-              >
-              </p-inputNumber>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
-      >
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Lokalizacja</label>
-          <input
-            type="text"
-            placeholder="Wprowadź lokalizację"
-            pInputText
-            formControlName="locality"
-          />
-        </div>
-
-        <div class="w-full md:w-1/3">
-          <span>Powierzchnia domu</span>
-          <div class="flex flex-row">
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" &#13217;"
-                inputId="integeronly"
-                placeholder="Od"
-                formControlName="areaFrom"
-              >
-              </p-inputNumber>
-            </div>
-            <div class="flex input-gap justify-center items-center">-</div>
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" &#13217;"
-                inputId="integeronly"
-                placeholder="Do"
-                formControlName="areaTo"
-              >
-              </p-inputNumber>
+          <div class="w-full md:w-1/3">
+            <span>Cena</span>
+            <div class="flex flex-row">
+              <div class="flex flex-col input-from">
+                <p-inputNumber
+                  [inputStyle]="{ width: '100%' }"
+                  [style]="{ width: '100%' }"
+                  suffix=" PLN"
+                  inputId="integeronly"
+                  placeholder="Od"
+                  formControlName="priceFrom"
+                >
+                </p-inputNumber>
+              </div>
+              <div class="flex input-gap justify-center items-center">-</div>
+              <div class="flex flex-col input-from">
+                <p-inputNumber
+                  [inputStyle]="{ width: '100%' }"
+                  [style]="{ width: '100%' }"
+                  suffix=" PLN"
+                  inputId="integeronly"
+                  placeholder="Do"
+                  formControlName="priceTo"
+                >
+                </p-inputNumber>
+              </div>
             </div>
           </div>
         </div>
 
         <div
-          class="w-full md:w-1/3 px-10 flex justify-end items-end text-white"
+          class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
         >
-          <button
-            type="button"
-            (click)="clearFilters()"
-            class="w-1/2 bg-gray-500 rounded-l py-3 px-4 hover:bg-gray-600 disabled:bg-gray-500"
-          >
-            Wyczyść filtry
-          </button>
-          <button
-            type="submit"
-            class="w-1/2 bg-blue-500 rounded-r py-3 px-4 hover:bg-blue-600 disabled:bg-blue-500"
-          >
-            Szukaj
-          </button>
+          <div class="w-full md:w-1/3 flex flex-col">
+            <label for="locality">Lokalizacja</label>
+            <input
+              id="locality"
+              type="text"
+              placeholder="Wprowadź lokalizację"
+              pInputText
+              formControlName="locality"
+            />
+          </div>
+
+          <div class="w-full md:w-1/3">
+            <span>Powierzchnia domu</span>
+            <div class="flex flex-row">
+              <div class="flex flex-col input-from">
+                <p-inputNumber
+                  [inputStyle]="{ width: '100%' }"
+                  [style]="{ width: '100%' }"
+                  suffix=" &#13217;"
+                  inputId="integeronly"
+                  placeholder="Od"
+                  formControlName="areaFrom"
+                >
+                </p-inputNumber>
+              </div>
+              <div class="flex input-gap justify-center items-center">-</div>
+              <div class="flex flex-col input-from">
+                <p-inputNumber
+                  [inputStyle]="{ width: '100%' }"
+                  [style]="{ width: '100%' }"
+                  suffix=" &#13217;"
+                  inputId="integeronly"
+                  placeholder="Do"
+                  formControlName="areaTo"
+                >
+                </p-inputNumber>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full md:w-1/3 flex justify-end items-end text-white">
+            <span class="p-buttonset">
+              <button
+                class="p-button-secondary"
+                pButton
+                [disabled]="!this.form.dirty || !this.form.touched"
+                (click)="clearFilters()"
+              >
+                Wyczyść filtry
+              </button>
+              <button
+                pButton
+                [disabled]="!this.form.dirty || !this.form.touched"
+              >
+                Szukaj
+              </button></span
+            >
+          </div>
         </div>
       </div>
-    </div>
-  </form>
-</p-sidebar>
-<button
-  (click)="visibleFilterSidebar = true"
-  type="button"
-  style="z-index: 100"
-  class="md:hidden w-full fixed bottom-0 left-0 py-3 bg-green-400 hover:bg-green-500 font-semibold"
->
-  Filtruj ogłoszenia
-</button>
-<div
-  class="w-full flex flex-col justify-center items-center pt-4 space-y-4"
-  *ngIf="dataLoad; else elseBlock"
->
-  <app-offer
-    *ngFor="let offer of offers"
-    class="w-full md:px-20"
-    [offer]="offer"
-  ></app-offer>
-  <h1 *ngIf="offers.length === 0">BRAK OFERT</h1>
-  <p-paginator
-    class="pb-14 md:pb-0"
-    [rows]="10"
-    [totalRecords]="totalRecords"
-    (onPageChange)="paginate($event)"
-  ></p-paginator>
-</div>
-<ng-template #elseBlock>
-  <div class="w-full h-full flex items-center justify-center">
-    <p-progressSpinner></p-progressSpinner>
+    </form>
   </div>
-</ng-template>
+  <p-sidebar
+    [(visible)]="visibleFilterSidebar"
+    [fullScreen]="true"
+    [baseZIndex]="10000"
+    [blockScroll]="true"
+  >
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full">
+      <div
+        class="flex flex-col md:px-20 px-5 items-center justify-center space-y-3"
+      >
+        <div
+          class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
+        >
+          <div class="w-full md:w-1/3 flex flex-col">
+            <label>Typ nieruchomości</label>
+            <p-dropdown
+              class="w-full"
+              name="propertType"
+              [options]="propertyTypes"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Wybierz typ nieruchomości"
+              [style]="{ width: '100%' }"
+              formControlName="propertyType"
+              [showClear]="true"
+            ></p-dropdown>
+          </div>
+          <div class="w-full md:w-1/3 flex flex-col">
+            <label>Typ ogłoszenia</label>
+            <p-dropdown
+              class="w-full"
+              name="offerType"
+              [options]="offerTypes"
+              optionLabel="name"
+              optionValue="id"
+              placeholder="Wybierz typ ogłoszenia"
+              [style]="{ width: '100%' }"
+              formControlName="offerType"
+              [showClear]="true"
+            ></p-dropdown>
+          </div>
+          <div class="w-full md:w-1/3">
+            <span>Cena</span>
+            <div class="flex flex-row">
+              <div class="flex flex-col input-from">
+                <p-inputNumber
+                  [inputStyle]="{ width: '100%' }"
+                  [style]="{ width: '100%' }"
+                  suffix=" PLN"
+                  inputId="integeronly"
+                  placeholder="Od"
+                  formControlName="priceFrom"
+                >
+                </p-inputNumber>
+              </div>
+              <div class="flex input-gap justify-center items-center">-</div>
+              <div class="flex flex-col input-from">
+                <p-inputNumber
+                  [inputStyle]="{ width: '100%' }"
+                  [style]="{ width: '100%' }"
+                  suffix=" PLN"
+                  inputId="integeronly"
+                  placeholder="Do"
+                  formControlName="priceTo"
+                >
+                </p-inputNumber>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div
+          class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
+        >
+          <div class="w-full md:w-1/3 flex flex-col">
+            <label>Lokalizacja</label>
+            <input
+              type="text"
+              placeholder="Wprowadź lokalizację"
+              pInputText
+              formControlName="locality"
+            />
+          </div>
+
+          <div class="w-full md:w-1/3">
+            <span>Powierzchnia domu</span>
+            <div class="flex flex-row">
+              <div class="flex flex-col input-from">
+                <p-inputNumber
+                  [inputStyle]="{ width: '100%' }"
+                  [style]="{ width: '100%' }"
+                  suffix=" &#13217;"
+                  inputId="integeronly"
+                  placeholder="Od"
+                  formControlName="areaFrom"
+                >
+                </p-inputNumber>
+              </div>
+              <div class="flex input-gap justify-center items-center">-</div>
+              <div class="flex flex-col input-from">
+                <p-inputNumber
+                  [inputStyle]="{ width: '100%' }"
+                  [style]="{ width: '100%' }"
+                  suffix=" &#13217;"
+                  inputId="integeronly"
+                  placeholder="Do"
+                  formControlName="areaTo"
+                >
+                </p-inputNumber>
+              </div>
+            </div>
+          </div>
+
+          <div class="w-full">
+            <span class="p-buttonset">
+              <button
+                class="p-button-secondary w-1/2"
+                pButton
+                [disabled]="!this.form.dirty || !this.form.touched"
+                (click)="clearFilters()"
+                label="Wyczyść filtry"
+              ></button>
+              <button
+                pButton
+                [disabled]="!this.form.dirty || !this.form.touched"
+                class="w-1/2"
+                label="Szukaj"
+              ></button
+            ></span>
+          </div>
+        </div>
+      </div>
+    </form>
+  </p-sidebar>
+  <div class="filter-button">
+    <button
+      (click)="visibleFilterSidebar = true"
+      pButton
+      label="Filtruj ogłoszenia"
+      style="z-index: 100; border-radius: 0"
+      class="w-full fixed bottom-0 left-0 md:hidden"
+    ></button>
+  </div>
+  <div
+    class="w-full flex flex-col justify-center items-center pt-4 space-y-4"
+    *ngIf="dataLoad; else elseBlock"
+  >
+    <app-offer
+      *ngFor="let offer of offers"
+      class="w-full md:px-20 px-6"
+      [offer]="offer"
+    ></app-offer>
+    <h1 *ngIf="offers.length === 0">BRAK OFERT</h1>
+    <p-paginator
+      class="pb-14 md:pb-0"
+      [rows]="10"
+      [totalRecords]="totalRecords"
+      (onPageChange)="paginate($event)"
+    ></p-paginator>
+  </div>
+  <ng-template #elseBlock>
+    <div class="w-full h-full flex items-center justify-center pt-10">
+      <p-progressSpinner></p-progressSpinner>
+    </div>
+  </ng-template>
+</div>

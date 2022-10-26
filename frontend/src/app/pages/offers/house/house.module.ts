@@ -10,6 +10,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SidebarModule } from 'primeng/sidebar';
 import { InputTextModule } from 'primeng/inputtext';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [HouseComponent],
@@ -23,6 +24,7 @@ import { InputTextModule } from 'primeng/inputtext';
     MultiSelectModule,
     SidebarModule,
     InputTextModule,
+    ButtonModule,
   ],
 })
 export class HouseModule {}

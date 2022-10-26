@@ -9,6 +9,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [RoomRentComponent],
@@ -22,6 +23,7 @@ import { SidebarModule } from 'primeng/sidebar';
     InputTextModule,
     MultiSelectModule,
     SidebarModule,
+    ButtonModule,
   ],
 })
 export class RoomRentModule {}

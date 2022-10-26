@@ -9,6 +9,7 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ReactiveFormsModule } from '@angular/forms';
 import { InputTextModule } from 'primeng/inputtext';
 import { SidebarModule } from 'primeng/sidebar';
+import { ButtonModule } from 'primeng/button';
 
 @NgModule({
   declarations: [FlatComponent],
@@ -22,6 +23,7 @@ import { SidebarModule } from 'primeng/sidebar';
     ReactiveFormsModule,
     InputTextModule,
     SidebarModule,
+    ButtonModule,
   ],
 })
 export class FlatModule {}

@@ -20,6 +20,7 @@ export class UserPanelSettingsComponent implements OnInit, OnDestroy {
   changingPassword: boolean;
   reloadUserInfoSubscription: Subscription;
   dataLoaded: boolean = false;
+  hideChangePasswordSidebarTriggerSubscription: Subscription;
 
   constructor(
     private userService: UserService,
@@ -37,6 +38,7 @@ export class UserPanelSettingsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.hideSidebarTriggerSubscription.unsubscribe();
     this.reloadUserInfoSubscription.unsubscribe();
+    this.hideChangePasswordSidebarTriggerSubscription.unsubscribe();
   }
 
   editUser() {
@@ -63,6 +65,11 @@ export class UserPanelSettingsComponent implements OnInit, OnDestroy {
   private listenOnHideSidebarTrigger() {
     this.hideSidebarTriggerSubscription =
       this.hideSidebarTrigger.addFirmUserSidebarHide.subscribe(() => {
+        this.displaySidebar = false;
+      });
+
+    this.hideChangePasswordSidebarTriggerSubscription =
+      this.hideSidebarTrigger.changePasswordSidebarHide.subscribe(() => {
         this.displaySidebar = false;
       });
   }

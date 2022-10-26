@@ -1,5 +1,5 @@
 <div
-  class="w-full flex text-center md:px-28 px-10 py-12 divide-x-2 divide-gray-400"
+  class="w-full hidden md:flex flex-row text-center md:px-28 px-10 py-12 divide-x-2 divide-customPalette-gray"
 >
   <a
     [routerLink]="['ogloszenia']"
@@ -35,6 +35,47 @@
     routerLink="ustawienia"
     routerLinkActive="user-panel-navbar-item-active"
     class="user-panel-navbar-item rounded-r-md"
+    >Ustawienia</a
+  >
+</div>
+
+<div
+  class="w-full md:hidden flex flex-col text-center md:px-28 px-10 py-12 divide-y-2 divide-customPalette-gray"
+>
+  <a
+    [routerLink]="['ogloszenia']"
+    routerLinkActive="user-panel-navbar-item-active"
+    class="user-panel-navbar-item rounded-t-md"
+    >Ogłoszenia</a
+  >
+  <a
+    routerLink="dashboard"
+    [routerLink]="['ogloszenia-obserwowane']"
+    routerLinkActive="user-panel-navbar-item-active"
+    class="user-panel-navbar-item"
+    >Obserwowane</a
+  >
+  <a
+    routerLink="wiadomosci"
+    routerLinkActive="user-panel-navbar-item-active"
+    class="user-panel-navbar-item"
+    >Wiadomości<p-badge
+      *ngIf="unreadMessages > 0"
+      [value]="unreadMessages <= 10 ? unreadMessages.toString() : '10+'"
+      styleClass="ml-2 bg-messages-message"
+    ></p-badge
+  ></a>
+  <a
+    *ngxPermissionsOnly="'users.index'"
+    routerLink="pracownicy"
+    routerLinkActive="user-panel-navbar-item-active"
+    class="user-panel-navbar-item"
+    >Użytkownicy</a
+  >
+  <a
+    routerLink="ustawienia"
+    routerLinkActive="user-panel-navbar-item-active"
+    class="user-panel-navbar-item rounded-b-md"
     >Ustawienia</a
   >
 </div>

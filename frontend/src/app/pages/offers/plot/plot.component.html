@@ -1,7 +1,7 @@
 <div class="w-full hidden md:flex">
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full">
     <div
-      class="bg-gray-200 flex flex-col md:px-20 px-5 items-center justify-center space-y-2"
+      class="flex flex-col md:px-20 px-5 items-center justify-center space-y-2"
     >
       <div
         class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
@@ -151,19 +151,19 @@
         </div>
 
         <div class="w-full md:w-2/3 flex justify-end items-end text-white">
-          <button
-            type="button"
-            (click)="clearFormAndFilters()"
-            class="bg-gray-500 rounded-l py-3 px-4 w-fit hover:bg-gray-600 disabled:bg-gray-500"
+          <span class="p-buttonset">
+            <button
+              class="p-button-secondary"
+              pButton
+              [disabled]="!this.form.dirty || !this.form.touched"
+              (click)="clearFormAndFilters()"
+            >
+              Wyczyść filtry
+            </button>
+            <button pButton [disabled]="!this.form.dirty || !this.form.touched">
+              Szukaj
+            </button></span
           >
-            Wyczyść filtry
-          </button>
-          <button
-            type="submit"
-            class="bg-blue-500 rounded-r py-3 px-4 w-fit hover:bg-blue-600 disabled:bg-blue-500"
-          >
-            Szukaj
-          </button>
         </div>
       </div>
     </div>
@@ -178,7 +178,7 @@
 >
   <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full">
     <div
-      class="bg-gray-200 flex flex-col md:px-20 px-5 items-center justify-center space-y-2"
+      class="flex flex-col md:px-20 px-5 items-center justify-center space-y-2"
     >
       <div
         class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
@@ -325,36 +325,37 @@
           ></p-multiSelect>
         </div>
 
-        <div
-          class="w-full md:w-2/3 pb-2 px-10 flex justify-end items-end text-white"
-        >
-          <button
-            type="button"
-            (click)="clearFormAndFilters()"
-            class="w-1/2 bg-gray-500 rounded-l py-3 px-4 hover:bg-gray-600 disabled:bg-gray-500"
-          >
-            Wyczyść filtry
-          </button>
-          <button
-            type="submit"
-            class="w-1/2 bg-blue-500 rounded-r py-3 px-4 hover:bg-blue-600 disabled:bg-blue-500"
-          >
-            Szukaj
-          </button>
+        <div class="w-full">
+          <span class="p-buttonset">
+            <button
+              class="p-button-secondary w-1/2"
+              pButton
+              [disabled]="!this.form.dirty || !this.form.touched"
+              (click)="clearFormAndFilters()"
+              label="Wyczyść filtry"
+            ></button>
+            <button
+              pButton
+              [disabled]="!this.form.dirty || !this.form.touched"
+              class="w-1/2"
+              label="Szukaj"
+            ></button
+          ></span>
         </div>
       </div>
     </div>
   </form>
 </p-sidebar>
 
-<button
-  (click)="visibleFilterSidebar = true"
-  type="button"
-  style="z-index: 100"
-  class="md:hidden w-full fixed bottom-0 left-0 py-3 bg-green-400 hover:bg-green-500 font-semibold"
->
-  Filtruj ogłoszenia
-</button>
+<div class="filter-button">
+  <button
+    (click)="visibleFilterSidebar = true"
+    pButton
+    label="Filtruj ogłoszenia"
+    style="z-index: 100; border-radius: 0"
+    class="w-full fixed bottom-0 left-0 md:hidden"
+  ></button>
+</div>
 
 <div
   class="w-full flex flex-col justify-center items-center pt-4 space-y-4"

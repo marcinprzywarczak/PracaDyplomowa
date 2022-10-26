@@ -32,32 +32,36 @@
             {{ offerDetails.locality }}
           </div>
         </div>
-        <div class="divide-y-2 divide-gray-300">
-          <div class="flex flex-row py-2">
-            <div class="w-1/4">Powierzchnia:</div>
-            <div class="w-3/4">{{ offerDetails.area_square_meters }} m2</div>
+        <div class="divide-y-2 divide-customPalette-green">
+          <div class="flex flex-col md:flex-row py-2">
+            <div class="md:w-1/4">Powierzchnia:</div>
+            <div class="md:w-3/4 pl-2 md:p-0">
+              {{ offerDetails.area_square_meters }} m2
+            </div>
           </div>
-          <div class="flex flex-row py-2">
-            <div class="w-1/4">Opis:</div>
-            <div class="w-3/4 break-words">{{ offerDetails.description }}</div>
+          <div class="flex flex-col md:flex-row py-2">
+            <div class="md:w-1/4">Opis:</div>
+            <div class="md:w-3/4 pl-2 md:p-0 break-words">
+              {{ offerDetails.description }}
+            </div>
           </div>
           <div class="text-3xl border-none pb-2">Informacje szczegółowe</div>
           <div
             *ngFor="let parameter of parameters"
-            class="flex flex-row py-2 odd:bg-gray-100 space-x-2"
+            class="flex flex-col md:flex-row py-2 odd:bg-customPalette-gray space-x-2"
           >
-            <div class="w-1/4 capitalize-first">{{ parameter.name }}:</div>
-            <div *ngIf="isArray(parameter.value)" class="w-3/4">
+            <div class="md:w-1/4 capitalize-first">{{ parameter.name }}:</div>
+            <div *ngIf="isArray(parameter.value)" class="md:w-3/4">
               {{ parameter.value.join(", ") }}
             </div>
-            <div *ngIf="!isArray(parameter.value)" class="w-3/4">
+            <div *ngIf="!isArray(parameter.value)" class="md:w-3/4">
               {{ parameter.value }}
             </div>
           </div>
         </div>
       </div>
     </div>
-    <div class="md:flex flex-col md:w-1/3 bg-gray-200 h-full">
+    <div class="md:flex flex-col md:w-1/3 h-full bg-gray-50">
       <div class="space-y-2 px-2 pt-4">
         <div
           *ngIf="firm"
@@ -117,15 +121,15 @@
           placeholder="Treść wiadomości"
           rows="10"
         ></textarea>
-        <p-button
+        <button
+          pButton
           [disabled]="!isLogged"
           (click)="sendMessage()"
-          styleClass="bg-blue-600 justify-self-end self-end"
           icon="pi pi-send"
           iconPos="left"
           label="Wyślij wiadomość"
           [loading]="messageSendLoading"
-        ></p-button>
+        ></button>
       </div>
     </div>
   </div>

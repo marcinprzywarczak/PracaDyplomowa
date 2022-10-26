@@ -1,6 +1,8 @@
-<div class="w-full min-w-full p-3 flex flex-row bg-amber-200 space-x-5">
+<div
+  class="w-full min-w-full p-3 flex flex-col md:flex-row bg-customPalette-green rounded-md text-gray-800 md:space-x-5"
+>
   <a [routerLink]="['/offer', offer.id]">
-    <div class="flex">
+    <div class="flex items-center justify-center pb-2 md:pb-0">
       <img
         *ngIf="mainPhoto; else placeHolderPhoto"
         src="{{ mainPhoto.photo_url }}"
@@ -28,7 +30,7 @@
         (click)="addOfferToFollowing()"
       >
         <i
-          class="pi pi-plus-circle hover:text-green-400"
+          class="follow-icon pi pi-heart-fill text-customPalette-lightGreen hover:text-customPalette-brown"
           style="font-size: 2rem"
         ></i>
       </div>
