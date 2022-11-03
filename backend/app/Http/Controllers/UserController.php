@@ -31,12 +31,12 @@ class UserController extends Controller
             ]);
         }
 
-        $filters = $request->get('filters');
+        $filters = $request->input('filters');
         $globalFilter = $filters['globalFilter'];
 
         $sortOrder = $filters['sortOrder'] === 1 ? 'ASC' : 'DESC';
         $users = User::where(function ($query){
-            $query->where('firm_id', Auth::user()->firm_id);
+            $query->where('firm_id', Auth::user()->firm_id)->where('id', '<>', Auth::id());
         })->where(function ($query) use($globalFilter) {
             $query->where('id', 'like', '%'.$globalFilter.'%')
                 ->orWhere('first_name', 'like', '%'.$globalFilter.'%')

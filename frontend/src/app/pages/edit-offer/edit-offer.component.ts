@@ -33,6 +33,7 @@ export class EditOfferComponent implements OnInit {
   offerTypeId: number;
   propertyTypeId: number;
   offerTypes: OfferType[] = [];
+  offerTypesOptions: OfferType[] = [];
   propertyTypes: PropertyType[] = [];
   propertyParameters: PropertyParameter[];
   dataLoaded: boolean = false;
@@ -92,12 +93,13 @@ export class EditOfferComponent implements OnInit {
               this.offerTypes = result.offerTypes;
 
               this.propertyTypes = result.propertyTypes;
+              this.offerTypesOptions = this.offerTypes;
               if (
                 this.propertyTypes.find((x) => x.id === this.propertyTypeId)!
                   .name === 'pokój'
               )
-                this.offerTypes = this.offerTypes.filter(
-                  (x) => x.name !== 'wynajem'
+                this.offerTypesOptions = this.offerTypes.filter(
+                  (x) => x.name !== 'sprzedaż'
                 );
             });
         })
@@ -154,7 +156,6 @@ export class EditOfferComponent implements OnInit {
       return;
     }
     this.loading = true;
-    console.log(this.addOfferForm.controls);
     let propertyParameters: { parameterId: number; value: string }[] = [];
     this.propertyParameters.forEach((parameter) => {
       if (this.addOfferForm.controls[parameter.name].value !== null) {
@@ -251,6 +252,14 @@ export class EditOfferComponent implements OnInit {
           this.getParametersCategories();
           this.setFormControls();
           this.deleteUnusedControls(oldPropertyParameters);
+          this.offerTypesOptions = this.offerTypes;
+          if (
+            this.propertyTypes.find((x) => x.id === this.propertyTypeId)!
+              .name === 'pokój'
+          )
+            this.offerTypesOptions = this.offerTypes.filter(
+              (x) => x.name !== 'sprzedaż'
+            );
           this.dataLoaded = true;
         })
       )

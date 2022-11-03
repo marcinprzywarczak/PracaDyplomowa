@@ -33,7 +33,7 @@ class OfferRepository
                         ->whereIn('value', $parameter['value']);
                 });
             }
-        return $offers->paginate(10);
+        return $offers->orderBy('created_at', 'desc')->paginate(10);
     }
 
     public function getOffer($request) {

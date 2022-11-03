@@ -71,6 +71,7 @@ const routes: Routes = [
       import('./pages/edit-offer/edit-offer.module').then(
         (m) => m.EditOfferModule
       ),
+    canActivate: [AuthGuard],
   },
   {
     path: 'nie-znaleziono',
@@ -93,7 +94,7 @@ const routes: Routes = [
   },
   {
     path: '**',
-    redirectTo: 'dashboard',
+    redirectTo: 'nie-znaleziono',
     pathMatch: 'full',
   },
 ];

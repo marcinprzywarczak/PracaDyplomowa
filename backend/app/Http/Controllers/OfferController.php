@@ -152,7 +152,7 @@ class OfferController extends Controller
                 ->where('offer_status_id', $offerStatus->id)
                 ->whereHas('user.firm', function (Builder $query) use ($user) {
                     $query->where('id', '=', $user->firm->id);
-                })->orderBy('id', 'ASC')
+                })->orderBy('created_at', 'desc')
                 ->paginate(10);
         }
 

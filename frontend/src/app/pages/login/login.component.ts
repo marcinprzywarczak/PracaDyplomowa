@@ -56,6 +56,7 @@ export class LoginComponent implements OnInit {
                 .getUserPermissions()
                 .pipe(
                   finalize(() => {
+                    this.loading = false;
                     if (
                       this.routeService.getPreviousUrl() !== '/login' &&
                       this.routeService.getPreviousUrl() !== '/'
@@ -82,7 +83,6 @@ export class LoginComponent implements OnInit {
           )
           .subscribe({
             next: (value) => {
-              this.loading = false;
               if (value.error) {
                 this.error = value.error;
                 this.errors = [];
@@ -92,8 +92,7 @@ export class LoginComponent implements OnInit {
               }
             },
             error: (err) => {
-              this.loading = false;
-              this.errors = err.error.errors;
+              if (err.error.errors) this.errors = err.error.errors;
               this.error = '';
             },
           });

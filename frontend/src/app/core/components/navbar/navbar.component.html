@@ -39,10 +39,12 @@
               id="dropdown-content-house"
               class="dropdown-menu-items w-auto z-10"
             >
-              <a [routerLink]="['/dom', 'sprzedaz']">
+              <a
+                [routerLink]="['/dom', 'sprzedaz']"
+                routerLinkActive="active-link-dropdown"
+              >
                 <div
                   class="p-3 hover:text-customPalette-brown transition duration-300"
-                  routerLinkActive="active-link-dropdown"
                 >
                   Sprzedaż
                 </div>
