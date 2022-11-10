@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\Offer;
 use App\Models\OfferType;
 use App\Models\PropertyType;
 use App\Models\User;
@@ -20,10 +21,10 @@ class OfferFactory extends Factory
     public function definition()
     {
         return [
-            'property_type_id' => PropertyType::select('id')->orderByRaw("RAND()")->first()->id,
+            'property_type_id' => PropertyType::all()->random(1)->first()->id,//PropertyType::select('id')->orderByRaw("RAND()")->first()->id,
             'offer_status_id' => 1,
-            'offer_type_id' => OfferType::select('id')->orderByRaw("RAND()")->first()->id,
-            'user_id' => User::select('id')->orderByRaw("RAND()")->first()->id,
+            'offer_type_id' => OfferType::all()->random(1)->first()->id,// OfferType::select('id')->orderByRaw("RAND()")->first()->id,
+            'user_id' =>  User::all()->random(1)->first()->id,//User::select('id')->orderByRaw("RAND()")->first()->id,
             'title' => $this->faker->text(10),
             'area_square_meters' => $this->faker->numberBetween(50, 200),
             'price' => $this->faker->numberBetween(50000, 300000),
