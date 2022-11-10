@@ -46,7 +46,7 @@ export class UserPanelMessagesComponent implements OnInit, OnDestroy {
 
   listenOnMessages() {
     this.pusherService.channel.bind('message-header-sent', (data: any) => {
-      this.messageHeaders.unshift(data.messageHeader);
+      this.messageHeaders.unshift(data.messageHeader); //obsługa
       if (this.messageHeaders.length === 1)
         this.currentMessageHeader = this.messageHeaders[0];
     });

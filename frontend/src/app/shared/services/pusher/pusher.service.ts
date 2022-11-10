@@ -11,18 +11,17 @@ import Pusher, {
   Options,
 } from 'pusher-js';
 import { UserService } from '../user/user.service';
+import { environment } from '../../../../environments/environment';
 @Injectable({
   providedIn: 'root',
 })
 export class PusherService {
+  BASE_API_URL: string = environment.apiUrl;
   channel: any;
   options: DeprecatedAuthOptions;
+  pusher: Pusher;
 
-  constructor(
-    private http: HttpClient,
-    private tokenService: HttpXsrfTokenExtractor,
-    private userService: UserService
-  ) {
+  constructor(private http: HttpClient, private userService: UserService) {
     const authorizer = (channel: Channel, options: Options) => {
       return {
         authorize: (
@@ -33,7 +32,7 @@ export class PusherService {
           data.append('socket_id', socketId);
           data.append('channel_name', channel.name);
           this.http
-            .post('http://localhost:8000/broadcasting/auth', data, {
+            .post(`${this.BASE_API_URL}/broadcasting/auth`, data, {
               withCredentials: true,
             })
             .subscribe((data: any) => {
@@ -50,7 +49,6 @@ export class PusherService {
       `private-chat.${this.userService.getUser().id}`
     );
   }
-  pusher;
 
   sendMessage(message: String) {
     this.http

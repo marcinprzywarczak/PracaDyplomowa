@@ -25,27 +25,44 @@ class ChatsController extends Controller
         $user = Auth::user();
         $toUser = User::findOrFail($request->input('user_message_to'));
         $offer = Offer::findOrFail($request->input('offer_id'));
-        $messageHeader = DB::transaction(function () use ($request, $user, $toUser, $offer){
-            $messageHeader = MessageHeader::create([
-                'sender' => $user->id,
-                'recipient' => $toUser->id,
-                'offer_id' => $offer->id,
-                'subject' => $request->subject,
-            ]);
-            $message = Message::create([
-                'message_header_id' => $messageHeader->id,
-                'message' => $request->input('message'),
-                'received' => 0,
-                'is_from_sender' => true
-            ]);
-            $messageHeader->load('senderUser', 'recipientUser', 'offer', 'offer.photos' ,'messages'); //do przetestowania
-//            return MessageHeader::with('senderUser', 'recipientUser', 'offer', 'offer.photos' ,'messages')
-//                ->where('id', $messageHeader->id)->first();
-            return $messageHeader;
-        });
+        $messageHeader = DB::transaction(
+            function () use (
+                    $request,
+                    $user,
+                    $toUser,
+                    $offer
+                ) {
+                $messageHeader = MessageHeader::create([
+                    'sender' => $user->id,
+                    'recipient' => $toUser->id,
+                    'offer_id' => $offer->id,
+                    'subject' => $request->subject,
+                ]);
+                Message::create([
+                    'message_header_id' => $messageHeader->id,
+                    'message' => $request->input('message'),
+                    'received' => 0,
+                    'is_from_sender' => true // test
+                ]);
+                $messageHeader->load(
+                    'senderUser',
+                    'recipientUser',
+                    'offer',
+                    'offer.photos',
+                    'messages'
+                );
+                return $messageHeader;
+            }
+        );
 
-        broadcast(new MessageHeaderSent($user, $messageHeader, $toUser));
-        return ['status' => 'Message Sent!'];
+        broadcast(
+            new MessageHeaderSent(
+                $user,
+                $messageHeader,
+                $toUser
+            )
+        );
+        return ['status' => 'Nowa wiadomość wysłana!'];
     }
 
     public function getAllMessages(Request $request)

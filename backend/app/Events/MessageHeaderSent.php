@@ -44,11 +44,15 @@ class MessageHeaderSent implements ShouldBroadcast
      *
      * @return void
      */
-    public function __construct(User $user, MessageHeader $messageHeader, User $toUser)
+    public function __construct(
+        User $user,
+        MessageHeader $messageHeader,
+        User $toUser)
     {
         $this->user = $user;
         $this->toUser = $toUser;
-        $this->messageHeader = new MessageHeaderResource($messageHeader);
+        $this->messageHeader =
+            new MessageHeaderResource($messageHeader);
     }
 
     /**
