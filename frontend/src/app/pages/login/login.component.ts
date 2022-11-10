@@ -50,43 +50,40 @@ export class LoginComponent implements OnInit {
             this.form.controls['email'].value,
             this.form.controls['password'].value
           )
-          .pipe(
-            finalize(() => {
-              this.apiService
-                .getUserPermissions()
-                .pipe(
-                  finalize(() => {
-                    this.loading = false;
-                    if (
-                      this.routeService.getPreviousUrl() !== '/login' &&
-                      this.routeService.getPreviousUrl() !== '/'
-                    )
-                      window.location.href = this.routeService.getPreviousUrl();
-                    else {
-                      window.location.reload();
-                    }
-                  })
-                )
-                .subscribe({
-                  next: (result) => {
-                    const permissions = result.permissions.map((x: any) => {
-                      return x.name;
-                    });
-                    this.ngxPermissionsService.loadPermissions(permissions);
-                    localStorage.setItem(
-                      'app.permissions',
-                      JSON.stringify(permissions)
-                    );
-                  },
-                });
-            })
-          )
           .subscribe({
             next: (value) => {
               if (value.error) {
                 this.error = value.error;
                 this.errors = [];
               } else {
+                this.apiService
+                  .getUserPermissions()
+                  .pipe(
+                    finalize(() => {
+                      this.loading = false;
+                      if (
+                        this.routeService.getPreviousUrl() !== '/login' &&
+                        this.routeService.getPreviousUrl() !== '/'
+                      )
+                        window.location.href =
+                          this.routeService.getPreviousUrl();
+                      else {
+                        window.location.reload();
+                      }
+                    })
+                  )
+                  .subscribe({
+                    next: (result) => {
+                      const permissions = result.permissions.map((x: any) => {
+                        return x.name;
+                      });
+                      this.ngxPermissionsService.loadPermissions(permissions);
+                      localStorage.setItem(
+                        'app.permissions',
+                        JSON.stringify(permissions)
+                      );
+                    },
+                  });
                 localStorage.setItem('isLogged', 'true');
                 localStorage.setItem('user', JSON.stringify(value.user));
               }

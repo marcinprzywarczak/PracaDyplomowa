@@ -81,7 +81,7 @@ class OfferController extends Controller
                         'user_id' => Auth::id(),
                         'offer_status_id' => $offerStatuses->id))->all()
                 );
-                $parameters = $request->get('parameters');
+                $parameters = $request->input('parameters');
                 foreach ($parameters as $parameter){
                     $parameterValue = $parameter["value"] === null ? '' : $parameter["value"];
                     $offer->parameters()->attach(
@@ -133,7 +133,7 @@ class OfferController extends Controller
     }
 
     public function getUserOffers(Request $request) {
-        $offerStatusName = $request->get('status');
+        $offerStatusName = $request->input('status');
         $offerStatus = OfferStatus::where('name', $offerStatusName)->first();
         if ($offerStatus === null) {
             return response()->json([
@@ -174,7 +174,7 @@ class OfferController extends Controller
 
 
     public function addOfferToFollowing(Request $request) {
-        $offerId = $request->get('offerId');
+        $offerId = $request->input('offerId');
         $offer = Offer::with('users')->where('id', $offerId)->first();
 
         if($offer === null) {
@@ -201,7 +201,7 @@ class OfferController extends Controller
     }
 
     public function removeOfferFromFollowing(Request $request){
-        $offerId =  $request->get('offerId');
+        $offerId =  $request->input('offerId');
         $offer = Offer::with('users')->where('id', $offerId)->first();
 
         if($offer->users->find(Auth::id()) === null) {
@@ -220,16 +220,17 @@ class OfferController extends Controller
     }
 
     public function update(EditOfferRequest $request) {
-        $offer = Offer::findOrFail($request->get('offer_id'));
+        $offer = Offer::findOrFail($request->input('offer_id'));
+
         $this->authorize('update', $offer);
         try{
             $photoPaths = [];
             $offerPhotos = [];
             $mainPhotoSrc = '';
-            if($request->get('photo_changed')) {
+            if($request->input('photo_changed')) {
                 $offerPhotos = Photo::with('offers')->whereHas('offers', function (Builder $query) use($request)
                 {
-                    $query->where('offers.id', $request->get('offer_id'));
+                    $query->where('offers.id', $request->input('offer_id'));
                 })->get();
 
                 foreach ($offerPhotos as $photo) {
@@ -276,7 +277,7 @@ class OfferController extends Controller
                     $request->all()
                 )->save();
 
-                $parameters = $request->get('parameters');
+                $parameters = $request->input('parameters');
                 $offer->parameters()->detach();
                 foreach ($parameters as $parameter){
                     $parameterValue = $parameter["value"] === null ? '' : $parameter["value"];
@@ -287,7 +288,7 @@ class OfferController extends Controller
                         ]
                     );
                 }
-                if($request->get('photo_changed')) {
+                if($request->input('photo_changed')) {
 
                     $offer->photos()->detach();
                     foreach ($photoPaths as $photo) {
@@ -338,7 +339,7 @@ class OfferController extends Controller
 
     public function completeOffer(Request $request)
     {
-        $offerId =  $request->get('offerId');
+        $offerId =  $request->input('offerId');
         $offer = Offer::findOrFail($offerId);
         $this->authorize('completeOffer', $offer);
         $offerStatus = OfferStatus::where('name', 'zakończone')->firstOrFail();
@@ -354,7 +355,7 @@ class OfferController extends Controller
 
     public function restoreOffer(Request $request)
     {
-        $offerId =  $request->get('offerId');
+        $offerId =  $request->input('offerId');
         $offer = Offer::findOrFail($offerId);
         $this->authorize('restoreOffer', $offer);
 

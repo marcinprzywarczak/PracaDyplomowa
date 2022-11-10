@@ -18,10 +18,16 @@ class OfferPolicy
     }
 
     public function completeOffer(User $user, Offer $offer) {
+        if($user->firm_id !== null) {
+            return $user->firm_id === $offer->user->firm_id;
+        }
         return $user->id === $offer->user_id;
     }
 
     public function restoreOffer(User $user, Offer $offer) {
+        if($user->firm_id !== null) {
+            return $user->firm_id === $offer->user->firm_id;
+        }
         return $user->id === $offer->user_id;
     }
 }

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\User\IndexFirmUserRequest;
 use App\Http\Requests\User\UpdateFirmRequest;
 use App\Http\Requests\User\UpdateFirmUserRequest;
 use App\Http\Requests\User\UpdateUserRequest;
@@ -11,6 +12,7 @@ use App\Models\Offer;
 use App\Models\User;
 use App\Services\UserService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\Auth;
 use Exception;
 use Illuminate\Support\Facades\DB;
@@ -21,7 +23,7 @@ use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
-    public function index(Request $request){
+    public function index(IndexFirmUserRequest $request){
         $this->authorize('index', User::class);
 
         if(Auth::user()->firm_id === null){
@@ -30,9 +32,11 @@ class UserController extends Controller
                 'totalRecords' => 0
             ]);
         }
-
         $filters = $request->input('filters');
-        $globalFilter = $filters['globalFilter'];
+        $globalFilter = '';
+        if(Arr::has($filters, 'globalFilter')){
+            $globalFilter = $filters['globalFilter'];
+        }
 
         $sortOrder = $filters['sortOrder'] === 1 ? 'ASC' : 'DESC';
         $users = User::where(function ($query){
