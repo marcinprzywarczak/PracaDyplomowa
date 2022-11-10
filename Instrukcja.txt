@@ -1,0 +1,5 @@
+php artisan key:generate
+php artisan key:generate --env=testing
+
+php artisan migrate:fresh --seed
+php artisan migrate:fresh --database sqlite --seed

@@ -62,10 +62,7 @@ class DatabaseSeeder extends Seeder
         $this->call(PropertyTypesSeeder::class);
         $this->call(OfferStatusesSeeder::class);
         $this->call(OfferTypesSeeder::class);
-        $this->call(OffersSeeder::class);
-        $this->call(ParametersSeeder::class);
-        $this->call(OfferParametersSeeder::class);
-        $this->call(OfferPhotoSeeder::class);
+
         // \App\Models\User::factory(10)->create();
         $user = User::create([
             'first_name' => 'Jan',
@@ -204,6 +201,10 @@ class DatabaseSeeder extends Seeder
             'avatar_url' => 'http://localhost:8000/public/default_avatar.jpg',
             'avatar' => 'public/default_avatar.jpg'
         ]);
+        $this->call(OffersSeeder::class);
+        $this->call(ParametersSeeder::class);
+        $this->call(OfferParametersSeeder::class);
+        $this->call(OfferPhotoSeeder::class);
         $this->call(MessageSeeder::class);
     }
 }
