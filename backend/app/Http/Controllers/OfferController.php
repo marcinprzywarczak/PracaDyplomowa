@@ -75,7 +75,7 @@ class OfferController extends Controller
             }
 
             $offerStatuses = OfferStatus::where('name', 'aktywne')->firstOrFail();
-            DB::transaction(function () use ($request, $offerStatuses, $photoPaths, $mainPhotoSrc){
+            $offer = DB::transaction(function () use ($request, $offerStatuses, $photoPaths, $mainPhotoSrc){
                 $offer = Offer::create(
                     $request->merge(array(
                         'user_id' => Auth::id(),
@@ -113,9 +113,10 @@ class OfferController extends Controller
                             'isMain' => 1,
                         ]);
                 }
+                return $offer;
             });
 
-            return response()->json([], 200);
+            return response()->json(['offer_id' => $offer->id], 200);
 
         } catch (Exception $error){
             foreach ($photoPaths as $photo) {

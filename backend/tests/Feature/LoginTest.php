@@ -15,6 +15,7 @@ class LoginTest extends TestCase
 {
     use DatabaseTransactions;
 
+    //Pomyślne logowanie
     public function test_login_success()
     {
         $response =  $this->postJson('/login', [
@@ -24,6 +25,8 @@ class LoginTest extends TestCase
         $this->assertAuthenticated();
         $response->assertStatus(200);
     }
+
+    //Błąd podczas logowania
     public function test_login_failed()
     {
         $response = $this->postJson('/login', [
@@ -35,6 +38,7 @@ class LoginTest extends TestCase
         $response->assertStatus(422);
     }
 
+    //Próba pobrania danych, która wymaga autoryzacji zakończona niepowodzeniem
     public function test_unauthorized_request() {
         $offer = Offer::first();
         $response = $this->postJson('/api/offers/getOfferToEdit', ["id" => $offer->id]);
@@ -42,6 +46,7 @@ class LoginTest extends TestCase
         $response->assertStatus(401);
     }
 
+    //Pobranie danych, które wymaga autoryzacji
     public function test_authorized_request() {
         Sanctum::actingAs(User::first());
         $offer = Offer::first();

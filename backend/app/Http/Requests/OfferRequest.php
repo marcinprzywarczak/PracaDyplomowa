@@ -31,6 +31,7 @@ class OfferRequest extends \Illuminate\Foundation\Http\FormRequest
             'price' => ['required', 'numeric'],
             'main_photo' => ['required', 'file'],
             'description' => ['required', 'min:20', 'max:1000'],
+            'locality' => ['required', 'string'],
             'parameters.*.parameterId' => ['exists:parameters,id', 'integer'],
         ];
     }

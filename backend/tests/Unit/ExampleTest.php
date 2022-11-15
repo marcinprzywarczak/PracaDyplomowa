@@ -11,13 +11,8 @@ class ExampleTest extends TestCase
      *
      * @return void
      */
-    public function test_new_property_type_can_be_add()
+    public function test_example()
     {
-        $response = $this->post('/login', [
-            'email' => 'user@testowy.com',
-            'password' => '12345678'
-        ]);
-
-        $response->assertStatus(200);
+        $this->assertTrue(true);
     }
 }
