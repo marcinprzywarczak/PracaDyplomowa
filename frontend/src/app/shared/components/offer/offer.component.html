@@ -21,8 +21,8 @@
   ></a>
   <div class="flex flex-col w-full">
     <div class="w-full flex flex-row justify-between">
-      <a [routerLink]="['/offer', offer.id]"
-        ><div class="text-2xl">Tytuł: {{ offer.title }}</div></a
+      <a [routerLink]="['/offer', offer.id]" id="offerLink"
+        ><div id="offerTitle" class="text-2xl">Tytuł: {{ offer.title }}</div></a
       >
       <div
         class="cursor-pointer"

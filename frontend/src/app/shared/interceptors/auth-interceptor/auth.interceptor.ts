@@ -25,10 +25,13 @@ export class AuthInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err) => {
         if (err.status === 401 || err.status === 419) {
-          this.loginService.logout().subscribe(() => {
-            localStorage.removeItem('isLogged');
-            window.location.href = '/login';
+          this.loginService.csrf().subscribe(() => {
+            this.loginService.logout().subscribe(() => {
+              localStorage.removeItem('isLogged');
+              window.location.href = '/login';
+            });
           });
+
           // this.router.navigate(['/login']);
         }
         return throwError(err);

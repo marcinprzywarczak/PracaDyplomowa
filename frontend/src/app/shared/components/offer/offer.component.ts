@@ -38,16 +38,17 @@ export class OfferComponent implements OnInit {
         'Aby obserwować ofertę musisz się zalogować!'
       );
       this.router.navigate(['/login']);
+    } else {
+      this.offerService.addOfferToFollowing(this.offer.id).subscribe({
+        next: (result) => {
+          this.alertService.showSuccess(result.message);
+        },
+        error: (err) => {
+          this.alertService.showError(err.error.error);
+          console.log(err);
+        },
+      });
     }
-    this.offerService.addOfferToFollowing(this.offer.id).subscribe({
-      next: (result) => {
-        this.alertService.showSuccess(result.message);
-      },
-      error: (err) => {
-        this.alertService.showError(err.error.error);
-        console.log(err);
-      },
-    });
   }
 
   removeFromFollowing() {

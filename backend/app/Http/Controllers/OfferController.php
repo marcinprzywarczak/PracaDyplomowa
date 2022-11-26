@@ -145,7 +145,9 @@ class OfferController extends Controller
 
         $offers = Offer::with('user','user.firm', 'property_type', 'offer_type', 'offer_status',
             'parameters', 'photos')
-            ->where([['user_id', Auth::id()], ['offer_status_id', $offerStatus->id]])->paginate(10);
+            ->where([['user_id', Auth::id()], ['offer_status_id', $offerStatus->id]])
+            ->orderBy('created_at', 'desc')
+            ->paginate(10);
 
         if($user->firm !== null) {
             $offers = Offer::with('user','user.firm', 'property_type', 'offer_type', 'offer_status',

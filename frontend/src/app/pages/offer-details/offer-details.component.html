@@ -48,7 +48,7 @@
           <div class="text-3xl border-none pb-2">Informacje szczegółowe</div>
           <div
             *ngFor="let parameter of parameters"
-            class="flex flex-col md:flex-row py-2 odd:bg-customPalette-gray space-x-2"
+            class="flex flex-col md:flex-row py-2 odd:bg-gray-100 space-x-2"
           >
             <div class="md:w-1/4 capitalize-first">{{ parameter.name }}:</div>
             <div *ngIf="isArray(parameter.value)" class="md:w-3/4">

@@ -45,54 +45,63 @@ export class LoginComponent implements OnInit {
     this.loading = true;
     if (!this.form.invalid) {
       this.loginService.csrf().subscribe(() => {
-        this.loginService
-          .login(
-            this.form.controls['email'].value,
-            this.form.controls['password'].value
-          )
-          .subscribe({
-            next: (value) => {
-              if (value.error) {
-                this.error = value.error;
-                this.errors = [];
-              } else {
-                this.apiService
-                  .getUserPermissions()
-                  .pipe(
-                    finalize(() => {
-                      this.loading = false;
-                      if (
-                        this.routeService.getPreviousUrl() !== '/login' &&
-                        this.routeService.getPreviousUrl() !== '/'
+        this.loginService.logout().subscribe(() => {
+          this.loginService.csrf().subscribe(() => {
+            this.loginService
+              .login(
+                this.form.controls['email'].value,
+                this.form.controls['password'].value
+              )
+              .subscribe({
+                next: (value) => {
+                  if (value.error) {
+                    this.error = value.error;
+                    this.errors = [];
+                  } else {
+                    this.apiService
+                      .getUserPermissions()
+                      .pipe(
+                        finalize(() => {
+                          this.loading = false;
+                          if (
+                            this.routeService.getPreviousUrl() !== '/login' &&
+                            this.routeService.getPreviousUrl() !== '/dashboard'
+                          )
+                            window.location.href =
+                              this.routeService.getPreviousUrl();
+                          else {
+                            window.location.reload();
+                          }
+                        })
                       )
-                        window.location.href =
-                          this.routeService.getPreviousUrl();
-                      else {
-                        window.location.reload();
-                      }
-                    })
-                  )
-                  .subscribe({
-                    next: (result) => {
-                      const permissions = result.permissions.map((x: any) => {
-                        return x.name;
+                      .subscribe({
+                        next: (result) => {
+                          const permissions = result.permissions.map(
+                            (x: any) => {
+                              return x.name;
+                            }
+                          );
+                          this.ngxPermissionsService.loadPermissions(
+                            permissions
+                          );
+                          localStorage.setItem(
+                            'app.permissions',
+                            JSON.stringify(permissions)
+                          );
+                        },
                       });
-                      this.ngxPermissionsService.loadPermissions(permissions);
-                      localStorage.setItem(
-                        'app.permissions',
-                        JSON.stringify(permissions)
-                      );
-                    },
-                  });
-                localStorage.setItem('isLogged', 'true');
-                localStorage.setItem('user', JSON.stringify(value.user));
-              }
-            },
-            error: (err) => {
-              if (err.error.errors) this.errors = err.error.errors;
-              this.error = '';
-            },
+                    localStorage.setItem('isLogged', 'true');
+                    localStorage.setItem('user', JSON.stringify(value.user));
+                  }
+                },
+                error: (err) => {
+                  this.loading = false;
+                  if (err.error.errors) this.errors = err.error.errors;
+                  this.error = '';
+                },
+              });
           });
+        });
       });
     }
   }

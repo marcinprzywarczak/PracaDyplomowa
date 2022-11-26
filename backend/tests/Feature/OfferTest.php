@@ -27,7 +27,13 @@ class OfferTest extends TestCase
         Sanctum::actingAs($user);
         $stub = __DIR__.'/test_files/test.jpg';
         $name = 'test.jpg';
-        $file = new UploadedFile($stub, $name, 'image/png', null, true);
+        $file = new UploadedFile(
+            $stub,
+            $name,
+            'image/png',
+            null,
+            true
+        );
 
         $response = $this->postJson('/api/offers/store',
             [
@@ -47,9 +53,13 @@ class OfferTest extends TestCase
 
         $response->assertStatus(200);
 
-        $photo = Photo::with('offers')->whereHas('offers',
-            function (Builder $query) use ($response) {
-                $query->where('offer_id', json_decode($response->getContent())->offer_id);
+        $photo = Photo::with('offers')
+            ->whereHas('offers',
+                function (Builder $query) use ($response) {
+                $query->where(
+                    'offer_id',
+                    json_decode($response->getContent())->offer_id
+                );
         })->first();
 
         $this->assertDatabaseHas('offers', [
@@ -69,8 +79,6 @@ class OfferTest extends TestCase
         ]);
 
         Storage::delete($photo->path);
-
-
     }
 
     //Błąd walidacji podczas dodawania ogłoszenia.

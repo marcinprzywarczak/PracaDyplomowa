@@ -236,13 +236,10 @@
           </div>
         </div>
         <div
-          *ngIf="
-            f['mainPhoto'].invalid &&
-            (f['mainPhoto'].touched || f['mainPhoto'].dirty || isSubmitted)
-          "
+          *ngIf="mainPhotoSrc === '' && isSubmitted"
           class="text-red-600 font-semibold"
         >
-          <div *ngIf="f['mainPhoto'].errors?.['required']">
+          <div *ngIf="mainPhotoSrc === '' && isSubmitted">
             Zdjęcie główne jest wymagane!
           </div>
         </div>
@@ -253,8 +250,7 @@
               class="photo-input-label"
               [ngClass]="[
                 mainPhotoSrc !== '' ? 'hidden' : ' flex',
-                f['mainPhoto'].invalid &&
-                (f['mainPhoto'].touched || f['mainPhoto'].dirty || isSubmitted)
+                mainPhotoSrc === '' && isSubmitted
                   ? 'border border-red-600'
                   : ''
               ]"
@@ -264,7 +260,6 @@
               id="mainPhoto"
               class="hidden"
               type="file"
-              formControlName="mainPhoto"
               (change)="onChangeMainPhoto($event)"
             />
             <ng-container *ngIf="mainPhotoSrc">

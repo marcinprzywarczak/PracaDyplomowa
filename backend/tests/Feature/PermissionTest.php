@@ -19,9 +19,16 @@ class PermissionTest extends TestCase
     public function test_forbidden_get_offer_to_edit() {
         Sanctum::actingAs(User::first());
         $offer = Offer::where('user_id', 2)->first();
-        $response = $this->postJson('/api/offers/getOfferToEdit', ["id" => $offer->id]);
+        $response = $this->postJson(
+            '/api/offers/getOfferToEdit',
+            ["id" => $offer->id]);
         $response->assertStatus(403);
-        $response->assertJson(["message" => "This action is unauthorized."]);
+        $response->assertJson(
+            [
+                "message" =>
+                    "This action is unauthorized."
+            ]
+        );
     }
 
     //Użytkownik może pobrać ogłoszenie do edycji, którego jest autorem

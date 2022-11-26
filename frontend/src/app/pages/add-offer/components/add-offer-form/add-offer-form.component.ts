@@ -114,7 +114,6 @@ export class AddOfferFormComponent implements OnInit {
           Validators.maxLength(1000),
         ],
       ],
-      mainPhoto: [null, [Validators.required]],
     });
   }
 
