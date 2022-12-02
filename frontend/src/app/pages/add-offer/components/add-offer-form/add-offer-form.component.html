@@ -43,6 +43,9 @@
             <div *ngIf="f['title'].errors?.['minlength']">
               Tytuł musi mieć przynajmniej 10 znaków.
             </div>
+            <div *ngIf="f['title'].errors?.['maxLength']">
+              Maksymalna długość tytułu to 255 znaków.
+            </div>
           </div>
           <div *ngIf="serverErrors.title" class="text-red-600 font-semibold">
             <div *ngFor="let title of serverErrors.title">{{ title }}</div>

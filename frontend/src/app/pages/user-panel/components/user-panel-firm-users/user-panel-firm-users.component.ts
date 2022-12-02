@@ -1,5 +1,5 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { FirmUserService } from '../../../../shared/services/firm-user-service/firm-user.service';
+import { FirmUserService } from '../../../../shared/services/firm-user/firm-user.service';
 import { ConfirmationService, LazyLoadEvent } from 'primeng/api';
 import { ReloadDataTriggerService } from '../../../../shared/services/reload-data-trigger/reload-data-trigger.service';
 import { Subscription } from 'rxjs';

@@ -112,7 +112,7 @@ class UserController extends Controller
         $this->authorize('deleteFirmUser', $user);
         $user->delete();
         return response()->json([
-            'message' => 'suksces'
+            'message' => 'sukces'
         ]);
     }
 

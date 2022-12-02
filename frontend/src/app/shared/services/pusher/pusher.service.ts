@@ -41,26 +41,12 @@ export class PusherService {
         },
       };
     };
-    this.pusher = new Pusher('f814e5e56264e6fcdea1', {
+    this.pusher = new Pusher(environment.pusherAppKey, {
       cluster: 'eu',
       authorizer: authorizer,
     });
     this.channel = this.pusher.subscribe(
       `private-chat.${this.userService.getUser().id}`
     );
-  }
-
-  sendMessage(message: String) {
-    this.http
-      .post(
-        'http://localhost:8000/api/messages',
-        {
-          message: message,
-        },
-        { withCredentials: true }
-      )
-      .subscribe((res) => {
-        console.log('res', res);
-      });
   }
 }

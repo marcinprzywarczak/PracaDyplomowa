@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { finalize } from 'rxjs';
 import { error } from '@angular/compiler/src/util';
-import { ApiService } from '../api/api.service';
+import { OfferService } from '../offer/offer.service';
 import { UserRegistration } from '../../models/user-registration';
 import { environment } from '../../../../environments/environment';
 
@@ -18,6 +18,7 @@ export class LoginService {
       withCredentials: true,
     });
   }
+
   login(email: string, password: string) {
     return this.http.post<any>(
       `${BASE_API_URL}/login`,
@@ -25,14 +26,6 @@ export class LoginService {
         email: email,
         password: password,
       },
-      { withCredentials: true }
-    );
-  }
-
-  isLogged() {
-    return this.http.post<{ isLogged: boolean }>(
-      `${BASE_API_URL}/api/isLogged`,
-      {},
       { withCredentials: true }
     );
   }
@@ -52,6 +45,12 @@ export class LoginService {
     return this.http.post<any>(`${BASE_API_URL}/register`, registerData, {
       withCredentials: true,
       headers: headers,
+    });
+  }
+
+  getUserPermissions() {
+    return this.http.get<any>(`${BASE_API_URL}/api/users/getPermissions`, {
+      withCredentials: true,
     });
   }
 }

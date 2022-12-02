@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Filter } from '../../../shared/models/filter';
-import { ApiService } from '../../../shared/services/api/api.service';
-import { finalize } from 'rxjs';
+import { OfferService } from '../../../shared/services/offer/offer.service';
+import { finalize, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Offer } from '../../../shared/models/offer';
@@ -13,7 +13,7 @@ import { OfferType } from '../../../shared/models/offer-type';
   templateUrl: './plot.component.html',
   styleUrls: ['./plot.component.scss'],
 })
-export class PlotComponent implements OnInit {
+export class PlotComponent implements OnInit, OnDestroy {
   offers: Offer[];
   totalRecords: number;
   currentPage: number;
@@ -44,8 +44,10 @@ export class PlotComponent implements OnInit {
   propertyTypeId: number;
   visibleFilterSidebar: boolean = false;
   offerType: string;
+  routeSubscription: Subscription;
+
   constructor(
-    private apiService: ApiService,
+    private offerService: OfferService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
   ) {}
@@ -62,7 +64,15 @@ export class PlotComponent implements OnInit {
       utilities: [],
       drivewayType: [],
     });
-    this.apiService
+    this.setPropertyAndOfferTypes();
+  }
+
+  ngOnDestroy() {
+    this.routeSubscription.unsubscribe();
+  }
+
+  setPropertyAndOfferTypes() {
+    this.offerService
       .getPropertyAndOfferTypes()
       .pipe(
         finalize(() => {
@@ -95,7 +105,7 @@ export class PlotComponent implements OnInit {
   }
 
   getRouteParameters() {
-    this.route.params.subscribe((params: any) => {
+    this.routeSubscription = this.route.params.subscribe((params: any) => {
       params.type === 'wynajem'
         ? (this.offerType = 'wynajem')
         : (this.offerType = 'sprzedaż');
@@ -117,7 +127,7 @@ export class PlotComponent implements OnInit {
   }
 
   getParameters() {
-    this.apiService
+    this.offerService
       .getParametersForPropertyType(this.propertyTypeId)
       .subscribe((value) => {
         this.plotTypeOptions = value.find(
@@ -139,7 +149,7 @@ export class PlotComponent implements OnInit {
       });
   }
   getOffers(page: number) {
-    this.apiService
+    this.offerService
       .getOffers(
         page,
         this.filters,
@@ -157,104 +167,74 @@ export class PlotComponent implements OnInit {
 
   onSubmit() {
     this.clearFilters();
+    this.form.setValue(this.form.value);
     if (
       this.form.controls['priceFrom'].value !== null &&
       this.form.controls['priceFrom'].value !== ''
     ) {
-      this.form.controls['priceFrom'].setValue(
-        this.form.controls['priceFrom'].value
-      );
       this.filters.push({
         column: 'price',
         operator: '>=',
         value: +this.form.controls['priceFrom'].value,
       });
-    } else {
-      this.form.controls['priceFrom'].setValue(null);
     }
 
     if (
       this.form.controls['priceTo'].value !== null &&
       this.form.controls['priceTo'].value !== ''
     ) {
-      this.form.controls['priceTo'].setValue(
-        this.form.controls['priceTo'].value
-      );
       this.filters.push({
         column: 'price',
         operator: '<=',
         value: +this.form.controls['priceTo'].value,
       });
-    } else {
-      this.form.controls['priceTo'].setValue(null);
     }
 
     if (
       this.form.controls['areaPlotFrom'].value !== null &&
       this.form.controls['areaPlotFrom'].value !== ''
     ) {
-      this.form.controls['areaPlotFrom'].setValue(
-        this.form.controls['areaPlotFrom'].value
-      );
       this.filters.push({
         column: 'area_square_meters',
         operator: '>=',
         value: +this.form.controls['areaPlotFrom'].value,
       });
-    } else {
-      this.form.controls['areaPlotFrom'].setValue(null);
     }
 
     if (
       this.form.controls['areaPlotTo'].value !== null &&
       this.form.controls['areaPlotTo'].value !== ''
     ) {
-      this.form.controls['areaPlotTo'].setValue(
-        this.form.controls['areaPlotTo'].value
-      );
       this.filters.push({
         column: 'area_square_meters',
         operator: '<=',
         value: +this.form.controls['areaPlotTo'].value,
       });
-    } else {
-      this.form.controls['areaPlotTo'].setValue(null);
     }
 
     if (
       this.form.controls['locality'].value !== null &&
       this.form.controls['locality'].value !== ''
     ) {
-      this.form.controls['locality'].setValue(
-        this.form.controls['locality'].value
-      );
       this.filters.push({
         column: 'locality',
         operator: 'like',
         value: '%' + this.form.controls['locality'].value + '%',
       });
-    } else {
-      this.form.controls['locality'].setValue(null);
     }
 
     if (
       this.form.controls['fence'].value !== null &&
       this.form.controls['fence'].value !== ''
     ) {
-      this.form.controls['fence'].setValue(this.form.controls['fence'].value);
       this.parameterValueIn.push({
         column: 'ogordzenie',
         operator: 'in',
         value: [this.form.controls['fence'].value],
       });
-    } else {
-      this.form.controls['fence'].setValue(null);
     }
 
     if (this.form.controls['utilities'].value !== null) {
-      this.form.controls['utilities'].setValue(
-        this.form.controls['utilities'].value
-      );
       this.form.controls['utilities'].value.forEach((x: number) => {
         this.parameterIn.push({
           column: 'parameter_id',
@@ -262,14 +242,9 @@ export class PlotComponent implements OnInit {
           value: x,
         });
       });
-    } else {
-      this.form.controls['utilities'].setValue(null);
     }
 
     if (this.form.controls['drivewayType'].value !== null) {
-      this.form.controls['drivewayType'].setValue(
-        this.form.controls['drivewayType'].value
-      );
       this.form.controls['drivewayType'].value.forEach((x: number) => {
         this.parameterIn.push({
           column: 'parameter_id',
@@ -277,25 +252,19 @@ export class PlotComponent implements OnInit {
           value: x,
         });
       });
-    } else {
-      this.form.controls['drivewayType'].setValue(null);
     }
 
     if (
       this.form.controls['plotType'].value !== null &&
       this.form.controls['plotType'].value.length > 0
     ) {
-      this.form.controls['plotType'].setValue(
-        this.form.controls['plotType'].value
-      );
       this.parameterValueIn.push({
         column: 'typ działki',
         operator: 'in',
         value: this.form.controls['plotType'].value,
       });
-    } else {
-      this.form.controls['plotType'].setValue(null);
     }
+
     this.visibleFilterSidebar = false;
     this.dataLoad = false;
     this.getOffers(1);

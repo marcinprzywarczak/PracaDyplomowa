@@ -26,8 +26,8 @@ class UpdateFirmRequest extends FormRequest
         return [
             'firm_id' => ['required', 'exists:firms,id'],
             'name' => ['required', 'string', 'max:255'],
-            'NIP' => ['required', 'string'],
-            'REGON' => ['required', 'string'],
+            'NIP' => ['required', 'string', 'regex:/^(\d{10})$/'],
+            'REGON' => ['required', 'string', 'regex:/^(\d{9})$/'],
             'street' => ['nullable'],
             'number' => ['required', 'string'],
             'zip_code' => ['required', 'string', 'regex:/^(\d){2}\-(\d){3}$/'],

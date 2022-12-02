@@ -94,4 +94,5 @@ Route::get('messages', [\App\Http\Controllers\ChatsController::class, 'fetchMess
 
 Route::post('messages/test', [\App\Http\Controllers\ChatsController::class, 'test']);
 
-
+Route::get('offer/{offer}', [\App\Http\Controllers\OfferController::class, 'test'])
+    ->where('offer', '[0-9]+');

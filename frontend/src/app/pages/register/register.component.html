@@ -145,12 +145,12 @@
           class="form-label inline-block pb-1 text-gray-700"
           >Numer telefonu</label
         >
-        <input
-          type="text"
+        <p-inputMask
+          mask="+48 999 999 999"
           id="phone_number"
           name="phone_number"
           formControlName="phone_number"
-          pInputText
+          styleClass="w-full"
           class="w-full"
           [ngClass]="
             (f['phone_number'].invalid &&
@@ -162,7 +162,7 @@
               : 'border-gray-300'
           "
           placeholder="Wprowadź numer telefonu"
-        />
+        ></p-inputMask>
         <div
           *ngIf="
             f['phone_number'].invalid &&
@@ -176,7 +176,7 @@
             Numer telefonu jest wymagany!
           </div>
           <div *ngIf="f['phone_number'].errors?.['pattern']">
-            Numer telefonu powinien mieć format xxx-xxx-xxx
+            Numer telefonu powinien mieć format +xx xxx xxx xxx
           </div>
         </div>
         <div
@@ -383,6 +383,9 @@
               <div *ngIf="f['nip'].errors?.['required']">
                 NIP jest wymagany!
               </div>
+              <div *ngIf="f['nip'].errors?.['pattern']">
+                Niepoprawny numer NIP
+              </div>
             </div>
             <div *ngIf="serverErrors.nip" class="text-red-600 font-semibold">
               <div *ngFor="let nip of serverErrors.nip">{{ nip }}</div>
@@ -419,6 +422,9 @@
             >
               <div *ngIf="f['regon'].errors?.['required']">
                 REGON jest wymagany!
+              </div>
+              <div *ngIf="f['regon'].errors?.['pattern']">
+                Niepoprawny numer REGON
               </div>
             </div>
             <div *ngIf="serverErrors.regon" class="text-red-600 font-semibold">

@@ -4,6 +4,7 @@ import { environment } from '../../../../environments/environment';
 import { HttpClient } from '@angular/common/http';
 import { AlertService } from '../../services/alert-service/alert.service';
 import { HideSidebarTriggerService } from '../../services/hide-sidebar-trigger/hide-sidebar-trigger.service';
+import { UserSettingsService } from '../../services/user-settings/user-settings.service';
 
 const confirmedValidator = (fg: FormGroup) => {
   const control = fg.get('password');
@@ -32,7 +33,8 @@ export class UserChangePasswordFormComponent implements OnInit {
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private alertService: AlertService,
-    private hideSidebarTrigger: HideSidebarTriggerService
+    private hideSidebarTrigger: HideSidebarTriggerService,
+    private userSettingsService: UserSettingsService
   ) {}
 
   ngOnInit(): void {
@@ -53,25 +55,21 @@ export class UserChangePasswordFormComponent implements OnInit {
   onSubmit() {
     this.loading = true;
     const data = this.form.value;
-    this.http
-      .put(`${this.BASE_API_URL}/user/password`, data, {
-        withCredentials: true,
-      })
-      .subscribe({
-        next: (result) => {
-          this.alertService.showSuccess(
-            'Hasło zostało zaktualizowane pomyślnie.'
-          );
-          this.hideSidebarTrigger.triggerAddFirmUserSidebarHide();
-          this.form.reset();
-          this.loading = false;
-        },
-        error: (err) => {
-          if (err.error.errors) this.serverErrors = err.error.errors;
-          this.alertService.showError('Błąd podczas aktualizacji hasła.');
-          console.log(err);
-          this.loading = false;
-        },
-      });
+    this.userSettingsService.changePassword(data).subscribe({
+      next: (result) => {
+        this.alertService.showSuccess(
+          'Hasło zostało zaktualizowane pomyślnie.'
+        );
+        this.hideSidebarTrigger.triggerAddFirmUserSidebarHide();
+        this.form.reset();
+        this.loading = false;
+      },
+      error: (err) => {
+        if (err.error.errors) this.serverErrors = err.error.errors;
+        this.alertService.showError('Błąd podczas aktualizacji hasła.');
+        console.log(err);
+        this.loading = false;
+      },
+    });
   }
 }

@@ -1,7 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
 import { Filter } from '../../../shared/models/filter';
-import { ApiService } from '../../../shared/services/api/api.service';
-import { finalize } from 'rxjs';
+import { OfferService } from '../../../shared/services/offer/offer.service';
+import { finalize, Subscription } from 'rxjs';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { PropertyType } from '../../../shared/models/property-type';
@@ -13,7 +13,7 @@ import { Offer } from '../../../shared/models/offer';
   templateUrl: './flat.component.html',
   styleUrls: ['./flat.component.scss'],
 })
-export class FlatComponent implements OnInit {
+export class FlatComponent implements OnInit, OnDestroy {
   offers: Offer[];
   totalRecords: number;
   currentPage: number;
@@ -39,7 +39,6 @@ export class FlatComponent implements OnInit {
   windowsOptions: any = [];
   buildingSecurityOptions: any = [];
   heatingOptions: any = [];
-  utilitiesOptions: any = [];
   additionalInfOptions: any = [];
   formOfPropertyOptions: any = [];
   form: FormGroup;
@@ -49,8 +48,9 @@ export class FlatComponent implements OnInit {
   parameterValueIn: Filter[] = [];
   visibleFilterSidebar: boolean = false;
   offerType: string;
+  routeSubscription: Subscription;
   constructor(
-    private apiService: ApiService,
+    private offerService: OfferService,
     private formBuilder: FormBuilder,
     private route: ActivatedRoute
   ) {}
@@ -79,8 +79,15 @@ export class FlatComponent implements OnInit {
       formOfProperty: [],
       additionalInf: [],
     });
+    this.setPropertyAndOfferTypes();
+  }
 
-    this.apiService
+  ngOnDestroy() {
+    this.routeSubscription.unsubscribe();
+  }
+
+  setPropertyAndOfferTypes() {
+    this.offerService
       .getPropertyAndOfferTypes()
       .pipe(
         finalize(() => {
@@ -113,7 +120,7 @@ export class FlatComponent implements OnInit {
   }
 
   getRouteParameters() {
-    this.route.params.subscribe((params: any) => {
+    this.routeSubscription = this.route.params.subscribe((params: any) => {
       params.type === 'wynajem'
         ? (this.offerType = 'wynajem')
         : (this.offerType = 'sprzedaż');
@@ -126,11 +133,16 @@ export class FlatComponent implements OnInit {
   paginate(event: any) {
     if (this.currentPage !== event.page + 1) {
       this.getOffers(event.page + 1);
+      window.scroll({
+        top: 0,
+        left: 0,
+        behavior: 'smooth',
+      });
     }
   }
 
   getParameters() {
-    this.apiService
+    this.offerService
       .getParametersForPropertyType(this.propertyTypeId)
       .subscribe((value) => {
         this.buildingTypeOptions = value.find(
@@ -166,7 +178,7 @@ export class FlatComponent implements OnInit {
   }
 
   getOffers(page: number) {
-    this.apiService
+    this.offerService
       .getOffers(
         page,
         this.filters,
@@ -183,13 +195,12 @@ export class FlatComponent implements OnInit {
   }
 
   clearFilters() {
-    this.filters = [];
-    this.filters[0] = this.defaultFilters[0];
-    this.filters[0] = this.defaultFilters[1];
+    this.filters = [this.defaultFilters[0], this.defaultFilters[1]];
     this.parameterValueIn = [];
     this.parameterFilters = [];
     this.parameterIn = [];
   }
+
   clearFormAndFilters() {
     this.clearFilters();
     this.form.reset();
@@ -200,303 +211,211 @@ export class FlatComponent implements OnInit {
 
   onSubmit() {
     this.clearFilters();
+    this.form.setValue(this.form.value);
     if (
       this.form.controls['priceFrom'].value !== null &&
       this.form.controls['priceFrom'].value !== ''
     ) {
-      this.form.controls['priceFrom'].setValue(
-        this.form.controls['priceFrom'].value
-      );
       this.filters.push({
         column: 'price',
         operator: '>=',
         value: +this.form.controls['priceFrom'].value,
       });
-    } else {
-      this.form.controls['priceFrom'].setValue(null);
     }
 
     if (
       this.form.controls['priceTo'].value !== null &&
       this.form.controls['priceTo'].value !== ''
     ) {
-      this.form.controls['priceTo'].setValue(
-        this.form.controls['priceTo'].value
-      );
       this.filters.push({
         column: 'price',
         operator: '<=',
         value: +this.form.controls['priceTo'].value,
       });
-    } else {
-      this.form.controls['priceTo'].setValue(null);
     }
 
     if (
       this.form.controls['areaFlatFrom'].value !== null &&
       this.form.controls['areaFlatFrom'].value !== ''
     ) {
-      this.form.controls['areaFlatFrom'].setValue(
-        this.form.controls['areaFlatFrom'].value
-      );
       this.filters.push({
         column: 'area_square_meters',
         operator: '>=',
         value: +this.form.controls['areaFlatFrom'].value,
       });
-    } else {
-      this.form.controls['areaFlatFrom'].setValue(null);
     }
 
     if (
       this.form.controls['areaFlatTo'].value !== null &&
       this.form.controls['areaFlatTo'].value !== ''
     ) {
-      this.form.controls['areaFlatTo'].setValue(
-        this.form.controls['areaFlatTo'].value
-      );
       this.filters.push({
         column: 'area_square_meters',
         operator: '<=',
         value: +this.form.controls['areaFlatTo'].value,
       });
-    } else {
-      this.form.controls['areaFlatTo'].setValue(null);
     }
 
     if (
       this.form.controls['locality'].value !== null &&
       this.form.controls['locality'].value !== ''
     ) {
-      this.form.controls['locality'].setValue(
-        this.form.controls['locality'].value
-      );
       this.filters.push({
         column: 'locality',
         operator: 'like',
         value: '%' + this.form.controls['locality'].value + '%',
       });
-    } else {
-      this.form.controls['locality'].setValue(null);
     }
 
     if (
       this.form.controls['floorNumberFrom'].value !== null &&
       this.form.controls['floorNumberFrom'].value !== ''
     ) {
-      this.form.controls['floorNumberFrom'].setValue(
-        this.form.controls['floorNumberFrom'].value
-      );
       this.parameterFilters.push({
         column: 'liczba pięter',
         operator: '>=',
         value: +this.form.controls['floorNumberFrom'].value,
       });
-    } else {
-      this.form.controls['floorNumberFrom'].setValue(null);
     }
 
     if (
       this.form.controls['floorNumberTo'].value !== null &&
       this.form.controls['floorNumberTo'].value !== ''
     ) {
-      this.form.controls['floorNumberTo'].setValue(
-        this.form.controls['floorNumberTo'].value
-      );
       this.parameterFilters.push({
         column: 'liczba pięter',
         operator: '<=',
         value: +this.form.controls['floorNumberTo'].value,
       });
-    } else {
-      this.form.controls['floorNumberTo'].setValue(null);
     }
 
     if (
       this.form.controls['floorFrom'].value !== null &&
       this.form.controls['floorFrom'].value !== ''
     ) {
-      this.form.controls['floorFrom'].setValue(
-        this.form.controls['floorFrom'].value
-      );
       this.parameterFilters.push({
         column: 'piętro',
         operator: '>=',
         value: +this.form.controls['floorFrom'].value,
       });
-    } else {
-      this.form.controls['floorFrom'].setValue(null);
     }
 
     if (
       this.form.controls['floorTo'].value !== null &&
       this.form.controls['floorTo'].value !== ''
     ) {
-      this.form.controls['floorTo'].setValue(
-        this.form.controls['floorTo'].value
-      );
       this.parameterFilters.push({
         column: 'piętro',
         operator: '<=',
         value: +this.form.controls['floorTo'].value,
       });
-    } else {
-      this.form.controls['floorTo'].setValue(null);
     }
 
     if (
       this.form.controls['roomsFrom'].value !== null &&
       this.form.controls['roomsFrom'].value !== ''
     ) {
-      this.form.controls['roomsFrom'].setValue(
-        this.form.controls['roomsFrom'].value
-      );
       this.parameterFilters.push({
         column: 'liczba pokoi',
         operator: '>=',
         value: +this.form.controls['roomsFrom'].value,
       });
-    } else {
-      this.form.controls['roomsFrom'].setValue(null);
     }
 
     if (
       this.form.controls['roomsTo'].value !== null &&
       this.form.controls['roomsTo'].value !== ''
     ) {
-      this.form.controls['roomsTo'].setValue(
-        this.form.controls['roomsTo'].value
-      );
       this.parameterFilters.push({
         column: 'liczba pokoi',
         operator: '<=',
         value: +this.form.controls['roomsTo'].value,
       });
-    } else {
-      this.form.controls['roomsTo'].setValue(null);
     }
 
     if (
       this.form.controls['yearFrom'].value !== null &&
       this.form.controls['yearFrom'].value !== ''
     ) {
-      this.form.controls['yearFrom'].setValue(
-        this.form.controls['yearFrom'].value
-      );
       this.parameterFilters.push({
         column: 'rok budowy',
         operator: '>=',
         value: +this.form.controls['yearFrom'].value,
       });
     }
+
     if (
       this.form.controls['yearTo'].value !== null &&
       this.form.controls['yearTo'].value !== ''
     ) {
-      this.form.controls['yearTo'].setValue(this.form.controls['yearTo'].value);
       this.parameterFilters.push({
         column: 'rok budowy',
         operator: '<=',
         value: +this.form.controls['yearTo'].value,
       });
-    } else {
-      this.form.controls['yearTo'].setValue(null);
     }
 
     if (
       this.form.controls['buildingType'].value !== null &&
       this.form.controls['buildingType'].value.length > 0
     ) {
-      this.form.controls['buildingType'].setValue(
-        this.form.controls['buildingType'].value
-      );
       this.parameterValueIn.push({
         column: 'rodzaj zabudowy',
         operator: 'in',
         value: this.form.controls['buildingType'].value,
       });
-    } else {
-      this.form.controls['buildingType'].setValue(null);
     }
 
     if (
       this.form.controls['buildingMaterial'].value !== null &&
       this.form.controls['buildingMaterial'].value.length > 0
     ) {
-      this.form.controls['buildingMaterial'].setValue(
-        this.form.controls['buildingMaterial'].value
-      );
       this.parameterValueIn.push({
         column: 'materiał budynku',
         operator: 'in',
         value: this.form.controls['buildingMaterial'].value,
       });
-    } else {
-      this.form.controls['buildingMaterial'].setValue(null);
     }
 
     if (
       this.form.controls['buildingCondition'].value !== null &&
       this.form.controls['buildingCondition'].value.length > 0
     ) {
-      this.form.controls['buildingCondition'].setValue(
-        this.form.controls['buildingCondition'].value
-      );
       this.parameterValueIn.push({
         column: 'stan wykończenia',
         operator: 'in',
         value: this.form.controls['buildingCondition'].value,
       });
-    } else {
-      this.form.controls['buildingCondition'].setValue(null);
     }
 
     if (
       this.form.controls['windows'].value !== null &&
       this.form.controls['windows'].value.length > 0
     ) {
-      this.form.controls['windows'].setValue(
-        this.form.controls['windows'].value
-      );
       this.parameterValueIn.push({
         column: 'okna',
         operator: 'in',
         value: this.form.controls['windows'].value,
       });
-    } else {
-      this.form.controls['windows'].setValue(null);
     }
 
     if (this.form.controls['heating'].value !== null) {
-      this.form.controls['heating'].setValue(
-        this.form.controls['heating'].value
-      );
       this.parameterValueIn.push({
         column: 'ogrzewanie',
         operator: 'in',
         value: this.form.controls['heating'].value,
       });
-    } else {
-      this.form.controls['heating'].setValue(null);
     }
 
     if (this.form.controls['formOfProperty'].value !== null) {
-      this.form.controls['formOfProperty'].setValue(
-        this.form.controls['formOfProperty'].value
-      );
       this.parameterValueIn.push({
         column: 'forma własności',
         operator: 'in',
         value: this.form.controls['formOfProperty'].value,
       });
-    } else {
-      this.form.controls['formOfProperty'].setValue(null);
     }
 
     if (this.form.controls['buildingSecurity'].value !== null) {
-      this.form.controls['buildingSecurity'].setValue(
-        this.form.controls['buildingSecurity'].value
-      );
       this.form.controls['buildingSecurity'].value.forEach((x: number) => {
         this.parameterIn.push({
           column: 'parameter_id',
@@ -504,14 +423,8 @@ export class FlatComponent implements OnInit {
           value: x,
         });
       });
-    } else {
-      this.form.controls['buildingSecurity'].setValue(null);
     }
-
     if (this.form.controls['additionalInf'].value !== null) {
-      this.form.controls['additionalInf'].setValue(
-        this.form.controls['additionalInf'].value
-      );
       this.form.controls['additionalInf'].value.forEach((x: number) => {
         this.parameterIn.push({
           column: 'parameter_id',
@@ -519,8 +432,6 @@ export class FlatComponent implements OnInit {
           value: x,
         });
       });
-    } else {
-      this.form.controls['additionalInf'].setValue(null);
     }
 
     this.dataLoad = false;

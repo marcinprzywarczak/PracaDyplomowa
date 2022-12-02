@@ -11,7 +11,6 @@ export class FirmUserService {
   constructor(private http: HttpClient) {}
 
   getFirmUsers(event: LazyLoadEvent) {
-    console.log(JSON.stringify(event));
     return this.http.post<any>(
       `${this.BASE_API_URL}/api/users/getUsers`,
       { filters: event },
@@ -39,22 +38,13 @@ export class FirmUserService {
       }
     );
   }
+
   deleteFirmUser(userId: number) {
     return this.http.post<any>(
       `${this.BASE_API_URL}/api/users/deleteFirmUser`,
       {
         userId: userId,
       },
-      {
-        withCredentials: true,
-      }
-    );
-  }
-
-  editUser(userData: FormData) {
-    return this.http.post<any>(
-      `${this.BASE_API_URL}/api/users/updateUser`,
-      userData,
       {
         withCredentials: true,
       }

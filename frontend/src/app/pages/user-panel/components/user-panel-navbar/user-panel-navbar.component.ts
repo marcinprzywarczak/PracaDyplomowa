@@ -2,11 +2,12 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PusherService } from '../../../../shared/services/pusher/pusher.service';
 import { Subscription } from 'rxjs';
 import { MessagesTriggerService } from '../../../../shared/services/messages-trigger/messages-trigger.service';
-import { MessageService } from '../../../../shared/services/message-service/message.service';
+import { MessageService } from '../../../../shared/services/message/message.service';
 import { MessageHeader } from '../../../../shared/models/message-header';
 import { UserService } from '../../../../shared/services/user/user.service';
-import { ApiService } from '../../../../shared/services/api/api.service';
+import { OfferService } from '../../../../shared/services/offer/offer.service';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { LoginService } from '../../../../shared/services/login/login.service';
 
 @Component({
   selector: 'app-user-panel-navbar',
@@ -23,7 +24,7 @@ export class UserPanelNavbarComponent implements OnInit, OnDestroy {
     private messagesTriggerService: MessagesTriggerService,
     private messageService: MessageService,
     private userService: UserService,
-    private apiService: ApiService,
+    private loginService: LoginService,
     private ngxPermissionsService: NgxPermissionsService
   ) {}
 
@@ -69,17 +70,14 @@ export class UserPanelNavbarComponent implements OnInit, OnDestroy {
   }
 
   getUserPermissions() {
-    this.apiService.getUserPermissions().subscribe({
+    this.loginService.getUserPermissions().subscribe({
       next: (result) => {
         const permissions = result.permissions.map((x: any) => {
           return x.name;
         });
-        console.log(permissions);
         this.ngxPermissionsService.loadPermissions(permissions);
         localStorage.setItem('app.permissions', JSON.stringify(permissions));
       },
     });
-
-    console.log(this.ngxPermissionsService.getPermissions());
   }
 }

@@ -7,14 +7,14 @@ import {
 } from '@angular/common/http';
 import { catchError, finalize, Observable, throwError } from 'rxjs';
 import { Router } from '@angular/router';
-import { ApiService } from '../../services/api/api.service';
 import { NgxPermissionsService } from 'ngx-permissions';
+import { LoginService } from '../../services/login/login.service';
 
 @Injectable()
 export class ForbiddenInterceptor implements HttpInterceptor {
   constructor(
     private router: Router,
-    private apiService: ApiService,
+    private loginService: LoginService,
     private ngxPermissionsService: NgxPermissionsService
   ) {}
 
@@ -25,7 +25,7 @@ export class ForbiddenInterceptor implements HttpInterceptor {
     return next.handle(request).pipe(
       catchError((err) => {
         if (err.status === 403) {
-          this.apiService
+          this.loginService
             .getUserPermissions()
             .pipe(
               finalize(() => {

@@ -9,6 +9,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ButtonModule } from 'primeng/button';
 import { CheckboxModule } from 'primeng/checkbox';
+import { InputMaskModule } from 'primeng/inputmask';
 
 @NgModule({
   declarations: [RegisterComponent],
@@ -21,6 +22,7 @@ import { CheckboxModule } from 'primeng/checkbox';
     PasswordModule,
     ButtonModule,
     CheckboxModule,
+    InputMaskModule,
   ],
 })
 export class RegisterModule {}

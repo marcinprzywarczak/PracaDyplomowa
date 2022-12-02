@@ -9,7 +9,7 @@ import {
 import { LoginService } from '../../../shared/services/login/login.service';
 import { finalize, Subscription } from 'rxjs';
 import { UserService } from '../../../shared/services/user/user.service';
-import { ApiService } from '../../../shared/services/api/api.service';
+import { OfferService } from '../../../shared/services/offer/offer.service';
 import { User } from '../../../shared/models/user';
 import { CookieService } from 'ngx-cookie-service';
 import { ReloadDataTriggerService } from '../../../shared/services/reload-data-trigger/reload-data-trigger.service';

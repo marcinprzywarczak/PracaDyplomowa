@@ -1,9 +1,9 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { OfferService } from '../../../../shared/services/offer/offer.service';
 import { Offer } from '../../../../shared/models/offer';
 import { OfferStatus } from '../../../../shared/models/offer-status';
 import { ReloadDataTriggerService } from '../../../../shared/services/reload-data-trigger/reload-data-trigger.service';
 import { Subscription } from 'rxjs';
+import { OfferManagementService } from '../../../../shared/services/offer-management/offer-management.service';
 
 @Component({
   selector: 'app-user-panel-offers',
@@ -21,7 +21,7 @@ export class UserPanelOffersComponent implements OnInit, OnDestroy {
   currentPage: number;
   triggerSubscription: Subscription;
   constructor(
-    private offerService: OfferService,
+    private offerManagementService: OfferManagementService,
     private reloadDataTriggerService: ReloadDataTriggerService
   ) {}
 
@@ -48,7 +48,7 @@ export class UserPanelOffersComponent implements OnInit, OnDestroy {
   }
 
   getOffers() {
-    this.offerService
+    this.offerManagementService
       .getUserOffer(this.currentPage, this.offerStatus)
       .subscribe((value) => {
         this.totalRecords = value.offers.total;
@@ -60,7 +60,7 @@ export class UserPanelOffersComponent implements OnInit, OnDestroy {
 
   paginate(event: any) {
     if (this.currentPage !== event.page + 1) {
-      this.offerService
+      this.offerManagementService
         .getUserOffer(event.page + 1, this.offerStatus)
         .subscribe((value) => {
           this.offers = value.offers.data;

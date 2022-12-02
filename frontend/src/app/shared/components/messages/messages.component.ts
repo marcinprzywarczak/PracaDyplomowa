@@ -14,7 +14,7 @@ import {
 } from '@angular/core';
 import { MessageHeader } from '../../models/message-header';
 import { UserService } from '../../services/user/user.service';
-import { MessageService } from '../../services/message-service/message.service';
+import { MessageService } from '../../services/message/message.service';
 import { PusherService } from '../../services/pusher/pusher.service';
 import { Message } from '../../models/message';
 import { MessagesTriggerService } from '../../services/messages-trigger/messages-trigger.service';

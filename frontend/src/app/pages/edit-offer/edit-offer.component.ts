@@ -10,8 +10,8 @@ import { PropertyType } from '../../shared/models/property-type';
 import { PropertyParameter } from '../../shared/models/property-parameter';
 import { ParameterCategory } from '../../shared/models/parameter-category';
 import { ActivatedRoute, Router } from '@angular/router';
-import { ApiService } from '../../shared/services/api/api.service';
-import { AddOfferService } from '../../shared/services/add-offer/add-offer.service';
+import { OfferService } from '../../shared/services/offer/offer.service';
+import { OfferManagementService } from '../../shared/services/offer-management/offer-management.service';
 import { MessageService } from 'primeng/api';
 import { finalize, tap } from 'rxjs';
 import { Offer } from '../../shared/models/offer';
@@ -56,8 +56,8 @@ export class EditOfferComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private apiService: ApiService,
-    private addOfferService: AddOfferService,
+    private apiService: OfferService,
+    private addOfferService: OfferManagementService,
     private router: Router,
     private messageService: MessageService,
     private http: HttpClient,
@@ -310,6 +310,7 @@ export class EditOfferComponent implements OnInit {
 
   setPhotos() {
     this.files = [];
+    let index = 0;
     this.offer.photos?.forEach((photo) => {
       if (photo.pivot.isMain === 1) {
         this.http
@@ -320,19 +321,25 @@ export class EditOfferComponent implements OnInit {
             this.mainPhoto = new File([result], 'photo');
           });
         this.mainPhotoSrc = photo.photo_url;
-        // this.addOfferForm.get('mainPhoto')?.setValue(this.mainPhotoSrc);
       } else {
+        index++;
         this.http
           .get(`${this.BASE_API_URL}/api/image/${photo.path}`, {
             responseType: 'blob',
           })
           .subscribe((result) => {
-            this.files.push({
+            this.files.unshift({
               file: new File([result], 'photo'),
               src: photo.photo_url,
             });
           });
       }
     });
+    for (let i = index; i < 5; i++) {
+      this.files.push({
+        file: null as any,
+        src: '',
+      });
+    }
   }
 }

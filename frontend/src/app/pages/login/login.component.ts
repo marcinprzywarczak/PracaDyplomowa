@@ -1,6 +1,6 @@
 import { AfterContentInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ApiService } from '../../shared/services/api/api.service';
+import { OfferService } from '../../shared/services/offer/offer.service';
 import { LoginService } from '../../shared/services/login/login.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -24,7 +24,7 @@ export class LoginComponent implements OnInit {
     private formBuilder: FormBuilder,
     private loginService: LoginService,
     private router: Router,
-    private apiService: ApiService,
+    private apiService: OfferService,
     private location: Location,
     private routeService: RouteService,
     private ngxPermissionsService: NgxPermissionsService
@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
                     this.error = value.error;
                     this.errors = [];
                   } else {
-                    this.apiService
+                    this.loginService
                       .getUserPermissions()
                       .pipe(
                         finalize(() => {

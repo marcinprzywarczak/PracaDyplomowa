@@ -1,12 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Offer } from '../../models/offer';
 import { Photo } from '../../models/photo';
-import { OfferService } from '../../services/offer/offer.service';
 import { UserService } from '../../services/user/user.service';
 import { AlertService } from '../../services/alert-service/alert.service';
 import { Router } from '@angular/router';
 import { ReloadDataTriggerService } from '../../services/reload-data-trigger/reload-data-trigger.service';
 import { ConfirmationService } from 'primeng/api';
+import { OfferManagementService } from '../../services/offer-management/offer-management.service';
 
 @Component({
   selector: 'app-offer',
@@ -20,7 +20,7 @@ export class OfferComponent implements OnInit {
 
   mainPhoto: Photo;
   constructor(
-    private offerService: OfferService,
+    private offerManagementService: OfferManagementService,
     private userService: UserService,
     private alertService: AlertService,
     private router: Router,
@@ -39,7 +39,7 @@ export class OfferComponent implements OnInit {
       );
       this.router.navigate(['/login']);
     } else {
-      this.offerService.addOfferToFollowing(this.offer.id).subscribe({
+      this.offerManagementService.addOfferToFollowing(this.offer.id).subscribe({
         next: (result) => {
           this.alertService.showSuccess(result.message);
         },
@@ -58,16 +58,18 @@ export class OfferComponent implements OnInit {
       );
       this.router.navigate(['/login']);
     }
-    this.offerService.removeOfferFromFollowing(this.offer.id).subscribe({
-      next: (result) => {
-        this.alertService.showSuccess(result.message);
-        this.reloadDataTriggerService.triggerFollowingOfferReload();
-      },
-      error: (err) => {
-        this.alertService.showError(err.error.error);
-        console.log(err);
-      },
-    });
+    this.offerManagementService
+      .removeOfferFromFollowing(this.offer.id)
+      .subscribe({
+        next: (result) => {
+          this.alertService.showSuccess(result.message);
+          this.reloadDataTriggerService.triggerFollowingOfferReload();
+        },
+        error: (err) => {
+          this.alertService.showError(err.error.error);
+          console.log(err);
+        },
+      });
   }
 
   completeOffer() {
@@ -75,7 +77,7 @@ export class OfferComponent implements OnInit {
       message: 'Czy na pewno chcesz zakończyć to ogłoszenie?',
       acceptButtonStyleClass: 'p-button-danger',
       accept: () => {
-        this.offerService.completeOffer(this.offer.id).subscribe({
+        this.offerManagementService.completeOffer(this.offer.id).subscribe({
           next: (result) => {
             this.alertService.showSuccess(result.message);
             this.reloadDataTriggerService.triggerUserOffersReload();
@@ -94,7 +96,7 @@ export class OfferComponent implements OnInit {
       message: 'Czy na pewno chcesz przywrócić to ogłoszenie?',
       acceptButtonStyleClass: 'p-button-danger',
       accept: () => {
-        this.offerService.restoreOffer(this.offer.id).subscribe({
+        this.offerManagementService.restoreOffer(this.offer.id).subscribe({
           next: (result) => {
             this.alertService.showSuccess(result.message);
             this.reloadDataTriggerService.triggerUserOffersReload();

@@ -12,7 +12,7 @@ import { LoginService } from '../../shared/services/login/login.service';
 import { Router } from '@angular/router';
 import { UserRegistration } from '../../shared/models/user-registration';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { ApiService } from '../../shared/services/api/api.service';
+import { OfferService } from '../../shared/services/offer/offer.service';
 const confirmedValidator = (fg: FormGroup) => {
   const control = fg.get('password');
   const matchingControl = fg.get('password_conf');
@@ -43,7 +43,7 @@ export class RegisterComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private http: HttpClient,
-    private apiService: ApiService
+    private apiService: OfferService
   ) {}
 
   ngOnInit(): void {
@@ -57,7 +57,7 @@ export class RegisterComponent implements OnInit {
           '',
           [
             Validators.required,
-            Validators.pattern(/^(?:\(?\?)?(?:[-\s]*(\d)){9}\)?$/),
+            Validators.pattern(/^(\+\d{2}|0) (\d{3} \d{3} \d{3})$/),
           ],
         ],
         sure_name: ['', [Validators.required]],
@@ -205,8 +205,14 @@ export class RegisterComponent implements OnInit {
   }
   setFirmValidators() {
     this.f['firm_name'].setValidators([Validators.required]);
-    this.f['nip'].setValidators([Validators.required]);
-    this.f['regon'].setValidators([Validators.required]);
+    this.f['nip'].setValidators([
+      Validators.required,
+      Validators.pattern(/^(\d{10})$/),
+    ]);
+    this.f['regon'].setValidators([
+      Validators.required,
+      Validators.pattern(/^(\d{9})$/),
+    ]);
     //this.f['street'].setValidators([Validators.required]);
     this.f['number'].setValidators([Validators.required]);
     this.f['locality'].setValidators([Validators.required]);

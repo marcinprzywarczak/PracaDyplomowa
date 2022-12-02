@@ -25,9 +25,6 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
-//        $output = new StreamOutput(fopen('php://stdout', 'w'));
-//        $output->writeln('test');
-//        $output->writeln($input);
         /*
          * function validatenip($nip) {
             $nipWithoutDashes = preg_replace("/-/","",$nip);
@@ -64,7 +61,7 @@ class CreateNewUser implements CreatesNewUsers
                 'isFirmAccount' => ['required'],
                 'first_name' => ['required', 'string', 'max:255'],
                 'sure_name' => ['required', 'string', 'max:255'],
-                'phone_number' => ['required', 'regex:/^(?:\(?\?)?(?:[-\.\(\)\s]*(\d)){9}\)?$/'],
+                'phone_number' => ['required', 'regex:/^(\+\d{2}|0)\ (\d{3} \d{3} \d{3})$/'],
                 'email' => [
                     'required',
                     'string',
@@ -75,8 +72,8 @@ class CreateNewUser implements CreatesNewUsers
                 'password' => $this->passwordRules(),
                 'user_avatar' => ['nullable', 'image'],
                 'firm_name' => ['required', 'string', 'max:255'],
-                'nip' => ['required', 'string'],
-                'regon' => ['required', 'string'],
+                'nip' => ['required', 'string', 'regex:/^(\d{10})$/'],
+                'regon' => ['required', 'string', 'regex:/^(\d{9})$/'],
                 'street' => ['nullable'],
                 'number' => ['required', 'string'],
                 'zip_code' => ['required', 'string', 'regex:/^(\d){2}\-(\d){3}$/'],

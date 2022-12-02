@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Offers;
 
 class OfferRequest extends \Illuminate\Foundation\Http\FormRequest
 {

@@ -66,9 +66,10 @@
         class="text-red-600 font-semibold"
       >
         <div *ngIf="f['NIP'].errors?.['required']">NIP jest wymagany!</div>
+        <div *ngIf="f['NIP'].errors?.['pattern']">Niepoprawny numer NIP</div>
       </div>
-      <div *ngIf="serverErrors.NIP" class="text-red-600 font-semibold">
-        <div *ngFor="let NIP of serverErrors.NIP">{{ NIP }}</div>
+      <div *ngIf="serverErrors.nip" class="text-red-600 font-semibold">
+        <div *ngFor="let NIP of serverErrors.nip">{{ NIP }}</div>
       </div>
     </div>
     <div class="form-group">
@@ -99,9 +100,12 @@
         class="text-red-600 font-semibold"
       >
         <div *ngIf="f['REGON'].errors?.['required']">REGON jest wymagany!</div>
+        <div *ngIf="f['REGON'].errors?.['pattern']">
+          Niepoprawny numer REGON
+        </div>
       </div>
-      <div *ngIf="serverErrors.REGON" class="text-red-600 font-semibold">
-        <div *ngFor="let REGON of serverErrors.REGON">{{ REGON }}</div>
+      <div *ngIf="serverErrors.regon" class="text-red-600 font-semibold">
+        <div *ngFor="let REGON of serverErrors.regon">{{ REGON }}</div>
       </div>
     </div>
 

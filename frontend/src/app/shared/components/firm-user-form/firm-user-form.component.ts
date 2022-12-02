@@ -8,13 +8,14 @@ import {
 import { LoginService } from '../../services/login/login.service';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { ApiService } from '../../services/api/api.service';
+import { OfferService } from '../../services/offer/offer.service';
 import { ReloadDataTriggerService } from '../../services/reload-data-trigger/reload-data-trigger.service';
-import { FirmUserService } from '../../services/firm-user-service/firm-user.service';
+import { FirmUserService } from '../../services/firm-user/firm-user.service';
 import { AlertService } from '../../services/alert-service/alert.service';
 import { HideSidebarTriggerService } from '../../services/hide-sidebar-trigger/hide-sidebar-trigger.service';
 import { User } from '../../models/user';
 import { environment } from '../../../../environments/environment';
+import { UserSettingsService } from '../../services/user-settings/user-settings.service';
 
 const confirmedValidator = (fg: FormGroup) => {
   const control = fg.get('password');
@@ -51,7 +52,8 @@ export class FirmUserFormComponent implements OnInit {
     private firmUserService: FirmUserService,
     private alertService: AlertService,
     private hideSidebarTrigger: HideSidebarTriggerService,
-    private http: HttpClient
+    private http: HttpClient,
+    private userSettingsService: UserSettingsService
   ) {}
 
   ngOnInit(): void {
@@ -74,7 +76,7 @@ export class FirmUserFormComponent implements OnInit {
           this.edit ? this.user.phone_number : null,
           [
             Validators.required,
-            // Validators.pattern(/^(?:\(?\?)?(?:[-\s]*(\d)){9}\)?$/),
+            Validators.pattern(/^(\+\d{2}|0) (\d{3} \d{3} \d{3})$/),
           ],
         ],
         sure_name: [
@@ -149,7 +151,7 @@ export class FirmUserFormComponent implements OnInit {
   }
 
   editUser(formData: FormData) {
-    this.firmUserService.editUser(formData).subscribe({
+    this.userSettingsService.editUser(formData).subscribe({
       next: (result) => {
         this.alertService.showSuccess('Dane pomyślnie zaktualizowane');
         this.afterRequestSuccess();

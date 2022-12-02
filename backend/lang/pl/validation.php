@@ -126,7 +126,9 @@ return [
     |
     */
     'messages' => [
-        'phone_number.regex' => 'TEST TEST',
+        'phone_number.regex' => 'Numer telefonu wymagany jest w formacie +XX XXX XXX XXX',
+        'nip.regex' => 'Niepoprawny numer NIP',
+        'regon.regex' => 'Niepoprawny numer REGON',
     ],
 
 

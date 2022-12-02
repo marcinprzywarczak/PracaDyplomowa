@@ -1,8 +1,8 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { OfferService } from '../../../../shared/services/offer/offer.service';
 import { Offer } from '../../../../shared/models/offer';
 import { ReloadDataTriggerService } from '../../../../shared/services/reload-data-trigger/reload-data-trigger.service';
 import { Subscription } from 'rxjs';
+import { OfferManagementService } from '../../../../shared/services/offer-management/offer-management.service';
 
 @Component({
   selector: 'app-user-panel-following-offers',
@@ -16,7 +16,7 @@ export class UserPanelFollowingOffersComponent implements OnInit, OnDestroy {
   currentPage: number = 0;
   triggerSubscription: Subscription;
   constructor(
-    private offerService: OfferService,
+    private offerManagementService: OfferManagementService,
     private reloadDataTriggerService: ReloadDataTriggerService
   ) {}
 
@@ -39,7 +39,7 @@ export class UserPanelFollowingOffersComponent implements OnInit, OnDestroy {
       );
   }
   getOffers() {
-    this.offerService
+    this.offerManagementService
       .getFollowingOffers(this.currentPage)
       .subscribe((value) => {
         console.log(value);
@@ -52,7 +52,7 @@ export class UserPanelFollowingOffersComponent implements OnInit, OnDestroy {
 
   paginate(event: any) {
     if (this.currentPage !== event.page + 1) {
-      this.offerService
+      this.offerManagementService
         .getFollowingOffers(event.page + 1)
         .subscribe((value) => {
           this.offers = value.offers.data;

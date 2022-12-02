@@ -1,6 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { PusherService } from '../../../../shared/services/pusher/pusher.service';
-import { MessageService } from '../../../../shared/services/message-service/message.service';
+import { MessageService } from '../../../../shared/services/message/message.service';
 import { MessageHeader } from '../../../../shared/models/message-header';
 import { MessagesTriggerService } from '../../../../shared/services/messages-trigger/messages-trigger.service';
 import { Subscription } from 'rxjs';

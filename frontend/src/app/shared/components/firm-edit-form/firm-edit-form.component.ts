@@ -1,11 +1,12 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Firm } from '../../models/firm';
 import { environment } from '../../../../environments/environment';
 import { AlertService } from '../../services/alert-service/alert.service';
 import { HideSidebarTriggerService } from '../../services/hide-sidebar-trigger/hide-sidebar-trigger.service';
 import { ReloadDataTriggerService } from '../../services/reload-data-trigger/reload-data-trigger.service';
+import { UserSettingsService } from '../../services/user-settings/user-settings.service';
 
 @Component({
   selector: 'app-firm-edit-form',
@@ -27,22 +28,25 @@ export class FirmEditFormComponent implements OnInit {
     private http: HttpClient,
     private alertService: AlertService,
     private hideSidebarTrigger: HideSidebarTriggerService,
-    private reloadDataTrigger: ReloadDataTriggerService
+    private reloadDataTrigger: ReloadDataTriggerService,
+    private userSettingsService: UserSettingsService
   ) {}
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
-      name: [],
-      NIP: [],
-      REGON: [],
+      name: [null, [Validators.required]],
+      NIP: [null, [Validators.required, Validators.pattern(/^(\d{10})$/)]],
+      REGON: [null, [Validators.required, Validators.pattern(/^(\d{9})$/)]],
       street: [],
-      number: [],
-      locality: [],
-      zip_code: [],
+      number: [null, [Validators.required]],
+      locality: [null, [Validators.required]],
+      zip_code: [
+        null,
+        [Validators.required, Validators.pattern(/^(\d){2}-(\d){3}$/)],
+      ],
       firm_logo: [],
     });
     this.form.patchValue(this.firm);
-    console.log(this.firm);
     this.setPhoto();
   }
   get f() {
@@ -98,22 +102,18 @@ export class FirmEditFormComponent implements OnInit {
   }
 
   updateFirm(formData: FormData) {
-    this.http
-      .post(`${this.BASE_API_URL}/api/users/updateFirm`, formData, {
-        withCredentials: true,
-      })
-      .subscribe({
-        next: (result) => {
-          this.alertService.showSuccess('Dane pomyślnie zaktualizowane');
-          this.afterRequestSuccess();
-          this.loading = false;
-        },
-        error: (err) => {
-          this.alertService.showError('Błąd podczas aktualizacji danych');
-          this.loading = false;
-          if (err.error.errors) this.serverErrors = err.error.errors;
-        },
-      });
+    this.userSettingsService.editFirm(formData).subscribe({
+      next: (result) => {
+        this.alertService.showSuccess('Dane pomyślnie zaktualizowane');
+        this.afterRequestSuccess();
+        this.loading = false;
+      },
+      error: (err) => {
+        this.alertService.showError('Błąd podczas aktualizacji danych');
+        this.loading = false;
+        if (err.error.errors) this.serverErrors = err.error.errors;
+      },
+    });
   }
 
   afterRequestSuccess() {

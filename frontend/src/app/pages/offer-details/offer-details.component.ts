@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
-import { ApiService } from '../../shared/services/api/api.service';
+import { OfferService } from '../../shared/services/offer/offer.service';
 import { finalize, switchMap } from 'rxjs';
 import { UserService } from '../../shared/services/user/user.service';
 import { RouteService } from '../../shared/services/route/route.service';
@@ -8,7 +8,7 @@ import { Offer } from '../../shared/models/offer';
 import { Photo } from '../../shared/models/photo';
 import { User } from '../../shared/models/user';
 import { Firm } from '../../shared/models/firm';
-import { MessageService } from '../../shared/services/message-service/message.service';
+import { MessageService } from '../../shared/services/message/message.service';
 import { AlertService } from '../../shared/services/alert-service/alert.service';
 import { NewMessage } from '../../shared/models/new-message';
 
@@ -48,7 +48,7 @@ export class OfferDetailsComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private router: Router,
-    private apiService: ApiService,
+    private apiService: OfferService,
     private userService: UserService,
     private messageService: MessageService,
     private alertService: AlertService

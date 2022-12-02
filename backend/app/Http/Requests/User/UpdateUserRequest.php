@@ -28,7 +28,7 @@ class UpdateUserRequest extends FormRequest
         return [
             'first_name' => ['required', 'string', 'max:255'],
             'sure_name' => ['required', 'string', 'max:255'],
-            'phone_number' => ['required'],
+            'phone_number' => ['required', 'regex:/^(\+\d{2}|0)\ (\d{3} \d{3} \d{3})$/'],
             'email' => [
                 'required',
                 'string',

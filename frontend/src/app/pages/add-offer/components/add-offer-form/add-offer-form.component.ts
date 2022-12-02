@@ -7,8 +7,8 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { AddOfferService } from '../../../../shared/services/add-offer/add-offer.service';
-import { ApiService } from '../../../../shared/services/api/api.service';
+import { OfferManagementService } from '../../../../shared/services/offer-management/offer-management.service';
+import { OfferService } from '../../../../shared/services/offer/offer.service';
 import { OfferType } from '../../../../shared/models/offer-type';
 import { PropertyType } from '../../../../shared/models/property-type';
 import { finalize, of, tap } from 'rxjs';
@@ -17,7 +17,7 @@ import { ParameterCategory } from '../../../../shared/models/parameter-category'
 import { MessageService } from 'primeng/api';
 
 @Component({
-  selector: 'app-add-offer-form',
+  selector: 'app-offer-management-form',
   templateUrl: './add-offer-form.component.html',
   styleUrls: ['./add-offer-form.component.scss'],
 })
@@ -48,8 +48,8 @@ export class AddOfferFormComponent implements OnInit {
   constructor(
     private route: ActivatedRoute,
     private formBuilder: FormBuilder,
-    private apiService: ApiService,
-    private addOfferService: AddOfferService,
+    private apiService: OfferService,
+    private addOfferService: OfferManagementService,
     private router: Router,
     private messageService: MessageService
   ) {}
@@ -100,7 +100,11 @@ export class AddOfferFormComponent implements OnInit {
       .subscribe();
 
     this.addOfferForm = this.formBuilder.group({
-      title: [null, [Validators.required, Validators.minLength(10)]],
+      title: [
+        null,
+        [Validators.required, Validators.minLength(10)],
+        Validators.maxLength(255),
+      ],
       propertyType: [null, [Validators.required]],
       offerType: [null, [Validators.required]],
       price: [null, [Validators.required, Validators.min(1)]],

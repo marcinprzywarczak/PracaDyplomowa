@@ -1,5 +1,47 @@
 <div class="w-full hidden md:flex">
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full">
+  <ng-container *ngTemplateOutlet="filterForm"></ng-container>
+</div>
+<p-sidebar
+  [(visible)]="visibleFilterSidebar"
+  [fullScreen]="true"
+  [baseZIndex]="10000"
+  [blockScroll]="true"
+>
+  <ng-container *ngTemplateOutlet="filterForm"></ng-container>
+</p-sidebar>
+<div class="filter-button">
+  <button
+    (click)="visibleFilterSidebar = true"
+    pButton
+    label="Filtruj ogłoszenia"
+    style="z-index: 100; border-radius: 0"
+    class="w-full fixed bottom-0 left-0 md:hidden"
+  ></button>
+</div>
+<div
+  class="w-full flex flex-col justify-center items-center pt-4 space-y-4"
+  *ngIf="dataLoad; else elseBlock"
+>
+  <app-offer
+    *ngFor="let offer of offers"
+    class="w-full md:px-20"
+    [offer]="offer"
+  ></app-offer>
+  <h1 *ngIf="offers.length === 0">BRAK OFERT</h1>
+  <p-paginator
+    class="pb-14 md:pb-0"
+    [rows]="10"
+    [totalRecords]="totalRecords"
+    (onPageChange)="paginate($event)"
+  ></p-paginator>
+</div>
+<ng-template #elseBlock>
+  <div class="w-full h-full flex items-center justify-center">
+    <p-progressSpinner></p-progressSpinner>
+  </div>
+</ng-template>
+<ng-template #filterForm>
+  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full pb-4">
     <div
       class="flex flex-col md:px-20 px-5 items-center justify-center space-y-2"
     >
@@ -414,447 +456,4 @@
       </div>
     </div>
   </form>
-</div>
-<p-sidebar
-  [(visible)]="visibleFilterSidebar"
-  [fullScreen]="true"
-  [baseZIndex]="10000"
-  [blockScroll]="true"
->
-  <form [formGroup]="form" (ngSubmit)="onSubmit()" class="w-full pb-4">
-    <div
-      class="flex flex-col md:px-20 px-5 items-center justify-center space-y-2"
-    >
-      <div
-        class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
-      >
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Lokalizacja</label>
-          <input
-            type="text"
-            placeholder="Wprowadź lokalizację"
-            [style]="{ width: '100%' }"
-            pInputText
-            formControlName="locality"
-          />
-        </div>
-
-        <div class="w-full md:w-1/3">
-          <span>Powierzchnia domu</span>
-          <div class="flex flex-row">
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" &#13217;"
-                inputId="integeronly"
-                placeholder="Od"
-                formControlName="areaHouseFrom"
-              >
-              </p-inputNumber>
-            </div>
-            <div class="flex input-gap justify-center items-center">-</div>
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" &#13217;"
-                inputId="integeronly"
-                placeholder="Do"
-                formControlName="areaHouseTo"
-              >
-              </p-inputNumber>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full md:w-1/3">
-          <span>Powierzchnia działki</span>
-          <div class="flex flex-row">
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" &#13217;"
-                inputId="integeronly"
-                placeholder="Od"
-                formControlName="areaPlotFrom"
-              >
-              </p-inputNumber>
-            </div>
-            <div class="flex justify-center items-center input-gap">-</div>
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" &#13217;"
-                inputId="integeronly"
-                placeholder="Do"
-                formControlName="areaPlotTo"
-              >
-              </p-inputNumber>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
-      >
-        <div class="w-full md:w-1/3">
-          <span>Cena</span>
-          <div class="flex flex-row">
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" PLN"
-                inputId="integeronly"
-                placeholder="Od"
-                formControlName="priceFrom"
-              >
-              </p-inputNumber>
-            </div>
-            <div class="flex input-gap justify-center items-center">-</div>
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                suffix=" PLN"
-                inputId="integeronly"
-                placeholder="Do"
-                formControlName="priceTo"
-              >
-              </p-inputNumber>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full md:w-1/3">
-          <span>Liczba pięter</span>
-          <div class="flex flex-row">
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                inputId="integeronly"
-                placeholder="Od"
-                formControlName="floorFrom"
-              >
-              </p-inputNumber>
-            </div>
-            <div class="flex input-gap justify-center items-center">-</div>
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                inputId="integeronly"
-                placeholder="Do"
-                formControlName="floorTo"
-              >
-              </p-inputNumber>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full md:w-1/3">
-          <span>Liczba pokoi</span>
-          <div class="flex flex-row">
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                inputId="integeronly"
-                placeholder="Od"
-                formControlName="roomsFrom"
-              >
-              </p-inputNumber>
-            </div>
-            <div class="flex input-gap justify-center items-center">-</div>
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                inputId="integeronly"
-                placeholder="Do"
-                formControlName="roomsTo"
-              >
-              </p-inputNumber>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div
-        class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
-      >
-        <div class="w-full md:w-1/3">
-          <span>Rok budowy</span>
-          <div class="flex flex-row">
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                inputId="integeronly"
-                placeholder="Od"
-                formControlName="yearFrom"
-              >
-              </p-inputNumber>
-            </div>
-            <div class="flex input-gap justify-center items-center">-</div>
-            <div class="flex flex-col input-from">
-              <p-inputNumber
-                [inputStyle]="{ width: '100%' }"
-                [style]="{ width: '100%' }"
-                inputId="integeronly"
-                placeholder="Do"
-                formControlName="yearTo"
-              >
-              </p-inputNumber>
-            </div>
-          </div>
-        </div>
-
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Rodzaj zabudowy</label>
-          <p-multiSelect
-            class="w-full"
-            name="buildingType"
-            [filter]="false"
-            display="chip"
-            [options]="buildingTypeOptions"
-            optionLabel="value"
-            optionValue="value"
-            placeholder="Wybierz rodzaj zabudowy"
-            [style]="{ width: '100%' }"
-            formControlName="buildingType"
-            [showClear]="true"
-            [showHeader]="false"
-            emptyMessage="Brak"
-          ></p-multiSelect>
-        </div>
-
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Materiał budynku</label>
-          <p-multiSelect
-            class="w-full"
-            name="buildingMaterial"
-            [filter]="false"
-            display="chip"
-            [options]="buildingMaterialsOptions"
-            optionLabel="value"
-            optionValue="value"
-            placeholder="Wybierz materiał budynku"
-            [style]="{ width: '100%' }"
-            formControlName="buildingMaterial"
-            [showClear]="true"
-            [showHeader]="false"
-            emptyMessage="Brak"
-          ></p-multiSelect>
-        </div>
-      </div>
-
-      <div
-        class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
-      >
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Pokrycie dachu</label>
-          <p-multiSelect
-            class="w-full"
-            name="roofingType"
-            [filter]="false"
-            display="chip"
-            [options]="roofingTypeOptions"
-            optionLabel="value"
-            optionValue="value"
-            placeholder="Wybierz pokrycie dachu"
-            [style]="{ width: '100%' }"
-            [panelStyle]="{ width: '100%' }"
-            formControlName="roofingType"
-            [showClear]="true"
-            [showHeader]="false"
-            emptyMessage="Brak"
-          ></p-multiSelect>
-        </div>
-
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Stan wykończenia</label>
-          <p-multiSelect
-            class="w-full"
-            name="buildingCondition"
-            [filter]="false"
-            display="chip"
-            [options]="buildingCondition"
-            optionLabel="value"
-            optionValue="value"
-            placeholder="Wybierz pokrycie dachu"
-            [style]="{ width: '100%' }"
-            formControlName="buildingCondition"
-            [showClear]="true"
-            [showHeader]="false"
-            emptyMessage="Brak"
-          ></p-multiSelect>
-        </div>
-
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Okna</label>
-          <p-multiSelect
-            class="w-full"
-            name="windows"
-            [filter]="false"
-            display="chip"
-            [options]="windowsOptions"
-            optionLabel="value"
-            optionValue="value"
-            placeholder="Wybierz pokrycie dachu"
-            [style]="{ width: '100%' }"
-            formControlName="windows"
-            [showClear]="true"
-            [showHeader]="false"
-            emptyMessage="Brak"
-          ></p-multiSelect>
-        </div>
-      </div>
-      <div
-        class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
-      >
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Zabezpieczenia budynku</label>
-          <p-multiSelect
-            [options]="buildingSecurityOptions"
-            formControlName="buildingSecurity"
-            defaultLabel="Wybierz zabezpieczenia budynku"
-            optionLabel="name"
-            optionValue="id"
-            display="chip"
-            [filter]="false"
-            [showClear]="true"
-            [style]="{ width: '100%' }"
-            [showHeader]="false"
-            emptyMessage="Brak"
-          ></p-multiSelect>
-        </div>
-
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Ogrodzenie</label>
-          <p-multiSelect
-            [options]="fenceOptions"
-            formControlName="fence"
-            defaultLabel="Wybierz ogrodzenie"
-            optionLabel="name"
-            optionValue="id"
-            display="chip"
-            [filter]="false"
-            [showClear]="true"
-            [style]="{ width: '100%' }"
-            [showHeader]="false"
-            emptyMessage="Brak"
-          ></p-multiSelect>
-        </div>
-
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Ogrzewanie</label>
-          <p-multiSelect
-            [options]="heatingOptions"
-            formControlName="heating"
-            defaultLabel="Wybierz rodzaj ogrzewania"
-            optionLabel="name"
-            optionValue="id"
-            display="chip"
-            [filter]="false"
-            [showClear]="true"
-            [style]="{ width: '100%' }"
-            [showHeader]="false"
-            emptyMessage="Brak"
-          ></p-multiSelect>
-        </div>
-      </div>
-      <div
-        class="flex flex-col space-y-3 w-full md:flex-row md:space-x-3 md:space-y-0"
-      >
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Media</label>
-          <p-multiSelect
-            [options]="utilitiesOptions"
-            formControlName="utilities"
-            defaultLabel="Wybierz media"
-            optionLabel="name"
-            optionValue="id"
-            display="chip"
-            [filter]="false"
-            [showClear]="true"
-            [style]="{ width: '100%' }"
-            [showHeader]="false"
-            emptyMessage="Brak"
-          ></p-multiSelect>
-        </div>
-
-        <div class="w-full md:w-1/3 flex flex-col">
-          <label>Informacje dodatkowe</label>
-          <p-multiSelect
-            [options]="additionalInfOptions"
-            formControlName="additionalInf"
-            defaultLabel="Wybierz informacje dodatkowe"
-            optionLabel="name"
-            optionValue="id"
-            display="chip"
-            [filter]="false"
-            [showClear]="true"
-            [style]="{ width: '100%' }"
-            [showHeader]="false"
-            emptyMessage="Brak"
-          ></p-multiSelect>
-        </div>
-
-        <div class="w-full">
-          <span class="p-buttonset">
-            <button
-              class="p-button-secondary w-1/2"
-              pButton
-              [disabled]="!this.form.dirty || !this.form.touched"
-              (click)="clearFormAndFilters()"
-              label="Wyczyść filtry"
-            ></button>
-            <button
-              pButton
-              [disabled]="!this.form.dirty || !this.form.touched"
-              class="w-1/2"
-              label="Szukaj"
-            ></button
-          ></span>
-        </div>
-      </div>
-    </div>
-  </form>
-</p-sidebar>
-<div class="filter-button">
-  <button
-    (click)="visibleFilterSidebar = true"
-    pButton
-    label="Filtruj ogłoszenia"
-    style="z-index: 100; border-radius: 0"
-    class="w-full fixed bottom-0 left-0 md:hidden"
-  ></button>
-</div>
-<div
-  class="w-full flex flex-col justify-center items-center pt-4 space-y-4"
-  *ngIf="dataLoad; else elseBlock"
->
-  <app-offer
-    *ngFor="let offer of offers"
-    class="w-full md:px-20"
-    [offer]="offer"
-  ></app-offer>
-  <h1 *ngIf="offers.length === 0">BRAK OFERT</h1>
-  <p-paginator
-    class="pb-14 md:pb-0"
-    [rows]="10"
-    [totalRecords]="totalRecords"
-    (onPageChange)="paginate($event)"
-  ></p-paginator>
-</div>
-<ng-template #elseBlock>
-  <div class="w-full h-full flex items-center justify-center">
-    <p-progressSpinner></p-progressSpinner>
-  </div>
 </ng-template>
