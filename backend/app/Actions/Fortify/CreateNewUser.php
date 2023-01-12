@@ -104,12 +104,12 @@ class CreateNewUser implements CreatesNewUsers
             if(request()->hasFile('user_avatar'))
                 $user_avatar = request()->file('user_avatar')->store('avatars');
             else
-                $user_avatar = 'public/default_avatar.jpg';
+                $user_avatar = 'public/default_avatar.png';
 
             if($input['isFirmAccount'] === 'true' && request()->hasFile('firm_logo'))
                 $firm_logo = request()->file('firm_logo')->store('avatars');
             else
-                $firm_logo = 'public/default_avatar.jpg';
+                $firm_logo = 'public/default_avatar.png';
 
 
             if($input['isFirmAccount'] === 'true')

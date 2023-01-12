@@ -89,9 +89,4 @@ class OfferController extends Controller
         return $repository->restoreOffer($request);
     }
 
-    public function test(Request $request, $offer)
-    {
-        dd($offer);
-    }
-
 }

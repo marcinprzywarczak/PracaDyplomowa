@@ -72,7 +72,7 @@ class OfferRepository
                         )->whereIn('value', $parameter['value']);
                 });
             }
-        return $offers->orderBy('created_at', 'desc')->paginate(10);
+        return $offers->orderBy('updated_at', 'desc')->paginate(10);
     }
 
     public function getOffer($request) {
@@ -202,7 +202,7 @@ class OfferRepository
                 })->get();
 
                 foreach ($offerPhotos as $photo) {
-                    if($photo->path !== 'public/default_photo.jpg')
+                    if($photo->path !== 'public/default_photo.png')
                         $test = Storage::delete($photo->path);
                 }
 
@@ -275,7 +275,7 @@ class OfferRepository
                             ]);
                     }
                     foreach ($offerPhotos as $photo) {
-                        if($photo->path !== 'public/default_photo.jpg')
+                        if($photo->path !== 'public/default_photo.png')
                             $photo->delete();
                     }
                 }
@@ -320,7 +320,7 @@ class OfferRepository
                 ->where('offer_status_id', $offerStatus->id)
                 ->whereHas('user.firm', function (Builder $query) use ($user) {
                     $query->where('id', '=', $user->firm->id);
-                })->orderBy('created_at', 'desc')
+                })->orderBy('updated_at', 'desc')
                 ->paginate(10);
         }
 

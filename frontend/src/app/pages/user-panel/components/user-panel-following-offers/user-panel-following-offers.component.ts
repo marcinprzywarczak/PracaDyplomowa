@@ -42,7 +42,6 @@ export class UserPanelFollowingOffersComponent implements OnInit, OnDestroy {
     this.offerManagementService
       .getFollowingOffers(this.currentPage)
       .subscribe((value) => {
-        console.log(value);
         this.totalRecords = value.offers.total;
         this.offers = value.offers.data;
         this.currentPage = value.offers.current_page;

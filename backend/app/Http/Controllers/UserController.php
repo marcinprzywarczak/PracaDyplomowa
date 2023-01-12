@@ -75,7 +75,7 @@ class UserController extends Controller
 
             DB::transaction(function () use ($request, $avatarSrc){
                 if($avatarSrc === ''){
-                    $avatarSrc = 'public/default_avatar.jpg';
+                    $avatarSrc = 'public/default_avatar.png';
                 }
 
                 $user = User::create([
@@ -134,7 +134,7 @@ class UserController extends Controller
         try {
             $firmLogo = '';
             if($photoChanged) {
-                if($firm->logo !== 'public/default_avatar.jpg' && $firm->logo !== null)
+                if($firm->logo !== 'public/default_avatar.png' && $firm->logo !== null)
                 {
                     Storage::delete($firm->logo);
                 }
@@ -147,7 +147,7 @@ class UserController extends Controller
                         ], 400);
                     }
                 } else {
-                    $firmLogo = 'public/default_avatar.jpg';
+                    $firmLogo = 'public/default_avatar.png';
                 }
             }
             if($photoChanged) {

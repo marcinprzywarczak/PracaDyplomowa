@@ -80,8 +80,8 @@ class OffersSeeder extends Seeder
         $offers = Offer::factory()->count(300)->create();
 
         $photo = Photo::create([
-            'path' => 'storage/default_photo.jpg',
-            'photo_url' => 'http://localhost:8000/storage/default_photo.jpg',
+            'path' => 'public/default_photo.png',
+            'photo_url' => 'http://localhost:8000/public/default_photo.png',
             'description' => 'zdjecie'
         ]);
 

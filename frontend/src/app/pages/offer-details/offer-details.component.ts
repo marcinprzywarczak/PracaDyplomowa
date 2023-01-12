@@ -72,8 +72,8 @@ export class OfferDetailsComponent implements OnInit {
         if (this.photos.length === 0) {
           this.photos = [
             {
-              path: '/assets/default-photo.jpg',
-              photo_url: '/assets/default-photo.jpg',
+              path: '/assets/default_photo.png',
+              photo_url: '/assets/default_photo.png',
               description: 'zdj',
               id: 0,
               pivot: { offer_id: id, isMain: 1, photo_id: 0 },
