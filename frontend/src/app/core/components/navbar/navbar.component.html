@@ -21,8 +21,8 @@
             appClickOutside
             (click)="houseDropdown = !houseDropdown"
             (clickOutside)="houseDropdown = false"
-            routerLinkActive="active-link"
             class="cursor-pointer text-gray-800 font-semibold"
+            [ngClass]="isActive('dom') ? 'active-link' : ''"
           >
             <div
               class="py-4 px-2 hover:text-customPalette-brown transition duration-300"
@@ -35,11 +35,13 @@
               ></i>
             </div>
             <div
-              [ngClass]="houseDropdown ? 'absolute' : 'hidden'"
+              *ngIf="houseDropdown"
               id="dropdown-content-house"
-              class="dropdown-menu-items w-auto z-10"
+              class="dropdown-menu-items w-auto z-10 absolute mt-1"
+              [@dropDownMenu]="houseDropdown"
             >
               <a
+                class="menu-item"
                 [routerLink]="['/dom', 'sprzedaz']"
                 routerLinkActive="active-link-dropdown"
               >
@@ -50,6 +52,7 @@
                 </div>
               </a>
               <a
+                class="menu-item"
                 [routerLink]="['/dom', 'wynajem']"
                 routerLinkActive="active-link-dropdown"
               >
@@ -65,8 +68,8 @@
             appClickOutside
             (clickOutside)="flatDropdown = false"
             (click)="flatDropdown = !flatDropdown"
-            routerLinkActive="active-link"
             class="cursor-pointer text-gray-800 font-semibold"
+            [ngClass]="isActive('mieszkanie') ? 'active-link' : ''"
           >
             <div
               class="py-4 px-2 hover:text-customPalette-brown transition duration-300"
@@ -79,11 +82,13 @@
               ></i>
             </div>
             <div
-              [ngClass]="flatDropdown ? 'absolute' : 'hidden'"
               id="dropdown-content-flat"
-              class="bg-customPalette-green w-auto z-10 px-2"
+              class="dropdown-menu-items w-auto z-10 px-2 absolute mt-1"
+              *ngIf="flatDropdown"
+              [@dropDownMenu]="flatDropdown"
             >
               <a
+                class="menu-item"
                 [routerLink]="['/mieszkanie', 'sprzedaz']"
                 routerLinkActive="active-link-dropdown"
               >
@@ -94,6 +99,7 @@
                 </div>
               </a>
               <a
+                class="menu-item"
                 [routerLink]="['/mieszkanie', 'wynajem']"
                 routerLinkActive="active-link-dropdown"
               >
@@ -109,7 +115,7 @@
             appClickOutside
             (click)="plotDropdown = !plotDropdown"
             (clickOutside)="plotDropdown = false"
-            routerLinkActive="active-link"
+            [ngClass]="isActive('dzialka') ? 'active-link' : ''"
             class="cursor-pointer text-gray-800 font-semibold"
           >
             <div
@@ -123,10 +129,12 @@
               ></i>
             </div>
             <div
-              [ngClass]="plotDropdown ? 'absolute' : 'hidden'"
-              class="dropdown-menu-items w-auto z-10"
+              class="dropdown-menu-items w-auto z-10 absolute mt-1"
+              *ngIf="plotDropdown"
+              [@dropDownMenu]="plotDropdown"
             >
               <a
+                class="menu-item"
                 [routerLink]="['/dzialka', 'sprzedaz']"
                 routerLinkActive="active-link-dropdown"
               >
@@ -137,6 +145,7 @@
                 </div>
               </a>
               <a
+                class="menu-item"
                 [routerLink]="['/dzialka', 'wynajem']"
                 routerLinkActive="active-link-dropdown"
               >
@@ -154,6 +163,7 @@
             (click)="roomDropdown = !roomDropdown"
             (clickOutside)="roomDropdown = false"
             routerLinkActive="active-link"
+            [ngClass]="isActive('pokoj') ? 'active-link' : ''"
             class="cursor-pointer text-gray-800 font-semibold"
           >
             <div
@@ -167,11 +177,13 @@
               ></i>
             </div>
             <div
-              [ngClass]="roomDropdown ? 'absolute' : 'hidden'"
               id="dropdown-content-room"
-              class="dropdown-menu-items w-auto z-10"
+              class="dropdown-menu-items w-auto z-10 absolute mt-1"
+              *ngIf="roomDropdown"
+              [@dropDownMenu]="roomDropdown"
             >
               <a
+                class="menu-item"
                 routerLink="pokoj/wynajem"
                 routerLinkActive="active-link-dropdown"
               >
@@ -227,25 +239,26 @@
             <i id="dropdown-user-icon" class="pi pi-angle-down"></i>
           </div>
           <div
-            [ngClass]="userDropdown ? 'absolute' : 'hidden'"
+            *ngIf="userDropdown"
+            [@dropDownMenu]="userDropdown"
             id="dropdown-content-user"
-            class="dropdown-menu-items"
+            class="dropdown-menu-items absolute"
           >
-            <a routerLink="uzytkownik/ogloszenia">
+            <a class="menu-item" routerLink="uzytkownik/ogloszenia">
               <div
                 class="p-3 hover:text-customPalette-brown transition duration-300"
               >
                 Moje konto
               </div>
             </a>
-            <a routerLink="dodaj-ogloszenie">
+            <a class="menu-item" routerLink="dodaj-ogloszenie">
               <div
                 class="p-3 hover:text-customPalette-brown transition duration-300"
               >
                 Dodaj ogłoszenie
               </div>
             </a>
-            <a>
+            <a class="menu-item">
               <div
                 (click)="logout()"
                 class="p-3 hover:text-customPalette-brown transition duration-300"
@@ -260,6 +273,8 @@
       <!-- Mobile menu button -->
       <div class="md:hidden flex items-center">
         <button
+          appClickOutside
+          (clickOutside)="mobileMenu = false"
           class="py-4 outline-none mobile-menu-button"
           (click)="mobileMenu = !mobileMenu"
         >
@@ -280,11 +295,12 @@
   </div>
   <!-- mobile menu -->
   <div
-    class="md:hidden w-full mobile-menu bg-white z-50"
-    [ngClass]="mobileMenu ? 'absolute' : 'hidden'"
+    class="md:hidden w-full mobile-menu bg-white z-50 absolute"
+    *ngIf="mobileMenu"
+    [@dropDownMenu]="mobileMenu"
   >
-    <ul class="w-full">
-      <li class="">
+    <ul class="w-full" appClickStopPropagation>
+      <li class="menu-item">
         <a routerLink="dashboard" class="w-full">
           <div
             class="cursor-pointer text-gray-800 font-semibold py-4 px-2 hover:text-customPalette-brown transition duration-300"
@@ -294,7 +310,7 @@
           </div>
         </a>
       </li>
-      <li>
+      <li class="menu-item">
         <div
           (click)="houseDropdownMobile = !houseDropdownMobile"
           routerLinkActive="active-link"
@@ -338,7 +354,7 @@
           </div>
         </div>
       </li>
-      <li>
+      <li class="menu-item">
         <div
           (click)="flatDropdownMobile = !flatDropdownMobile"
           routerLinkActive="active-link"
@@ -382,7 +398,7 @@
           </div>
         </div>
       </li>
-      <li>
+      <li class="menu-item">
         <div
           (click)="plotDropdownMobile = !plotDropdownMobile"
           routerLinkActive="active-link"
@@ -427,7 +443,7 @@
         </div>
       </li>
 
-      <li>
+      <li class="menu-item">
         <div
           (click)="roomDropdownMobile = !roomDropdownMobile"
           routerLinkActive="active-link"
@@ -463,7 +479,7 @@
       </li>
 
       <li
-        class="py-2 flex flex-row items-center space-x-3"
+        class="menu-item py-2 flex flex-row items-center space-x-3"
         [ngClass]="isLogged ? 'justify-start' : 'justify-end'"
       >
         <div
@@ -509,7 +525,7 @@
               id="dropdown-content-user-mobile"
               class="dropdown-menu-items w-full"
             >
-              <a href="#">
+              <a routerLink="dodaj-ogloszenie">
                 <div
                   class="p-3 hover:text-customPalette-brown transition duration-300"
                 >

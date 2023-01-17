@@ -199,13 +199,14 @@
           <span class="p-buttonset">
             <button
               class="p-button-secondary"
+              type="button"
               pButton
-              [disabled]="!this.form.dirty || !this.form.touched"
+              [disabled]="!form.dirty || !form.touched"
               (click)="clearFormAndFilters()"
             >
               Wyczyść filtry
             </button>
-            <button pButton [disabled]="!this.form.dirty || !this.form.touched">
+            <button pButton [disabled]="!form.dirty || !form.touched">
               Szukaj
             </button></span
           >

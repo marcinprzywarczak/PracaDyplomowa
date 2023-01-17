@@ -1,10 +1,12 @@
 import {
   Component,
+  ElementRef,
   HostListener,
   OnChanges,
   OnDestroy,
   OnInit,
   SimpleChanges,
+  ViewChild,
 } from '@angular/core';
 import { LoginService } from '../../../shared/services/login/login.service';
 import { finalize, Subscription } from 'rxjs';
@@ -15,11 +17,23 @@ import { CookieService } from 'ngx-cookie-service';
 import { ReloadDataTriggerService } from '../../../shared/services/reload-data-trigger/reload-data-trigger.service';
 import { NavbarService } from '../../../shared/services/navbar/navbar.service';
 import { NgxPermissionsService } from 'ngx-permissions';
+import {
+  animate,
+  query,
+  sequence,
+  stagger,
+  style,
+  transition,
+  trigger,
+} from '@angular/animations';
+import { IsActiveMatchOptions, Router } from '@angular/router';
+import { DropDownAnimation } from '../../../shared/animations/dropdown-animation';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss'],
+  animations: [DropDownAnimation],
 })
 export class NavbarComponent implements OnInit, OnDestroy {
   isLogged: boolean;
@@ -46,7 +60,8 @@ export class NavbarComponent implements OnInit, OnDestroy {
     private cookieService: CookieService,
     private reloadDataTrigger: ReloadDataTriggerService,
     public navbarService: NavbarService,
-    private ngxPermissions: NgxPermissionsService
+    private ngxPermissions: NgxPermissionsService,
+    public router: Router
   ) {}
 
   ngOnInit(): void {
@@ -83,5 +98,15 @@ export class NavbarComponent implements OnInit, OnDestroy {
       this.reloadDataTrigger.userNavbarInfoReloadTrigger.subscribe(() => {
         this.user = this.userService.getUser();
       });
+  }
+
+  isActive(url: string) {
+    const matchOptions: IsActiveMatchOptions = {
+      paths: 'subset',
+      matrixParams: 'ignored',
+      queryParams: 'ignored',
+      fragment: 'ignored',
+    };
+    return this.router.isActive(url, matchOptions);
   }
 }

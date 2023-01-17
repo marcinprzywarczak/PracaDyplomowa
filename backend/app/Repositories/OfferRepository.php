@@ -79,10 +79,12 @@ class OfferRepository
         try {
             $offer = Offer::with('user','user.firm', 'property_type', 'offer_type', 'offer_status', 'parameters', 'photos')
                 ->findOrFail($request->id);
+
             $parameter_category = ParameterCategory::
-            whereHas('parameters.offers', function (Builder $query) use($request){
-                $query->where('offers.id', $request->id);
-            })->get();
+                whereHas('parameters.offers', function (Builder $query) use($request){
+                    $query->where('offers.id', $request->id);
+                })->get();
+
             if($offer === null){
                 return response()->json([
                     'error' => 'Nie znaleziono oferty o podanym id'

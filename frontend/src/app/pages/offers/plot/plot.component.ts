@@ -149,6 +149,8 @@ export class PlotComponent implements OnInit, OnDestroy {
       });
   }
   getOffers(page: number) {
+    console.log(this.filters);
+
     this.offerService
       .getOffers(
         page,
@@ -273,7 +275,7 @@ export class PlotComponent implements OnInit, OnDestroy {
   clearFilters() {
     this.filters = [];
     this.filters[0] = this.defaultFilters[0];
-    this.filters[0] = this.defaultFilters[1];
+    this.filters[1] = this.defaultFilters[1];
     this.parameterValueIn = [];
     this.parameterFilters = [];
     this.parameterIn = [];
@@ -283,6 +285,7 @@ export class PlotComponent implements OnInit, OnDestroy {
     this.form.reset();
     this.dataLoad = false;
     this.visibleFilterSidebar = false;
+    console.log(this.filters);
     this.getOffers(1);
   }
 }

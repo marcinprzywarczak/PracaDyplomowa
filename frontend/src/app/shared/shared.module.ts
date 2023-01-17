@@ -61,6 +61,7 @@ import { NgxPermissionsModule } from 'ngx-permissions';
     FirmEditFormComponent,
     UserChangePasswordFormComponent,
     NgxPermissionsModule,
+    ClickStopPropagationDirective,
   ],
 })
 export class SharedModule {}
