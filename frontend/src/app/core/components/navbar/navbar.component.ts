@@ -1,31 +1,11 @@
-import {
-  Component,
-  ElementRef,
-  HostListener,
-  OnChanges,
-  OnDestroy,
-  OnInit,
-  SimpleChanges,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { LoginService } from '../../../shared/services/login/login.service';
 import { finalize, Subscription } from 'rxjs';
 import { UserService } from '../../../shared/services/user/user.service';
-import { OfferService } from '../../../shared/services/offer/offer.service';
 import { User } from '../../../shared/models/user';
-import { CookieService } from 'ngx-cookie-service';
 import { ReloadDataTriggerService } from '../../../shared/services/reload-data-trigger/reload-data-trigger.service';
 import { NavbarService } from '../../../shared/services/navbar/navbar.service';
 import { NgxPermissionsService } from 'ngx-permissions';
-import {
-  animate,
-  query,
-  sequence,
-  stagger,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { IsActiveMatchOptions, Router } from '@angular/router';
 import { DropDownAnimation } from '../../../shared/animations/dropdown-animation';
 
@@ -57,7 +37,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
   constructor(
     private loginService: LoginService,
     private userService: UserService,
-    private cookieService: CookieService,
     private reloadDataTrigger: ReloadDataTriggerService,
     public navbarService: NavbarService,
     private ngxPermissions: NgxPermissionsService,
@@ -84,7 +63,6 @@ export class NavbarComponent implements OnInit, OnDestroy {
       )
       .subscribe((response) => {
         if (response.status === 204) {
-          // this.cookieService.deleteAll('/', 'localhost');
           this.ngxPermissions.flushPermissions();
           localStorage.removeItem('app.permissions');
           localStorage.removeItem('isLogged');

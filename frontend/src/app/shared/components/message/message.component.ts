@@ -9,7 +9,6 @@ export class MessageComponent implements OnInit {
   @Input() message: string;
   @Input() date: string;
   @Input() justify: string = 'justify-start self-start';
-  datee: Date;
   constructor() {}
 
   ngOnInit(): void {}

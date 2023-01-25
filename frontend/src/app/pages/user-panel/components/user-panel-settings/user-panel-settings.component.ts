@@ -87,7 +87,6 @@ export class UserPanelSettingsComponent implements OnInit, OnDestroy {
       .get<any>('http://localhost:8000/api/user', { withCredentials: true })
       .subscribe({
         next: (result) => {
-          console.log(result);
           this.user = result.user;
           this.dataLoaded = true;
           this.userService.setUser(this.user);

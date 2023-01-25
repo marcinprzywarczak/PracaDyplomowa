@@ -152,7 +152,7 @@ export class EditOfferComponent implements OnInit {
 
   submitForm() {
     this.isSubmitted = true;
-    if (this.addOfferForm.invalid) {
+    if (this.addOfferForm.invalid || this.mainPhotoSrc === '') {
       return;
     }
     this.loading = true;

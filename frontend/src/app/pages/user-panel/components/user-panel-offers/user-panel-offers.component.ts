@@ -12,11 +12,9 @@ import { OfferManagementService } from '../../../../shared/services/offer-manage
 })
 export class UserPanelOffersComponent implements OnInit, OnDestroy {
   offers: Offer[] = [];
-  offerStatuses: OfferStatus[] = [];
   offerStatusOptions: string[] = ['aktywne', 'zakończone'];
   offerStatus: string = 'aktywne';
   dataLoaded: boolean = false;
-  // offerStatusModel: string = 'aktywne';
   totalRecords: number;
   currentPage: number;
   triggerSubscription: Subscription;

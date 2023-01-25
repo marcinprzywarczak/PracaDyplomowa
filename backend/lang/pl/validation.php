@@ -129,6 +129,7 @@ return [
         'phone_number.regex' => 'Numer telefonu wymagany jest w formacie +XX XXX XXX XXX',
         'nip.regex' => 'Niepoprawny numer NIP',
         'regon.regex' => 'Niepoprawny numer REGON',
+        'email.unique' => 'Podany adres email jest już zajęty',
     ],
 
 

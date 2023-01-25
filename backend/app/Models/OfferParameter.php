@@ -14,13 +14,10 @@ class OfferParameter extends Pivot
     protected function value():Attribute{
 
         return Attribute::make(
-            get: fn ($value, $attributes) => $value,//dd(Parameter::where('id',$attributes['parameter_id'])->first()->type),
+            get: fn ($value, $attributes) => $value,
         );
     }
     public function parameter(){
         return $this->belongsTo(Parameter::class);
     }
-//    public function getParam(){
-//        return $this->parameter->type;
-//    }
 }

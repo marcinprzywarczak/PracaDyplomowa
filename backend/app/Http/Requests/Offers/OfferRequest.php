@@ -55,7 +55,7 @@ class OfferRequest extends \Illuminate\Foundation\Http\FormRequest
                 'price' => 'cena',
                 'main_photo' => 'zdjęcie główne',
                 'description' => 'opis',
-                'parameters.*.parameterId' => 'parameter'
+                'parameters.*.parameterId' => 'parametr'
             ];
     }
 }

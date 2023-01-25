@@ -25,35 +25,6 @@ class CreateNewUser implements CreatesNewUsers
      */
     public function create(array $input)
     {
-        /*
-         * function validatenip($nip) {
-            $nipWithoutDashes = preg_replace("/-/","",$nip);
-            $reg = '/^[0-9]{10}$/';
-            if(preg_match($reg, $nipWithoutDashes)==false)
-                return false;
-            else
-            {
-                $digits = str_split($nipWithoutDashes);
-                $checksum = (6*intval($digits[0]) + 5*intval($digits[1]) + 7*intval($digits[2]) + 2*intval($digits[3]) + 3*intval($digits[4]) + 4*intval($digits[5]) + 5*intval($digits[6]) + 6*intval($digits[7]) + 7*intval($digits[8]))%11;
-
-                return (intval($digits[9]) == $checksum);
-            }
-            }
-        function validateregon9($regon) {
-            $reg = '/^[0-9]{9}$/';
-            if(preg_match($reg, $regon)==false)
-                return false;
-            else
-            {
-                $digits = str_split($regon);
-                $checksum = (8*intval($digits[0]) + 9*intval($digits[1]) + 2*intval($digits[2]) + 3*intval($digits[3]) + 4*intval($digits[4]) + 5*intval($digits[5]) + 6*intval($digits[6]) + 7*intval($digits[7]))%11;
-                if($checksum == 10)
-                    $checksum = 0;
-
-                return (intval($digits[8]) == $checksum);
-            }
-}
-         */
         $rules = [];
         if($input['isFirmAccount'] === 'true')
         {
@@ -86,7 +57,7 @@ class CreateNewUser implements CreatesNewUsers
                 'isFirmAccount' => ['required'],
                 'first_name' => ['required', 'string', 'max:255'],
                 'sure_name' => ['required', 'string', 'max:255'],
-                'phone_number' => ['required', 'regex:/^(?:\(?\?)?(?:[-\.\(\)\s]*(\d)){9}\)?$/'],
+                'phone_number' => ['required', 'regex:/^(\+\d{2}|0)\ (\d{3} \d{3} \d{3})$/'],
                 'email' => [
                     'required',
                     'string',

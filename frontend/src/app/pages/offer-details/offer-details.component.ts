@@ -114,32 +114,6 @@ export class OfferDetailsComponent implements OnInit {
         });
       }
     });
-    // this.offerDetails.parameters.forEach((parameter: any) => {
-    //   if (parameter.pivot.value === '') {
-    //     let params: any[] = [];
-    //     this.offerDetails.parameters
-    //       .filter(
-    //         (x: any) =>
-    //           x.parameter_category_id === parameter.parameter_category_id
-    //       )
-    //       .forEach((x: any) => {
-    //         console.log(x);
-    //         params.push(x.name);
-    //       });
-    //     console.log(
-    //       this.parameterCategories.find(
-    //         (x: any) => x.id === parameter.parameter_category_id
-    //       ).name
-    //     );
-    //     this.parameters.push({
-    //       name: this.parameterCategories.find(
-    //         (x: any) => x.id === parameter.parameter_category_id
-    //       ).name,
-    //       value: params,
-    //     });
-    //     console.log(params);
-    //   }
-    // });
   }
 
   getStringOfArray(values: any[]) {

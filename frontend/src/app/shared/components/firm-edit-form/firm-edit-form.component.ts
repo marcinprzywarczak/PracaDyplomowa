@@ -66,11 +66,7 @@ export class FirmEditFormComponent implements OnInit {
     formData.append('zip_code', this.form.controls['zip_code'].value);
     formData.append('photo_changed', this.photoChanged ? 'true' : 'false');
     if (this.firmLogoSrc !== '') {
-      formData.append(
-        'user_avatar',
-        this.firmLogo,
-        this.firmLogo.name ?? 'logo'
-      );
+      formData.append('firm_logo', this.firmLogo, this.firmLogo.name ?? 'logo');
     }
     this.updateFirm(formData);
   }

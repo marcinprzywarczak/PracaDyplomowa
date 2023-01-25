@@ -2,14 +2,6 @@
   <div class="mx-auto px-4">
     <div class="flex justify-between">
       <div class="flex space-x-7">
-        <!--        <div class="md:hidden">-->
-        <!--          &lt;!&ndash; Website Logo &ndash;&gt;-->
-        <!--          <a href="#" class="flex items-center py-4 px-2">-->
-        <!--&lt;!&ndash;            <img src="logo.png" alt="Logo" class="h-8 w-8 mr-2">&ndash;&gt;-->
-        <!--            <span class="font-semibold text-gray-800 text-lg">Navigation</span>-->
-        <!--          </a>-->
-        <!--        </div>-->
-        <!-- Primary Navbar items -->
         <div class="hidden md:flex items-center space-x-1">
           <a
             routerLink="dashboard"
@@ -242,7 +234,7 @@
             *ngIf="userDropdown"
             [@dropDownMenu]="userDropdown"
             id="dropdown-content-user"
-            class="dropdown-menu-items absolute"
+            class="dropdown-menu-items absolute max-w-full min-w-max w-full right-0"
           >
             <a class="menu-item" routerLink="uzytkownik/ogloszenia">
               <div
@@ -550,8 +542,6 @@
             </div>
           </div>
         </ng-template>
-        <!--            <a routerLink="login" type="blank" class="py-2 px-2 font-medium text-gray-800 rounded hover:bg-green-500 hover:text-white transition duration-300">Zaloguj</a>-->
-        <!--            <a routerLink="/register" class="py-2 px-2 font-medium text-white bg-green-500 rounded hover:bg-green-400 transition duration-300">Zarejestruj</a>-->
       </li>
     </ul>
   </div>

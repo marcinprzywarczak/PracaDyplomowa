@@ -83,7 +83,6 @@ export class MessagesComponent
       .replyMessage(this.message, this.messageHeader.id)
       .subscribe({
         next: (result) => {
-          console.log(new Date().toISOString());
           this.messageHeader.updated_at = new Date().toISOString();
           this.message = '';
           this.messagesTriggerService.triggerMessageHeaderSort();

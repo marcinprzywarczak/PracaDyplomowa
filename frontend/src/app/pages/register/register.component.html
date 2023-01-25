@@ -14,7 +14,6 @@
           name="isFirmAccount"
           formControlName="isFirmAccount"
         ></p-checkbox>
-        <!--        <p-inputSwitch [(ngModel)]="isFirmAccount" formControlName="isFirmAccount"></p-inputSwitch>-->
       </div>
       <div class="form-group w-full">
         <label for="email" class="form-label inline-block pb-1 text-gray-700"
@@ -627,42 +626,6 @@
             </div>
           </div>
         </div>
-        <!--        <div class="form-group">-->
-        <!--          <label-->
-        <!--            for="firm_logo"-->
-        <!--            class="form-label inline-block pb-1 text-gray-700"-->
-        <!--            >Logo firmy</label-->
-        <!--          >-->
-        <!--          <input-->
-        <!--            type="file"-->
-        <!--            id="firm_logo"-->
-        <!--            name="firm_logo"-->
-        <!--            formControlName="firm_logo"-->
-        <!--            (change)="onChangeFirmLogo($event)"-->
-        <!--            class="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"-->
-        <!--            placeholder="Wybierz logo firmy"-->
-        <!--            [ngClass]="-->
-        <!--              (f['firm_logo'].invalid &&-->
-        <!--                (f['firm_logo'].touched ||-->
-        <!--                  f['firm_logo'].dirty ||-->
-        <!--                  isSubmitted)) ||-->
-        <!--              serverErrors.firm_logo-->
-        <!--                ? 'border-red-600'-->
-        <!--                : 'border-gray-300'-->
-        <!--            "-->
-        <!--          />-->
-        <!--          &lt;!&ndash;          <div *ngIf="f['firm_logo'].invalid && (f['firm_logo'].touched || f['firm_logo'].dirty || isSubmitted)" class="text-red-600 font-semibold">&ndash;&gt;-->
-        <!--          &lt;!&ndash;            <div *ngIf="f['firm_logo'].errors?.['required']">Hasło jest wymagane!</div>&ndash;&gt;-->
-        <!--          &lt;!&ndash;          </div>&ndash;&gt;-->
-        <!--          <div-->
-        <!--            *ngIf="serverErrors.firm_logo"-->
-        <!--            class="text-red-600 font-semibold"-->
-        <!--          >-->
-        <!--            <div *ngFor="let firm_logo of serverErrors.firm_logo">-->
-        <!--              {{ firm_logo }}-->
-        <!--            </div>-->
-        <!--          </div>-->
-        <!--        </div>-->
       </div>
       <div class="w-full flex items-center justify-center">
         <button

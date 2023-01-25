@@ -17,7 +17,6 @@ export class MessageHeaderComponent implements OnInit {
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
-    console.log(this.active);
     this.mainPhoto = this.messageHeader.offer.photos?.find(
       (x) => x.pivot.isMain === 1
     )!;

@@ -64,16 +64,18 @@ export class UserPanelFirmUsersComponent implements OnInit, OnDestroy {
 
   loadUsers(event: LazyLoadEvent) {
     this.lazyLoadEvent = event;
-    console.log(event);
     this.loading = true;
     this.firmUserService.getFirmUsers(event).subscribe({
       next: (result) => {
-        console.log(result);
         this.users = result.users;
         this.totalRecords = result.totalRecords;
         this.loading = false;
       },
-      error: (err) => {},
+      error: (err) => {
+        this.alertService.showError(
+          'Błąd serwera podczas pobierania użytkowników.'
+        );
+      },
     });
   }
 

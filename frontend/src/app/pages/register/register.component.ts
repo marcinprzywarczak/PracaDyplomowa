@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 import { UserRegistration } from '../../shared/models/user-registration';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { OfferService } from '../../shared/services/offer/offer.service';
+import { AlertService } from '../../shared/services/alert-service/alert.service';
 const confirmedValidator = (fg: FormGroup) => {
   const control = fg.get('password');
   const matchingControl = fg.get('password_conf');
@@ -43,7 +44,8 @@ export class RegisterComponent implements OnInit {
     private loginService: LoginService,
     private router: Router,
     private http: HttpClient,
-    private apiService: OfferService
+    private apiService: OfferService,
+    private alertService: AlertService
   ) {}
 
   ngOnInit(): void {
@@ -185,7 +187,7 @@ export class RegisterComponent implements OnInit {
               if (err.error.errors) this.serverErrors = err.error.errors;
             } else {
               //wyświetlić toast z informacją o błędzie serwera
-              console.log('err', err);
+              this.alertService.showError('Błąd serwera podczas rejestracji.');
             }
           },
         });
@@ -213,7 +215,6 @@ export class RegisterComponent implements OnInit {
       Validators.required,
       Validators.pattern(/^(\d{9})$/),
     ]);
-    //this.f['street'].setValidators([Validators.required]);
     this.f['number'].setValidators([Validators.required]);
     this.f['locality'].setValidators([Validators.required]);
     this.f['zip_code'].setValidators([

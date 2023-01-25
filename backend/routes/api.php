@@ -33,9 +33,6 @@ Route::post('/isLogged', function () {
     return response()->json(['isLogged' => \Illuminate\Support\Facades\Auth::check()], 200);
 })->middleware('permission:users.store');
 
-Route::post('/photo', [\App\Http\Controllers\PhotoController::class, 'add']);
-
-Route::get('/photoGet', [\App\Http\Controllers\PhotoController::class, 'get']);
 
 Route::post('/offers', [\App\Http\Controllers\OfferController::class, 'index']);
 
@@ -84,7 +81,6 @@ Route::middleware('auth:sanctum')->group(function(){
     });
 });
 
-Route::post('/getUsersTest', [\App\Http\Controllers\UserController::class, 'test']);
 
 Route::get('image/{path}/{filename}', function ($path, $filename) {
    $file = \Illuminate\Support\Facades\Storage::get("$path/$filename");
@@ -92,7 +88,3 @@ Route::get('image/{path}/{filename}', function ($path, $filename) {
 });
 Route::get('messages', [\App\Http\Controllers\ChatsController::class, 'fetchMessages']);
 
-Route::post('messages/test', [\App\Http\Controllers\ChatsController::class, 'test']);
-
-Route::get('offer/{offer}', [\App\Http\Controllers\OfferController::class, 'test'])
-    ->where('offer', '[0-9]+');

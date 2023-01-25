@@ -29,7 +29,7 @@ class EditOfferRequest extends \Illuminate\Foundation\Http\FormRequest
             'files' => ['array'],
             'area_square_meters' => ['required', 'numeric'],
             'price' => ['required', 'numeric'],
-            'main_photo' => ['nullable', 'file'],
+            'main_photo' => ['required_if:photo_changed,true', 'file'],
             'description' => ['required', 'min:20', 'max:1000'],
             'parameters.*.parameterId' => ['exists:parameters,id', 'integer'],
             'offer_id' => ['required', 'integer', 'exists:offers,id'],
@@ -56,7 +56,7 @@ class EditOfferRequest extends \Illuminate\Foundation\Http\FormRequest
                 'price' => 'cena',
                 'main_photo' => 'zdjęcie główne',
                 'description' => 'opis',
-                'parameters.*.parameterId' => 'parameter'
+                'parameters.*.parameterId' => 'parametr'
             ];
     }
 }

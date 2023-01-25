@@ -45,7 +45,6 @@ export class OfferComponent implements OnInit {
         },
         error: (err) => {
           this.alertService.showError(err.error.error);
-          console.log(err);
         },
       });
     }
