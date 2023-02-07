@@ -20,7 +20,11 @@ class OfferRepository
                                 $parameterIn,
                                 $parameterValueIn){
         $offerStatus = OfferStatus::where('name', 'aktywne')->first();
-        $filters[] = array('column' => 'offer_status_id', 'operator' => '=', 'value' => $offerStatus->id);
+        $filters[] = array(
+            'column' => 'offer_status_id',
+            'operator' => '=',
+            'value' => $offerStatus->id
+        );
         $offers = Offer::with(
             'user',
             'user.firm',
